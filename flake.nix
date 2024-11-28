@@ -3,6 +3,7 @@
 
   inputs = {
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    # I wanted to use a stable nixpkgs, but plasma-manager had problems with it.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     lix-module = {

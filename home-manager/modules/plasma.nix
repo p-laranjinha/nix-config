@@ -31,5 +31,19 @@
         accelerationProfile = "none";
       }
     ];
+    configFile = {
+      # https://www.reddit.com/r/kde/comments/r5xir0/config_file_location_for_hot_corners/
+      # Disable corners and edges that do things.
+      kwinrc.ElectricBorders = {
+        Bottom = "None";
+        BottomLeft = "None";
+        BottomRight = "None";
+        Left = "None";
+        Right = "None";
+        Top = "None";
+        TopLeft = "ShowDesktop";
+        TopRight = "None";
+      };
+    };
   };
 }
