@@ -5,6 +5,7 @@
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     # I wanted to use a stable nixpkgs, but plasma-manager had problems with it.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nur.url = "github:nix-community/NUR";
 
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-2.tar.gz";
@@ -37,13 +38,14 @@
     nixosConfigurations.orange = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
+        {nixpkgs.overlays = [inputs.nur.overlay];}
         ./nixos/configuration.nix
         inputs.lix-module.nixosModules.default
         inputs.nix-ld.nixosModules.nix-ld
         inputs.home-manager.nixosModules.default
         {
           # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
-          #home-manager.backupFileExtension = "backup";
+          home-manager.backupFileExtension = "backup";
           home-manager.useUserPackages = true;
           home-manager.useGlobalPkgs = true;
           home-manager.sharedModules = [

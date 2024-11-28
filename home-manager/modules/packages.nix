@@ -6,7 +6,25 @@
     };
   };
 
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    profiles.default = {
+      search = {
+        force = true;
+        #engines = {};
+        order = [
+          "DuckDuckGo"
+          "Google"
+        ];
+      };
+      settings = {};
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        bitwarden
+        ublock-origin
+        darkreader
+      ];
+    };
+  };
 
   # The home.packages option allows you to install Nix packages into your environment.
   home.packages = with pkgs; [
