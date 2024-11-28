@@ -11,7 +11,7 @@
       {
         location = "bottom";
         height = 44;
-        screen = 1;
+        screen = 0;
         widgets = [
           {
             kickoff = {
