@@ -45,7 +45,7 @@
         inputs.home-manager.nixosModules.default
         {
           # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
-          home-manager.backupFileExtension = "backup";
+          #home-manager.backupFileExtension = "backup";
           home-manager.useUserPackages = true;
           home-manager.useGlobalPkgs = true;
           home-manager.sharedModules = [
