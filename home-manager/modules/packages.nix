@@ -2,7 +2,7 @@
   programs.bash = {
     enable = true;
     shellAliases = {
-      rebuild = "bash ~/nixos/rebuild.sh";
+      rebuild = "~/nixos/rebuild.sh";
     };
   };
 
