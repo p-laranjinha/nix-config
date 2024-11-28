@@ -41,7 +41,7 @@
         Left = "None";
         Right = "None";
         Top = "None";
-        TopLeft = "ShowDesktop";
+        TopLeft = "None";
         TopRight = "None";
       };
     };
