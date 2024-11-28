@@ -7,7 +7,7 @@ NIX_CONFIG_DIR=~/nixos/
 set -e
 
 # cd to your config dir without affecting shell outside this script
-pushd $NIX_CONFIG_DIR
+pushd $NIX_CONFIG_DIR &>/dev/null
 
 # Early return if no changes were detected.
 if git diff --quiet '*.nix'; then
@@ -33,6 +33,7 @@ current=$(nixos-rebuild list-generations | grep current | awk '{print $1 " " $3 
 
 # Commit all changes witih the generation metadata
 git commit -am "$current"
+git push
 
 # Notify all OK!
 notify-send -e "NixOS Rebuilt OK!" --icon=software-update-available

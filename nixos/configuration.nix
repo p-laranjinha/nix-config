@@ -1,50 +1,54 @@
-{ config, lib, pkgs, inputs, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
 
-      # Bootloader
-      ./modules/boot.nix
+    # Bootloader
+    ./modules/boot.nix
 
-      # Filesystem config and btrfs snapshots.
-      ./modules/fs.nix
+    # Filesystem config and btrfs snapshots.
+    ./modules/fs.nix
 
-      # Wayland and X11.
-      ./modules/display.nix
+    # Wayland and X11.
+    ./modules/display.nix
 
-      # Timezones and regions.
-      ./modules/time.nix
+    # Timezones and regions.
+    ./modules/time.nix
 
-      # Pipewire and other audio things.
-      ./modules/audio.nix
+    # Pipewire and other audio things.
+    ./modules/audio.nix
 
-      # Everything required to remote access this host:
-      #  - Wake-on-lan
-      #  - Tailscale
-      #  - xRDP
-      #  - SSH
-      #  - Sunshine
-      #    - Autologin and lock
-      ./modules/remote-access.nix
+    # Everything required to remote access this host:
+    #  - Wake-on-lan
+    #  - Tailscale
+    #  - xRDP
+    #  - SSH
+    #  - Sunshine
+    #    - Autologin and lock
+    ./modules/remote-access.nix
 
-      # Allows regular binaries to be run.
-      ./modules/binaries.nix
+    # Allows regular binaries to be run.
+    ./modules/binaries.nix
 
-      # System packages and NixOS programs.
-      ./modules/packages.nix
-    ];
-
+    # System packages and NixOS programs.
+    ./modules/packages.nix
+  ];
 
   networking.hostName = "orange";
   # Don't forget to set a password with ‘passwd’.
   users.users.pebble = {
     isNormalUser = true;
     description = "Orange Pebble";
-    extraGroups = [ "networkmanager" "wheel" "wireshark" ];
+    extraGroups = ["networkmanager" "wheel" "wireshark"];
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -75,5 +79,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }

@@ -27,14 +27,19 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: {
     nixosConfigurations.orange = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
+      specialArgs = {inherit inputs;};
       modules = [
         ./nixos/configuration.nix
         inputs.lix-module.nixosModules.default
         inputs.nix-ld.nixosModules.nix-ld
-        inputs.home-manager.nixosModules.default {
+        inputs.home-manager.nixosModules.default
+        {
           # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
           #home-manager.backupFileExtension = "backup";
           home-manager.useUserPackages = true;

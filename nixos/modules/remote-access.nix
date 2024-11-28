@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   networking.interfaces.enp14s0.wakeOnLan.enable = true;
 
   services.tailscale.enable = true;
@@ -10,17 +9,17 @@
 
   services.openssh = {
     enable = true;
-    ports = [ 22 ];
+    ports = [22];
     settings = {
       PasswordAuthentication = true;
-      AllowUsers = [ "pebble" ]; # Allows all users by default. Can be [ "user1" "user2" ]
+      AllowUsers = ["pebble"]; # Allows all users by default. Can be [ "user1" "user2" ]
       UseDns = true;
       X11Forwarding = false;
       PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
     };
   };
   services.fail2ban.enable = true;
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [22];
 
   services.sunshine = {
     enable = true;
@@ -39,12 +38,12 @@
   systemd.user.services.lock-if-autologin = {
     enable = true;
     description = "If the display manager is set to autologin, lock on startup.";
-    path = [ pkgs.procps ];
+    path = [pkgs.procps];
     script = ''
       SDDM_TEST=`pgrep -xa sddm-helper`
       [[ $SDDM_TEST == *"--autologin"* ]] && loginctl lock-session
     '';
-    wantedBy = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
+    wantedBy = ["graphical-session.target"];
+    after = ["graphical-session.target"];
   };
 }

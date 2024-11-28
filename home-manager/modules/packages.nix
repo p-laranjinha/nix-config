@@ -1,9 +1,8 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.bash = {
     enable = true;
     shellAliases = {
-      rebuild = "sudo nixos-rebuild switch";
+      rebuild = "bash ~/nixos/rebuild";
     };
   };
 
@@ -13,8 +12,6 @@
   home.packages = with pkgs; [
     alejandra # Nix formatter
     kdePackages.kate
-
-
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
