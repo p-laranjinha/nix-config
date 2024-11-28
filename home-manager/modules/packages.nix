@@ -11,6 +11,7 @@
   # The home.packages option allows you to install Nix packages into your environment.
   home.packages = with pkgs; [
     alejandra # Nix formatter
+    libnotify
     kdePackages.kate
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
