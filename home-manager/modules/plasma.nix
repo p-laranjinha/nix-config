@@ -60,9 +60,11 @@
         TopLeft = "None";
         TopRight = "None";
       };
+      # Disable auto lock.
       kscreenlockerrc.Daemon = {
         Autolock = false;
-        LockGrace = 30;
+        Timeout = 0;
+        #LockGrace = 30;
         LockOnResume = true;
       };
     };
