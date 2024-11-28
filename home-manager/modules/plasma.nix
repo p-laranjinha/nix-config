@@ -60,6 +60,11 @@
         TopLeft = "None";
         TopRight = "None";
       };
+      kscreenlockerrc.Daemon = {
+        Autolock = false;
+        LockGrace = 30;
+        LockOnResume = true;
+      };
     };
   };
 }
