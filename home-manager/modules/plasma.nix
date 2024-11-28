@@ -5,6 +5,48 @@
     workspace = {
       lookAndFeel = "org.kde.breezedark.desktop";
     };
+
+    # https://github.com/nix-community/plasma-manager/blob/trunk/examples/home.nix
+    panels = [
+      {
+        location = "bottom";
+        height = 44;
+        widgets = [
+          {
+            kickoff = {
+              sortAlphabetically = true;
+              icon = "nix-snowflake-white";
+            };
+          }
+          {
+            iconTasks = {
+              launchers = [
+                "applications:org.kde.dolphin.desktop"
+                "applications:org.kde.konsole.desktop"
+              ];
+            };
+          }
+          "org.kde.plasma.marginsseparator"
+          {
+            systemTray.items = {
+              shown = [
+                "org.kde.plasma.bluetooth"
+                "org.kde.plasma.networkmanagement"
+                "org.kde.plasma.volume"
+              ];
+              hidden = [];
+            };
+          }
+          {
+            digitalClock = {
+              calendar.firstDayOfWeek = "sunday";
+              time.format = "24h";
+            };
+          }
+        ];
+      }
+    ];
+
     input.mice = [
       {
         name = "Logitech USB Receiver";
