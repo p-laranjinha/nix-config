@@ -16,4 +16,10 @@
     LC_TELEPHONE = "en_IE.UTF-8";
     LC_TIME = "en_IE.UTF-8";
   };
+
+  # Configure keyboard layout in X11
+  services.xserver.xkb = {
+    layout = "us,us";
+    variant = ",altgr-intl";
+  };
 }

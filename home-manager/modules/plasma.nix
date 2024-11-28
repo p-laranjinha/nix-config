@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   programs.plasma = {
     enable = true;
-    #overrideConfig = true;
+    overrideConfig = true;
     workspace = {
       lookAndFeel = "org.kde.breezedark.desktop";
     };
@@ -31,6 +31,22 @@
         accelerationProfile = "none";
       }
     ];
+    powerdevil.AC = {
+      autoSuspend = {
+        action = "sleep";
+        idleTimeout = 3600; # 1h
+      };
+      dimDisplay = {
+        enable = true;
+        idleTimeout = 600; # 10m
+      };
+      turnOffDisplay = {
+        idleTimeout = 1800; # 30m
+        idleTimeoutWhenLocked = 600; # 10m
+      };
+      whenSleepingEnter = "standbyThenHibernate";
+      powerProfile = "performance";
+    };
     configFile = {
       # https://www.reddit.com/r/kde/comments/r5xir0/config_file_location_for_hot_corners/
       # Disable corners and edges that do things.
