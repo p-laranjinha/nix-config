@@ -93,6 +93,7 @@
     configFile = {
       # https://www.reddit.com/r/kde/comments/r5xir0/config_file_location_for_hot_corners/
       # Disable corners and edges that do things.
+      # Change settings and look into ~/.config/kwinrc to see what does what.
       kwinrc.ElectricBorders = {
         Bottom = "None";
         BottomLeft = "None";
@@ -103,6 +104,10 @@
         TopLeft = "None";
         TopRight = "None";
       };
+      kwinrc.Effect-overview = {
+        BorderActivate = 9;
+      };
+
       # Disable auto lock.
       kscreenlockerrc.Daemon = {
         Autolock = false;
