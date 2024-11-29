@@ -115,6 +115,11 @@
         #LockGrace = 30;
         LockOnResume = true;
       };
+
+      # Fix bluetooth not being online on startup.
+      bluedevilglobalrc.Adapters = {
+        "F0:A6:54:4F:22:E0_powered" = true;
+      };
     };
   };
 }
