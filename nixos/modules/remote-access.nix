@@ -1,4 +1,6 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  ENABLE_SUNSHINE = false;
+in {
   networking.interfaces.enp14s0.wakeOnLan.enable = true;
 
   services.tailscale.enable = true;
@@ -22,7 +24,7 @@
   networking.firewall.allowedTCPPorts = [22];
 
   services.sunshine = {
-    enable = true;
+    enable = ENABLE_SUNSHINE;
     autoStart = true;
     capSysAdmin = true;
     openFirewall = true;
@@ -31,12 +33,12 @@
     };
   };
   services.displayManager.autoLogin = {
-    enable = true;
+    enable = ENABLE_SUNSHINE;
     user = "pebble";
   };
   # Used so that I can access this PC remotely using Sunshine but still have a password.
   systemd.user.services.lock-if-autologin = {
-    enable = true;
+    enable = ENABLE_SUNSHINE;
     description = "If the display manager is set to autologin, lock on startup.";
     path = [pkgs.procps];
     script = ''
