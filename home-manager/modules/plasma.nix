@@ -90,6 +90,7 @@
       whenSleepingEnter = "standbyThenHibernate";
       powerProfile = "performance";
     };
+    session.sessionRestore.restoreOpenApplicationsOnLogin = "startWithEmptySession";
     configFile = {
       # https://www.reddit.com/r/kde/comments/r5xir0/config_file_location_for_hot_corners/
       # Disable corners and edges that do things.
@@ -119,6 +120,12 @@
       # Fix bluetooth not being online on startup.
       bluedevilglobalrc.Adapters = {
         "F0:A6:54:4F:22:E0_powered" = true;
+      };
+
+      # Make max volume go to 150% and volume step to 2%.
+      plasmaparc.General = {
+        RaiseMaximumVolume = true;
+        VolumeStep = 2;
       };
     };
   };
