@@ -27,7 +27,7 @@
       After = ["graphical-session.target"];
     };
     Service = {
-      ExecStart = ''${pkgs.syncthingtray}'';
+      ExecStart = ''${pkgs.syncthingtray}/bin/syncthingtray'';
     };
   };
 }
