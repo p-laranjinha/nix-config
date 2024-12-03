@@ -23,8 +23,8 @@
       Description = "Launch SyncthingTray on startup.";
     };
     Install = {
-      WantedBy = ["default.target"];
-      After = ["default.target"];
+      WantedBy = ["graphical-session.target"];
+      After = ["graphical-session.target"];
     };
     Service = {
       ExecStart = ''${pkgs.syncthingtray}/bin/syncthingtray --wait'';
