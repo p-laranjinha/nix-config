@@ -33,6 +33,8 @@
     kdePackages.kate
     fswatch
 
+    syncthingtray
+
     #freecad
     #orca-slicer
 
