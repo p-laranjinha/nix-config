@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   services.syncthing = {
     enable = true;
     tray.enable = false;
@@ -27,7 +27,7 @@
       After = ["graphical-session.target"];
     };
     Service = {
-      ExecStart = "syncthingtray";
+      ExecStart = ''${pkgs.syncthingtray}'';
     };
   };
 }
