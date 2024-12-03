@@ -30,7 +30,7 @@ sudo nixos-rebuild switch --flake $NIX_CONFIG_DIR
 # Get current generation metadata
 current=$(nixos-rebuild list-generations | grep current | awk '{print $1 " " $3 " " $4}')
 
-# Commit all changes witih the generation metadata
+# Commit all changes witih the generation metadata\
 git commit -am "$current"
 git push
 

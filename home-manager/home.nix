@@ -17,6 +17,8 @@
     ./modules/plasma.nix
 
     ./modules/git.nix
+
+    ./modules/syncthing.nix
   ];
 
   home = {
