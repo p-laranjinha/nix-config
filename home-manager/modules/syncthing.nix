@@ -23,11 +23,11 @@
       Description = "Launch SyncthingTray on startup.";
     };
     Install = {
-      WantedBy = ["graphical-session.target"];
-      After = ["graphical-session.target"];
+      WantedBy = ["default.target"];
+      After = ["default.target"];
     };
     Service = {
-      ExecStart = ''${pkgs.syncthingtray}/bin/syncthingtray'';
+      ExecStart = ''${pkgs.syncthingtray}/bin/syncthingtray --wait'';
     };
   };
 }
