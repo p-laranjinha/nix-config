@@ -17,4 +17,17 @@
       };
     };
   };
+
+  systemd.user.services.syncthingtray = {
+    Unit = {
+      Description = "Launch SyncthingTray on startup.";
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
+      After = ["graphical-session.target"];
+    };
+    Service = {
+      ExecStart = "syncthingtray";
+    };
+  };
 }
