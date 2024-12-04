@@ -17,6 +17,10 @@
             "phone"
             "tablet"
           ];
+          versioning = {
+            type = "staggered";
+            params.maxAge = "31556926"; # 1 year
+          };
         };
         "Obsidian Vaults" = {
           id = "obsidian-vaults";
@@ -25,6 +29,10 @@
             "phone"
             "tablet"
           ];
+          versioning = {
+            type = "staggered";
+            params.maxAge = "0"; # forever
+          };
         };
         "Music" = {
           id = "music";
@@ -32,6 +40,10 @@
           devices = [
             "phone"
           ];
+          versioning = {
+            type = "staggered";
+            params.maxAge = "31556926"; # 1 year
+          };
         };
         "Tachiyomi Backup" = {
           id = "tachiyomi-backup";
