@@ -54,7 +54,7 @@
 
   systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
   environment.systemPackages = with pkgs; [
-    syncthingtray
+    syncthingtray-minimal
   ];
   systemd.user.services.syncthingtray = {
     enable = false;
