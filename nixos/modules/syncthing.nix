@@ -19,10 +19,8 @@
           ];
           versioning = {
             type = "staggered";
-            params = {
-              maxAge = "31536000"; # 1 year
-              cleanupIntervalS = "604800"; # clean once per week
-            };
+            cleanupIntervalS = "604800"; # clean once per week
+            params.maxAge = "31536000"; # 1 year
           };
         };
         "Obsidian Vaults" = {
@@ -34,10 +32,8 @@
           ];
           versioning = {
             type = "staggered";
-            params = {
-              maxAge = "0"; # forever
-              cleanupIntervalS = "604800"; # clean once per week
-            };
+            cleanupIntervalS = "604800"; # clean once per week
+            params.maxAge = "0"; # forever
           };
         };
         "Music" = {
@@ -48,10 +44,8 @@
           ];
           versioning = {
             type = "staggered";
-            params = {
-              maxAge = "31536000"; # 1 year
-              cleanupIntervalS = "604800"; # clean once per week
-            };
+            cleanupIntervalS = "604800"; # clean once per week
+            params.maxAge = "31536000"; # 1 year
           };
         };
         "Tachiyomi Backup" = {
