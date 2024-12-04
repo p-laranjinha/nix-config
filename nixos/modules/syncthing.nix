@@ -20,7 +20,7 @@
           versioning = {
             type = "staggered";
             params = {
-              maxAge = "31556926"; # 1 year
+              maxAge = "31536000"; # 1 year
               cleanInterval = "604800"; # clean once per week
             };
           };
@@ -49,7 +49,7 @@
           versioning = {
             type = "staggered";
             params = {
-              maxAge = "31556926"; # 1 year
+              maxAge = "31536000"; # 1 year
               cleanInterval = "604800"; # clean once per week
             };
           };
