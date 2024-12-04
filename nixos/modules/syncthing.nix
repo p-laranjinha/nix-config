@@ -54,10 +54,9 @@
 
   systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
   environment.systemPackages = with pkgs; [
-    syncthingtray-minimal
+    syncthingtray
   ];
   systemd.user.services.syncthingtray = {
-    enable = false;
     description = "Launch SyncthingTray on startup.";
     script = ''${pkgs.syncthingtray}/bin/syncthingtray --wait'';
     wantedBy = ["graphical-session.target"];
