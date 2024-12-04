@@ -8,7 +8,7 @@
     overrideFolders = false;
     settings = {
       devices = {
-        "phone".id = "JU2TRHN-NJQPZUH-QPBTFZB-IEEDJKW-45V5IRB-6YSUSUS-OVWWEK3-Y4QPBAS";
+        "phone" = {id = "JU2TRHN-NJQPZUH-QPBTFZB-IEEDJKW-45V5IRB-6YSUSUS-OVWWEK3-Y4QPBAS";};
       };
       folders = {
         "Tachiyomi Backup" = {
