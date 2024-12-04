@@ -21,7 +21,7 @@
             type = "staggered";
             params = {
               maxAge = "31536000"; # 1 year
-              cleanInterval = "604800"; # clean once per week
+              cleanupIntervalS = "604800"; # clean once per week
             };
           };
         };
@@ -36,7 +36,7 @@
             type = "staggered";
             params = {
               maxAge = "0"; # forever
-              cleanInterval = "604800"; # clean once per week
+              cleanupIntervalS = "604800"; # clean once per week
             };
           };
         };
@@ -50,7 +50,7 @@
             type = "staggered";
             params = {
               maxAge = "31536000"; # 1 year
-              cleanInterval = "604800"; # clean once per week
+              cleanupIntervalS = "604800"; # clean once per week
             };
           };
         };
