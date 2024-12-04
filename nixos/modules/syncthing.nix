@@ -46,6 +46,7 @@
           path = "~/Sync/WIT";
           devices = [
             "phone"
+            "tablet"
           ];
         };
       };
