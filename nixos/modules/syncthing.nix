@@ -1,6 +1,9 @@
 {pkgs, ...}: {
   services.syncthing = {
-    # WARNING: If something is wrong, syncthing will just not have any devices or folders
+    # WARNING: If something is wrong, syncthing will just not have any
+    #  devices or folders.
+    # INFO: Versioning cleanup interval uses a different method which
+    #  nixpkgs doesn't seem to support. Will have to manually change that.
     enable = true;
     openDefaultPorts = true;
     user = "pebble";
@@ -22,7 +25,7 @@
           ];
           versioning = {
             type = "staggered";
-            cleanupIntervalS = "604800"; # clean once per week
+            #cleanupIntervalS = "604800"; # clean once per week
             params.maxAge = "31536000"; # 1 year
           };
         };
@@ -35,7 +38,7 @@
           ];
           versioning = {
             type = "staggered";
-            #  cleanupIntervalS = "604800"; # clean once per week
+            #cleanupIntervalS = "604800"; # clean once per week
             params.maxAge = "0"; # forever
           };
         };
@@ -47,7 +50,7 @@
           ];
           versioning = {
             type = "staggered";
-            #  cleanupIntervalS = "604800"; # clean once per week
+            #cleanupIntervalS = "604800"; # clean once per week
             params.maxAge = "31536000"; # 1 year
           };
         };
