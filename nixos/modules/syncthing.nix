@@ -81,7 +81,7 @@
     description = "Launch SyncthingTray on startup.";
     #preStart = ''sleep 5'';
     script = ''${pkgs.syncthingtray}/bin/syncthingtray --wait'';
-    wantedBy = ["syncthing.service"];
+    wantedBy = ["graphical-session.target"];
     after = ["syncthing.service"];
   };
 }
