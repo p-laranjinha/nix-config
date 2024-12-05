@@ -82,6 +82,6 @@
     #preStart = ''sleep 5'';
     script = ''${pkgs.syncthingtray}/bin/syncthingtray --wait'';
     wantedBy = ["graphical-session.target"];
-    after = ["syncthing.service"];
+    after = ["graphical-session.target"];
   };
 }
