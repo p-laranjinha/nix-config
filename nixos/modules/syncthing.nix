@@ -79,7 +79,7 @@
   ];
   systemd.user.services.syncthingtray = {
     description = "Launch SyncthingTray on startup.";
-    preStart = ''sleep 5'';
+    #preStart = ''sleep 5'';
     script = ''${pkgs.syncthingtray}/bin/syncthingtray --wait'';
     requires = ["syncthing.service"];
   };
