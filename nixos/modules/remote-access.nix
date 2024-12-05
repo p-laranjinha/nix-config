@@ -3,7 +3,13 @@
 in {
   networking.interfaces.enp14s0.wakeOnLan.enable = true;
 
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "both";
+    extraUpFlags = [
+      "--advertise-exit-node"
+    ];
+  };
 
   services.xrdp.enable = true;
   services.xrdp.defaultWindowManager = "startplasma-x11";
