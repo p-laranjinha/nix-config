@@ -45,7 +45,6 @@ in {
       SDDM_TEST=`pgrep -xa sddm-helper`
       [[ $SDDM_TEST == *"--autologin"* ]] && loginctl lock-session
     '';
-    wantedBy = ["graphical-session.target"];
     after = ["graphical-session.target"];
   };
 }
