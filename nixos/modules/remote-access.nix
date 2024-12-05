@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  ENABLE_SUNSHINE = true;
+  ENABLE_SUNSHINE = false;
 in {
   networking.interfaces.enp14s0.wakeOnLan.enable = true;
 
