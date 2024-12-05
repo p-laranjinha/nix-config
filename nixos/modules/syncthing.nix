@@ -3,7 +3,7 @@
     # WARNING: If something is wrong, syncthing will just not have any
     #  devices or folders.
     # INFO: Versioning cleanup interval uses a different method which
-    #  nixpkgs doesn't seem to support. Will have to manually change that.
+    #  nixpkgs doesn't seem to support.
     enable = true;
     openDefaultPorts = true;
     user = "pebble";
@@ -80,7 +80,6 @@
   systemd.user.services.syncthingtray = {
     description = "Launch SyncthingTray on startup.";
     script = ''${pkgs.syncthingtray}/bin/syncthingtray --wait'';
-    wantedBy = ["graphical-session.target"];
-    after = ["graphical-session.target"];
+    after = ["syncthing.service"];
   };
 }
