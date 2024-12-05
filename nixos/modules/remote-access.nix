@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  ENABLE_SUNSHINE = false;
+  ENABLE_SUNSHINE = true;
 in {
   networking.interfaces.enp14s0.wakeOnLan.enable = true;
 
@@ -45,6 +45,7 @@ in {
       SDDM_TEST=`pgrep -xa sddm-helper`
       [[ $SDDM_TEST == *"--autologin"* ]] && loginctl lock-session
     '';
-    after = ["graphical-session.target"];
+    #wantedBy = ["graphical-session.target"];
+    #after = ["graphical-session.target"];
   };
 }
