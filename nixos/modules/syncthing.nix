@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   services.syncthing = {
+    # WARNING: If something is wrong, syncthing will just not have any devices or folders
     enable = true;
     openDefaultPorts = true;
     user = "pebble";
@@ -19,11 +20,11 @@
             "phone"
             "tablet"
           ];
-          #versioning = {
-          #  type = "staggered";
-          #  cleanupIntervalS = "604800"; # clean once per week
-          #  params.maxAge = "31536000"; # 1 year
-          #};
+          versioning = {
+            type = "staggered";
+            #  cleanupIntervalS = "604800"; # clean once per week
+            params.maxAge = "31536000"; # 1 year
+          };
         };
         "Obsidian Vaults" = {
           id = "obsidian-vaults";
@@ -32,11 +33,11 @@
             "phone"
             "tablet"
           ];
-          #versioning = {
-          #  type = "staggered";
-          #  cleanupIntervalS = "604800"; # clean once per week
-          #  params.maxAge = "0"; # forever
-          #};
+          versioning = {
+            type = "staggered";
+            #  cleanupIntervalS = "604800"; # clean once per week
+            params.maxAge = "0"; # forever
+          };
         };
         "Music" = {
           id = "music";
@@ -44,11 +45,11 @@
           devices = [
             "phone"
           ];
-          #versioning = {
-          #  type = "staggered";
-          #  cleanupIntervalS = "604800"; # clean once per week
-          #  params.maxAge = "31536000"; # 1 year
-          #};
+          versioning = {
+            type = "staggered";
+            #  cleanupIntervalS = "604800"; # clean once per week
+            params.maxAge = "31536000"; # 1 year
+          };
         };
         "Tachiyomi Backup" = {
           id = "tachiyomi-backup";
