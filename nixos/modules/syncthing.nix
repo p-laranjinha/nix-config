@@ -77,11 +77,11 @@
   environment.systemPackages = with pkgs; [
     syncthingtray
   ];
-  systemd.services.syncthingtray = {
+  systemd.user.services.syncthingtray = {
     description = "Launch SyncthingTray on startup.";
     #preStart = ''sleep 5'';
     script = ''${pkgs.syncthingtray}/bin/syncthingtray --wait'';
     wantedBy = ["graphical-session.target"];
-    after = ["graphical-session.target"];
+    after = ["syncthing.service"];
   };
 }
