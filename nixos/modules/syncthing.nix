@@ -78,11 +78,10 @@
     syncthingtray
   ];
   systemd.services.syncthingtray = {
-    enable = true;
     description = "Launch SyncthingTray on startup.";
     #preStart = ''sleep 5'';
     script = ''${pkgs.syncthingtray}/bin/syncthingtray --wait'';
-    #wantedBy = ["syncthing.service"];
-    #after = ["syncthing.service"];
+    wantedBy = ["graphical-session.target"];
+    after = ["syncthing.service"];
   };
 }
