@@ -29,6 +29,7 @@
   # The home.packages option allows you to install Nix packages into your environment.
   home.packages = with pkgs; [
     alejandra # Nix formatter
+    nil # Nix language server
     libnotify
     kdePackages.kate
     fswatch
