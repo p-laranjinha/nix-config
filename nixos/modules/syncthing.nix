@@ -4,6 +4,8 @@
     openDefaultPorts = true;
     user = "pebble";
     dataDir = "/home/pebble";
+    overrideDevices = false;
+    overrideFolders = false;
     settings = {
       devices = {
         "phone".id = "JU2TRHN-NJQPZUH-QPBTFZB-IEEDJKW-45V5IRV-6YSUSUS-OVWWEK3-Y4QPBAS";
