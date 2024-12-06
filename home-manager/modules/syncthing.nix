@@ -25,7 +25,7 @@
           ];
           versioning = {
             type = "staggered";
-            #cleanupIntervalS = "604800"; # clean once per week
+            cleanupIntervalS = "604800"; # clean once per week
             params.maxAge = "31536000"; # 1 year
           };
         };
@@ -38,7 +38,7 @@
           ];
           versioning = {
             type = "staggered";
-            #cleanupIntervalS = "604800"; # clean once per week
+            cleanupIntervalS = "604800"; # clean once per week
             params.maxAge = "0"; # forever
           };
         };
@@ -50,7 +50,7 @@
           ];
           versioning = {
             type = "staggered";
-            #cleanupIntervalS = "604800"; # clean once per week
+            cleanupIntervalS = "604800"; # clean once per week
             params.maxAge = "31536000"; # 1 year
           };
         };
