@@ -12,7 +12,7 @@
 
     ./modules/git.nix
 
-    #./modules/syncthing.nix
+    ./modules/syncthing.nix
   ];
 
   home = {

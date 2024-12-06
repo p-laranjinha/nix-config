@@ -23,6 +23,8 @@ alejandra . &>/dev/null \
 # Shows your changes
 git diff -U0 '*.nix'
 
+git add .
+
 echo "NixOS Rebuilding..."
 
 sudo nixos-rebuild switch --flake $NIX_CONFIG_DIR
