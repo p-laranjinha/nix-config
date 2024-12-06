@@ -9,6 +9,8 @@ set -e
 # cd to your config dir without affecting shell outside this script
 pushd $NIX_CONFIG_DIR &>/dev/null
 
+git reset
+
 # Early return if no changes were detected.
 if git diff --quiet '*.nix'; then
     echo "No changes detected, exiting."
