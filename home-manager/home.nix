@@ -1,10 +1,4 @@
-{
-  config,
-  pkgs,
-  inputs,
-  lib,
-  ...
-}: {
+{...}: {
   imports = [
     # Environment variables.
     ./modules/environment.nix
@@ -17,6 +11,8 @@
     ./modules/plasma.nix
 
     ./modules/git.nix
+
+    #./modules/syncthing.nix
   ];
 
   home = {

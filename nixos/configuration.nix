@@ -38,8 +38,6 @@
 
     # System packages and NixOS programs.
     ./modules/packages.nix
-
-    ./modules/syncthing.nix
   ];
 
   networking.hostName = "orange";
