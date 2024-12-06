@@ -27,7 +27,7 @@
             type = "staggered";
             params = {
               cleanInterval = "604800"; # clean once per week
-              maxAge = "31536000"; # 1 year
+              maxAge = "0"; # 1 year
             };
           };
         };
