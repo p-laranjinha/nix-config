@@ -26,7 +26,7 @@
           versioning = {
             type = "staggered";
             params = {
-              cleanInterval = "604800"; # clean once per week
+              #cleanInterval = "604800"; # clean once per week
               maxAge = "0"; # 1 year
             };
           };
