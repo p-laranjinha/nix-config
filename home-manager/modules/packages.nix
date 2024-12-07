@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  imports = [
+    ./build123d.nix
+  ];
+
   programs.bash = {
     enable = true;
     shellAliases = {
