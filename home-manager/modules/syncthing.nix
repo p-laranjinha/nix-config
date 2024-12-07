@@ -5,12 +5,6 @@
     # INFO: Versioning cleanup interval uses a different method which
     #  nixpkgs doesn't seem to support.
     enable = true;
-    #tray.enable = true;
-    #openDefaultPorts = true;
-    #user = "pebble";
-    #dataDir = "/home/pebble";
-    #overrideDevices = false;
-    #overrideFolders = false;
     settings = {
       devices = {
         "phone".id = "JU2TRHN-NJQPZUH-QPBTFZB-IEEDJKW-45V5IRV-6YSUSUS-OVWWEK3-Y4QPBAS";
@@ -80,11 +74,16 @@
   home.packages = with pkgs; [
     syncthingtray
   ];
-  #systemd.user.services.syncthingtray = {
-  #  description = "Launch SyncthingTray on startup.";
-  #  #preStart = ''sleep 5'';
-  #  script = ''${pkgs.syncthingtray}/bin/syncthingtray --wait'';
-  #  wantedBy = ["graphical-session.target"];
-  #  after = ["syncthing.service"];
-  #};
+  systemd.user.services.syncthingtray = {
+    Unit = {
+      Description = "Launch SyncthingTray on startup.";
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
+      After = ["syncthing.service"];
+    };
+    Service = {
+      ExecStart = ''${pkgs.syncthingtray}/bin/syncthingtray --wait'';
+    };
+  };
 }
