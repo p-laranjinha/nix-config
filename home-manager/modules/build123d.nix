@@ -29,6 +29,7 @@ with {
       (python-pkgs:
         with python-pkgs; [
           my_toolz
+          yq
         ]))
   ];
 }
