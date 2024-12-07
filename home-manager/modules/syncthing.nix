@@ -5,6 +5,7 @@
     # INFO: Versioning cleanup interval uses a different method which
     #  nixpkgs doesn't seem to support.
     enable = true;
+    #tray.enable = true;
     #openDefaultPorts = true;
     #user = "pebble";
     #dataDir = "/home/pebble";
@@ -76,9 +77,9 @@
   };
 
   systemd.user.services.syncthing.environment.STNODEFAULTFOLDER = "true";
-  #home.packages = with pkgs; [
-  #  syncthingtray
-  #];
+  home.packages = with pkgs; [
+    syncthingtray
+  ];
   #systemd.user.services.syncthingtray = {
   #  description = "Launch SyncthingTray on startup.";
   #  #preStart = ''sleep 5'';
