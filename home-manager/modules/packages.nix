@@ -32,9 +32,9 @@
   home.packages = with pkgs; [
     alejandra # Nix formatter
     nil # Nix language server
-    libnotify
+    libnotify # Library for notifications, used in rebuild.sh
     kdePackages.kate
-    fswatch
+    fswatch # Tool to see file changes in real time
 
     freecad
     orca-slicer
