@@ -1,13 +1,9 @@
-{
-  pkgs,
-  fetchzip,
-  ...
-}: let
+{pkgs, ...}: let
   # https://github.com/black7375/Firefox-UI-Fix
-  lepton = fetchzip {
+  lepton = pkgs.fetchzip {
     url = "https://github.com/black7375/Firefox-UI-Fix/releases/download/v8.6.5/Lepton.zip";
-    # Use "sha256sum <file>" to get the hash.
-    hash = "sha256-79deca7377be4b4f3af757bee45abe3245033c9722de7b7d4c4f4b3a221fa77c";
+    sha256 = "sha256-W9Z6L/dVXR9nHbORl37SQWQV43rIKoXJTL7M/Gv2Xr0=";
+    stripRoot = false; # Required for zip files with multiple root files.
     postFetch = ''
       pwd
       ls
@@ -39,6 +35,7 @@ in {
     };
     profiles.default = {
       settings = {
+        "nothing" = lepton;
         "browser.tabs.closeWindowWithLastTab" = false;
         "privacy.donottrackheader.enabled" = true;
         "privacy.globalprivacycontrol.enabled" = true;
