@@ -47,21 +47,7 @@ in {
         "browser.uiCustomization.state" = builtins.toJSON {
           placements = {
             widget-overflow-fixed-list = [];
-            unified-extensions-area = [
-              #"dearrow_ajay_app-browser-action"
-              #"sponsorblocker_ajay_app-browser-action"
-              #"ublock0_raymondhill_net-browser-action"
-              #"plasma-browser-integration_kde_org-browser-action"
-              #"_59c55aed-bdb3-4f2f-b81d-27011a689be6_-browser-action"
-              #"_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action"
-              #"_d07ccf11-c0cd-4938-a265-2a4d6ad01189_-browser-action"
-              #"gdpr_cavi_au_dk-browser-action"
-              #"_036a55b4-5e72-4d05-a06c-cba2dfcc134a_-browser-action"
-              #"enhancerforyoutube_maximerf_addons_mozilla_org-browser-action"
-              #"yet_another_speed_dial_conceptualspace_net-browser-action"
-              #"_a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad_-browser-action"
-              #"_34daeb50-c2d2-4f14-886a-7160b24d66a4_-browser-action"
-            ];
+            unified-extensions-area = [];
             nav-bar = [
               "back-button"
               "forward-button"
@@ -90,14 +76,7 @@ in {
             PersonalToolbar = [];
           };
           seen = [];
-          dirtyAreaCache = [
-            #"nav-bar"
-            #"vertical-tabs"
-            #"PersonalToolbar"
-            #"unified-extensions-area"
-            #"toolbar-menubar"
-            #"TabsToolbar"
-          ];
+          dirtyAreaCache = [];
           # This has to be bigger than the "currentVersion" in about:config or prefs.js.
           "currentVersion" = 21;
           "newElementCount" = 0;
