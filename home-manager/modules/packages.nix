@@ -31,17 +31,25 @@
       PasswordManagerEnabled = false;
     };
     profiles.default = {
-      #preferences = {
-      #  "browser.contentblocking.category" = { Value = "strict"; Status = "locked"; };
-      #  "extensions.pocket.enabled" = false;
-      #  "extensions.screenshots.disabled" = true;
-      #  "browser.topsites.contile.enabled" = false;
-      #  "browser.formfill.enable" = false;
-      #  "browser.search.suggest.enabled" = false;
-      #  "browser.search.suggest.enabled.private" = false;
-      #  "browser.urlbar.suggest.searches" = false;
-      #  "browser.urlbar.showSearchSuggestionsFirst" = false;
-      #};
+      settings = {
+        "browser.tabs.closeWindowWithLastTab" = true;
+        "privacy.donottrackheader.enabled" = true;
+        "privacy.globalprivacycontrol.enabled" = true;
+        "extensions.formautofill.addresses.enabled" = false;
+        "extensions.formautofill.creditCards.enabled" = false;
+        "dom.security.https_only_mode" = true;
+        "dom.security.https_only_mode_ever_enabled" = true;
+        "browser.urlbar.maxRichResults" = 20;
+        "browser.urlbar.showSearchSuggestionsFirst" = false;
+        "browser.newtabpage.activity-stream.showSponsored" = false;
+        "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+      };
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        bitwarden
+        ublock-origin
+        darkreader
+        # The rest can just be installed by logging in to the Firefox account.
+      ];
       search = {
         force = true;
         default = "DuckDuckGo";
@@ -79,13 +87,6 @@
           "Google".metaData.alias = "@g"; # builtin engines only support specifying one additional alias.
         };
       };
-      settings = {};
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        bitwarden
-        ublock-origin
-        darkreader
-        # The rest can just be installed by logging in to the Firefox account.
-      ];
     };
   };
 
