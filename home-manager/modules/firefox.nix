@@ -1,5 +1,6 @@
 {pkgs, ...}: let
   # https://github.com/black7375/Firefox-UI-Fix
+  # You may also need to go to about:support, click "Clear startup cache..." and restart Firefox.
   lepton = pkgs.fetchzip {
     url = "https://github.com/black7375/Firefox-UI-Fix/releases/download/v8.6.5/Lepton.zip";
     sha256 = "sha256-W9Z6L/dVXR9nHbORl37SQWQV43rIKoXJTL7M/Gv2Xr0=";
@@ -45,51 +46,57 @@ in {
         "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
         "browser.uiCustomization.state" = builtins.toJSON {
           placements = {
-            widget-overflow-fixed-list = [
-            ];
+            widget-overflow-fixed-list = [];
             unified-extensions-area = [
-              "ublock0_raymondhill_net-browser-action"
-              "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action"
-              "plasma-browser-integration_kde_org-browser-action"
+              #"dearrow_ajay_app-browser-action"
+              #"sponsorblocker_ajay_app-browser-action"
+              #"ublock0_raymondhill_net-browser-action"
+              #"plasma-browser-integration_kde_org-browser-action"
+              #"_59c55aed-bdb3-4f2f-b81d-27011a689be6_-browser-action"
+              #"_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action"
+              #"_d07ccf11-c0cd-4938-a265-2a4d6ad01189_-browser-action"
+              #"gdpr_cavi_au_dk-browser-action"
+              #"_036a55b4-5e72-4d05-a06c-cba2dfcc134a_-browser-action"
+              #"enhancerforyoutube_maximerf_addons_mozilla_org-browser-action"
+              #"yet_another_speed_dial_conceptualspace_net-browser-action"
+              #"_a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad_-browser-action"
+              #"_34daeb50-c2d2-4f14-886a-7160b24d66a4_-browser-action"
             ];
             nav-bar = [
+              "back-button"
               "forward-button"
               "stop-reload-button"
-              "back-button"
               "customizableui-special-spring1"
               "urlbar-container"
               "customizableui-special-spring2"
               "save-to-pocket-button"
               "downloads-button"
-              "fxa-toolbar-menu-button"
               "unified-extensions-button"
               "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
               "addon_darkreader_org-browser-action"
+              "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action"
+              "sidebar-button"
             ];
             toolbar-menubar = [
               "menubar-items"
             ];
             TabsToolbar = [
-              "firefox-view-button"
               "tabbrowser-tabs"
               "new-tab-button"
+              "firefox-view-button"
               "alltabs-button"
             ];
-            vertical-tabs = [
-            ];
-            PersonalToolbar = [
-              "import-button"
-              "personal-bookmarks"
-            ];
+            vertical-tabs = [];
+            PersonalToolbar = [];
           };
           seen = [];
           dirtyAreaCache = [
-            "nav-bar"
-            "vertical-tabs"
-            "PersonalToolbar"
-            "unified-extensions-area"
-            "toolbar-menubar"
-            "TabsToolbar"
+            #"nav-bar"
+            #"vertical-tabs"
+            #"PersonalToolbar"
+            #"unified-extensions-area"
+            #"toolbar-menubar"
+            #"TabsToolbar"
           ];
           # This has to be bigger than the "currentVersion" in about:config or prefs.js.
           "currentVersion" = 21;
