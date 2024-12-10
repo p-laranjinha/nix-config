@@ -45,8 +45,8 @@
               "plasma-browser-integration_kde_org-browser-action"
             ];
             nav-bar = [
-              "back-button"
               "forward-button"
+              "back-button"
               "stop-reload-button"
               "customizableui-special-spring1"
               "urlbar-container"
