@@ -1,4 +1,15 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  fetchzip,
+  ...
+}: let
+  # https://github.com/black7375/Firefox-UI-Fix
+  lepton = fetchzip {
+    url = "https://github.com/black7375/Firefox-UI-Fix/releases/download/v8.6.5/Lepton.zip";
+    # Use "sha256sum <file>" to get the hash.
+    hash = "sha256-79deca7377be4b4f3af757bee45abe3245033c9722de7b7d4c4f4b3a221fa77c";
+  };
+in {
   programs.firefox = {
     enable = true;
     # Check about:policies#documentation for options.
@@ -83,10 +94,10 @@
             "toolbar-menubar"
             "TabsToolbar"
           ];
+          # This has to be bigger than the "currentVersion" in about:config or prefs.js.
           "currentVersion" = 21;
           "newElementCount" = 0;
         };
-        #"browser.uiCustomization.state" = ''{"placements":{"widget-overflow-fixed-list":[],"unified-extensions-area":["ublock0_raymondhill_net-browser-action","_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action","plasma-browser-integration_kde_org-browser-action"],"nav-bar":["back-button","forward-button","stop-reload-button","customizableui-special-spring1","urlbar-container","customizableui-special-spring2","save-to-pocket-button","downloads-button","fxa-toolbar-menu-button","unified-extensions-button","_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action","addon_darkreader_org-browser-action"],"toolbar-menubar":["menubar-items"],"TabsToolbar":["firefox-view-button","tabbrowser-tabs","new-tab-button","alltabs-button"],"vertical-tabs":[],"PersonalToolbar":["import-button","personal-bookmarks"]},"seen":["save-to-pocket-button","developer-button","_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action","addon_darkreader_org-browser-action","ublock0_raymondhill_net-browser-action","_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action","plasma-browser-integration_kde_org-browser-action"],"dirtyAreaCache":["nav-bar","vertical-tabs","PersonalToolbar","unified-extensions-area","toolbar-menubar","TabsToolbar"],"currentVersion":20,"newElementCount":2}'';
       };
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         bitwarden
