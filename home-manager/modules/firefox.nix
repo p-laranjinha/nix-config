@@ -8,6 +8,10 @@
     url = "https://github.com/black7375/Firefox-UI-Fix/releases/download/v8.6.5/Lepton.zip";
     # Use "sha256sum <file>" to get the hash.
     hash = "sha256-79deca7377be4b4f3af757bee45abe3245033c9722de7b7d4c4f4b3a221fa77c";
+    postFetch = ''
+      pwd
+      ls
+    '';
   };
 in {
   programs.firefox = {
