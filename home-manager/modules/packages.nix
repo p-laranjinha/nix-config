@@ -94,14 +94,16 @@
   home.packages = with pkgs; [
     alejandra # Nix formatter
     nil # Nix language server
+
     libnotify # Library for notifications, used in rebuild.sh
     kdePackages.kate
     fswatch # Tool to see file changes in real time
 
     freecad
     orca-slicer
-
     inputs.cq-editor
+
+    obsidian
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
