@@ -4,10 +4,6 @@
     url = "https://github.com/black7375/Firefox-UI-Fix/releases/download/v8.6.5/Lepton.zip";
     sha256 = "sha256-W9Z6L/dVXR9nHbORl37SQWQV43rIKoXJTL7M/Gv2Xr0=";
     stripRoot = false; # Required for zip files with multiple root files.
-    postFetch = ''
-      pwd
-      ls
-    '';
   };
 in {
   programs.firefox = {
@@ -35,7 +31,6 @@ in {
     };
     profiles.default = {
       settings = {
-        "nothing" = lepton;
         "browser.tabs.closeWindowWithLastTab" = false;
         "privacy.donottrackheader.enabled" = true;
         "privacy.globalprivacycontrol.enabled" = true;
@@ -100,6 +95,7 @@ in {
           "newElementCount" = 0;
         };
       };
+      extraConfig = builtins.readFile "${lepton}/user.js";
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         bitwarden
         ublock-origin
