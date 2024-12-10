@@ -32,7 +32,7 @@
     };
     profiles.default = {
       settings = {
-        "browser.tabs.closeWindowWithLastTab" = true;
+        "browser.tabs.closeWindowWithLastTab" = false;
         "privacy.donottrackheader.enabled" = true;
         "privacy.globalprivacycontrol.enabled" = true;
         "extensions.formautofill.addresses.enabled" = false;
