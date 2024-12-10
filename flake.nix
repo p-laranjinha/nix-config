@@ -29,7 +29,7 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    #cq-editor.url = "github:marcus7070/cq-flake";
+    cq-editor.url = "github:marcus7070/cq-flake";
   };
 
   outputs = {
@@ -44,11 +44,14 @@
         ./nixos/configuration.nix
         inputs.lix-module.nixosModules.default
         inputs.nix-ld.nixosModules.nix-ld
+        # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
         inputs.home-manager.nixosModules.default
         {
-          # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
+          # If the line below doesn't work run "journalctl --unit home-manager-pebble.service"
+          #  to see if a file is making home-manager not able to start the systemd service on rebuild.
           #home-manager.backupFileExtension = "backup";
-          #home-manager.extraSpecialArgs = {inherit inputs;};
+
+          home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.useUserPackages = true;
           home-manager.useGlobalPkgs = true;
           home-manager.sharedModules = [
