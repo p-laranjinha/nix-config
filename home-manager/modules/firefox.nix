@@ -6,7 +6,7 @@
     stripRoot = false; # Required for zip files with multiple root files.
   };
 in {
-  home.file."~/.mozilla/firefox/default/chrome".source = "${lepton}/chrome";
+  home.file.".mozilla/firefox/default/chrome".source = "${lepton}/chrome";
   programs.firefox = {
     enable = true;
     # Check about:policies#documentation for options.
