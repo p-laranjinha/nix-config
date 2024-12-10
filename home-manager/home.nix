@@ -6,6 +6,8 @@
     # Dotfiles.
     ./modules/files.nix
 
+    ./modules/aliases.nix
+
     ./modules/packages.nix
 
     ./modules/plasma.nix
