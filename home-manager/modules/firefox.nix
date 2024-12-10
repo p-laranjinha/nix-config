@@ -35,58 +35,58 @@
         "browser.urlbar.showSearchSuggestionsFirst" = false;
         "browser.newtabpage.activity-stream.showSponsored" = false;
         "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
-        #"browser.uiCustomization.state" = builtins.toJSON {
-        #  placements = {
-        #    widget-overflow-fixed-list = [
-        #    ];
-        #    unified-extensions-area = [
-        #      "ublock0_raymondhill_net-browser-action"
-        #      "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action"
-        #      "plasma-browser-integration_kde_org-browser-action"
-        #    ];
-        #    nav-bar = [
-        #      "forward-button"
-        #      "back-button"
-        #      "stop-reload-button"
-        #      "customizableui-special-spring1"
-        #      "urlbar-container"
-        #      "customizableui-special-spring2"
-        #      "save-to-pocket-button"
-        #      "downloads-button"
-        #      "fxa-toolbar-menu-button"
-        #      "unified-extensions-button"
-        #      "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
-        #      "addon_darkreader_org-browser-action"
-        #    ];
-        #    toolbar-menubar = [
-        #      "menubar-items"
-        #    ];
-        #    TabsToolbar = [
-        #      "firefox-view-button"
-        #      "tabbrowser-tabs"
-        #      "new-tab-button"
-        #      "alltabs-button"
-        #    ];
-        #    vertical-tabs = [
-        #    ];
-        #    PersonalToolbar = [
-        #      "import-button"
-        #      "personal-bookmarks"
-        #    ];
-        #  };
-        #  seen = [];
-        #  dirtyAreaCache = [
-        #    "nav-bar"
-        #    "vertical-tabs"
-        #    "PersonalToolbar"
-        #    "unified-extensions-area"
-        #    "toolbar-menubar"
-        #    "TabsToolbar"
-        #  ];
-        #  "currentVersion" = 1;
-        #  "newElementCount" = 0;
-        #};
-        "browser.uiCustomization.state" = ''{"placements":{"widget-overflow-fixed-list":[],"unified-extensions-area":["ublock0_raymondhill_net-browser-action","_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action","plasma-browser-integration_kde_org-browser-action"],"nav-bar":["forward-button","back-button","stop-reload-button","customizableui-special-spring1","urlbar-container","customizableui-special-spring2","save-to-pocket-button","downloads-button","fxa-toolbar-menu-button","unified-extensions-button","_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action","addon_darkreader_org-browser-action"],"toolbar-menubar":["menubar-items"],"TabsToolbar":["firefox-view-button","tabbrowser-tabs","new-tab-button","alltabs-button"],"vertical-tabs":[],"PersonalToolbar":["import-button","personal-bookmarks"]},"seen":["save-to-pocket-button","developer-button","_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action","addon_darkreader_org-browser-action","ublock0_raymondhill_net-browser-action","_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action","plasma-browser-integration_kde_org-browser-action"],"dirtyAreaCache":["nav-bar","vertical-tabs","PersonalToolbar","unified-extensions-area","toolbar-menubar","TabsToolbar"],"currentVersion":0,"newElementCount":0}'';
+        "browser.uiCustomization.state" = builtins.toJSON {
+          placements = {
+            widget-overflow-fixed-list = [
+            ];
+            unified-extensions-area = [
+              "ublock0_raymondhill_net-browser-action"
+              "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action"
+              "plasma-browser-integration_kde_org-browser-action"
+            ];
+            nav-bar = [
+              "forward-button"
+              "back-button"
+              "stop-reload-button"
+              "customizableui-special-spring1"
+              "urlbar-container"
+              "customizableui-special-spring2"
+              "save-to-pocket-button"
+              "downloads-button"
+              "fxa-toolbar-menu-button"
+              "unified-extensions-button"
+              "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
+              "addon_darkreader_org-browser-action"
+            ];
+            toolbar-menubar = [
+              "menubar-items"
+            ];
+            TabsToolbar = [
+              "firefox-view-button"
+              "tabbrowser-tabs"
+              "new-tab-button"
+              "alltabs-button"
+            ];
+            vertical-tabs = [
+            ];
+            PersonalToolbar = [
+              "import-button"
+              "personal-bookmarks"
+            ];
+          };
+          seen = [];
+          dirtyAreaCache = [
+            "nav-bar"
+            "vertical-tabs"
+            "PersonalToolbar"
+            "unified-extensions-area"
+            "toolbar-menubar"
+            "TabsToolbar"
+          ];
+          "currentVersion" = 21;
+          "newElementCount" = 0;
+        };
+        #"browser.uiCustomization.state" = ''{"placements":{"widget-overflow-fixed-list":[],"unified-extensions-area":["ublock0_raymondhill_net-browser-action","_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action","plasma-browser-integration_kde_org-browser-action"],"nav-bar":["back-button","forward-button","stop-reload-button","customizableui-special-spring1","urlbar-container","customizableui-special-spring2","save-to-pocket-button","downloads-button","fxa-toolbar-menu-button","unified-extensions-button","_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action","addon_darkreader_org-browser-action"],"toolbar-menubar":["menubar-items"],"TabsToolbar":["firefox-view-button","tabbrowser-tabs","new-tab-button","alltabs-button"],"vertical-tabs":[],"PersonalToolbar":["import-button","personal-bookmarks"]},"seen":["save-to-pocket-button","developer-button","_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action","addon_darkreader_org-browser-action","ublock0_raymondhill_net-browser-action","_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action","plasma-browser-integration_kde_org-browser-action"],"dirtyAreaCache":["nav-bar","vertical-tabs","PersonalToolbar","unified-extensions-area","toolbar-menubar","TabsToolbar"],"currentVersion":20,"newElementCount":2}'';
       };
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         bitwarden
