@@ -28,6 +28,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    #cq-editor.url = "github:marcus7070/cq-flake";
   };
 
   outputs = {
@@ -46,6 +48,7 @@
         {
           # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
           #home-manager.backupFileExtension = "backup";
+          #home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.useUserPackages = true;
           home-manager.useGlobalPkgs = true;
           home-manager.sharedModules = [
