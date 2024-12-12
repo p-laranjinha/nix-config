@@ -17,6 +17,5 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
-    EDITORR = "nvim";
   };
 }
