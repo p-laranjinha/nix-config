@@ -6,9 +6,6 @@
   home.shellAliases = {
     nvimu = "nvim -u ~/Programs/neovim-config/init.lua";
   };
-  home.sessionVariables = {
-    EDITORR = "nvim";
-  };
   programs.neovim = {
     enable = true;
     #defaultEditor = true;
