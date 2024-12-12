@@ -7,7 +7,7 @@
     nvimu = "nvim -u ~/Programs/neovim-config/init.lua";
   };
   home.sessionVariables = {
-    EDITOR = "nvim";
+    EDITORR = "nvim";
   };
   programs.neovim = {
     enable = true;
