@@ -3,6 +3,8 @@
     # Dependencies
     gcc
     unzip # Used to install LSPs with Mason.
+    ripgrep
+    fzf
   ];
   home.file.".config/nvim".source = pkgs.fetchgit {
     url = "https://github.com/p-laranjinha/neovim-config";
