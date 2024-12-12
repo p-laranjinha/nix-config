@@ -2,7 +2,7 @@
   home.packages = with pkgs; [
     # Dependencies
     gcc
-    stylua
+    unzip # Used to install LSPs with Mason.
   ];
   home.file.".config/nvim".source = pkgs.fetchgit {
     url = "https://github.com/p-laranjinha/neovim-config";
