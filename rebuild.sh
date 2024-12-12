@@ -10,6 +10,7 @@ set -e
 pushd $NIX_CONFIG_DIR &>/dev/null
 
 git reset
+git submodule update --init --recursive
 
 # Early return if no changes were detected.
 if git diff --quiet '*.nix'; then
@@ -29,7 +30,7 @@ git add .
 
 echo "NixOS Rebuilding..."
 
-sudo nixos-rebuild switch --flake $NIX_CONFIG_DIR
+sudo nixos-rebuild switch --flake "${NIX_CONFIG_DIR}?submodules=1"
 
 # Get current generation metadata
 current=$(nixos-rebuild list-generations | grep current | awk '{print $1 " " $3 " " $4}')

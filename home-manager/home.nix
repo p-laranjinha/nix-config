@@ -15,6 +15,8 @@
     ./modules/git.nix
 
     ./modules/syncthing.nix
+
+    ./modules/neovim
   ];
 
   home = {
