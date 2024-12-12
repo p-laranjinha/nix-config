@@ -14,7 +14,8 @@
   # or
   #
   #  /etc/profiles/per-user/pebble/etc/profile.d/hm-session-vars.sh
-  #
+
+  # These variables need a logout/login to be in effect.
   home.sessionVariables = {
     # EDITOR = "emacs";
   };

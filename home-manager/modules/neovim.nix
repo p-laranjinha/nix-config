@@ -4,11 +4,9 @@
     sha256 = "sha256-O2HeUy1BHcufYcUmeI9jO0KT9xuFGRXW7ILZ7sel7C4=";
   };
   home.shellAliases = {
-    nvimu = "nvim -u ~/Programs/neovim-config/init.lua";
+    # Neovim that uses the config from my git repo.
+    nvimg = "XDG_CONFIG_HOME=~/Projects NVIM_APPNAME=neovim-config nvim";
   };
-  #home.sessionVariables = {
-  #  EDITOR = "nvim";
-  #};
   programs.neovim = {
     enable = true;
     defaultEditor = true;
