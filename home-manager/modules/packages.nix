@@ -14,6 +14,7 @@
   home.packages = with pkgs; [
     alejandra # Nix formatter.
     nil # Nix language server.
+    nvd # Nix package version diff tool.
 
     nerd-fonts.fira-code
 
