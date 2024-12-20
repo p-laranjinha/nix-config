@@ -17,6 +17,8 @@
     ./modules/syncthing.nix
 
     ./modules/firefox.nix
+
+    ./modules/neovim.nix
   ];
 
   home = {
