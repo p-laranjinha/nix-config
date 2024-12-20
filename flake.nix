@@ -59,7 +59,11 @@
           #  to see if a file is making home-manager not able to start the systemd service on rebuild.
           #home-manager.backupFileExtension = "backup";
 
-          home-manager.extraSpecialArgs.flake-inputs = inputs;
+          home-manager.extraSpecialArgs = {
+            flake-inputs = inputs;
+            # If we don't also add umport here, home manager has an infinite recursion error.
+            umport = (import ./umport.nix {inherit (nixpkgs) lib;}).umport;
+          };
           home-manager.useUserPackages = true;
           home-manager.useGlobalPkgs = true;
           home-manager.sharedModules = [

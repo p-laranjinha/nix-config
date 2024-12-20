@@ -1,25 +1,7 @@
-{...}: {
-  imports = [
-    # Environment variables.
-    ./modules/environment.nix
-
-    # Dotfiles.
-    ./modules/files.nix
-
-    ./modules/aliases.nix
-
-    ./modules/packages.nix
-
-    ./modules/plasma.nix
-
-    ./modules/git.nix
-
-    ./modules/syncthing.nix
-
-    ./modules/firefox.nix
-
-    ./modules/neovim.nix
-  ];
+{umport, ...}: {
+  imports = umport {
+    path = ./modules;
+  };
 
   home = {
     username = "pebble";
