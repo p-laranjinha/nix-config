@@ -5,10 +5,13 @@
     unzip # Used to install LSPs with Mason.
     ripgrep
     fzf
+    cargo # Used to install the nil nix LSP.
+    wl-clipboard # Clipboard provider so that clipboard works.
   ];
   home.file.".config/nvim".source = pkgs.fetchgit {
     url = "https://github.com/p-laranjinha/neovim-config";
-    sha256 = "sha256-O2HeUy1BHcufYcUmeI9jO0KT9xuFGRXW7ILZ7sel7C4=";
+    rev = "b0cd74b9baeb7f6f0969b41a61c417b5ae5e5958"; # HEAD
+    sha256 = "1fdgs4730pxqm6ynj1ppp174h8v0l0l769rc18dx86j5p1l0n50j";
   };
   home.shellAliases = {
     # Neovim that uses the config from my git repo.
@@ -19,6 +22,5 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-    #extraLuaConfig = lib.fileContents neovim-config/init.lua;
   };
 }

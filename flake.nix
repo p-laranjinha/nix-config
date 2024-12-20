@@ -29,7 +29,19 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    cq-editor.url = "github:marcus7070/cq-flake";
+    cq-editor = {
+      url = "github:marcus7070/cq-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+
+    # Contains function for importing all .nix inside a folder.
+    # https://discourse.nixos.org/t/umport-automatic-import-of-modules/39455
+    nypkgs = {
+      url = "github:yunfachi/nypkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -38,7 +50,10 @@
     ...
   } @ inputs: {
     nixosConfigurations.orange = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
+      specialArgs = {
+        inherit inputs;
+        ylib = inputs.nypkgs.lib.x86_64-linux;
+      };
       modules = [
         {nixpkgs.overlays = [inputs.nur.overlay];}
         ./nixos/configuration.nix
@@ -51,13 +66,16 @@
           #  to see if a file is making home-manager not able to start the systemd service on rebuild.
           #home-manager.backupFileExtension = "backup";
 
-          home-manager.extraSpecialArgs = {inherit inputs;};
+          home-manager.extraSpecialArgs.flake-inputs = inputs;
           home-manager.useUserPackages = true;
           home-manager.useGlobalPkgs = true;
           home-manager.sharedModules = [
             inputs.plasma-manager.homeManagerModules.plasma-manager
           ];
-          home-manager.users.pebble = import ./home-manager/home.nix;
+          home-manager.users.pebble.imports = [
+            ./home-manager/home.nix
+            inputs.nix-flatpak.homeManagerModules.nix-flatpak
+          ];
         }
       ];
     };

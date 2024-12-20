@@ -22,7 +22,9 @@
         "cadquery-src": "cadquery-src",
         "cq-editor-src": "cq-editor-src",
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
         "ocp-src": "ocp-src",
         "ocp-stubs-src": "ocp-stubs-src",
         "pybind11-stubgen-src": "pybind11-stubgen-src",
@@ -165,6 +167,22 @@
         "url": "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-2.tar.gz"
       }
     },
+    "nix-flatpak": {
+      "locked": {
+        "lastModified": 1734128415,
+        "narHash": "sha256-HLwdVNxpuTsLlM3tCkpbQU6yCehdgf3kOS1G2SDlkzY=",
+        "owner": "gmodena",
+        "repo": "nix-flatpak",
+        "rev": "8bdc2540da516006d07b04019eb57ae0781a04b3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gmodena",
+        "ref": "latest",
+        "repo": "nix-flatpak",
+        "type": "github"
+      }
+    },
     "nix-ld": {
       "inputs": {
         "nixpkgs": [
@@ -186,22 +204,6 @@
       }
     },
     "nixpkgs": {
-      "locked": {
-        "lastModified": 1732837521,
-        "narHash": "sha256-jNRNr49UiuIwaarqijgdTR2qLPifxsVhlJrKzQ8XUIE=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "970e93b9f82e2a0f3675757eb0bfc73297cc6370",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
       "locked": {
         "lastModified": 1733392399,
         "narHash": "sha256-kEsTJTUQfQFIJOcLYFt/RvNxIK653ZkTBIs4DG+cBns=",
@@ -229,6 +231,26 @@
       "original": {
         "owner": "nix-community",
         "repo": "NUR",
+        "type": "github"
+      }
+    },
+    "nypkgs": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1726657437,
+        "narHash": "sha256-eBeVOFceQkYfWHAwdQ+aM8vLAbsuuWUgek2f6dFBTl0=",
+        "owner": "yunfachi",
+        "repo": "nypkgs",
+        "rev": "698ab4159dc38affee2fc5886468af139de8d95e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yunfachi",
+        "repo": "nypkgs",
         "type": "github"
       }
     },
@@ -325,9 +347,11 @@
         "cq-editor": "cq-editor",
         "home-manager": "home-manager",
         "lix-module": "lix-module",
+        "nix-flatpak": "nix-flatpak",
         "nix-ld": "nix-ld",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "nur": "nur",
+        "nypkgs": "nypkgs",
         "plasma-manager": "plasma-manager"
       }
     },

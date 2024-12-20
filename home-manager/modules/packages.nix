@@ -1,36 +1,37 @@
 {
   pkgs,
-  inputs,
+  flake-inputs,
   ...
 }: {
-  imports = [
-    ./firefox.nix
-  ];
-
   programs.bash.enable = true;
 
   programs.zoxide.enable = true;
 
+  # Allow fonts installed with home-packages.
+  fonts.fontconfig.enable = true;
+
   # The home.packages option allows you to install Nix packages into your environment.
   home.packages = with pkgs; [
-    alejandra # Nix formatter
-    nil # Nix language server
+    alejandra # Nix formatter.
+    nil # Nix language server.
 
-    libnotify # Library for notifications, used in rebuild.sh
+    nerd-fonts.fira-code
+
+    libnotify # Library for notifications, used in rebuild.sh.
+    fd # find replacement, used in rebuild.sh together with update-nix-fetchgit.
+    update-nix-fetchgit
+
     kdePackages.kate
-    fswatch # Tool to see file changes in real time
+    fswatch # Tool to see file changes in real time.
 
     freecad
     orca-slicer
-    inputs.cq-editor
+    flake-inputs.cq-editor
+
+    # rpi-imager # Tool to create SD cards with OSs for Raspberry Pis.
 
     obsidian
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    quodlibet
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -38,5 +39,12 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+  ];
+
+  # This will update flatpaks on rebuild, which will make rebuild not
+  #  idempotent, oh well.
+  services.flatpak.update.onActivation = true;
+  services.flatpak.packages = [
+    "eu.betterbird.Betterbird"
   ];
 }
