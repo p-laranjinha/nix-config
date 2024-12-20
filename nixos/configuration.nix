@@ -3,42 +3,17 @@
   lib,
   pkgs,
   inputs,
+  umport,
   ...
 }: {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-
-    # Bootloader
-    ./modules/boot.nix
-
-    # Filesystem config and btrfs snapshots.
-    ./modules/fs.nix
-
-    # Wayland and X11.
-    ./modules/display.nix
-
-    # Timezones and regions.
-    ./modules/time.nix
-
-    # Pipewire and other audio things.
-    ./modules/audio.nix
-
-    # Everything required to remote access this host:
-    #  - Wake-on-lan
-    #  - Tailscale
-    #  - xRDP
-    #  - SSH
-    #  - Sunshine
-    #    - Autologin and lock
-    ./modules/remote-access.nix
-
-    # Allows regular binaries to be run.
-    ./modules/binaries.nix
-
-    # System packages and NixOS programs.
-    ./modules/packages.nix
-  ];
+  imports =
+    [
+      # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ]
+    ++ umport {
+      path = ./modules;
+    };
 
   networking.hostName = "orange";
   # Don't forget to set a password with ‘passwd’.
