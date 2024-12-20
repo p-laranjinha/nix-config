@@ -35,13 +35,6 @@
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-
-    # Contains function for importing all .nix inside a folder.
-    # https://discourse.nixos.org/t/umport-automatic-import-of-modules/39455
-    nypkgs = {
-      url = "github:yunfachi/nypkgs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
@@ -52,7 +45,7 @@
     nixosConfigurations.orange = nixpkgs.lib.nixosSystem {
       specialArgs = {
         inherit inputs;
-        ylib = inputs.nypkgs.lib.x86_64-linux;
+        umport = (import ./umport.nix {inherit (nixpkgs) lib;}).umport;
       };
       modules = [
         {nixpkgs.overlays = [inputs.nur.overlay];}
