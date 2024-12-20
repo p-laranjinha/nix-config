@@ -1,4 +1,4 @@
-{...}: {
+{ylib, ...}: {
   imports = [
     # Environment variables.
     ./modules/environment.nix
@@ -16,7 +16,7 @@
 
     ./modules/syncthing.nix
 
-    ./modules/neovim.nix
+    ./modules/firefox.nix
   ];
 
   home = {
