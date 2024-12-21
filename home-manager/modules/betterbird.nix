@@ -3,7 +3,7 @@
   #profile = lib.lists.findFirst (value: (lib.strings.hasSuffix "default-default" value)) "" (lib.mapAttrsToList (name: value: name) (builtins.readDir /home/pebble/.var/app/eu.betterbird.Betterbird/.thunderbird));\
   profile = "egxcshns.default-default";
   userjs = lib.strings.concatStrings [".thunderbird/" profile "/user.js"];
-  status-icons-prefix = ".local/share/flatpak/app/eu.betterbird.Betterbird/current/active/export/share/icons/hicolor/scalable/status/eu.betterbird.Betterbird-";
+  status-icons-prefix = ".local/share/flatpak/app/eu.betterbird.Betterbird/current/active/files/lib/betterbird/chrome/icons/default/";
 in {
   services.flatpak.packages = [
     "eu.betterbird.Betterbird"
