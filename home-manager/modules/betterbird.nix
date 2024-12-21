@@ -62,12 +62,11 @@ in {
     };
     Install = {
       WantedBy = ["graphical-session.target"];
-      After = ["graphical-session.target"];
+      After = ["flatpak-portal.service"];
     };
     Service = {
       ExecStart = "${pkgs.writeShellScript "betterbird" ''
         #!/run/current-system/sw/bin/bash
-        sleep 20s
         $(awk "/^Exec=/{sub(/^Exec=/, \"\"); print; exit}" /home/pebble/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop)
       ''}";
     };
