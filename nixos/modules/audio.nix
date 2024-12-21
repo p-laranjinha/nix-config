@@ -1,11 +1,11 @@
 {...}: {
-  hardware.pulseaudio = {
-    enable = true;
-    support32Bit = true;
-  };
+  # hardware.pulseaudio = {
+  #   enable = true; # For RDP audio.
+  #   support32Bit = true;
+  # };
   security.rtkit.enable = true;
   services.pipewire = {
-    enable = false;
+    enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
