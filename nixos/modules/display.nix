@@ -6,6 +6,6 @@
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
-  services.displayManager.sddm.wayland.enable = false;
-  services.displayManager.defaultSession = "plasmax11";
+  services.displayManager.sddm.wayland.enable = true;
+  # services.displayManager.defaultSession = "plasmax11";
 }
