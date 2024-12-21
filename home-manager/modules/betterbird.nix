@@ -9,7 +9,9 @@ in {
   ];
 
   services.flatpak.overrides = {
-    "eu.betterbird.Betterbird".Context.filesystem = "host";
+    "eu.betterbird.Betterbird".Context.filesystems = [
+      "host"
+    ];
   };
 
   home.file."${userjs}".text = ''
