@@ -83,7 +83,10 @@
       After = ["syncthing.service"];
     };
     Service = {
-      ExecStart = ''${pkgs.syncthingtray}/bin/syncthingtray --wait'';
+      ExecStart = "${pkgs.writeShellScript "syncthing" ''
+        #!/run/current-system/sw/bin/bash
+        ${pkgs.syncthingtray}/bin/syncthingtray --wait
+      ''}";
     };
   };
 }

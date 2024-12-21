@@ -1,4 +1,8 @@
-{lib, ...}: let
+{
+  lib,
+  pkgs,
+  ...
+}: let
   # It may take a restart for the icons to apply.
   # This commented line gets the profile automatically but is inpure.
   #profile = lib.lists.findFirst (value: (lib.strings.hasSuffix "default-default" value)) "" (lib.mapAttrsToList (name: value: name) (builtins.readDir /home/pebble/.var/app/eu.betterbird.Betterbird/.thunderbird));\
@@ -6,22 +10,6 @@
   userjs = lib.strings.concatStrings [".thunderbird/" profile "/user.js"];
   status-icons-prefix = ".local/share/flatpak/app/eu.betterbird.Betterbird/current/active/export/share/icons/hicolor/scalable/status/eu.betterbird.Betterbird-";
 in {
-  systemd.user.services.betterbird = {
-    Unit = {
-      Description = "Run Betterbird on startup.";
-    };
-    Install = {
-      WantedBy = ["graphical-session.target"];
-      After = ["graphical-session.target"];
-    };
-    Service = {
-      ExecStart = ''
-        BETTERBIRD=`awk "/^Exec=/{sub(/^Exec=/, \"\"); print; exit}" /home/pebble/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop)`
-        $BETTERBIRD
-      '';
-    };
-  };
-
   services.flatpak.packages = [
     "eu.betterbird.Betterbird"
   ];
@@ -67,4 +55,20 @@ in {
       <circle style="fill:#fe5d00" cx="770" cy="770" r="160" />
     </svg>
   '';
+
+  systemd.user.services.betterbird = {
+    Unit = {
+      Description = "Run Betterbird on startup.";
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
+      After = ["graphical-session.target"];
+    };
+    Service = {
+      ExecStart = "${pkgs.writeShellScript "betterbird" ''
+        #!/run/current-system/sw/bin/bash
+        $(awk "/^Exec=/{sub(/^Exec=/, \"\"); print; exit}" /home/pebble/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop)
+      ''}";
+    };
+  };
 }
