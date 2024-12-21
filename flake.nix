@@ -57,7 +57,7 @@
         {
           # If the line below doesn't work run "journalctl --unit home-manager-pebble.service"
           #  to see if a file is making home-manager not able to start the systemd service on rebuild.
-          #home-manager.backupFileExtension = "backup";
+          home-manager.backupFileExtension = "backup";
 
           home-manager.extraSpecialArgs = {
             flake-inputs = inputs;
