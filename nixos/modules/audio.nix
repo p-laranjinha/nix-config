@@ -1,11 +1,13 @@
-{...}: {
-  # hardware.pulseaudio = {
-  #   enable = true; # For RDP audio.
-  #   support32Bit = true;
-  # };
+{...}: let
+  USE_PIPEWIRE = false; # Pulseaudio is used if false. For RDP.
+in {
+  hardware.pulseaudio = {
+    enable = !USE_PIPEWIRE; # For RDP audio.
+    support32Bit = true;
+  };
   security.rtkit.enable = true;
   services.pipewire = {
-    enable = true;
+    enable = USE_PIPEWIRE;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
