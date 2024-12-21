@@ -1,4 +1,5 @@
 {lib, ...}: let
+  # It may take a restart for the icons to apply.
   # This commented line gets the profile automatically but is inpure.
   #profile = lib.lists.findFirst (value: (lib.strings.hasSuffix "default-default" value)) "" (lib.mapAttrsToList (name: value: name) (builtins.readDir /home/pebble/.var/app/eu.betterbird.Betterbird/.thunderbird));\
   profile = "egxcshns.default-default";
