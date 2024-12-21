@@ -16,7 +16,8 @@ in {
     };
     Service = {
       ExecStart = ''
-        $(awk "/^Exec=/{sub(/^Exec=/, \"\"); print; exit}" /home/pebble/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop)
+        BETTERBIRD=`awk "/^Exec=/{sub(/^Exec=/, \"\"); print; exit}" /home/pebble/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop)`
+        $BETTERBIRD
       '';
     };
   };
