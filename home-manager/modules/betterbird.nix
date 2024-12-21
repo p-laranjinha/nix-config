@@ -6,6 +6,21 @@
   userjs = lib.strings.concatStrings [".thunderbird/" profile "/user.js"];
   status-icons-prefix = ".local/share/flatpak/app/eu.betterbird.Betterbird/current/active/export/share/icons/hicolor/scalable/status/eu.betterbird.Betterbird-";
 in {
+  systemd.user.services.betterbird = {
+    Unit = {
+      Description = "Run Betterbird on startup.";
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
+      After = ["graphical-session.target"];
+    };
+    Service = {
+      ExecStart = ''
+        $(awk '/^Exec=/{sub(/^Exec=/, ""); print; exit}' /home/pebble/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop)
+      '';
+    };
+  };
+
   services.flatpak.packages = [
     "eu.betterbird.Betterbird"
   ];
