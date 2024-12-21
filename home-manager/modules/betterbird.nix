@@ -2,7 +2,7 @@
   # This commented line gets the profile automatically but is inpure.
   #profile = lib.lists.findFirst (value: (lib.strings.hasSuffix "default-default" value)) "" (lib.mapAttrsToList (name: value: name) (builtins.readDir /home/pebble/.var/app/eu.betterbird.Betterbird/.thunderbird));\
   profile = "egxcshns.default-default";
-  userjs = lib.strings.concatStrings [".var/app/eu.betterbird.Betterbird/.thunderbird/" profile "/user.js"];
+  userjs = lib.strings.concatStrings [".thunderbird/" profile "/user.js"];
 in {
   services.flatpak.packages = [
     "eu.betterbird.Betterbird"
