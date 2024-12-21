@@ -62,11 +62,12 @@ in {
     };
     Install = {
       WantedBy = ["graphical-session.target"];
-      After = ["plasma-kwin_x11.service" "plasma-kwin_wayland.service"];
+      After = ["graphical-session.target"];
     };
     Service = {
       ExecStart = "${pkgs.writeShellScript "betterbird" ''
         #!/run/current-system/sw/bin/bash
+        sleep 5s
         $(awk "/^Exec=/{sub(/^Exec=/, \"\"); print; exit}" /home/pebble/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop)
       ''}";
     };
