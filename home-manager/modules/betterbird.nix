@@ -10,5 +10,6 @@ in {
 
   home.file."${userjs}".text = ''
     user_pref("mail.startupMinimized", true);
+    user_pref("mail.minimizeToTray", false);
   '';
 }
