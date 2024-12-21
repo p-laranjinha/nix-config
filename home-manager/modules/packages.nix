@@ -33,6 +33,16 @@
 
     obsidian
     quodlibet
+    discord
+    speedcrunch
+    qalculate-qt
+    qbittorrent
+    devtoolbox
+
+    blanket
+    gapless
+    cassette
+    fooyin
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -45,5 +55,7 @@
   # This will update flatpaks on rebuild, which will make rebuild not
   #  idempotent, oh well.
   services.flatpak.update.onActivation = true;
-  services.flatpak.packages = [];
+  services.flatpak.packages = [
+    "camp.nook.nookdesktop"
+  ];
 }
