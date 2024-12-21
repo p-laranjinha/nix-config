@@ -6,8 +6,8 @@
     ripgrep
     fzf
     cargo # Used to install the nil nix LSP.
-    wl-clipboard # Clipboard provider so that clipboard works.
-    wl-clipboard-x11 # To make clipboard work on X11/RDP
+    wl-clipboard # Clipboard provider for Wayland.
+    xclip # Clipboard provider for X11/RDP
   ];
   home.file.".config/nvim".source = pkgs.fetchgit {
     url = "https://github.com/p-laranjinha/neovim-config";
