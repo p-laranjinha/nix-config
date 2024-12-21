@@ -62,7 +62,7 @@ in {
     };
     Install = {
       WantedBy = ["graphical-session.target"];
-      After = ["flatpak-portal.service"];
+      After = ["plasma-kwin_x11.service" "plasma-kwin_wayland.service"];
     };
     Service = {
       ExecStart = "${pkgs.writeShellScript "betterbird" ''
