@@ -45,7 +45,5 @@
   # This will update flatpaks on rebuild, which will make rebuild not
   #  idempotent, oh well.
   services.flatpak.update.onActivation = true;
-  services.flatpak.packages = [
-    "eu.betterbird.Betterbird"
-  ];
+  services.flatpak.packages = [];
 }
