@@ -8,6 +8,10 @@ in {
     "eu.betterbird.Betterbird"
   ];
 
+  services.flatpak.overrides = {
+    "eu.betterbird.Betterbird".Context.filesystem = "host";
+  };
+
   home.file."${userjs}".text = ''
     user_pref("mail.startupMinimized", true);
     user_pref("mail.minimizeToTray", true);
