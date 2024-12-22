@@ -59,9 +59,9 @@
     "camp.nook.nookdesktop"
   ];
 
-  # Autostart .desktop files.
   home.file =
     lib.attrsets.recursiveUpdate
+    # Autostart .desktop files.
     (builtins.listToAttrs (builtins.map (x: {
         name = ".config/autostart/${x}";
         value = {source = config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/applications/${x}";};
@@ -78,7 +78,6 @@
         {
           name = "discord-minimized";
           script = ''
-            #!/run/current-system/sw/bin/bash
             discord --start-minimized
           '';
         }

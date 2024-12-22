@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }: let
@@ -25,6 +24,9 @@ in {
     user_pref("mail.startupMinimized", true);
     user_pref("mail.minimizeToTray", true);
   '';
+
+  # Autostart.
+  home.file.".config/autostart/eu.betterbird.Betterbird.desktop".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop";
 
   # System tray icon.
   home.file."${status-icons-prefix}default.svg".text = ''
@@ -56,23 +58,4 @@ in {
       <circle style="fill:#fe5d00" cx="770" cy="770" r="160" />
     </svg>
   '';
-
-  home.file.".config/autostart/eu.betterbird.Betterbird.desktop".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop";
-
-  # systemd.user.services.betterbird = {
-  #   Unit = {
-  #     Description = "Run Betterbird on startup.";
-  #   };
-  #   Install = {
-  #     WantedBy = ["graphical-session.target"];
-  #     After = ["graphical-session.target"];
-  #   };
-  #   Service = {
-  #     ExecStart = "${pkgs.writeShellScript "betterbird" ''
-  #       #!/run/current-system/sw/bin/bash
-  #       sleep 5s
-  #       $(awk "/^Exec=/{sub(/^Exec=/, \"\"); print; exit}" /home/pebble/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop)
-  #     ''}";
-  #   };
-  # };
 }
