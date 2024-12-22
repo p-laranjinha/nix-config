@@ -71,8 +71,16 @@
       ]))
     # Autostart scripts.
     (builtins.listToAttrs (builtins.map (x: {
-        name = ".config/autostart/${x.name}.sh";
-        value = {source = pkgs.writeShellScript x.name x.script;};
+        name = ".config/autostart/${x.name}.desktop";
+        value = {
+          text = ''
+            [[Desktop Entry]]
+            Exec=${pkgs.writeShellScript x.name x.script}
+            Name=${x.name}
+            Type=Application
+            X-KDE-AutostartScript=true
+          '';
+        };
       })
       [
         {
