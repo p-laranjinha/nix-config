@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }: let
   # It may take a restart for the icons to apply.
@@ -56,20 +57,22 @@ in {
     </svg>
   '';
 
-  systemd.user.services.betterbird = {
-    Unit = {
-      Description = "Run Betterbird on startup.";
-    };
-    Install = {
-      WantedBy = ["graphical-session.target"];
-      After = ["graphical-session.target"];
-    };
-    Service = {
-      ExecStart = "${pkgs.writeShellScript "betterbird" ''
-        #!/run/current-system/sw/bin/bash
-        sleep 5s
-        $(awk "/^Exec=/{sub(/^Exec=/, \"\"); print; exit}" /home/pebble/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop)
-      ''}";
-    };
-  };
+  home.file.".config/autostart/eu.betterbird.Betterbird.desktop".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop";
+
+  # systemd.user.services.betterbird = {
+  #   Unit = {
+  #     Description = "Run Betterbird on startup.";
+  #   };
+  #   Install = {
+  #     WantedBy = ["graphical-session.target"];
+  #     After = ["graphical-session.target"];
+  #   };
+  #   Service = {
+  #     ExecStart = "${pkgs.writeShellScript "betterbird" ''
+  #       #!/run/current-system/sw/bin/bash
+  #       sleep 5s
+  #       $(awk "/^Exec=/{sub(/^Exec=/, \"\"); print; exit}" /home/pebble/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop)
+  #     ''}";
+  #   };
+  # };
 }
