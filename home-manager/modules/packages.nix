@@ -34,15 +34,13 @@
     obsidian
     quodlibet
     discord
-    speedcrunch
+    # speedcrunch
     qalculate-qt
     qbittorrent
     devtoolbox
 
     blanket
-    gapless
-    cassette
-    fooyin
+    # fooyin
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
