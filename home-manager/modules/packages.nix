@@ -1,6 +1,7 @@
 {
   pkgs,
   flake-inputs,
+  config,
   ...
 }: {
   programs.bash.enable = true;
@@ -56,4 +57,13 @@
   services.flatpak.packages = [
     "camp.nook.nookdesktop"
   ];
+
+  # Autostart
+  home.file = builtins.listToAttrs (builtins.map (x: {
+      name = ".config/autostart/${x}";
+      value = {source = config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/applications/${x}";};
+    })
+    [
+      "discord.desktop"
+    ]);
 }
