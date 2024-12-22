@@ -64,6 +64,6 @@
       value = {source = config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/applications/${x}";};
     })
     [
-      "discord.desktop"
+      # "discord.desktop"
     ]);
 }
