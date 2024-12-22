@@ -2,6 +2,7 @@
   pkgs,
   flake-inputs,
   config,
+  lib,
   ...
 }: {
   programs.bash.enable = true;
@@ -58,12 +59,28 @@
     "camp.nook.nookdesktop"
   ];
 
-  # Autostart
-  home.file = builtins.listToAttrs (builtins.map (x: {
-      name = ".config/autostart/${x}";
-      value = {source = config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/applications/${x}";};
-    })
-    [
-      # "discord.desktop"
-    ]);
+  # Autostart .desktop files.
+  home.file =
+    lib.attrsets.recursiveUpdate
+    (builtins.listToAttrs (builtins.map (x: {
+        name = ".config/autostart/${x}";
+        value = {source = config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/applications/${x}";};
+      })
+      [
+        # "discord.desktop"
+      ]))
+    # Autostart scripts.
+    (builtins.listToAttrs (builtins.map (x: {
+        name = ".config/autostart/${x.name}.sh";
+        value = {source = pkgs.writeShellScript x.name x.script;};
+      })
+      [
+        {
+          name = "discord-minimized";
+          script = ''
+            #!/run/current-system/sw/bin/bash
+            discord --start-minimized
+          '';
+        }
+      ]));
 }
