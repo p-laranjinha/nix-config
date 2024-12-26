@@ -29,7 +29,7 @@
 
     freecad
     orca-slicer
-    flake-inputs.cq-editor
+    # flake-inputs.cq-editor
 
     # rpi-imager # Tool to create SD cards with OSs for Raspberry Pis.
 
