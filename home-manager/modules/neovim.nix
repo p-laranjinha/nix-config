@@ -11,8 +11,8 @@
   ];
   home.file.".config/nvim".source = pkgs.fetchgit {
     url = "https://github.com/p-laranjinha/neovim-config";
-    rev = "67956e7ff3a9f4eb6cd34cac937ebfe586953fce"; # HEAD
-    sha256 = "18gfza8knwvk84ablvjxacq9rdsklzinz31vbh7d9y7d3ky35m7m";
+    rev = "adb18c0a361ef0fbed68aa6520ee0dd91f1a0ca5"; # HEAD
+    sha256 = "1jidzriymr9m0rl2xw6ails51h0144c06c55gqwk53m130pmf74w";
   };
   home.shellAliases = {
     # Neovim that uses the config from my git repo.
