@@ -5,7 +5,7 @@
 
   home.file.".config/ghostty/config".text = ''
     theme = ayu
-    font-size = 10
+    font-size = 11
     font-family = "FiraCode Nerd Font"
   '';
 }
