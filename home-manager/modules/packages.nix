@@ -32,7 +32,6 @@
 
     # rpi-imager # Tool to create SD cards with OSs for Raspberry Pis.
 
-    flake-inputs.ghostty.packages.x86_64-linux.default
     obsidian
     quodlibet
     discord
