@@ -22,8 +22,8 @@
           {
             iconTasks = {
               launchers = [
-                "applications:org.kde.dolphin.desktop"
-                "applications:org.kde.konsole.desktop"
+                # "applications:org.kde.dolphin.desktop"
+                # "applications:org.kde.konsole.desktop"
               ];
             };
           }
@@ -87,7 +87,7 @@
         idleTimeout = 1800; # 30m
         idleTimeoutWhenLocked = 600; # 10m
       };
-      whenSleepingEnter = "standbyThenHibernate";
+      whenSleepingEnter = "hybridSleep";
       powerProfile = "performance";
     };
     session.sessionRestore.restoreOpenApplicationsOnLogin = "startWithEmptySession";
