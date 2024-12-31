@@ -9,29 +9,15 @@
     # https://github.com/nix-community/plasma-manager/blob/trunk/examples/home.nix
     panels = [
       {
-        location = "top";
-        height = 44;
-        screen = 0;
-        widgets = [
-          {appMenu = {};}
-          {applicationTitleBar = {};}
-          {battery = {};}
-          {keyboardLayout = {};}
-          {kicker = {};}
-          {kickerdash = {};}
-          {pager = {};}
-          {plasmaPanelColorizer = {};}
-          {plasmusicToolbar = {};}
-          {systemMonitor = {};}
-        ];
-      }
-      {
         location = "bottom";
         height = 44;
         screen = 0;
         widgets = [
           {
-            panelSpacer.length = 600;
+            panelSpacer = {
+              expanding = false;
+              length = 600;
+            };
           }
           {
             kickoff = {
