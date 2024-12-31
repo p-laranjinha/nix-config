@@ -17,6 +17,15 @@
             kickoff = {
               sortAlphabetically = true;
               icon = "nix-snowflake-white";
+              sidebarPosition = "right";
+              showActionButtonCaptions = false;
+              showButtonsFor.custom = [
+                "shutdown"
+                "reboot"
+                "suspend"
+                "logout"
+                "lock-screen"
+              ];
             };
           }
           {
