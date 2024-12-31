@@ -48,7 +48,7 @@
       };
       modules = [
         {nixpkgs.overlays = [inputs.nur.overlay];}
-        ./nixos/configuration.nix
+        ./system/configuration.nix
         inputs.lix-module.nixosModules.default
         inputs.nix-ld.nixosModules.nix-ld
         # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
