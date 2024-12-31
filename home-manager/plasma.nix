@@ -23,8 +23,11 @@
                 "shutdown"
                 "reboot"
                 "suspend"
+                "hibernate"
                 "logout"
                 "lock-screen"
+                "switch-user"
+                "save-session"
               ];
             };
           }
