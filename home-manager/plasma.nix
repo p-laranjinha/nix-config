@@ -19,16 +19,7 @@
               icon = "nix-snowflake-white";
               sidebarPosition = "right";
               showActionButtonCaptions = false;
-              showButtonsFor.custom = [
-                "shutdown"
-                "reboot"
-                "suspend"
-                "hibernate"
-                "logout"
-                "lock-screen"
-                "switch-user"
-                "save-session"
-              ];
+              showButtonsFor = "powerAndSession";
             };
           }
           {
