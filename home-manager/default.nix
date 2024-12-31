@@ -1,6 +1,7 @@
 {umport, ...}: {
   imports = umport {
-    path = ./modules;
+    path = ./.;
+    exclude = [./default.nix];
   };
 
   home = {

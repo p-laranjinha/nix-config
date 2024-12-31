@@ -48,7 +48,7 @@
       };
       modules = [
         {nixpkgs.overlays = [inputs.nur.overlay];}
-        ./system/configuration.nix
+        ./system
         inputs.lix-module.nixosModules.default
         inputs.nix-ld.nixosModules.nix-ld
         # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
@@ -69,7 +69,7 @@
             inputs.plasma-manager.homeManagerModules.plasma-manager
           ];
           home-manager.users.pebble.imports = [
-            ./home-manager/home.nix
+            ./home-manager
             inputs.nix-flatpak.homeManagerModules.nix-flatpak
           ];
         }

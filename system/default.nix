@@ -4,14 +4,10 @@
   umport,
   ...
 }: {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ]
-    ++ umport {
-      path = ./modules;
-    };
+  imports = umport {
+    path = ./.;
+    exclude = [./default.nix];
+  };
 
   networking.hostName = "orange";
   # Don't forget to set a password with ‘passwd’.
