@@ -39,6 +39,7 @@
     qalculate-qt
     qbittorrent
     devtoolbox
+    obs-studio
 
     blanket
     # fooyin
