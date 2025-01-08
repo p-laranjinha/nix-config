@@ -14,6 +14,8 @@
 
   # The home.packages option allows you to install Nix packages into your environment.
   home.packages = with pkgs; [
+    gnome-remote-desktop
+
     alejandra # Nix formatter.
     nil # Nix language server.
     nvd # Nix package version diff tool.

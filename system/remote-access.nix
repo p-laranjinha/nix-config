@@ -10,10 +10,11 @@ in {
   services.xrdp.openFirewall = true;
   services.xrdp.audio.enable = true;
 
-  environment.systemPackages = [
-    pkgs.kdePackages.krdp
-  ];
-  networking.firewall.allowedTCPPorts = [22 3389];
+  # environment.systemPackages = [
+  #   pkgs.kdePackages.krdp
+  # ];
+  # networking.firewall.allowedTCPPorts = [22 3389];
+  networking.firewall.allowedTCPPorts = [22];
   services.openssh = {
     enable = true;
     ports = [22];
