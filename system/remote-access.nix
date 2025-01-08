@@ -13,7 +13,7 @@ in {
   environment.systemPackages = [
     pkgs.kdePackages.krdp
   ];
-
+  networking.firewall.allowedTCPPorts = [22 3389];
   services.openssh = {
     enable = true;
     ports = [22];
@@ -26,7 +26,6 @@ in {
     };
   };
   services.fail2ban.enable = true;
-  networking.firewall.allowedTCPPorts = [22];
 
   services.sunshine = {
     enable = ENABLE_SUNSHINE;
