@@ -1,5 +1,5 @@
 {...}: let
-  USE_PIPEWIRE = false; # Pulseaudio is used if false. For RDP.
+  USE_PIPEWIRE = true; # Pulseaudio is used if false. For RDP.
 in {
   hardware.pulseaudio = {
     enable = !USE_PIPEWIRE; # For RDP audio.

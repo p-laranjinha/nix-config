@@ -5,10 +5,14 @@ in {
 
   services.tailscale.enable = true;
 
-  services.xrdp.enable = true;
+  services.xrdp.enable = false;
   services.xrdp.defaultWindowManager = "startplasma-x11";
   services.xrdp.openFirewall = true;
   services.xrdp.audio.enable = true;
+
+  environment.systemPackages = [
+    pkgs.kdePackages.krdp
+  ];
 
   services.openssh = {
     enable = true;
