@@ -15,8 +15,9 @@ in {
     pkgs.kdePackages.krfb
   ];
   # networking.firewall.allowedTCPPorts = [22 3389];
+  networking.firewall.allowedTCPPorts = [22 5900];
 
-  networking.firewall.allowedTCPPorts = [22];
+  # networking.firewall.allowedTCPPorts = [22];
   services.openssh = {
     enable = true;
     ports = [22];
