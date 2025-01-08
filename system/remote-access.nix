@@ -14,6 +14,12 @@ in {
   #   pkgs.kdePackages.krdp
   # ];
   # networking.firewall.allowedTCPPorts = [22 3389];
+
+  environment.systemPackages = [
+    pkgs.wayvnc
+  ];
+  # networking.firewall.allowedTCPPorts = [22 3389];
+
   networking.firewall.allowedTCPPorts = [22];
   services.openssh = {
     enable = true;
