@@ -10,13 +10,9 @@ in {
   services.xrdp.openFirewall = true;
   services.xrdp.audio.enable = true;
 
-  # environment.systemPackages = [
-  #   pkgs.kdePackages.krdp
-  # ];
-  # networking.firewall.allowedTCPPorts = [22 3389];
-
   environment.systemPackages = [
-    pkgs.wayvnc
+    # pkgs.kdePackages.krdp
+    pkgs.kdePackages.krfb
   ];
   # networking.firewall.allowedTCPPorts = [22 3389];
 
