@@ -27,6 +27,8 @@
     kdePackages.kate
     fswatch # Tool to see file changes in real time.
 
+    inkscape-with-extensions
+    gimp-with-plugins
     freecad
     orca-slicer
 

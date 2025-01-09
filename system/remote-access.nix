@@ -5,7 +5,7 @@ in {
 
   services.tailscale.enable = true;
 
-  services.xrdp.enable = false;
+  services.xrdp.enable = true;
   services.xrdp.defaultWindowManager = "startplasma-x11";
   services.xrdp.openFirewall = true;
   services.xrdp.audio.enable = true;
