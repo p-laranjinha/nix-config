@@ -79,7 +79,7 @@
       Description = "Launch SyncthingTray on startup.";
     };
     Install = {
-      WantedBy = ["graphical-session.target"];
+      WantedBy = ["multi-user.target"];
       After = ["syncthing.service"];
     };
     Service = {

@@ -31,6 +31,7 @@
     gimp-with-plugins
     freecad
     orca-slicer
+    blender
 
     # rpi-imager # Tool to create SD cards with OSs for Raspberry Pis.
 
