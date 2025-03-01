@@ -84,18 +84,16 @@
       }
     ];
     powerdevil.AC = {
-      #autoSuspend = {
-      #  action = "sleep";
-      #  idleTimeout = 3600; # 1h
-      #};
-      #dimDisplay = {
-      #  enable = true;
-      #  idleTimeout = 600; # 10m
-      #};
-      #turnOffDisplay = {
-      #  idleTimeout = 1800; # 30m
-      #  idleTimeoutWhenLocked = 600; # 10m
-      #};
+      autoSuspend = {
+        action = "nothing";
+      };
+      dimDisplay = {
+        enable = false;
+      };
+      turnOffDisplay = {
+        idleTimeout = "never";
+        idleTimeoutWhenLocked = null;
+      };
       whenSleepingEnter = "hybridSleep";
       powerProfile = "performance";
     };
