@@ -47,10 +47,10 @@
         umport = (import ./umport.nix {inherit (nixpkgs) lib;}).umport;
       };
       modules = [
-        {}
         ./system
         inputs.lix-module.nixosModules.default
         inputs.nix-ld.nixosModules.nix-ld
+        inputs.nur.modules.nixos.default
         # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
         inputs.home-manager.nixosModules.default
         {
@@ -72,7 +72,6 @@
             ./home-manager
             inputs.nix-flatpak.homeManagerModules.nix-flatpak
           ];
-          nixpkgs.overlays = [inputs.nur.overlays.default];
         }
       ];
     };
