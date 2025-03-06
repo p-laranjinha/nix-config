@@ -47,7 +47,7 @@
         umport = (import ./umport.nix {inherit (nixpkgs) lib;}).umport;
       };
       modules = [
-        {nixpkgs.overlays = [inputs.nur.overlays.default];}
+        {}
         ./system
         inputs.lix-module.nixosModules.default
         inputs.nix-ld.nixosModules.nix-ld
@@ -72,6 +72,7 @@
             ./home-manager
             inputs.nix-flatpak.homeManagerModules.nix-flatpak
           ];
+          nixpkgs.overlays = [inputs.nur.overlays.default];
         }
       ];
     };
