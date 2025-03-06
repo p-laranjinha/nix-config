@@ -60,6 +60,7 @@
   services.flatpak.update.onActivation = true;
   services.flatpak.packages = [
     "camp.nook.nookdesktop"
+    "app.zen_browser.zen"
   ];
 
   home.file =
