@@ -96,7 +96,7 @@ in {
         };
       };
       extraConfig = builtins.readFile "${lepton}/user.js";
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         bitwarden
         ublock-origin
         darkreader
