@@ -11,7 +11,7 @@ in {
   services.xrdp.audio.enable = false;
 
   environment.systemPackages = [
-    pkgs.kdePackages.krdp
+    # pkgs.kdePackages.krdp
     # pkgs.kdePackages.krfb
   ];
   # networking.firewall.allowedTCPPorts = [22 3389];
