@@ -14,9 +14,6 @@
 
   # The home.packages option allows you to install Nix packages into your environment.
   home.packages = with pkgs; [
-    xdg-desktop-portal
-    kdePackages.xdg-desktop-portal-kde
-
     alejandra # Nix formatter.
     nil # Nix language server.
     nvd # Nix package version diff tool.
