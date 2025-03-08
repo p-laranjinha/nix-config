@@ -1,11 +1,11 @@
 {pkgs, ...}: let
-  ENABLE_SUNSHINE = true;
+  ENABLE_SUNSHINE = false;
 in {
   networking.interfaces.enp14s0.wakeOnLan.enable = true;
 
   services.tailscale.enable = true;
 
-  services.xrdp.enable = false;
+  services.xrdp.enable = true;
   services.xrdp.defaultWindowManager = "startplasma-x11";
   services.xrdp.openFirewall = true;
 
