@@ -1,6 +1,4 @@
 {...}: {
-  # You may have to change the boot order in the BIOS
-  #  if you change the bootloader here.
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
@@ -10,7 +8,7 @@
       enable = true;
       device = "nodev";
       efiSupport = true;
-      #useOSProber = true;
+      useOSProber = true;
     };
   };
 }

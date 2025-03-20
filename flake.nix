@@ -2,21 +2,10 @@
   description = "flake";
 
   inputs = {
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    # I wanted to use a stable nixpkgs, but plasma-manager had problems with it.
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    # plasma-manager currently requires nixos unstable :(
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
-
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-2.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # So that regular binaries can be run.
-    nix-ld = {
-      url = "github:Mic92/nix-ld";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -29,50 +18,50 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+
+    # So that regular binaries can be run.
+    nix-ld = {
+      url = "github:Mic92/nix-ld";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     ghostty = {
       url = "github:ghostty-org/ghostty";
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: {
-    nixosConfigurations.orange = nixpkgs.lib.nixosSystem {
+  outputs = {self, ...} @ inputs: {
+    nixosConfigurations.orange = inputs.nixpkgs.lib.nixosSystem rec {
+      # These values are added as arguments to all modules.
       specialArgs = {
         inherit inputs;
-        umport = (import ./umport.nix {inherit (nixpkgs) lib;}).umport;
+        umport = (import ./lib/umport.nix {inherit (inputs.nixpkgs) lib;}).umport;
       };
       modules = [
         ./system
-        inputs.lix-module.nixosModules.default
-        inputs.nix-ld.nixosModules.nix-ld
-        inputs.nur.modules.nixos.default
-        # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
         inputs.home-manager.nixosModules.default
         {
-          # If the line below doesn't work run "journalctl --unit home-manager-pebble.service"
-          #  to see if a file is making home-manager not able to start the systemd service on rebuild.
-          home-manager.backupFileExtension = "backup";
+          # Home manager doesn't use specialArgs to add arguments to its modules.
+          home-manager.extraSpecialArgs = {} // specialArgs;
 
-          home-manager.extraSpecialArgs = {
-            flake-inputs = inputs;
-            # If we don't also add umport here, home manager has an infinite recursion error.
-            umport = (import ./umport.nix {inherit (nixpkgs) lib;}).umport;
-          };
           home-manager.useUserPackages = true;
           home-manager.useGlobalPkgs = true;
+
           home-manager.sharedModules = [
             inputs.plasma-manager.homeManagerModules.plasma-manager
           ];
+
           home-manager.users.pebble.imports = [
-            ./home-manager
+            ./home
             inputs.nix-flatpak.homeManagerModules.nix-flatpak
           ];
+
+          # This allows home manager to overwrite files by backing them up with the following extension.
+          home-manager.backupFileExtension = "backup";
         }
+        inputs.nur.modules.nixos.default
+        inputs.nix-ld.nixosModules.nix-ld
       ];
     };
   };

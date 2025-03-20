@@ -9,6 +9,10 @@
     exclude = [./default.nix];
   };
 
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    plasma-browser-integration
+  ];
+
   networking.hostName = "orange";
   # Don't forget to set a password with ‘passwd’.
   users.users.pebble = {
@@ -19,8 +23,12 @@
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    # Allow unfree packages
+    allowUnfree = true;
+    # Workaround for https://github.com/nix-community/home-manager/issues/2942
+    allowUnfreePredicate = _: true;
+  };
 
   networking.networkmanager.enable = true;
   # This makes the system wait for the network before booting. This also fails rebuild if enabled.

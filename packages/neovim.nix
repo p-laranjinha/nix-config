@@ -17,11 +17,12 @@
   home.shellAliases = {
     # Neovim that uses the config from my git repo.
     nvimg = "XDG_CONFIG_HOME=~/Projects NVIM_APPNAME=neovim-config nvim";
+    v = "nvim";
+    vi = "nvim";
+    vim = "nvim";
   };
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
   };
 }
