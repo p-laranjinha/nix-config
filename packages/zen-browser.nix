@@ -48,31 +48,31 @@ in {
   };
 
   config = {
-    home.file =
-      builtins.listToAttrs (builtins.map (theme: {
-          name = "${config.home.homeDirectory}/.zen/default/chrome/zen-themes/${theme}";
-          value = {
-            source = "${zen-themes-repo}/themes/${theme}";
-            recursive = true;
-          };
-        })
-        zen-themes)
-      // {
-        "${config.home.homeDirectory}/.zen/default/zen-themes.json".text = "{${builtins.toString (
-          builtins.map (theme: ''
-            "${theme}":
-              ${builtins.toJSON ((builtins.fromJSON (builtins.readFile "${zen-themes-repo}/themes/${theme}/theme.json")) // {enabled = true;})}${
-              if theme == builtins.tail zen-themes
-              then ""
-              else ","
-            }
-          '')
-          zen-themes
-        )}}";
-      }
-      // {
-        "${config.home.homeDirectory}/.zen/default/chrome/zen-themes.css".text = "${builtins.toString (builtins.map (theme: ''@import url("file///home/pebble/.zen/default/chrome/zen-themes/${theme}/chrome.css");'') zen-themes)}";
-      };
+    # home.file =
+    #   builtins.listToAttrs (builtins.map (theme: {
+    #       name = "${config.home.homeDirectory}/.zen/default/chrome/zen-themes/${theme}";
+    #       value = {
+    #         source = "${zen-themes-repo}/themes/${theme}";
+    #         recursive = true;
+    #       };
+    #     })
+    #     zen-themes)
+    #   // {
+    #     "${config.home.homeDirectory}/.zen/default/zen-themes.json".text = "{${builtins.toString (
+    #       builtins.map (theme: ''
+    #         "${theme}":
+    #           ${builtins.toJSON ((builtins.fromJSON (builtins.readFile "${zen-themes-repo}/themes/${theme}/theme.json")) // {enabled = true;})}${
+    #           if theme == builtins.tail zen-themes
+    #           then ""
+    #           else ","
+    #         }
+    #       '')
+    #       zen-themes
+    #     )}}";
+    #   }
+    #   // {
+    #     "${config.home.homeDirectory}/.zen/default/chrome/zen-themes.css".text = "${builtins.toString (builtins.map (theme: ''@import url("file///home/pebble/.zen/default/chrome/zen-themes/${theme}/chrome.css");'') zen-themes)}";
+    #   };
 
     programs.zen-browser = {
       enable = true;
