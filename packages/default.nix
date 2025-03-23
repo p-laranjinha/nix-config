@@ -59,32 +59,30 @@
   services.flatpak.update.onActivation = true;
   services.flatpak.packages = [
     "camp.nook.nookdesktop"
-    # "app.zen_browser.zen"
   ];
 
-  home.file =
-    lib.attrsets.recursiveUpdate
-    # Autostart .desktop files.
-    (builtins.listToAttrs (builtins.map (x: {
-        name = ".config/autostart/${x}";
-        value = {source = config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/applications/${x}";};
-      })
-      [
-        # "discord.desktop"
-      ]))
-    # Autostart scripts.
-    (builtins.listToAttrs (builtins.map (x: {
-        name = ".config/autostart/${x.name}.desktop";
-        value = {
-          text = ''
-            [Desktop Entry]
-            Exec=${pkgs.writeShellScript x.name x.script}
-            Name=${x.name}
-            Type=Application
-            X-KDE-AutostartScript=true
-          '';
-        };
-      })
+  xdg = {
+    enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+      };
+    };
+  };
+
+  xdg.autostart = {
+    enable = true;
+    entries =
+      # Autostart scripts.
+      builtins.map
+      (x:
+        pkgs.writeText "${x.name}.desktop" ''
+          [Desktop Entry]
+          Exec=${pkgs.writeShellScript x.name x.script}
+          Name=${x.name}
+          Type=Application
+          X-KDE-AutostartScript=true
+        '')
       [
         {
           name = "discord-minimized";
@@ -92,5 +90,18 @@
             discord --start-minimized
           '';
         }
-      ]));
+      ]
+      ++
+      # Autostart .desktop files. 1
+      builtins.map
+      (x: "${config.home.profileDirectory}/share/applications/${x}.desktop")
+      [
+        # "discord"
+      ]
+      ++
+      # Autostart .desktop files. 2
+      [
+        # "${pkgs.discord}/share/applications/discord.desktop
+      ];
+  };
 }
