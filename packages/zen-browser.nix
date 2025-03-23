@@ -69,6 +69,9 @@ in {
           '')
           zen-themes
         )}}";
+      }
+      // {
+        "${config.home.homeDirectory}/.zen/default/chrome/zen-themes.css".text = "${builtins.toString (builtins.map (theme: ''@import url("file///home/pebble/.zen/default/chrome/zen-themes/${theme}/chrome.css");'') zen-themes)}";
       };
 
     programs.zen-browser = {
