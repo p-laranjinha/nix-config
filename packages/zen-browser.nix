@@ -60,7 +60,7 @@ in {
       // {
         "${config.home.homeDirectory}/.zen/default/zen-themes.json".text = "{${builtins.toString (
           builtins.map (theme: ''
-            "${theme}":{
+            "${theme}":
               ${builtins.toJSON ((builtins.fromJSON (builtins.readFile "${zen-themes-repo}/themes/${theme}/theme.json")) // {enabled = true;})}${
               if theme == builtins.tail zen-themes
               then ""
