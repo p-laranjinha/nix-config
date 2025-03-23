@@ -12,13 +12,17 @@
     "zen-browser"
   ];
   mkFirefoxModule = import "${inputs.home-manager.outPath}/modules/programs/firefox/mkFirefoxModule.nix";
-  zen-themes = pkgs.fetchgit {
+  zen-themes-repo = pkgs.fetchgit {
     url = "https://github.com/zen-browser/theme-store";
     rev = "2a9820d3e93530a97140e82c9b20f2edd6c431c9"; # HEAD
     sha256 = "0b9ic42b3sbir1k7rqyq6k1rbmqq4klva52543h9hwh0zvwbkqcw";
     # sparseCheckout causes update-nix-fetchgit to have wrong hash.
     # sparseCheckout = [ "/themes/81fcd6b3-f014-4796-988f-6c3cb3874db8" ];
   };
+  zen-themes = [
+    "81fcd6b3-f014-4796-988f-6c3cb3874db8" # Zen Context Menu
+    "906c6915-5677-48ff-9bfc-096a02a72379" # Floating Status Bar
+  ];
 in {
   imports = [
     (mkFirefoxModule {
@@ -44,23 +48,29 @@ in {
   };
 
   config = {
-    # home.file = {
-    #   # "${config.home.homeDirectory}/.zen/default/zen-themes.json".source
-    #   "${config.home.homeDirectory}/Desktop/zen-test" = {
-    #     source = zen-themes;
-    #     recursive = true;
-    #   };
-    # };
-
-    home.file = builtins.listToAttrs (builtins.map (theme: {
-        name = "${config.home.homeDirectory}/.zen/default/chrome/zen-themes/${theme}";
-        value = {
-          source = "${zen-themes}/themes/${theme}";
-          recursive = true;
-        };
-      }) [
-        "81fcd6b3-f014-4796-988f-6c3cb3874db8"
-      ]);
+    home.file =
+      builtins.listToAttrs (builtins.map (theme: {
+          name = "${config.home.homeDirectory}/.zen/default/chrome/zen-themes/${theme}";
+          value = {
+            source = "${zen-themes-repo}/themes/${theme}";
+            recursive = true;
+          };
+        })
+        zen-themes)
+      // {
+        "${config.home.homeDirectory}/.zen/default/zen-themes.json".text = "{${builtins.toString (
+          builtins.map (theme: ''
+            "${theme}":{
+              ${builtins.readFile "${zen-themes-repo}/themes/${theme}/theme.json"},
+              "enabled": true}${
+              if theme == builtins.tail zen-themes
+              then ""
+              else ","
+            }
+          '')
+          zen-themes
+        )}}";
+      };
 
     programs.zen-browser = {
       enable = true;
