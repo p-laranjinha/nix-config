@@ -12,6 +12,13 @@
     "zen-browser"
   ];
   mkFirefoxModule = import "${inputs.home-manager.outPath}/modules/programs/firefox/mkFirefoxModule.nix";
+  zen-themes = pkgs.fetchgit {
+    url = "https://github.com/zen-browser/theme-store";
+    rev = "2a9820d3e93530a97140e82c9b20f2edd6c431c9"; # HEAD
+    sha256 = "0b9ic42b3sbir1k7rqyq6k1rbmqq4klva52543h9hwh0zvwbkqcw";
+    # sparseCheckout causes update-nix-fetchgit to have wrong hash.
+    # sparseCheckout = [ "/themes/81fcd6b3-f014-4796-988f-6c3cb3874db8" ];
+  };
 in {
   imports = [
     (mkFirefoxModule {
@@ -37,6 +44,24 @@ in {
   };
 
   config = {
+    # home.file = {
+    #   # "${config.home.homeDirectory}/.zen/default/zen-themes.json".source
+    #   "${config.home.homeDirectory}/Desktop/zen-test" = {
+    #     source = zen-themes;
+    #     recursive = true;
+    #   };
+    # };
+
+    home.file = builtins.listToAttrs (builtins.map (theme: {
+        name = "${config.home.homeDirectory}/.zen/default/chrome/zen-themes/${theme}";
+        value = {
+          source = "${zen-themes}/themes/${theme}";
+          recursive = true;
+        };
+      }) [
+        "81fcd6b3-f014-4796-988f-6c3cb3874db8"
+      ]);
+
     programs.zen-browser = {
       enable = true;
       package =
@@ -141,7 +166,7 @@ in {
             seen = [];
             dirtyAreaCache = [];
             # This has to be bigger than the "currentVersion" in about:config or prefs.js.
-            "currentVersion" = 21;
+            "currentVersion" = 999;
             "newElementCount" = 0;
           };
         };
