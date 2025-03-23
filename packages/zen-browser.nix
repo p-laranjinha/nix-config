@@ -6,8 +6,6 @@
   pkgs,
   ...
 }: let
-  cfg = config.my.home.features.zen-browser;
-
   applicationName = "Zen Browser";
   modulePath = [
     "programs"
@@ -38,7 +36,7 @@ in {
     enable = lib.mkEnableOption "";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     programs.zen-browser = {
       enable = true;
       package =
