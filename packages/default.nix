@@ -61,15 +61,6 @@
     "camp.nook.nookdesktop"
   ];
 
-  xdg = {
-    enable = true;
-    mimeApps = {
-      enable = true;
-      defaultApplications = {
-      };
-    };
-  };
-
   xdg.autostart = {
     enable = true;
     entries =
