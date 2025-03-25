@@ -120,6 +120,11 @@ in {
       };
       profiles.default = {
         settings = {
+          # Makes extensions save settings in files instead of in IndexedDB.
+          # IndexedDB supposedly improves performance but doesn't allow me to
+          #  declaratively set extension settings.
+          "extensions.webextensions.ExtensionStorageIDB.enabled" = false;
+
           "browser.tabs.closeWindowWithLastTab" = false;
           "privacy.donottrackheader.enabled" = true;
           "privacy.globalprivacycontrol.enabled" = true;
