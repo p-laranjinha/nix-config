@@ -126,7 +126,7 @@ in {
           #  declaratively set extension settings.
           # But I don't feel like declaring the settings for the few extensions that
           #  aren't synced, and the performance hit might not be worth it.
-          # "extensions.webextensions.ExtensionStorageIDB.enabled" = false;
+          "extensions.webextensions.ExtensionStorageIDB.enabled" = true;
 
           "browser.tabs.closeWindowWithLastTab" = false;
           "privacy.donottrackheader.enabled" = true;
