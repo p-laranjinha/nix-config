@@ -171,11 +171,11 @@ in {
                 "addon_darkreader_org-browser-action"
               ];
               toolbar-menubar = [
+                # No idea what this does.
                 "menubar-items"
-                "developer-button"
-                "developer-button"
               ];
               TabsToolbar = [
+                "personal-bookmarks"
                 "tabbrowser-tabs"
               ];
               vertical-tabs = [];
