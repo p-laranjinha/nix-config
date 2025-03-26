@@ -161,6 +161,7 @@ in {
                 "menubar-items"
               ];
               TabsToolbar = [
+                "personal-bookmarks"
                 "tabbrowser-tabs"
               ];
               vertical-tabs = [];
