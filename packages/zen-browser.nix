@@ -12,17 +12,12 @@
     "zen-browser"
   ];
   mkFirefoxModule = import "${inputs.home-manager.outPath}/modules/programs/firefox/mkFirefoxModule.nix";
-  zen-themes-repo = pkgs.fetchgit {
-    url = "https://github.com/zen-browser/theme-store";
-    rev = "2a9820d3e93530a97140e82c9b20f2edd6c431c9"; # HEAD
-    sha256 = "0b9ic42b3sbir1k7rqyq6k1rbmqq4klva52543h9hwh0zvwbkqcw";
+  clean-bookmarks = pkgs.fetchgit {
+    url = "https://github.com/CMD-Golem/Zen-Browser-Mods";
+    rev = "1e90c79abc22ce01033a255c81211543d1a9a4dc"; # HEAD
+    sha256 = "13ikihq5l3jy3vw22gk0296nc2w09xk4dg9lg9hd22rszw76g5fx";
     # sparseCheckout causes update-nix-fetchgit to have wrong hash.
-    # sparseCheckout = [ "/themes/81fcd6b3-f014-4796-988f-6c3cb3874db8" ];
   };
-  zen-themes = [
-    "81fcd6b3-f014-4796-988f-6c3cb3874db8" # Zen Context Menu
-    "906c6915-5677-48ff-9bfc-096a02a72379" # Floating Status Bar
-  ];
 in {
   imports = [
     (mkFirefoxModule {
@@ -48,31 +43,8 @@ in {
   };
 
   config = {
-    # home.file =
-    #   builtins.listToAttrs (builtins.map (theme: {
-    #       name = "${config.home.homeDirectory}/.zen/default/chrome/zen-themes/${theme}";
-    #       value = {
-    #         source = "${zen-themes-repo}/themes/${theme}";
-    #         recursive = true;
-    #       };
-    #     })
-    #     zen-themes)
-    #   // {
-    #     "${config.home.homeDirectory}/.zen/default/zen-themes.json".text = "{${builtins.toString (
-    #       builtins.map (theme: ''
-    #         "${theme}":
-    #           ${builtins.toJSON ((builtins.fromJSON (builtins.readFile "${zen-themes-repo}/themes/${theme}/theme.json")) // {enabled = true;})}${
-    #           if theme == builtins.tail zen-themes
-    #           then ""
-    #           else ","
-    #         }
-    #       '')
-    #       zen-themes
-    #     )}}";
-    #   }
-    #   // {
-    #     "${config.home.homeDirectory}/.zen/default/chrome/zen-themes.css".text = "${builtins.toString (builtins.map (theme: ''@import url("file///home/pebble/.zen/default/chrome/zen-themes/${theme}/chrome.css");'') zen-themes)}";
-    #   };
+    # Makes bookmarks look like essentials.
+    home.file.".zen/default/chrome/userChrome.css".source = "${clean-bookmarks}/clean_bookmarks.css";
 
     programs.zen-browser = {
       enable = true;
