@@ -139,6 +139,63 @@ in {
           "browser.urlbar.showSearchSuggestionsFirst" = false;
           "browser.newtabpage.activity-stream.showSponsored" = false;
           "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+          "browser.search.separatePrivateDefault" = false;
+          "browser.newtabpage.pinned" = []; # Removes "Search with Google" from search results
+          "zen.splitView.change-on-hover" = true;
+          "zen.theme.accent-color" = "#aac7ff"; # The first blue option
+
+          "browser.uiCustomization.state" = builtins.toJSON {
+            placements = {
+              widget-overflow-fixed-list = [];
+              unified-extensions-area = [
+                "_d07ccf11-c0cd-4938-a265-2a4d6ad01189_-browser-action"
+                "_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action"
+                "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action"
+                "dearrow_ajay_app-browser-action"
+                "sponsorblocker_ajay_app-browser-action"
+                "ublock0_raymondhill_net-browser-action"
+                "gdpr_cavi_au_dk-browser-action"
+                "_59c55aed-bdb3-4f2f-b81d-27011a689be6_-browser-action"
+                "enhancerforyoutube_maximerf_addons_mozilla_org-browser-action"
+                "_036a55b4-5e72-4d05-a06c-cba2dfcc134a_-browser-action"
+                "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action"
+                "_a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad_-browser-action"
+              ];
+              nav-bar = [
+                "back-button"
+                "stop-reload-button"
+                "forward-button"
+                "urlbar-container"
+                "unified-extensions-button"
+                "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
+                "addon_darkreader_org-browser-action"
+              ];
+              toolbar-menubar = [
+                # "menubar-items"
+              ];
+              TabsToolbar = [
+                "tabbrowser-tabs"
+              ];
+              vertical-tabs = [];
+              PersonalToolbar = [
+                # "personal-bookmarks"
+              ];
+              zen-sidebar-top-buttons = [];
+              zen-sidebar-botton-buttons = [
+                "preferences-button"
+                "downloads-button"
+                "zen-workspaces-button"
+                "sidebar-button"
+                "zen-expand-sidebar-button"
+              ];
+            };
+            seen = [];
+            dirtyAreaCache = [];
+            # This has to be bigger than the "currentVersion" in about:config or prefs.js.
+            "currentVersion" = 999;
+            "newElementCount" = 0;
+          };
+
           # "browser.uiCustomization.state" = builtins.toJSON {
           #   placements = {
           #     widget-overflow-fixed-list = [];
