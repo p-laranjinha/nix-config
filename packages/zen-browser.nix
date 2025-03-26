@@ -192,7 +192,7 @@ in {
             seen = [];
             dirtyAreaCache = [];
             # This has to be bigger than the "currentVersion" in about:config or prefs.js.
-            "currentVersion" = 999;
+            "currentVersion" = 21;
             "newElementCount" = 0;
           };
 
