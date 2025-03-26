@@ -180,7 +180,7 @@ in {
               ];
               vertical-tabs = [];
               PersonalToolbar = [
-                # "personal-bookmarks"
+                "personal-bookmarks"
               ];
               zen-sidebar-top-buttons = [];
               zen-sidebar-bottom-buttons = [
