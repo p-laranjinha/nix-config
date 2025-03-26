@@ -175,13 +175,11 @@ in {
                 "menubar-items"
               ];
               TabsToolbar = [
-                "personal-bookmarks"
                 "tabbrowser-tabs"
+                "personal-bookmarks"
               ];
               vertical-tabs = [];
-              PersonalToolbar = [
-                "personal-bookmarks"
-              ];
+              PersonalToolbar = [];
               zen-sidebar-top-buttons = [];
               zen-sidebar-bottom-buttons = [
                 "preferences-button"
