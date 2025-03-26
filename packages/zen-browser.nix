@@ -171,7 +171,9 @@ in {
                 "addon_darkreader_org-browser-action"
               ];
               toolbar-menubar = [
-                # "menubar-items"
+                "menubar-items"
+                "developer-button"
+                "developer-button"
               ];
               TabsToolbar = [
                 "tabbrowser-tabs"
@@ -181,7 +183,7 @@ in {
                 # "personal-bookmarks"
               ];
               zen-sidebar-top-buttons = [];
-              zen-sidebar-botton-buttons = [
+              zen-sidebar-bottom-buttons = [
                 "preferences-button"
                 "downloads-button"
                 "zen-workspaces-button"
