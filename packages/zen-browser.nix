@@ -143,19 +143,18 @@ in {
           "browser.newtabpage.pinned" = []; # Removes "Search with Google" from search results
           "zen.splitView.change-on-hover" = true;
           "zen.theme.accent-color" = "#aac7ff"; # The first blue option
+          "zen.urlbar.replace-newtab" = true; # Set this to false to go back to regular new tab
 
           "browser.uiCustomization.state" = builtins.toJSON {
             placements = {
               widget-overflow-fixed-list = [
-                "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
-                "addon_darkreader_org-browser-action"
-                "unified-extensions-button"
               ];
               nav-bar = [
                 "back-button"
                 "stop-reload-button"
                 "forward-button"
                 "urlbar-container"
+                "unified-extensions-button"
               ];
               toolbar-menubar = [
                 # No idea what this does.
@@ -175,10 +174,13 @@ in {
                 "zen-expand-sidebar-button"
               ];
               # Some extensions may appear in the nav-bar if they're not here.
+              # The extensions appear in this order.
               unified-extensions-area = [
-                "_d07ccf11-c0cd-4938-a265-2a4d6ad01189_-browser-action"
-                "_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action"
-                "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action"
+                "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action" # Bitwarden
+                "addon_darkreader_org-browser-action" # Dark Reader
+                "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action" # Violentmonkey
+                "_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action" # Stylus
+                "_d07ccf11-c0cd-4938-a265-2a4d6ad01189_-browser-action" # Web Archives
                 "dearrow_ajay_app-browser-action"
                 "sponsorblocker_ajay_app-browser-action"
                 "ublock0_raymondhill_net-browser-action"
