@@ -9,6 +9,8 @@
     exclude = [./default.nix];
   };
 
+  programs.steam.enable = true;
+
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     plasma-browser-integration
   ];
