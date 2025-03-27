@@ -1,7 +1,6 @@
 # https://github.com/0xc000022070/zen-browser-flake/issues/9#issuecomment-2711057434
 {
   lib,
-  config,
   inputs,
   pkgs,
   ...
@@ -107,12 +106,18 @@ in {
           "extensions.formautofill.creditCards.enabled" = false;
           "dom.security.https_only_mode" = true;
           "dom.security.https_only_mode_ever_enabled" = true;
-          "browser.urlbar.maxRichResults" = 20;
+          "browser.urlbar.maxRichResults" = 15;
           "browser.urlbar.showSearchSuggestionsFirst" = false;
           "browser.newtabpage.activity-stream.showSponsored" = false;
           "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
           "browser.search.separatePrivateDefault" = false;
           "browser.newtabpage.pinned" = []; # Removes "Search with Google" from search results
+          "browser.toolbars.bookmarks.visibility" = "never";
+          "browser.tabs.loadBookmarksInTabs" = true;
+          "browser.search.openintab" = true;
+
+          "zen.tabs.show-newtab-vertical" = false;
+          "zen.urlbar.behavior" = "float";
           "zen.splitView.change-on-hover" = true;
           "zen.theme.accent-color" = "#aac7ff"; # The first blue option
           "zen.urlbar.replace-newtab" = true; # Set this to false to go back to regular new tab
