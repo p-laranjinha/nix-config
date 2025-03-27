@@ -146,10 +146,9 @@ in {
               zen-sidebar-top-buttons = [];
               zen-sidebar-bottom-buttons = [
                 "preferences-button"
-                "downloads-button"
                 "zen-workspaces-button"
+                "downloads-button"
                 "sidebar-button"
-                "zen-expand-sidebar-button"
               ];
               # Some extensions may appear in the nav-bar if they're not here.
               # The extensions appear in this order.
