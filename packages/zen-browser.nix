@@ -114,7 +114,7 @@ in {
           "browser.newtabpage.pinned" = []; # Removes "Search with Google" from search results
           "browser.toolbars.bookmarks.visibility" = "never";
           "browser.tabs.loadBookmarksInTabs" = true;
-          "browser.search.openintab" = true;
+          "browser.urlbar.openintab" = true;
 
           "zen.tabs.show-newtab-vertical" = false;
           "zen.urlbar.behavior" = "float";
