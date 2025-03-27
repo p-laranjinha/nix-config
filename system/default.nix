@@ -9,7 +9,11 @@
     exclude = [./default.nix];
   };
 
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+  };
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     plasma-browser-integration

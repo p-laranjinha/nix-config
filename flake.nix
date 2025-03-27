@@ -20,12 +20,6 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
-    # So that regular binaries can be run.
-    nix-ld = {
-      url = "github:Mic92/nix-ld";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     ghostty.url = "github:ghostty-org/ghostty";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
@@ -60,7 +54,6 @@
           home-manager.backupFileExtension = "backup";
         }
         inputs.nur.modules.nixos.default
-        inputs.nix-ld.nixosModules.nix-ld
       ];
     };
   };
