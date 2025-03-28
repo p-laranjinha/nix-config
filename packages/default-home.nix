@@ -1,8 +1,14 @@
 {
   pkgs,
   config,
+  umport,
   ...
 }: {
+  imports = umport {
+    path = ./.;
+    exclude = [./default-home.nix ./default-system.nix];
+  };
+
   programs.bash.enable = true;
 
   programs.zoxide.enable = true;

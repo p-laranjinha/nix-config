@@ -4,10 +4,7 @@
       path = ./.;
       exclude = [./default.nix];
     }
-    ++ umport {
-      path = ../packages;
-    };
-
+    ++ [../packages/default-home.nix];
   home = {
     username = "pebble";
     homeDirectory = "/home/pebble";

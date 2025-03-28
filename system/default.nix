@@ -1,23 +1,16 @@
 {
   lib,
-  pkgs,
   umport,
   ...
 }: {
-  imports = umport {
-    path = ./.;
-    exclude = [./default.nix];
-  };
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-  };
-
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    plasma-browser-integration
-  ];
+  imports =
+    umport {
+      path = ./.;
+      exclude = [./default.nix];
+    }
+    ++ [
+      ../packages/default-system.nix
+    ];
 
   networking.hostName = "orange";
   # Don't forget to set a password with ‘passwd’.
@@ -56,25 +49,6 @@
       };
     };
   };
-
-  # Required to install flatpak
-  xdg.portal = {
-    enable = true;
-    config = {
-      common = {
-        default = [
-          "gtk"
-        ];
-      };
-    };
-    extraPortals = with pkgs; [
-      # xdg-desktop-portal-wlr
-      kdePackages.xdg-desktop-portal-kde
-      # xdg-desktop-portal-gtk
-    ];
-  };
-  # install flatpak binary
-  services.flatpak.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
