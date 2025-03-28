@@ -1,6 +1,7 @@
 {
   lib,
   umport,
+  inputs,
   ...
 }: {
   imports =
@@ -11,6 +12,29 @@
     ++ [
       ../packages/default-system.nix
     ];
+
+  system.autoUpgrade = {
+    enable = true;
+    flake = inputs.self.outPath;
+    flags = [
+      "--update-input"
+      "nixpkgs"
+      "-L" # print build logs
+      "--commit-lock-file"
+    ];
+    dates = "weekly";
+  };
+  nix.optimise = {
+    # Cleans the store
+    automatic = true;
+    dates = ["weekly"];
+  };
+  nix.gc = {
+    # Deletes old generations
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 
   networking.hostName = "orange";
   # Don't forget to set a password with ‘passwd’.
