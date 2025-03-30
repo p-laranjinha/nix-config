@@ -1,5 +1,5 @@
 {...}: {
   home.shellAliases = {
-    rebuild = "~/nixos/rebuild.sh";
+    rebuild = "~/home/nixos/rebuild.sh";
   };
 }

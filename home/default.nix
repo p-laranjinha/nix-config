@@ -1,4 +1,8 @@
-{umport, ...}: {
+{
+  config,
+  umport,
+  ...
+}: {
   imports =
     umport {
       path = ./.;
@@ -9,6 +13,14 @@
     username = "pebble";
     homeDirectory = "/home/pebble";
   };
+
+  # Symlinking important folders to a sub home folder to have a cleaner home
+  home.file."home/Desktop".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Desktop";
+  home.file."home/Downloads".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Downloads";
+  home.file."home/Audio".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Music";
+  home.file."home/Images".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Pictures";
+  home.file."home/Videos".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Videos";
+  home.file."home/Documents".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Documents";
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
