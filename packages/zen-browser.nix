@@ -1,6 +1,5 @@
 # https://github.com/0xc000022070/zen-browser-flake/issues/9#issuecomment-2711057434
 {
-  lib,
   inputs,
   pkgs,
   ...
