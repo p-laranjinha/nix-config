@@ -37,10 +37,6 @@ in {
     })
   ];
 
-  options.my.home.features.zen-browser = {
-    enable = lib.mkEnableOption "";
-  };
-
   config = {
     # Makes bookmarks look like essentials.
     home.file.".zen/default/chrome/userChrome.css".source = "${clean-bookmarks}/clean_bookmarks.css";
