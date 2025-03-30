@@ -31,6 +31,8 @@
     kdePackages.kate
     fswatch # Tool to see file changes in real time.
 
+    unrar
+
     inkscape-with-extensions
     gimp-with-plugins
     freecad
