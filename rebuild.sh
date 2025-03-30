@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Based on https://gist.github.com/0atman/1a5133b842f929ba4c1e195ee67599d5
 
-NIX_CONFIG_DIR=~/nixos/
+NIX_CONFIG_DIR=~/home/nixos/
 
 # Exit immediately if a command exits with a non-zero status.
 set -e

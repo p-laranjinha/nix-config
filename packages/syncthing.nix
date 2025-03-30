@@ -41,7 +41,7 @@
         };
         "Music" = {
           id = "music";
-          path = "~/Music/Music";
+          path = "~/home/Audio/Music";
           devices = [
             "phone"
           ];
