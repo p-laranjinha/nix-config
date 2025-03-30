@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
@@ -11,4 +11,7 @@
       useOSProber = true;
     };
   };
+  environment.systemPackages = with pkgs; [
+    grub2 # Makes grub commands available in the terminal.
+  ];
 }
