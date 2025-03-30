@@ -13,7 +13,7 @@
       folders = {
         "Default" = {
           id = "default";
-          path = "~/Sync/Default";
+          path = "~/home/Sync/Default";
           devices = [
             "phone"
             "tablet"
@@ -28,7 +28,7 @@
         };
         "Obsidian Vaults" = {
           id = "obsidian-vaults";
-          path = "~/Obsidian Vaults";
+          path = "~/home/Obsidian Vaults";
           devices = [
             "phone"
             "tablet"
@@ -53,7 +53,7 @@
         };
         "Tachiyomi Backup" = {
           id = "tachiyomi-backup";
-          path = "~/Sync/Tachiyomi Backup";
+          path = "~/home/Sync/Tachiyomi Backup";
           devices = [
             "phone"
             "tablet"
@@ -61,7 +61,7 @@
         };
         "WIT" = {
           id = "wit";
-          path = "~/Sync/WIT";
+          path = "~/home/Sync/WIT";
           devices = [
             "phone"
           ];
