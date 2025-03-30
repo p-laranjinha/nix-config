@@ -1,3 +1,7 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [prismlauncher];
+  home.packages = with pkgs; [
+    prismlauncher
+    heroic
+    cartridges
+  ];
 }
