@@ -11,7 +11,7 @@
     }
     ++ [
       ../packages/default-system.nix
-      ../specializations.nix
+      ../specialisations.nix
     ];
 
   system.autoUpgrade = {

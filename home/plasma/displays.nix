@@ -3,17 +3,17 @@
   config,
   ...
 }: let
-  one-1920x1080-screen = config.personal.one-1920x1080-screen;
+  cfg = config.personal.displays;
 in {
-  options.personal.one-1920x1080-screen = {
-    sunshine = lib.mkOption {
+  options.personal.displays = {
+    one-1920x1080-screen = lib.mkOption {
       type = lib.types.bool;
       default = false;
       description = "If only one 1920x1080@60 screen is to be used. For Sunshine.";
     };
   };
 
-  config = lib.mkIf false {
+  config = {
     home.file.".config/kwinoutputconfig.json".text = builtins.toJSON [
       {
         name = "outputs";
@@ -30,14 +30,14 @@ in {
             highDynamicRange = false;
             iccProfilePath = "";
             mode = lib.mkMerge [
-              (lib.mkIf (!one-1920x1080-screen) {
+              {
                 height = 1440;
                 refreshRate = 165002;
                 width = 2560;
-              })
-              (lib.mkIf one-1920x1080-screen {
+              }
+              (lib.mkIf cfg.one-1920x1080-screen {
                 height = 1080;
-                refreshRate = 60;
+                refreshRate = 60000;
                 width = 1920;
               })
             ];
@@ -83,31 +83,28 @@ in {
           {
             lidClosed = false;
             outputs = lib.mkMerge [
+              [
+                {
+                  enabled = true;
+                  outputIndex = 0;
+                  position = {
+                    x = 0;
+                    y = 0;
+                  };
+                  priority = 0;
+                }
+                {
+                  enabled = true;
+                  outputIndex = 1;
+                  position = {
+                    x = 2560;
+                    y = 360;
+                  };
+                  priority = 1;
+                }
+              ]
               (
-                lib.mkIf (!one-1920x1080-screen)
-                [
-                  {
-                    enabled = true;
-                    outputIndex = 0;
-                    position = {
-                      x = 0;
-                      y = 0;
-                    };
-                    priority = 0;
-                  }
-                  {
-                    enabled = true;
-                    outputIndex = 1;
-                    position = {
-                      x = 2560;
-                      y = 360;
-                    };
-                    priority = 1;
-                  }
-                ]
-              )
-              (
-                lib.mkIf one-1920x1080-screen
+                lib.mkIf cfg.one-1920x1080-screen
                 [
                   {
                     enabled = true;
