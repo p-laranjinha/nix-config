@@ -30,11 +30,11 @@ in {
             highDynamicRange = false;
             iccProfilePath = "";
             mode = lib.mkMerge [
-              {
+              (lib.mkIf (! cfg.one-1920x1080-screen) {
                 height = 1440;
                 refreshRate = 165002;
                 width = 2560;
-              }
+              })
               (lib.mkIf cfg.one-1920x1080-screen {
                 height = 1080;
                 refreshRate = 60000;
@@ -83,26 +83,27 @@ in {
           {
             lidClosed = false;
             outputs = lib.mkMerge [
-              [
-                {
-                  enabled = true;
-                  outputIndex = 0;
-                  position = {
-                    x = 0;
-                    y = 0;
-                  };
-                  priority = 0;
-                }
-                {
-                  enabled = true;
-                  outputIndex = 1;
-                  position = {
-                    x = 2560;
-                    y = 360;
-                  };
-                  priority = 1;
-                }
-              ]
+              (lib.mkIf (! cfg.one-1920x1080-screen)
+                [
+                  {
+                    enabled = true;
+                    outputIndex = 0;
+                    position = {
+                      x = 0;
+                      y = 0;
+                    };
+                    priority = 0;
+                  }
+                  {
+                    enabled = true;
+                    outputIndex = 1;
+                    position = {
+                      x = 2560;
+                      y = 360;
+                    };
+                    priority = 1;
+                  }
+                ])
               (
                 lib.mkIf cfg.one-1920x1080-screen
                 [
