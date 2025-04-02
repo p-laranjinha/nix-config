@@ -10,7 +10,7 @@ in {
     sunshine = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "If Sunshine is used for remote access";
+      description = "If Sunshine is used for remote access instead of xrdp.";
     };
   };
 
@@ -19,9 +19,9 @@ in {
 
     services.tailscale.enable = true;
 
-    services.xrdp.enable = true;
+    services.xrdp.enable = ! cfg.sunshine;
     services.xrdp.defaultWindowManager = "startplasma-x11";
-    services.xrdp.openFirewall = true;
+    services.xrdp.openFirewall = ! cfg.sunshine;
 
     services.openssh = {
       enable = true;
