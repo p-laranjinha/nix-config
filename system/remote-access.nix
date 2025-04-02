@@ -42,7 +42,7 @@ in {
       capSysAdmin = true;
       openFirewall = true;
       settings = {
-        output_name = 1;
+        output_name = 2;
       };
     };
     services.displayManager.autoLogin = {
