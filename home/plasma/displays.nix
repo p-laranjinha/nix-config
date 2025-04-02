@@ -57,7 +57,7 @@ in {
                   {
                       "allowSdrSoftwareBrightness": true,
                       "autoRotation": "InTabletMode",
-                      "brightness": 0.41,
+                      "brightness": 0,
                       "colorPowerTradeoff": "PreferAccuracy",
                       "colorProfileSource": "sRGB",
                       "connectorName": "HDMI-A-1",
