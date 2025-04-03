@@ -9,7 +9,12 @@
     exclude = [./default-home.nix ./default-system.nix];
   };
 
-  programs.bash.enable = true;
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+      cd ~/home/
+    '';
+  };
 
   programs.zoxide.enable = true;
 
