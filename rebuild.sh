@@ -26,7 +26,7 @@ if git diff --quiet; then
 else
   use_git=true
   # Shows your changes.
-  git diff -U0
+  git status
 
   git add .
 fi

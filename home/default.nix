@@ -15,12 +15,23 @@
   };
 
   # Symlinking important folders to a sub home folder to have a cleaner home
-  home.file."home/Desktop".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Desktop";
-  home.file."home/Downloads".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Downloads";
-  home.file."home/Audio".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Music";
-  home.file."home/Images".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Pictures";
-  home.file."home/Videos".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Videos";
-  home.file."home/Documents".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Documents";
+  home.file = let
+    folders = {
+      "Desktop" = "Desktop";
+      "Downloads" = "Downloads";
+      "Audio" = "Music";
+      "Images" = "Pictures";
+      "Videos" = "Videos";
+      "Documents" = "Documents";
+      ".config" = ".config";
+      ".local" = ".local";
+      ".zen" = ".zen";
+    };
+  in
+    builtins.listToAttrs (builtins.map (target: {
+      name = "home/${target}";
+      value = {source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${folders.${target}}";};
+    }) (builtins.attrNames folders));
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
