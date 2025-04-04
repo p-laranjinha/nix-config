@@ -6,6 +6,12 @@
       lookAndFeel = "org.kde.breezedark.desktop";
     };
 
+    shortcuts = {
+      "kwin" = {
+        "Window Fullscreen" = "Alt+F11";
+      };
+    };
+
     # https://github.com/nix-community/plasma-manager/blob/trunk/examples/home.nix
     panels = [
       {
