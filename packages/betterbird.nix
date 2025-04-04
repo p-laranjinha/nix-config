@@ -25,9 +25,6 @@ in {
     user_pref("mail.minimizeToTray", true);
   '';
 
-  # Autostart.
-  home.file.".config/autostart/eu.betterbird.Betterbird.desktop".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop";
-
   # System tray icon.
   home.file."${status-icons-prefix}default.svg".text = ''
     <!-- Copyright © Betterbird Project 2021 -->

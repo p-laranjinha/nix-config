@@ -73,38 +73,47 @@
     "camp.nook.nookdesktop"
   ];
 
-  xdg.autostart = {
-    enable = true;
-    entries =
-      # Autostart scripts.
-      builtins.map
-      (x:
-        pkgs.writeText "${x.name}.desktop" ''
-          [Desktop Entry]
-          Exec=${pkgs.writeShellScript x.name x.script}
-          Name=${x.name}
-          Type=Application
-          X-KDE-AutostartScript=true
-        '')
-      [
-        {
-          name = "discord-minimized";
-          script = ''
-            discord --start-minimized
-          '';
-        }
-      ]
-      ++
-      # Autostart .desktop files. 1
-      builtins.map
-      (x: "${config.home.profileDirectory}/share/applications/${x}.desktop")
-      [
-        # "discord"
-      ]
-      ++
-      # Autostart .desktop files. 2
-      [
-        # "${pkgs.discord}/share/applications/discord.desktop
-      ];
-  };
+  # Autostarts.
+  home.file = let
+    scripts = builtins.mapAttrs (name: script:
+      pkgs.writeText "${name}.desktop" ''
+        [Desktop Entry]
+        Exec=${pkgs.writeShellScript name script}
+        Name=${name}
+        Type=Application
+        X-KDE-AutostartScript=true
+      '');
+    outOfStore = builtins.mapAttrs (
+      name: source:
+        config.lib.file.mkOutOfStoreSymlink source
+    );
+  in let
+    files =
+      scripts {
+        "discord-minimized" = ''
+          discord --start-minimized
+        '';
+        "syncthingtray" = ''
+          ${pkgs.syncthingtray}/bin/syncthingtray --wait
+        '';
+        # Used so that I can access this PC remotely using Sunshine but still have a password.
+        "lock-if-autologin" = ''
+          #! /usr/bin/env nix-shell
+          #! nix-shell -i bash -p procps
+          SDDM_TEST=`pgrep -xa sddm-helper`
+          [[ $SDDM_TEST == *"--autologin"* ]] && loginctl lock-session
+        '';
+      }
+      // outOfStore {
+        "betterbird" = "${config.home.homeDirectory}/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop";
+      }
+      // {
+        # inStore
+        # "discord" = "${pkgs.discord}/share/applications/discord.desktop
+      };
+  in
+    builtins.listToAttrs (builtins.map (name: {
+      name = ".config/autostart/${name}.desktop";
+      value = {source = files.${name};};
+    }) (builtins.attrNames files));
 }

@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   ...
@@ -46,20 +45,9 @@ in {
       };
     };
     services.displayManager.autoLogin = {
+      # There is an autostart script somewhere else that locks on autologin.
       enable = cfg.sunshine;
       user = "pebble";
-    };
-    # Used so that I can access this PC remotely using Sunshine but still have a password.
-    systemd.user.services.lock-if-autologin = {
-      enable = cfg.sunshine;
-      description = "If the display manager is set to autologin, lock on startup.";
-      path = [pkgs.procps];
-      script = ''
-        SDDM_TEST=`pgrep -xa sddm-helper`
-        [[ $SDDM_TEST == *"--autologin"* ]] && loginctl lock-session
-      '';
-      wantedBy = ["multi-user.target"];
-      after = ["graphical-session.target"];
     };
   };
 }

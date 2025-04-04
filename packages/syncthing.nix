@@ -74,18 +74,4 @@
   home.packages = with pkgs; [
     syncthingtray
   ];
-  systemd.user.services.syncthingtray = {
-    Unit = {
-      Description = "Launch SyncthingTray on startup.";
-    };
-    Install = {
-      WantedBy = ["multi-user.target"];
-      After = ["syncthing.service"];
-    };
-    Service = {
-      ExecStart = "${pkgs.writeShellScript "syncthing" ''
-        ${pkgs.syncthingtray}/bin/syncthingtray --wait
-      ''}";
-    };
-  };
 }
