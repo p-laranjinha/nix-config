@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   config,
   ...
@@ -42,6 +43,47 @@ in {
       openFirewall = true;
       settings = {
         output_name = 0;
+      };
+      applications = {
+        env = {
+          PATH = "$(PATH):$(HOME)/.local/bin";
+        };
+        apps = [
+          {
+            name = "Desktop 1080p 60fps";
+            image-path = "desktop.png";
+            prep-cmd = [
+              {
+                do = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-2.mode.1920x1080@60";
+                undo = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-2.mode.2560x1440@165";
+              }
+            ];
+          }
+          {
+            name = "Steam Big Picture 1080p 60fps";
+            image-path = "steam.png";
+            detached = [
+              "setsid steam steam://open/bigpicture"
+            ];
+            prep-cmd = [
+              {
+                do = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-2.mode.1920x1080@60";
+                undo = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-2.mode.2560x1440@165";
+              }
+            ];
+          }
+          {
+            name = "Desktop";
+            image-path = "desktop.png";
+          }
+          {
+            name = "Steam Big Picture";
+            image-path = "steam.png";
+            detached = [
+              "setsid steam steam://open/bigpicture"
+            ];
+          }
+        ];
       };
     };
     services.displayManager.autoLogin = {

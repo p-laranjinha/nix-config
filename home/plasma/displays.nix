@@ -33,17 +33,10 @@ in {
                       "edidIdentifier": "BNQ 32647 21573 35 2023 0",
                       "highDynamicRange": false,
                       "iccProfilePath": "",
-                      "mode": {${
-        if (! cfg.one-1920x1080-screen)
-        then ''
-          "height": 1440,
-          "refreshRate": 165002,
-          "width": 2560''
-        else ''
-          "height": 1080,
-          "refreshRate": 60000,
-          "width": 1920''
-      }
+                      "mode": {
+                          "height": 1440,
+                          "refreshRate": 165002,
+                          "width": 2560
                       },
                       "overscan": 0,
                       "rgbRange": "Automatic",
