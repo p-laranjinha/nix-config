@@ -31,7 +31,10 @@
     builtins.listToAttrs (builtins.map (target: {
       name = "home/${target}";
       value = {source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${folders.${target}}";};
-    }) (builtins.attrNames folders));
+    }) (builtins.attrNames folders))
+    // {
+      ".config/nixpkgs/config.nix".text = ''{ allowUnfree = true; }'';
+    };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
