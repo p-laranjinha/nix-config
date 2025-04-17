@@ -153,16 +153,16 @@ in {
                 "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action" # Violentmonkey
                 "_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action" # Stylus
                 "_d07ccf11-c0cd-4938-a265-2a4d6ad01189_-browser-action" # Web Archives
+                "ublock0_raymondhill_net-browser-action" # uBlock Origin
+                "_5d554479-7cc4-487f-bd25-d8fc67a42602_-browser-action" # FMHY SafeGuard
+                "gdpr_cavi_au_dk-browser-action" # Consent-O-Matic
                 "dearrow_ajay_app-browser-action" # DeArrow
                 "sponsorblocker_ajay_app-browser-action" # SponsorBlock
-                "ublock0_raymondhill_net-browser-action" # uBlock Origin
-                "gdpr_cavi_au_dk-browser-action" # Consent-O-Matic
-                "_5d554479-7cc4-487f-bd25-d8fc67a42602_-browser-action" # FMHY SafeGuard
-                "_59c55aed-bdb3-4f2f-b81d-27011a689be6_-browser-action" # YouTube Windowed FullScreen
                 "enhancerforyoutube_maximerf_addons_mozilla_org-browser-action" # Enhancer for Youtube
-                "_036a55b4-5e72-4d05-a06c-cba2dfcc134a_-browser-action" # TWP - Translate Web Pages
-                "_a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad_-browser-action" # Refined GitHub
                 "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action" # Return Youtube Dislike
+                "_59c55aed-bdb3-4f2f-b81d-27011a689be6_-browser-action" # YouTube Windowed FullScreen
+                "_a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad_-browser-action" # Refined GitHub
+                "_036a55b4-5e72-4d05-a06c-cba2dfcc134a_-browser-action" # TWP - Translate Web Pages
               ];
             };
             seen = [];
