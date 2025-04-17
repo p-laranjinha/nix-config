@@ -33,6 +33,7 @@
       value = {source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${folders.${target}}";};
     }) (builtins.attrNames folders))
     // {
+      # Allows for unfree packages to be used by nix-shell
       ".config/nixpkgs/config.nix".text = ''{ allowUnfree = true; }'';
     };
 
