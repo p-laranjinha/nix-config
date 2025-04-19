@@ -17,6 +17,9 @@ in {
   config = {
     networking.interfaces.enp14s0.wakeOnLan.enable = true;
 
+    # Accept all traffic from Tailscale unconditionally
+    networking.firewall.trustedInterfaces = ["tailscale0"];
+
     services.tailscale.enable = true;
 
     services.xrdp.enable = ! cfg.sunshine;
