@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  environment.systemPackages = with pkgs; [
+    quickemu
+  ];
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
