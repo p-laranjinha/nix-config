@@ -2,6 +2,7 @@
   environment.systemPackages = with pkgs; [
     quickemu
   ];
+  virtualisation.spiceUSBRedirection.enable = true;
 
   programs.steam = {
     enable = true;
