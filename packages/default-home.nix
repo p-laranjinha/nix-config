@@ -64,6 +64,7 @@
     varia
 
     libreoffice-qt6-fresh
+    xfce.thunar
 
     haruna
     mpv
