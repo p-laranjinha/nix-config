@@ -37,6 +37,7 @@
     fswatch # Tool to see file changes in real time.
 
     unrar
+    peazip
 
     inkscape-with-extensions
     gimp-with-plugins
@@ -49,14 +50,24 @@
     obsidian
     quodlibet
     discord
-    # speedcrunch
-    qalculate-qt
+    speedcrunch
+    # qalculate-qt
     qbittorrent
     devtoolbox
     obs-studio
 
     blanket
     # fooyin
+
+    trayscale
+
+    varia
+
+    libreoffice-qt6-fresh
+
+    haruna
+    mpv
+    showtime
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -70,27 +81,44 @@
   #  idempotent, oh well.
   services.flatpak.update.onActivation = true;
   services.flatpak.packages = [
+    # App to play background music/noises from Animal Crossing.
     "camp.nook.nookdesktop"
+
+    # Good looking widget that displays and controls the currently playing media.
+    # Could be cool to use with something like a terminal music player.
+    # But on KDE I could just use the included media player in the system tray.
     "dev.geopjr.Turntable"
+
+    # App to draw things using characters to create ASCII art.
     "io.github.nokse22.asciidraw"
-    "io.github.josephmawa.TextCompare"
-    "re.sonny.OhMySVG"
+
+    # Cool internet radio app.
     "de.haeckerfelix.Shortwave"
+
+    # Dictionary.
     "com.github.johnfactotum.QuickLookup"
-    "de.haeckerfelix.AudioSharing"
-    "eu.nokun.MirrorHall"
-    "io.github.giantpinkrobots.varia"
+
+    # Task manager like the one on windows. Looks nice.
     "io.missioncenter.MissionCenter"
-    "dev.deedles.Trayscale"
+
+    # App to make SVGs smaller.
+    "re.sonny.OhMySVG"
+
+    # App to figure out file permission codes.
     "io.github.ronniedroid.concessio"
-    "net.nokyan.Resources"
-    "org.gnome.design.Emblem"
-    "com.felipekinoshita.Wildcard"
+
+    # App to see system logs.
+    "io.github.phastmike.tags"
     "org.gnome.Logs"
-    "com.github.finefindus.eyedropper"
-    "io.github.josephmawa.Bella"
+
+    # Tool to modify PDFs.
     "com.github.jeromerobert.pdfarranger"
+
+    # Neat game.
     "app.drey.MultiplicationPuzzle"
+
+    "io.github.nokse22.inspector"
+    "io.github.nokse22.Exhibit"
   ];
 
   # Autostarts.
