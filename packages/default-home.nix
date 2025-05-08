@@ -23,52 +23,67 @@
 
   # The home.packages option allows you to install Nix packages into your environment.
   home.packages = with pkgs; [
-    alejandra # Nix formatter.
-    nil # Nix language server.
-    nvd # Nix package version diff tool.
+    # Nix formatter.
+    alejandra
+    # Nix language server.
+    nil
+    # Nix package version diff tool.
+    nvd
 
+    # App with lots of utilities for developers, like a chmod calculator, diff, QR code generator, and regex tester.
+    devtoolbox
+
+    # Font.
     nerd-fonts.fira-code
 
-    libnotify # Library for notifications, used in rebuild.sh.
-    fd # find replacement, used in rebuild.sh together with update-nix-fetchgit.
+    # Library for notifications, used in rebuild.sh.
+    libnotify
+    # find replacement, used in rebuild.sh together with update-nix-fetchgit.
+    fd
     update-nix-fetchgit
 
-    kdePackages.kate
-    fswatch # Tool to see file changes in real time.
+    # Tool to see file changes in real time.
+    fswatch
 
+    # Archive tools.
     unrar
     peazip
 
+    # Document editors.
+    kdePackages.kate
+    libreoffice-qt6-fresh
+    obsidian
+
+    # Calculator.
+    speedcrunch
+
+    # Graphic editors.
     inkscape-with-extensions
     gimp-with-plugins
     freecad
     orca-slicer
     blender
 
-    # rpi-imager # Tool to create SD cards with OSs for Raspberry Pis.
-
-    obsidian
-    quodlibet
-    discord
-    speedcrunch
-    # qalculate-qt
-    qbittorrent
-    devtoolbox
-    obs-studio
-
-    blanket
-    # fooyin
-
-    trayscale
-
+    # Downloading apps.
     varia
+    qbittorrent
 
-    libreoffice-qt6-fresh
-    xfce.thunar
-
+    # Media players.
     haruna
     mpv
     showtime
+
+    # Video recording/streaming.
+    obs-studio
+
+    # Messaging.
+    discord
+
+    # App to play background noise like rain and wind.
+    blanket
+
+    # Music player with plugins.
+    quodlibet
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -105,21 +120,17 @@
     # App to make SVGs smaller.
     "re.sonny.OhMySVG"
 
-    # App to figure out file permission codes.
-    "io.github.ronniedroid.concessio"
-
     # App to see system logs.
-    "io.github.phastmike.tags"
     "org.gnome.Logs"
+
+    # App to read files and add highlight lines based on tags.
+    "io.github.phastmike.tags"
 
     # Tool to modify PDFs.
     "com.github.jeromerobert.pdfarranger"
 
     # Neat game.
     "app.drey.MultiplicationPuzzle"
-
-    "io.github.nokse22.inspector"
-    "io.github.nokse22.Exhibit"
   ];
 
   # Autostarts.
