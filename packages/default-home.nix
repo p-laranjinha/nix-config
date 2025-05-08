@@ -71,6 +71,26 @@
   services.flatpak.update.onActivation = true;
   services.flatpak.packages = [
     "camp.nook.nookdesktop"
+    "dev.geopjr.Turntable"
+    "io.github.nokse22.asciidraw"
+    "io.github.josephmawa.TextCompare"
+    "re.sonny.OhMySVG"
+    "de.haeckerfelix.Shortwave"
+    "com.github.johnfactotum.QuickLookup"
+    "de.haeckerfelix.AudioSharing"
+    "eu.nokun.MirrorHall"
+    "io.github.giantpinkrobots.varia"
+    "io.missioncenter.MissionCenter"
+    "dev.deedles.Trayscale"
+    "io.github.ronniedroid.concessio"
+    "net.nokyan.Resources"
+    "org.gnome.design.Emblem"
+    "com.felipekinoshita.Wildcard"
+    "org.gnome.Logs"
+    "com.github.finefindus.eyedropper"
+    "io.github.josephmawa.Bella"
+    "com.github.jeromerobert.pdfarranger"
+    "app.drey.MultiplicationPuzzle"
   ];
 
   # Autostarts.
