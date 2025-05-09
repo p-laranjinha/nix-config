@@ -87,6 +87,8 @@
 
     # GUI for dealing with git repos integrated with GitHub.
     github-desktop
+    # Tool to remove large files from git history. Call with "bfg".
+    bfg-repo-cleaner
 
     # App to give quick examples of how to use most commands.
     tldr
