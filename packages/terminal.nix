@@ -1,6 +1,7 @@
-{inputs, ...}: {
-  home.packages = [
-    inputs.ghostty.packages.x86_64-linux.default
+{pkgs, ...}: {
+  home.packages = with pkgs; [
+    ghostty
+    wezterm
   ];
 
   home.file.".config/ghostty/config".text = ''

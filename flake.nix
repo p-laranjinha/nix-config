@@ -20,7 +20,6 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
-    ghostty.url = "github:ghostty-org/ghostty";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
