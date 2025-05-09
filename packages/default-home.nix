@@ -89,9 +89,14 @@
     github-desktop
     # Tool to remove large files from git history. Call with "bfg".
     bfg-repo-cleaner
+    # TUI for git.
+    lazygit
 
     # App to give quick examples of how to use most commands.
     tldr
+
+    # Game.
+    mindustry
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
