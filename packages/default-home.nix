@@ -85,6 +85,12 @@
     # Music player with plugins.
     quodlibet
 
+    # GUI for dealing with git repos integrated with GitHub.
+    github-desktop
+
+    # App to give quick examples of how to use most commands.
+    tldr
+
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
