@@ -14,17 +14,17 @@
       ../specialisations.nix
     ];
 
-  system.autoUpgrade = {
-    enable = true;
-    flake = inputs.self.outPath;
-    flags = [
-      "--update-input"
-      "nixpkgs"
-      "-L" # print build logs
-      "--commit-lock-file"
-    ];
-    dates = "weekly";
-  };
+  # system.autoUpgrade = {
+  #   enable = true;
+  #   flake = inputs.self.outPath;
+  #   flags = [
+  #     "--update-input"
+  #     "nixpkgs"
+  #     "-L" # print build logs
+  #     "--commit-lock-file"
+  #   ];
+  #   dates = "weekly";
+  # };
   nix.optimise = {
     # Cleans the store
     automatic = true;
