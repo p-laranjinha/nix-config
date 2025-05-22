@@ -32,6 +32,7 @@
 
     # App with lots of utilities for developers, like a chmod calculator, diff, QR code generator, and regex tester.
     devtoolbox
+    textpieces
 
     # Font.
     nerd-fonts.fira-code
@@ -54,6 +55,9 @@
     libreoffice-qt6-fresh
     obsidian
 
+    # Find LaTeX symbols by sketching them.
+    hieroglyphic
+
     # Calculator.
     speedcrunch
 
@@ -63,6 +67,8 @@
     freecad
     orca-slicer
     blender
+    # Turn images into ASCII.
+    letterpress
 
     # Downloading apps.
     varia
@@ -78,6 +84,8 @@
 
     # Messaging.
     discord
+    # App that aggregates websites and runs them in the background. Good for messaging websites.
+    ferdium
 
     # App to play background noise like rain and wind.
     blanket
@@ -104,13 +112,6 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-
-    ferdium
-    station
-    tangram
-    letterpress
-    hieroglyphic
-    textpieces
   ];
 
   # This will update flatpaks on rebuild, which will make rebuild not
@@ -152,6 +153,8 @@
     # Neat game.
     "app.drey.MultiplicationPuzzle"
 
+    # App that adds website to the system menu.
+    # TODO: See what this app does and figure out how to do it via nix. If I even want that.
     "io.github.zaedus.spider"
   ];
 
