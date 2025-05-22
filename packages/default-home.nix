@@ -86,7 +86,6 @@
     discord
     # App that aggregates websites and runs them in the background. Good for messaging websites.
     ferdium
-    station
 
     # App to play background noise like rain and wind.
     blanket
