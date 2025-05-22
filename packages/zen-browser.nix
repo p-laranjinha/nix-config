@@ -12,8 +12,8 @@
   mkFirefoxModule = import "${inputs.home-manager.outPath}/modules/programs/firefox/mkFirefoxModule.nix";
   clean-bookmarks = pkgs.fetchgit {
     url = "https://github.com/CMD-Golem/Zen-Browser-Mods";
-    rev = "1e90c79abc22ce01033a255c81211543d1a9a4dc"; # HEAD
-    sha256 = "13ikihq5l3jy3vw22gk0296nc2w09xk4dg9lg9hd22rszw76g5fx";
+    rev = "6af1581d06f50d4566289e40a62e87e9e7177576"; # HEAD
+    sha256 = "05y3d6sm4vairbif543604ck3ikq75ysww5xd8a33aq8svfvqlbz";
     # sparseCheckout causes update-nix-fetchgit to have wrong hash.
   };
 in {

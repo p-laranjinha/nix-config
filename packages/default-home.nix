@@ -104,6 +104,13 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+
+    ferdium
+    station
+    tangram
+    letterpress
+    hieroglyphic
+    textpieces
   ];
 
   # This will update flatpaks on rebuild, which will make rebuild not
@@ -144,6 +151,8 @@
 
     # Neat game.
     "app.drey.MultiplicationPuzzle"
+
+    "io.github.zaedus.spider"
   ];
 
   # Autostarts.
