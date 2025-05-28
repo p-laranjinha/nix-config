@@ -2,6 +2,7 @@
 {
   inputs,
   pkgs,
+  config,
   ...
 }: let
   applicationName = "Zen Browser";
@@ -10,12 +11,6 @@
     "zen-browser"
   ];
   mkFirefoxModule = import "${inputs.home-manager.outPath}/modules/programs/firefox/mkFirefoxModule.nix";
-  clean-bookmarks = pkgs.fetchgit {
-    url = "https://github.com/CMD-Golem/Zen-Browser-Mods";
-    rev = "6af1581d06f50d4566289e40a62e87e9e7177576"; # HEAD
-    sha256 = "05y3d6sm4vairbif543604ck3ikq75ysww5xd8a33aq8svfvqlbz";
-    # sparseCheckout causes update-nix-fetchgit to have wrong hash.
-  };
 in {
   imports = [
     (mkFirefoxModule {
@@ -38,7 +33,7 @@ in {
 
   config = {
     # Makes bookmarks look like essentials.
-    home.file.".zen/default/chrome/userChrome.css".source = "${clean-bookmarks}/clean_bookmarks.css";
+    home.file.".zen/default/chrome/userChrome.css".source = config.lib.file.mkOutOfStoreSymlink ./zen-browser-clean-bookmarks.css;
 
     programs.zen-browser = {
       enable = true;
