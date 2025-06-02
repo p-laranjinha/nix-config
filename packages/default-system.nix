@@ -32,22 +32,4 @@
   };
   # install flatpak binary
   services.flatpak.enable = true;
-
-  environment.etc."paperless-admin-pass".text = "admin";
-  services.paperless = {
-    enable = true;
-    passwordFile = "/etc/paperless-admin-pass";
-    settings = {
-      PAPERLESS_CONSUMER_IGNORE_PATTERN = [
-        ".DS_STORE/*"
-        "desktop.ini"
-      ];
-      PAPERLESS_OCR_LANGUAGE = "por";
-      PAPERLESS_OCR_USER_ARGS = {
-        optimize = 1;
-        pdfa_image_compression = "lossless";
-      };
-    };
-  };
-  networking.firewall.allowedTCPPorts = [28981];
 }
