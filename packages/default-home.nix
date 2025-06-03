@@ -106,6 +106,7 @@
     # Game.
     mindustry
 
+    gparted
     libsForQt5.partitionmanager
     rpi-imager
 
