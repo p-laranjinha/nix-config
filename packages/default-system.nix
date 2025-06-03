@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     quickemu
+    gparted
   ];
   virtualisation.spiceUSBRedirection.enable = true;
 

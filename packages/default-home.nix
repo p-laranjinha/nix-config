@@ -106,10 +106,6 @@
     # Game.
     mindustry
 
-    gparted
-    libsForQt5.partitionmanager
-    rpi-imager
-
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
@@ -160,6 +156,8 @@
     # App that adds website to the system menu.
     # TODO: See what this app does and figure out how to do it via nix. If I even want that.
     "io.github.zaedus.spider"
+
+    "org.raspberrypi.rpi-imager"
   ];
 
   # Autostarts.
