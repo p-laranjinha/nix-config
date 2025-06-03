@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     quickemu
-    gparted
+    libsForQt5.partitionmanager
   ];
   virtualisation.spiceUSBRedirection.enable = true;
 
