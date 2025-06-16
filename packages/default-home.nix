@@ -12,7 +12,8 @@
   programs.bash = {
     enable = true;
     initExtra = ''
-      cd ~/home/
+      # This breaks "nix develop".
+      # cd ~/home/
     '';
   };
 
