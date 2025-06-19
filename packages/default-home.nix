@@ -72,7 +72,6 @@
     letterpress
 
     # Downloading apps.
-    varia
     qbittorrent
 
     # Media players.
@@ -157,6 +156,9 @@
     # App that adds website to the system menu.
     # TODO: See what this app does and figure out how to do it via nix. If I even want that.
     "io.github.zaedus.spider"
+
+    # Downloading app.
+    "io.github.giantpinkrobots.varia"
 
     "org.raspberrypi.rpi-imager"
   ];
