@@ -49,7 +49,7 @@
 
     # Archive tools.
     unrar
-    peazip
+    # peazip
 
     # Document editors.
     kdePackages.kate
