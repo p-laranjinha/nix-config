@@ -112,6 +112,8 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+
+    streamcontroller
   ];
 
   # This will update flatpaks on rebuild, which will make rebuild not
