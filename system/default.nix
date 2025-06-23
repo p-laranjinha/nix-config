@@ -1,7 +1,6 @@
 {
   lib,
   umport,
-  pkgs,
   ...
 }: {
   imports =
@@ -13,6 +12,8 @@
       ../packages/default-system.nix
       ../specialisations.nix
     ];
+
+  hardware.enableAllFirmware = true;
 
   # system.autoUpgrade = {
   #   enable = true;
@@ -62,7 +63,6 @@
   # services.blueman.enable = true;
   hardware.bluetooth = {
     enable = true;
-    package = pkgs.bluez;
     # Had to remove ~/.config/bluedevilglobalrc for bluetooth to be online on startup.
     # https://www.reddit.com/r/ManjaroLinux/comments/12fgj3o/kde_plasma_bluetooth_not_automatically_powered_on/
     powerOnBoot = true;
