@@ -14,8 +14,6 @@
       ../specialisations.nix
     ];
 
-  boot.extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
-
   # system.autoUpgrade = {
   #   enable = true;
   #   flake = inputs.self.outPath;
@@ -60,21 +58,23 @@
   # This makes the system wait for the network before booting. This also fails rebuild if enabled.
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
+  boot.extraModprobeConfig = ''options bluetooth enable_ecred=1 '';
+  # services.blueman.enable = true;
   hardware.bluetooth = {
     enable = true;
     # Had to remove ~/.config/bluedevilglobalrc for bluetooth to be online on startup.
     # https://www.reddit.com/r/ManjaroLinux/comments/12fgj3o/kde_plasma_bluetooth_not_automatically_powered_on/
     powerOnBoot = true;
-    settings = {
-      General = {
-        ControllerMode = "dual";
-        FastConnectable = "true";
-        Experimental = "true";
-      };
-      Policy = {
-        AutoEnable = "true";
-      };
-    };
+    # settings = {
+    #   General = {
+    #     ControllerMode = "dual";
+    #     FastConnectable = "true";
+    #     Experimental = "true";
+    #   };
+    #   Policy = {
+    #     AutoEnable = "true";
+    #   };
+    # };
   };
 
   # This value determines the NixOS release from which the default
