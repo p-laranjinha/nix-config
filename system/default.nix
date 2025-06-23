@@ -13,7 +13,7 @@
       ../specialisations.nix
     ];
 
-  hardware.enableAllFirmware = true;
+  # hardware.enableAllFirmware = true;
   hardware.xpadneo.enable = true;
 
   # system.autoUpgrade = {
@@ -71,7 +71,7 @@
       General = {
         ControllerMode = "dual";
         FastConnectable = "true";
-        UserspaceHID = "true";
+        # UserspaceHID = "true";
         # Experimental = "true";
       };
       Policy = {
