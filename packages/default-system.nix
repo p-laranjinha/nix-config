@@ -2,6 +2,7 @@
   environment.systemPackages = with pkgs; [
     quickemu
     gparted
+    bluez
   ];
   virtualisation.spiceUSBRedirection.enable = true;
 
