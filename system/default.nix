@@ -14,6 +14,8 @@
       ../specialisations.nix
     ];
 
+  boot.extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
+
   # system.autoUpgrade = {
   #   enable = true;
   #   flake = inputs.self.outPath;
