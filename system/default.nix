@@ -66,16 +66,17 @@
     # Had to remove ~/.config/bluedevilglobalrc for bluetooth to be online on startup.
     # https://www.reddit.com/r/ManjaroLinux/comments/12fgj3o/kde_plasma_bluetooth_not_automatically_powered_on/
     powerOnBoot = true;
-    # settings = {
-    #   General = {
-    #     ControllerMode = "dual";
-    #     FastConnectable = "true";
-    #     Experimental = "true";
-    #   };
-    #   Policy = {
-    #     AutoEnable = "true";
-    #   };
-    # };
+    settings = {
+      General = {
+        ControllerMode = "dual";
+        FastConnectable = "true";
+        UserspaceHID = "true";
+        # Experimental = "true";
+      };
+      Policy = {
+        AutoEnable = "true";
+      };
+    };
   };
 
   # This value determines the NixOS release from which the default
