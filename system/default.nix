@@ -14,6 +14,7 @@
     ];
 
   hardware.enableAllFirmware = true;
+  hardware.xpadneo.enable = true;
 
   # system.autoUpgrade = {
   #   enable = true;
@@ -59,7 +60,7 @@
   # This makes the system wait for the network before booting. This also fails rebuild if enabled.
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
-  boot.extraModprobeConfig = ''options bluetooth enable_ecred=1 '';
+  # boot.extraModprobeConfig = ''options bluetooth enable_ecred=1 '';
   # services.blueman.enable = true;
   hardware.bluetooth = {
     enable = true;
