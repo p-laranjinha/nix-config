@@ -51,6 +51,7 @@
           home-manager.users.pebble.imports = [
             ./home
             inputs.nix-flatpak.homeManagerModules.nix-flatpak
+            inputs.zen-browser.homeModules.beta
           ];
 
           # This allows home manager to overwrite files by backing them up with the following extension.
