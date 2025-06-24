@@ -70,6 +70,9 @@
         # Experimental = "true";
         # Had to add these settings for the Xbox controllers to connect.
         # https://github.com/bluez/bluez/issues/155#issuecomment-2646656304
+        # If that still doesn't work try:
+        # https://github.com/bluez/bluez/issues/155#issuecomment-897362404
+        # https://github.com/bluez/bluez/issues/155#issuecomment-1006563750
         Privacy = "device";
         JustWorksRepairing = "always";
         Class = "0x000100";
