@@ -32,7 +32,7 @@
     nvd
 
     # App with lots of utilities for developers, like a chmod calculator, diff, QR code generator, and regex tester.
-    devtoolbox
+    # devtoolbox
     textpieces
 
     # Font.
@@ -91,7 +91,7 @@
     blanket
 
     # Music player with plugins.
-    quodlibet
+    # quodlibet
 
     # GUI for dealing with git repos integrated with GitHub.
     github-desktop
