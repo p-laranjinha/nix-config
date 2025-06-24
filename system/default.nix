@@ -57,12 +57,7 @@
   # This makes the system wait for the network before booting. This also fails rebuild if enabled.
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
-  # hardware.enableAllFirmware = true;
-  # hardware.xpadneo.enable = true;
-  # hardware.xone.enable = true;
-  # boot.extraModprobeConfig = ''options bluetooth enable_ecred=1 '';
-  # boot.extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
-  # services.blueman.enable = true;
+  hardware.xpadneo.enable = true;
   hardware.bluetooth = {
     enable = true;
     # Had to remove ~/.config/bluedevilglobalrc for bluetooth to be online on startup.
@@ -72,8 +67,12 @@
       General = {
         ControllerMode = "dual";
         FastConnectable = "true";
-        # UserspaceHID = "true";
         # Experimental = "true";
+        # Had to add these settings for the Xbox controllers to connect.
+        # https://github.com/bluez/bluez/issues/155#issuecomment-2646656304
+        Privacy = "device";
+        JustWorksRepairing = "always";
+        Class = "0x000100";
       };
       Policy = {
         AutoEnable = "true";
