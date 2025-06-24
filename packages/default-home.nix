@@ -31,10 +31,6 @@
     # Nix package version diff tool.
     nvd
 
-    # App with lots of utilities for developers, like a chmod calculator, diff, QR code generator, and regex tester.
-    # devtoolbox
-    textpieces
-
     # Font.
     nerd-fonts.fira-code
 
@@ -89,9 +85,6 @@
 
     # App to play background noise like rain and wind.
     blanket
-
-    # Music player with plugins.
-    # quodlibet
 
     # GUI for dealing with git repos integrated with GitHub.
     github-desktop
@@ -159,6 +152,13 @@
 
     # Downloading app.
     "io.github.giantpinkrobots.varia"
+
+    # App with lots of utilities for developers, like a chmod calculator, diff, QR code generator, and regex tester.
+    "me.iepure.devtoolbox"
+    "io.gitlab.liferooter.TextPieces"
+
+    # Music player with plugins.
+    "io.github.quodlibet.QuodLibet"
 
     "org.raspberrypi.rpi-imager"
   ];
