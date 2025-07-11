@@ -45,6 +45,7 @@
 
     # Archive tools.
     unrar
+    p7zip
     # peazip
 
     # Document editors.

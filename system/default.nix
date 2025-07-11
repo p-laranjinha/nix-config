@@ -36,6 +36,8 @@
     options = "--delete-older-than 30d";
   };
 
+  services.printing.enable = true;
+
   networking.hostName = "orange";
   # Don't forget to set a password with ‘passwd’.
   users.users.pebble = {
