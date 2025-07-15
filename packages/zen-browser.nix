@@ -64,6 +64,7 @@
         "zen.theme.accent-color" = "#aac7ff"; # The first blue option
         "zen.urlbar.replace-newtab" = true; # Set this to false to go back to regular new tab
         "zen.tab-unloader.enabled" = false;
+        "zen.urlbar.show-protections-icon" = true;
 
         "browser.uiCustomization.state" = builtins.toJSON {
           placements = {

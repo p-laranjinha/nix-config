@@ -18,8 +18,8 @@
   };
 
   # Configure keyboard layout in X11
-  services.xserver.xkb = {
-    layout = "us,us";
-    variant = ",altgr-intl";
+  services.xserver = {
+    xkb.layout = "us,us";
+    xkbVariant = ",altgr-intl";
   };
 }

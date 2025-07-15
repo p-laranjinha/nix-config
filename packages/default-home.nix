@@ -31,8 +31,9 @@
     # Nix package version diff tool.
     nvd
 
-    # Font.
+    # Fonts.
     nerd-fonts.fira-code
+    overpass # A nerd-fonts variant also exists.
 
     # Library for notifications, used in rebuild.sh.
     libnotify
