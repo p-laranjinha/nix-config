@@ -4,6 +4,7 @@
     overrideConfig = true;
     workspace = {
       lookAndFeel = "org.kde.breezedark.desktop";
+      enableMiddleClickPaste = false;
     };
 
     # https://github.com/nix-community/plasma-manager/blob/trunk/examples/home.nix
