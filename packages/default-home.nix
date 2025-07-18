@@ -17,6 +17,13 @@
     '';
   };
 
+  # Tool to locate the nixpkgs package providing a certain file.
+  programs.nix-index = {
+    enable = true;
+    # Makes the command-not-found error return the nixpkgs package that contains it.
+    enableBashIntegration = true;
+  };
+
   programs.zoxide.enable = true;
 
   # Allow fonts installed with home-packages.
@@ -100,6 +107,9 @@
 
     # Game.
     mindustry
+
+    # CLI tool to run programs without installing them on Nix. Functionally an easier to use nix-shell. Requires nix-index.
+    comma
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
