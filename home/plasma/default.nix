@@ -40,12 +40,15 @@
           "org.kde.plasma.marginsseparator"
           {
             systemTray.items = {
+              showAll = false;
               shown = [
                 "org.kde.plasma.bluetooth"
                 "org.kde.plasma.networkmanagement"
                 "org.kde.plasma.volume"
               ];
-              hidden = [];
+              hidden = [
+                "org.kde.plasma.clipboard"
+              ];
             };
           }
           {

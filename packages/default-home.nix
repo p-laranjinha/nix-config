@@ -105,11 +105,14 @@
     # App to give quick examples of how to use most commands.
     tldr
 
-    # Game.
+    # Games.
     mindustry
+    airshipper # Veloren launcher
 
     # CLI tool to run programs without installing them on Nix. Functionally an easier to use nix-shell. Requires nix-index.
     comma
+
+    ungoogled-chromium
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your

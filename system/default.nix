@@ -43,7 +43,7 @@
   users.users.pebble = {
     isNormalUser = true;
     description = "Orange Pebble";
-    extraGroups = ["networkmanager" "wheel" "wireshark"];
+    extraGroups = ["networkmanager" "wheel" "wireshark" "dialout"];
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
