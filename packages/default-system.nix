@@ -16,6 +16,11 @@
     localNetworkGameTransfers.openFirewall = true;
   };
 
+  hardware.logitech.wireless = {
+    enable = true;
+    enableGraphical = true;
+  };
+
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     plasma-browser-integration
   ];
