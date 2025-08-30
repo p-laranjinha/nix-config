@@ -1,9 +1,14 @@
 {pkgs, ...}: {
+  imports = [./vm.nix];
+
   environment.systemPackages = with pkgs; [
     quickemu
     gparted
+
+    # Fonts.
+    nerd-fonts.fira-code
+    overpass # A nerd-fonts variant also exists.
   ];
-  virtualisation.spiceUSBRedirection.enable = true;
 
   programs.steam = {
     enable = true;
