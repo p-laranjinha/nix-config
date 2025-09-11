@@ -5,6 +5,7 @@
     cartridges
 
     mindustry
+    osu-lazer-bin
   ];
 
   services.flatpak.packages = [
