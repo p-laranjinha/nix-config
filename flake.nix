@@ -50,7 +50,7 @@
           home-manager.useGlobalPkgs = true;
 
           home-manager.sharedModules = [
-            inputs.plasma-manager.homeManagerModules.plasma-manager
+            inputs.plasma-manager.homeModules.plasma-manager
           ];
 
           home-manager.users.pebble.imports = [

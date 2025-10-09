@@ -18,8 +18,12 @@
   };
 
   # Configure keyboard layout in X11
+  # Run the following to find out available options:
+  #  cat $(nix-build --no-out-link '<nixpkgs>' -A xkeyboard_config)/etc/X11/xkb/rules/base.lst
   services.xserver = {
-    xkb.layout = "us,us";
-    xkbVariant = ",altgr-intl";
+    xkb = {
+      layout = "us,us";
+      variant = ",intl";
+    };
   };
 }
