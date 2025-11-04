@@ -16,6 +16,7 @@
 #PlacesToolbarItems {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr); /* Number of columns */
+	margin-top: 5px;
 }
 
 /* Horizontal line */

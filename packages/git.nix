@@ -1,11 +1,11 @@
 {...}: {
   programs.git = {
     enable = true;
-    extraConfig = {
+    settings = {
       init.defaultBranch = "master";
+      user.name = "p-laranjinha";
+      user.email = "plcasimiro2000@gmail.com";
     };
-    userName = "p-laranjinha";
-    userEmail = "plcasimiro2000@gmail.com";
     # Git extension for versioning large files (Git Large File Storage).
     lfs.enable = true;
   };

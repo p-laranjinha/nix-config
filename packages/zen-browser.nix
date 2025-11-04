@@ -5,7 +5,7 @@
   ...
 }: {
   # Makes bookmarks look like essentials.
-  home.file.".zen/default/chrome/userChrome.css".source = config.lib.file.mkOutOfStoreSymlink ./zen-browser-clean-bookmarks.css;
+  home.file.".zen/default/chrome/userChrome.css".source = config.lib.file.mkOutOfStoreSymlink /home/pebble/home/nixos/packages/zen-browser-clean-bookmarks.css;
 
   programs.zen-browser = {
     enable = true;
@@ -57,6 +57,12 @@
         "browser.toolbars.bookmarks.visibility" = "never";
         "browser.tabs.loadBookmarksInTabs" = true;
         "browser.urlbar.openintab" = true;
+
+        # https://docs.zen-browser.app/guides/live-editing
+        # Required to see the devtools for the browser UI and for userChrome.css to work.
+        "devtools.debugger.remote-enabled" = true;
+        "devtools.chrome.enabled" = true;
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
         "zen.tabs.show-newtab-vertical" = false;
         "zen.urlbar.behavior" = "float";
