@@ -5,7 +5,7 @@
   ];
 
   home.file.".config/ghostty/config".text = ''
-    theme = Ayu
+    theme = ayu
     # The background color in nvim is darker, so I chose that.
     # background = #0A0E14
     background = #000000
