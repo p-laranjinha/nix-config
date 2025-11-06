@@ -1,7 +1,4 @@
-{
-  this,
-  ...
-}: {
+{this, ...}: {
   networking.hostName = this.hostname;
   # Don't forget to set a password with `passwd`.
   users.users.${this.username} = {
