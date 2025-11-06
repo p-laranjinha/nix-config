@@ -2,8 +2,10 @@
   description = "flake";
 
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+
+    # Nix User Repository
     nur.url = "github:nix-community/NUR";
 
     home-manager = {
@@ -32,38 +34,42 @@
     };
   };
 
-  outputs = {self, ...} @ inputs: {
-    nixosConfigurations.orange = inputs.nixpkgs.lib.nixosSystem rec {
-      # These values are added as arguments to all modules.
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: let
+    # Common information about the system that may be used in multiple locations.
+    # Using camelCase because that is the standard for options. kebab-case is for packages and files.
+    this = {
+      hostname = "orange";
+      username = "pebble";
+      fullname = "Orange Pebble";
+      homeDirectory = /home/pebble;
+      # A home inside the home directory so I'm not bothered by folders and hidden folders added by programs.
+      subHomeDirectory = /home/pebble/home;
+      configDirectory = /home/pebble/home/nixos;
+      hostPlatform = "x86_64-linux";
+      # Research properly before changing this.
+      stateVersion = "24.05";
+    };
+
+    lib = (nixpkgs.lib.extend (_: _: home-manager.lib)).extend (import ./lib);
+  in {
+    inherit lib;
+    nixosConfigurations.${this.hostname} = nixpkgs.lib.nixosSystem {
+      inherit lib;
+      modules =
+        (lib.attrValues (lib.modulesIn ./modules))
+        ++ [
+          {system.configurationRevision = self.rev or "dirty";}
+          inputs.nur.modules.nixos.default
+        ];
       specialArgs = {
         inherit inputs;
-        umport = (import ./lib/umport.nix {inherit (inputs.nixpkgs) lib;}).umport;
+        inherit this;
       };
-      modules = [
-        ./system
-        inputs.home-manager.nixosModules.default
-        {
-          # Home manager doesn't use specialArgs to add arguments to its modules.
-          home-manager.extraSpecialArgs = {} // specialArgs;
-
-          home-manager.useUserPackages = true;
-          home-manager.useGlobalPkgs = true;
-
-          home-manager.sharedModules = [
-            inputs.plasma-manager.homeModules.plasma-manager
-          ];
-
-          home-manager.users.pebble.imports = [
-            ./home
-            inputs.nix-flatpak.homeManagerModules.nix-flatpak
-            inputs.zen-browser.homeModules.beta
-          ];
-
-          # This allows home manager to overwrite files by backing them up with the following extension.
-          home-manager.backupFileExtension = "backup";
-        }
-        inputs.nur.modules.nixos.default
-      ];
     };
   };
 }
