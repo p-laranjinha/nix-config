@@ -96,11 +96,13 @@
       # Nix package version diff tool.
       nvd
 
-      # Library for notifications, used in rebuild.sh.
+      # Library for notifications.
       libnotify
-      # find replacement, used in rebuild.sh together with update-nix-fetchgit.
+
+      # find replacement, used to update fetchgit references together with update-nix-fetchgit in nixr.
       fd
       update-nix-fetchgit
+
       gum
 
       # Tool to see file changes in real time.
