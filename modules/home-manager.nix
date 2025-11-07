@@ -28,7 +28,7 @@
 
     home = {
       username = this.username;
-      homeDirectory = toString this.homeDirectory;
+      homeDirectory = this.homeDirectory;
       stateVersion = this.stateVersion;
     };
 
@@ -37,10 +37,6 @@
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
-
-    home.shellAliases = {
-      rebuild = "~/home/nixos/rebuild.sh";
-    };
 
     # Symlinking folders I care about to a sub home folder to have a cleaner home.
     home.file = let
@@ -57,8 +53,8 @@
       };
     in
       builtins.listToAttrs (builtins.map (target: {
-        name = "${lib.removePrefix ((toString this.homeDirectory) + "/") (toString this.subHomeDirectory)}/${target}";
-        value = {source = config.lib.meta.mkOutOfStoreSymlink "${toString this.homeDirectory}/${folders.${target}}";};
+        name = "${lib.removePrefix ((this.homeDirectory) + "/") (this.subHomeDirectory)}/${target}";
+        value = {source = config.lib.meta.mkOutOfStoreSymlink "${this.homeDirectory}/${folders.${target}}";};
       }) (builtins.attrNames folders))
       // {
         # Allows for unfree packages to be used by nix-shell

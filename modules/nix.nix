@@ -1,4 +1,8 @@
-{this, ...}: {
+{
+  this,
+  inputs,
+  ...
+}: {
   networking.hostName = this.hostname;
   # Don't forget to set a password with `passwd`.
   users.users.${this.username} = {
@@ -29,6 +33,26 @@
   };
 
   services.printing.enable = true;
+
+  # Adds current flake to the registry so it can be accessed in things like the repl.
+  nix.registry = {
+    config.flake = inputs.self;
+    # config-git = {
+    #   exact = false;
+    #   to = {
+    #     type = "git";
+    #     url = "file:${this.configDirectory}";
+    #   };
+    # };
+    # config-github = {
+    #   exact = false;
+    #   to = {
+    #     type = "github";
+    #     owner = "p-laranjinha";
+    #     repo = "nix-config";
+    #   };
+    # };
+  };
 
   system.stateVersion = this.stateVersion;
 }

@@ -44,7 +44,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    quickemu
     gparted
 
     # Fonts.
@@ -72,37 +71,6 @@
       inputs.nix-flatpak.homeManagerModules.nix-flatpak
     ];
 
-    programs.bash = {
-      enable = true;
-      initExtra = ''
-        # This breaks "nix develop".
-        # cd ~/home/
-      '';
-    };
-
-    programs.git = {
-      enable = true;
-      settings = {
-        init.defaultBranch = "master";
-        user.name = "p-laranjinha";
-        user.email = "plcasimiro2000@gmail.com";
-      };
-      # Git extension for versioning large files (Git Large File Storage).
-      lfs.enable = true;
-    };
-    programs.gh = {
-      enable = true;
-    };
-
-    # Tool to locate the nixpkgs package providing a certain file.
-    programs.nix-index = {
-      enable = true;
-      # Makes the command-not-found error return the nixpkgs package that contains it.
-      enableBashIntegration = true;
-    };
-
-    programs.zoxide.enable = true;
-
     programs.vscode = {
       enable = true;
       package = pkgs.vscodium;
@@ -113,22 +81,6 @@
     };
 
     home.packages = with pkgs; [
-      # Nix formatter.
-      alejandra
-      # Nix language server.
-      nil
-      # Nix package version diff tool.
-      nvd
-
-      # Library for notifications, used in rebuild.sh.
-      libnotify
-      # find replacement, used in rebuild.sh together with update-nix-fetchgit.
-      fd
-      update-nix-fetchgit
-
-      # Tool to see file changes in real time.
-      fswatch
-
       # Archive tools.
       unrar
       p7zip
@@ -175,26 +127,10 @@
 
       # GUI for dealing with git repos integrated with GitHub.
       github-desktop
-      # Tool to remove large files from git history. Call with "bfg".
-      bfg-repo-cleaner
-      # TUI for git.
-      lazygit
 
-      # App to give quick examples of how to use most commands.
-      tldr
-
-      # CLI tool to run programs without installing them on Nix. Functionally an easier to use nix-shell. Requires nix-index.
-      comma
-
+      # Browsers.
       ungoogled-chromium
       firefox
-
-      # # You can also create simple shell scripts directly inside your
-      # # configuration. For example, this adds a command 'my-hello' to your
-      # # environment:
-      # (pkgs.writeShellScriptBin "my-hello" ''
-      #   echo "Hello, ${config.home.username}!"
-      # '')
     ];
 
     # This will update flatpaks on rebuild, which will make rebuild not

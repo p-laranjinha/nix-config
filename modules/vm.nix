@@ -17,6 +17,8 @@
     pkgs.freerdp
     inputs.winapps.packages.${this.hostPlatform}.winapps
     inputs.winapps.packages.${this.hostPlatform}.winapps-launcher # optional
+
+    pkgs.quickemu
   ];
 
   hm = {

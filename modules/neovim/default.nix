@@ -16,9 +16,6 @@
       sha256 = "1mlynprn39hqp1c3dmg424x8qqmdgy0w8flq9slrsja80zky62v9";
     };
     home.shellAliases = {
-      # Neovim that uses the config from my git repo.
-      nvimg = "XDG_CONFIG_HOME=~/Projects NVIM_APPNAME=neovim-config nvim";
-      v = "nvim";
       vi = "nvim";
       vim = "nvim";
     };

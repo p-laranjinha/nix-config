@@ -23,7 +23,7 @@ in {
     };
 
     home.file =
-      config.lib.meta.mkAutostartSymlink "betterbird" "${toString this.homeDirectory}/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop"
+      config.lib.meta.mkAutostartSymlink "betterbird" "${this.homeDirectory}/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop"
       // {
         "${userjs}".text = ''
           user_pref("mail.startupMinimized", true);
