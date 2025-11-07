@@ -8,6 +8,9 @@
     home.shellAliases = {
       lg = "lazygit";
 
+      # Undoes a commit but keeps the changes.
+      gitr = "git reset --soft HEAD~1";
+
       # "nix rebuild"
       # Runs a script that rebuilds this flake.
       nixr = toString (config.lib.meta.mkMutableConfigSymlink ./nixr.sh);
@@ -15,6 +18,7 @@
       nixs = "sudo nixos-rebuild switch --flake ${this.configDirectory}";
       nixb = "sudo nixos-rebuild build --flake ${this.configDirectory}";
       nixl = "nixos-rebuild list-generations";
+      nixu = "nix flake update --flake ${this.configDirectory}";
 
       # "nix query"
       # Runs nix repl initialized with values from this flake for easier testing and debugging.

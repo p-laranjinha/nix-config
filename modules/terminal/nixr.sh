@@ -23,6 +23,7 @@ fi
 git diff HEAD | delta --paging always
 gum log --time timeonly --level info "Finished showing diff."
 
+gum log --time timeonly --level info "Committing changes."
 git commit -m "$(gum input --width 50 --header "Input commit summary:" --placeholder "")" \
            -m "$(gum write --width 80 --header "Input commit description:" --placeholder "")"
 
