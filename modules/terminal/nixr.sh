@@ -27,7 +27,7 @@ else
 	exit 1
 fi
 
-gum spin --title "Rebuilding." -- sudo nixos-rebuild switch --flak $NIX_CONFIG_DIR
+gum input --password | sudo -nS gum spin --title "Rebuilding." -- nixos-rebuild switch --flak $NIX_CONFIG_DIR
 if [ $? -eq 0 ]; then
 	gum log --time timeonly --level info "Finished rebuilding."
 else
