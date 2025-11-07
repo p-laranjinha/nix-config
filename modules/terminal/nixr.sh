@@ -14,6 +14,12 @@ else
 	exit 1
 fi
 
+git diff HEAD --quiet
+if [ $? -eq 0 ]; then
+	gum log --time timeonly --level error "No changes have been found. Use 'nixs' instead."
+	exit 1
+fi
+
 git diff HEAD | delta --paging always
 gum log --time timeonly --level info "Finished showing diff."
 
