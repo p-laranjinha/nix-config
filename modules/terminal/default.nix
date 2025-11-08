@@ -11,10 +11,13 @@
       # Undoes a commit but keeps the changes.
       gitr = "git reset --soft HEAD~1";
 
+      # nix-alien commands to run unpatched binaries and find their libraries.
+      nixa = "nix-alien-ld --";
+      nixafl = "nix-alien-find-libs";
+
       # "nix rebuild"
       # Runs a script that rebuilds this flake.
       nixr = toString (config.lib.meta.mkMutableConfigSymlink ./nixr.sh);
-
       nixs = "sudo nixos-rebuild switch --flake ${this.configDirectory}";
       nixb = "sudo nixos-rebuild build --flake ${this.configDirectory}";
       nixl = "nixos-rebuild list-generations";
