@@ -11,9 +11,9 @@ gum log --time timeonly --level info "Checking submodules..."
 check_submodule () {
 	git diff HEAD --quiet
 	if [ $? -eq 0 ]; then
-		gum log --time timeonly --level info "Submodule '$name' has no unstaged files."
+		gum log --time timeonly --level info "Submodule '$name' has no uncommitted files."
 	else
-		gum log --time timeonly --level warn "Submodule '$name' has unstaged files."
+		gum log --time timeonly --level warn "Submodule '$name' has uncommitted files."
 		gum confirm "Do you want to continue?"
 		if [ $? -eq 1 ]; then
 			exit 1 
