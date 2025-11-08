@@ -6,6 +6,46 @@ NIX_CONFIG_DIR=/home/pebble/home/nix-config
 # cd to your config dir without affecting shell outside this script.
 pushd $NIX_CONFIG_DIR &>/dev/null
 
+# Check if submodules are up to date and warn the user.
+check_submodule () {
+	git diff HEAD --quiet
+	if [ $? -eq 0 ]; then
+		gum log --time timeonly --level info "Submodule '$name' has no unstaged files."
+	else
+		gum log --time timeonly --level warn "Submodule '$name' has unstaged files."
+		gum confirm "Do you want to continue?"
+		if [ $? -eq 1 ]; then
+			exit 1 
+		fi
+	fi
+
+	UPSTREAM=${1:-'@{u}'}
+	LOCAL=$(git rev-parse @)
+	REMOTE=$(git rev-parse "$UPSTREAM")
+	BASE=$(git merge-base @ "$UPSTREAM")
+
+	if [ $LOCAL = $REMOTE ]; then
+	    gum log --time timeonly --level info "Submodule '$name' is up to date."
+	else
+		if [ $LOCAL = $BASE ]; then
+		    gum log --time timeonly --level warn "Submodule '$name' is outdated."
+		elif [ $REMOTE = $BASE ]; then
+		    gum log --time timeonly --level warn "Submodule '$name' has not pushed its changes."
+		else
+		    gum log --time timeonly --level warn "Submodule '$name' has diverged from origin."
+		fi
+		gum confirm "Do you want to continue?"
+		if [ $? -eq 1 ]; then
+			exit 1 
+		fi
+	fi
+}
+export -f check_submodule
+git submodule --quiet foreach check_submodule
+if [ $? -ne 0 ]; then
+	exit 1
+fi
+
 # Update files gotten using fetchgit which have a comment on the rev or url attribute.
 gum log --time timeonly --level info "Updating fetchgit commit references."
 fd .nix --exec update-nix-fetchgit --only-commented
@@ -44,9 +84,13 @@ git diff HEAD | delta --paging always
 gum log --time timeonly --level info "Finished showing diff."
 
 gum log --time timeonly --level info "Committing changes."
-git commit -m "$(gum input --width 50 --header "Input commit summary:" --placeholder "")" \
-           -m "$(gum write --width 80 --header "Input commit description:" --placeholder "")"
-
+COMMIT_SUMMARY=$(gum input --width 50 --header "Input commit summary:" --placeholder "")
+if [ $? -ne 0 ]; then
+	gum log --time timeonly --level error "No commit message."
+	exit 1
+fi
+COMMIT_DESCRIPTION=$(gum input --width 80 --header "Input commit description:" --placeholder "")
+git commit -m "$COMMIT_SUMMARY" -m "$COMMIT_DESCRIPTION"
 if [ $? -eq 0 ]; then
 	gum log --time timeonly --level info "Committed changes."
 else

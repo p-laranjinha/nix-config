@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   hm = {
     home.packages = with pkgs; [
       # Dependencies
@@ -9,12 +13,9 @@
       cargo # Used to install the nil nix LSP.
       wl-clipboard # Clipboard provider for Wayland.
       xclip # Clipboard provider for X11/RDP
+      nodejs_24 # For the bash LSP.
     ];
-    home.file.".config/nvim".source = pkgs.fetchgit {
-      url = "https://github.com/p-laranjinha/neovim-config";
-      rev = "20fbfe2a18eb8ee9b8c5482afe1e639a9330a945"; # HEAD
-      sha256 = "1mlynprn39hqp1c3dmg424x8qqmdgy0w8flq9slrsja80zky62v9";
-    };
+    home.file.".config/nvim".source = config.lib.meta.mkMutableConfigSymlink ./config;
     home.shellAliases = {
       vi = "nvim";
       vim = "nvim";
