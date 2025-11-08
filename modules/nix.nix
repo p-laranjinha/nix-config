@@ -11,6 +11,8 @@
     extraGroups = ["networkmanager" "wheel" "wireshark" "dialout"];
   };
 
+  nix.package = inputs.determinate.packages.${this.hostPlatform}.default;
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   nixpkgs.config = {
