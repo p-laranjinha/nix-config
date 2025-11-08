@@ -7,6 +7,7 @@ NIX_CONFIG_DIR=/home/pebble/home/nix-config
 pushd $NIX_CONFIG_DIR &>/dev/null
 
 # Check if submodules are up to date and warn the user.
+gum log --time timeonly --level info "Checking submodules..."
 check_submodule () {
 	git diff HEAD --quiet
 	if [ $? -eq 0 ]; then
@@ -47,7 +48,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Update files gotten using fetchgit which have a comment on the rev or url attribute.
-gum log --time timeonly --level info "Updating fetchgit commit references."
+gum log --time timeonly --level info "Updating fetchgit commit references..."
 fd .nix --exec update-nix-fetchgit --only-commented
 if [ $? -eq 0 ]; then
 	gum log --time timeonly --level info "Updated fetchgit commit references."
@@ -56,7 +57,7 @@ else
 fi
 
 # Autoformat the nix files.
-gum log --time timeonly --level info "Formatting files."
+gum log --time timeonly --level info "Formatting files..."
 alejandra -q .
 if [ $? -eq 0 ]; then
 	gum log --time timeonly --level info "Finished formatting files."
@@ -65,7 +66,7 @@ else
 	exit 1
 fi
 
-gum log --time timeonly --level info "Staging files."
+gum log --time timeonly --level info "Staging files..."
 git add .
 if [ $? -eq 0 ]; then
 	gum log --time timeonly --level info "Staged files."
@@ -83,7 +84,7 @@ fi
 git diff HEAD | delta --paging always
 gum log --time timeonly --level info "Finished showing diff."
 
-gum log --time timeonly --level info "Committing changes."
+gum log --time timeonly --level info "Committing changes..."
 COMMIT_SUMMARY=$(gum input --width 50 --header "Input commit summary:" --placeholder "")
 if [ $? -ne 0 ]; then
 	gum log --time timeonly --level error "No commit message."
@@ -98,7 +99,7 @@ else
 	exit 1
 fi
 
-gum log --time timeonly --level info "Rebuilding."
+gum log --time timeonly --level info "Rebuilding..."
 sudo nixos-rebuild switch --flake .
 if [ $? -eq 0 ]; then
 	gum log --time timeonly --level info "Finished rebuilding."
@@ -107,7 +108,7 @@ else
 	exit 1
 fi
 
-gum log --time timeonly --level info "Pushing to origin."
+gum log --time timeonly --level info "Pushing to origin..."
 git push
 if [ $? -eq 0 ]; then
 	gum log --time timeonly --level info "Pushed to origin."
