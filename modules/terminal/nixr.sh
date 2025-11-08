@@ -89,7 +89,7 @@ if [ $? -ne 0 ]; then
 	gum log --time timeonly --level error "No commit message."
 	exit 1
 fi
-COMMIT_DESCRIPTION=$(gum input --width 80 --header "Input commit description:" --placeholder "")
+COMMIT_DESCRIPTION=$(gum write --width 80 --header "Input commit description:" --placeholder "")
 git commit -m "$COMMIT_SUMMARY" -m "$COMMIT_DESCRIPTION"
 if [ $? -eq 0 ]; then
 	gum log --time timeonly --level info "Committed changes."
