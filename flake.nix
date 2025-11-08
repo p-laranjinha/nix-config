@@ -5,13 +5,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
 
-    # Determinate's Nix fork.
-    # Using the installation method I found here:
-    #  https://www.reddit.com/r/NixOS/comments/1oh9u22/using_determinate_nix_fork_without_determinatenixd/
-    # This method uses the GitHub url and "nix.package", and bypasses some use
-    #  of flakehub and installation of the proprietary daemon.
-    determinate.url = "github:DeterminateSystems/nix-src";
-
     # Nix User Repository
     nur.url = "github:nix-community/NUR";
 
