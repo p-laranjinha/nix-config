@@ -20,6 +20,7 @@ check_submodule () {
 		fi
 	fi
 
+	# https://stackoverflow.com/a/3278427
 	UPSTREAM=${1:-'@{u}'}
 	LOCAL=$(git rev-parse @)
 	REMOTE=$(git rev-parse "$UPSTREAM")
@@ -53,7 +54,7 @@ fd .nix --exec update-nix-fetchgit --only-commented
 if [ $? -eq 0 ]; then
 	gum log --time timeonly --level info "Updated fetchgit commit references."
 else
-	gum log --time timeonly --level warn "Failed to update of fetchgit commit references."
+	gum log --time timeonly --level warn "Failed to update fetchgit commit references."
 fi
 
 # Autoformat the nix files.
