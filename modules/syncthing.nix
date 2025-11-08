@@ -17,9 +17,9 @@
           "tablet".id = "XR6AZSI-APGKKIB-LWMMCKW-6E63TBX-KFBSLVG-7JYURKQ-TZNGESZ-IVNNDQ5";
         };
         folders = {
-          "Default" = {
+          "default" = {
             id = "default";
-            path = "~/home/Sync/Default";
+            path = "~/home/sync/default";
             devices = [
               "phone"
               "phone-old"
@@ -33,9 +33,9 @@
               };
             };
           };
-          "Obsidian Vaults" = {
+          "obsidian-vaults" = {
             id = "obsidian-vaults";
-            path = "~/home/Obsidian Vaults";
+            path = "~/home/obsidian-vaults";
             devices = [
               "phone"
               "phone-old"
@@ -47,9 +47,9 @@
               params.maxAge = "0"; # forever
             };
           };
-          "Music" = {
+          "music" = {
             id = "music";
-            path = "~/home/audio/Music";
+            path = "~/home/audio/music";
             devices = [
               "phone"
               "phone-old"
@@ -60,9 +60,9 @@
               params.maxAge = "31536000"; # 1 year
             };
           };
-          "Tachiyomi Backup" = {
+          "tachiyomi-backup" = {
             id = "tachiyomi-backup";
-            path = "~/home/Sync/Tachiyomi Backup";
+            path = "~/home/sync/tachiyomi-backup";
             devices = [
               "phone"
               "phone-old"
@@ -71,7 +71,7 @@
           };
           "WIT" = {
             id = "wit";
-            path = "~/home/Sync/WIT";
+            path = "~/home/sync/WIT";
             devices = [
               "phone"
               "phone-old"
