@@ -34,6 +34,14 @@
     grub2 # Makes grub commands available in the terminal.
   ];
 
+  # https://www.marcusfolkesson.se/blog/determine-wakeup-cause-with-acpi/
+  # https://askubuntu.com/a/1469469
+  # This makes it so that I can suspend the system without it waking up immediately.
+  # Also tried solutions from https://wiki.archlinux.org/title/Power_management/Wakeup_triggers but but they didn't work.
+  systemd.tmpfiles.rules = [
+    "w /proc/acpi/wakeup - - - - XH00"
+  ];
+
   time.timeZone = "Europe/Lisbon";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
