@@ -1,4 +1,6 @@
 # For lib functions that depend on modules like nixos and home-manager.
+# There might be a way to create these functions with mkOption instead of
+#  abusing config.lib.meta, but I don't think it's worth the trouble.
 # These functions are accessed by config.lib.meta.XXX
 # For more "pure" functions check ../lib
 {
@@ -17,8 +19,7 @@ with lib; {
       config.lib.meta.mkOutOfStoreSymlink
       (this.configDirectory + removePrefix (toString ./..) (toString path));
 
-    # Use like: hm.home.file = mkAutostart(Script/Symlink) "name" ''script''
-    # Use // to extend hm if needed.
+    # Use like: hm.home.file = mkAutostartScript "name" ''script''
     mkAutostartScript = name: script: {
       ".config/autostart/${name}.desktop".text = ''
         [Desktop Entry]
@@ -28,6 +29,7 @@ with lib; {
         X-KDE-AutostartScript=true
       '';
     };
+    # Use like: hm.home.file = mkAutostartSymlink "name" path
     mkAutostartSymlink = name: path: {
       ".config/autostart/${name}.desktop".source = config.lib.meta.mkOutOfStoreSymlink path;
     };
