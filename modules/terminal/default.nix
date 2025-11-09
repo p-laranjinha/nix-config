@@ -11,6 +11,9 @@
       # Undoes a commit but keeps the changes.
       gitr = "git reset --soft HEAD~1";
 
+      # Restart plasma shell.
+      kr = "kquitapp6 plasmashell; kstart plasmashell;";
+
       # nix-alien commands to run unpatched binaries and find their libraries.
       nixa = "nix-alien-ld --";
       nixafl = "nix-alien-find-libs";
@@ -18,7 +21,7 @@
       # "nix rebuild"
       # Runs a script that rebuilds this flake.
       nixr = toString (config.lib.meta.mkMutableConfigSymlink ./nixr.sh);
-      nixs = "sudo nixos-rebuild switch --flake ${this.configDirectory}";
+      nixs = toString (config.lib.meta.mkMutableConfigSymlink ./nixs.sh);
       nixb = "sudo nixos-rebuild build --flake ${this.configDirectory}";
       nixl = "nixos-rebuild list-generations";
       nixu = "nix flake update --flake ${this.configDirectory}";

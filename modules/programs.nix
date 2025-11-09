@@ -44,7 +44,9 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # Disk and partition managers.
     gparted
+    kdePackages.partitionmanager
 
     # Fonts.
     nerd-fonts.fira-code
@@ -65,10 +67,6 @@
     enable = true;
     enableGraphical = true;
   };
-
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    plasma-browser-integration
-  ];
 
   hm = {
     imports = [

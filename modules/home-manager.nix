@@ -22,10 +22,6 @@
   };
 
   hm = {
-    imports = [
-      inputs.plasma-manager.homeModules.plasma-manager
-    ];
-
     home = {
       username = this.username;
       homeDirectory = this.homeDirectory;

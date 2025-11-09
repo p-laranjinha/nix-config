@@ -1,9 +1,29 @@
-{...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./displays.nix
   ];
 
+  # Enable the KDE Plasma Desktop Environment.
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
+
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    plasma-browser-integration
+  ];
+  environment.systemPackages = with pkgs; [
+    kdePackages.kdbusaddons # kquitapp6
+  ];
+
   hm = {
+    imports = [
+      inputs.plasma-manager.homeModules.plasma-manager
+    ];
+
     programs.plasma = {
       enable = true;
       overrideConfig = true;

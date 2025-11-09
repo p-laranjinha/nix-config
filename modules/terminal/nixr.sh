@@ -14,7 +14,7 @@ check_submodule () {
 		gum log --time timeonly --level info "Submodule '$name' has no uncommitted files."
 	else
 		gum log --time timeonly --level warn "Submodule '$name' has uncommitted files."
-		gum confirm "Do you want to continue?"
+		gum confirm "Continue?"
 		if [ $? -eq 1 ]; then
 			exit 1 
 		fi
@@ -36,7 +36,7 @@ check_submodule () {
 		else
 		    gum log --time timeonly --level warn "Submodule '$name' has diverged from origin."
 		fi
-		gum confirm "Do you want to continue?"
+		gum confirm "Continue?"
 		if [ $? -eq 1 ]; then
 			exit 1 
 		fi
@@ -117,3 +117,12 @@ else
 	gum log --time timeonly --level error "Failed to push to origin."
 	exit 1
 fi
+
+gum confirm "Restart plasma shell?"
+if [ $? -eq 1 ]; then
+	exit 1 
+fi
+gum log --time timeonly --level info "Restarting plasma shell..."
+kquitapp6 plasmashell
+kstart plasmashell
+gum log --time timeonly --level info "Restarted plasma shell."
