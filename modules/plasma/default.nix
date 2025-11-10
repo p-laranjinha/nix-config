@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -32,19 +33,175 @@
         enableMiddleClickPaste = false;
       };
 
-      # https://github.com/nix-community/plasma-manager/blob/trunk/examples/home.nix
+      # Use the command "plasma-interactiveconsole" and the following website
+      #  to find some hard to get config values:
+      #  https://develop.kde.org/docs/plasma/scripting/examples/#iterate-all-widgets-and-print-their-config-values
+      # I've also included an example script to run with the command to get
+      #  config values as ./interactiveconsolesave.js
       panels = [
         {
           location = "bottom";
           height = 44;
           screen = 0;
-          widgets = [
+          lengthMode = "fit";
+          alignment = "left";
+          # Not using the included systemMonitor option because it sucks.
+          widgets = let
+            blue = "61,174,233";
+            orange = "246,116,0";
+            black = "0,0,0";
+            # Taken from the systemMonitor option source code.
+            toEscapedList = ids:
+              if ids != null
+              then "[${lib.concatMapStringsSep ", " (x: ''\"${x}\"'') ids}]"
+              else null;
+          in [
             {
-              panelSpacer = {
-                expanding = false;
-                length = 600;
+              name = "org.kde.plasma.systemmonitor";
+              config = {
+                Appearance = {
+                  title = "CPU Usage";
+                  chartFace = "org.kde.ksysguard.linechart";
+                  updateRateLimit = "1000";
+                };
+                SensorLabels = {
+                  "cpu/all/usage" = "Usage";
+                  "cpu/all/averageFrequency" = "Average Frequency";
+                };
+                SensorColors = {
+                  "cpu/all/usage" = blue;
+                };
+                Sensors = {
+                  highPrioritySensorIds = toEscapedList ["cpu/all/usage"];
+                  lowPrioritySensorIds = toEscapedList ["cpu/all/averageFrequency"];
+                };
               };
             }
+            {
+              name = "org.kde.plasma.systemmonitor";
+              config = {
+                Appearance = {
+                  title = "CPU Temperature";
+                  chartFace = "org.kde.ksysguard.linechart";
+                  updateRateLimit = "1000";
+                };
+                SensorLabels = {
+                  "cpu/all/maximumTemperature" = "Maximum Temperature";
+                  "cpu/all/averageTemperature" = "Average Temperature";
+                };
+                SensorColors = {
+                  "cpu/all/maximumTemperature" = orange;
+                };
+                Sensors = {
+                  highPrioritySensorIds = toEscapedList ["cpu/all/maximumTemperature"];
+                  lowPrioritySensorIds = toEscapedList ["cpu/all/averageTemperature"];
+                };
+                "org.kde.ksysguard.linechart/General" = {
+                  rangeAutoY = false;
+                  rangeFromY = 40;
+                  rangeToY = 95;
+                };
+              };
+            }
+            {
+              name = "org.kde.plasma.systemmonitor";
+              config = {
+                Appearance = {
+                  title = "GPU Usage";
+                  chartFace = "org.kde.ksysguard.linechart";
+                  updateRateLimit = "1000";
+                };
+                SensorLabels = {
+                  "gpu/gpu1/usage" = "Usage";
+                  "gpu/gpu1/coreFrequency" = "Frequency";
+                };
+                SensorColors = {
+                  "gpu/gpu1/usage" = blue;
+                };
+                Sensors = {
+                  highPrioritySensorIds = toEscapedList ["gpu/gpu1/usage"];
+                  lowPrioritySensorIds = toEscapedList ["gpu/gpu1/coreFrequency"];
+                };
+              };
+            }
+            {
+              name = "org.kde.plasma.systemmonitor";
+              config = {
+                Appearance = {
+                  title = "GPU Temperature";
+                  chartFace = "org.kde.ksysguard.linechart";
+                  updateRateLimit = "1000";
+                };
+                SensorLabels = {
+                  "gpu/gpu1/temp2" = "Junction Temperature"; # Hotspot
+                  "gpu/gpu1/temperature" = "Temperature";
+                };
+                SensorColors = {
+                  "gpu/gpu1/temp2" = orange;
+                };
+                Sensors = {
+                  highPrioritySensorIds = toEscapedList ["gpu/gpu1/temp2"];
+                  lowPrioritySensorIds = toEscapedList ["gpu/gpu1/temperature"];
+                };
+                "org.kde.ksysguard.linechart/General" = {
+                  rangeAutoY = false;
+                  rangeFromY = 40;
+                  rangeToY = 110;
+                };
+              };
+            }
+            {
+              name = "org.kde.plasma.systemmonitor";
+              config = {
+                Appearance = {
+                  title = "Memory Usage";
+                  chartFace = "org.kde.ksysguard.linechart";
+                  updateRateLimit = "1000";
+                };
+                SensorLabels = {
+                  "memory/physical/used" = "Used Physical";
+                  "memory/swap/used" = "Used Swap";
+                };
+                SensorColors = {
+                  "memory/physical/used" = blue;
+                  "memory/swap/used" = orange;
+                };
+                Sensors = {
+                  highPrioritySensorIds = toEscapedList ["memory/physical/used" "memory/swap/used"];
+                };
+              };
+            }
+            {
+              name = "org.kde.plasma.systemmonitor";
+              config = {
+                Appearance = {
+                  title = "Network Speed";
+                  chartFace = "org.kde.ksysguard.linechart";
+                  updateRateLimit = "1000";
+                };
+                SensorLabels = {
+                  "network/all/download" = "Download Rate";
+                  "network/all/upload" = "Upload Rate";
+                };
+                SensorColors = {
+                  "network/all/download" = blue;
+                  "network/all/upload" = orange;
+                };
+                Sensors = {
+                  highPrioritySensorIds = toEscapedList ["network/all/download" "network/all/upload"];
+                };
+              };
+            }
+          ];
+        }
+        {
+          location = "bottom";
+          height = 44;
+          screen = 0;
+          minLength = 800;
+          maxLength = 800;
+          alignment = "center";
+          widgets = [
             {
               kickoff = {
                 sortAlphabetically = true;
@@ -52,6 +209,7 @@
                 sidebarPosition = "right";
                 showActionButtonCaptions = false;
                 showButtonsFor = "powerAndSession";
+                popupWidth = 791;
               };
             }
             {
@@ -60,9 +218,37 @@
                   # "applications:org.kde.dolphin.desktop"
                   # "applications:org.kde.konsole.desktop"
                 ];
+                behavior = {
+                  grouping.method = "none";
+                  middleClickAction = "close";
+                };
+                appearance = {
+                  highlightWindows = true;
+                  rows = {
+                    multirowView = "lowSpace";
+                    maximum = 2;
+                  };
+                };
               };
             }
+          ];
+        }
+        {
+          location = "bottom";
+          height = 44;
+          screen = 0;
+          lengthMode = "fit";
+          alignment = "right";
+          widgets = [
             "org.kde.plasma.marginsseparator"
+            {
+              name = "org.kde.plasma.notes";
+              config = {
+                General = {
+                  color = "translucent";
+                };
+              };
+            }
             {
               systemTray.items = {
                 showAll = false;
@@ -71,15 +257,40 @@
                   "org.kde.plasma.networkmanagement"
                   "org.kde.plasma.volume"
                 ];
+                # Shown when relevant
+                # Broke when I just added 'syncthing'. I assume it's because if
+                #  I set 'shown', 'extra', and 'hidden', plasmoids not included
+                #  are disabled and it disabled something important.
+                extra = [
+                  "org.kde.plasma.cameraindicator"
+                  "org.kde.plasma.manage-inputmethod"
+                  "org.kde.plasma.bluetooth"
+                  "org.kde.plasma.keyboardlayout"
+                  "org.kde.plasma.devicenotifier"
+                  "org.kde.plasma.mediacontroller"
+                  "org.kde.plasma.notifications"
+                  "org.kde.kscreen"
+                  "org.kde.plasma.brightness"
+                  "org.kde.plasma.keyboardindicator"
+                  "org.kde.plasma.networkmanagement"
+                  "org.kde.plasma.printmanager"
+                  "org.kde.plasma.volume"
+                  "martchus.syncthingplasmoid"
+                ];
                 hidden = [
                   "org.kde.plasma.clipboard"
+                  "Syncthing Tray"
                 ];
               };
             }
             {
               digitalClock = {
                 calendar.firstDayOfWeek = "sunday";
-                time.format = "24h";
+                time = {
+                  format = "24h";
+                  showSeconds = "always";
+                };
+                date.format.custom = "ddd dd/M";
               };
             }
           ];
@@ -173,6 +384,13 @@
         kxkbrc.Layout = {
           ResetOldOptions = true;
           Options = "fkeys:basic_13-24";
+        };
+
+        # Limiting the clipboard for safety reasons.
+        klipperrc.General = {
+          MaxClipItems = 1;
+          KeepClipboardContents = false;
+          IgnoreImages = false;
         };
       };
       shortcuts = {

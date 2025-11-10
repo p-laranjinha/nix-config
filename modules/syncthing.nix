@@ -13,7 +13,6 @@
       settings = {
         devices = {
           "phone".id = "R2RNYGN-BZPUWLZ-6OEOT77-ALGBSJP-MD2JPBY-AOY2T72-UX25SEB-H47LVAO";
-          "phone-old".id = "JU2TRHN-NJQPZUH-QPBTFZB-IEEDJKW-45V5IRV-6YSUSUS-OVWWEK3-Y4QPBAS";
           "tablet".id = "XR6AZSI-APGKKIB-LWMMCKW-6E63TBX-KFBSLVG-7JYURKQ-TZNGESZ-IVNNDQ5";
         };
         folders = {
@@ -22,7 +21,6 @@
             path = "~/home/sync/default";
             devices = [
               "phone"
-              "phone-old"
               "tablet"
             ];
             versioning = {
@@ -38,7 +36,6 @@
             path = "~/home/obsidian-vaults";
             devices = [
               "phone"
-              "phone-old"
               "tablet"
             ];
             versioning = {
@@ -52,7 +49,6 @@
             path = "~/home/audio/music";
             devices = [
               "phone"
-              "phone-old"
             ];
             versioning = {
               type = "staggered";
@@ -65,7 +61,6 @@
             path = "~/home/sync/tachiyomi-backup";
             devices = [
               "phone"
-              "phone-old"
               "tablet"
             ];
           };
@@ -74,7 +69,6 @@
             path = "~/home/sync/WIT";
             devices = [
               "phone"
-              "phone-old"
             ];
           };
         };
