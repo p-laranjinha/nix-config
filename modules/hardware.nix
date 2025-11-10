@@ -36,8 +36,12 @@
 
   # https://www.marcusfolkesson.se/blog/determine-wakeup-cause-with-acpi/
   # https://askubuntu.com/a/1469469
+  # https://wiki.archlinux.org/title/Power_management/Wakeup_triggers but but they didn't work.
   # This makes it so that I can suspend the system without it waking up immediately.
-  # Also tried solutions from https://wiki.archlinux.org/title/Power_management/Wakeup_triggers but but they didn't work.
+  # Not sure which option fixes it, or if both are required, but here they are.
+  boot.kernelParams = [
+    "gpiolib_acpi.ignore_interrupt=AMDI0030:00@3,AMDI0030:00@10,AMDI0030:00@32"
+  ];
   systemd.tmpfiles.rules = [
     "w /proc/acpi/wakeup - - - - XH00"
   ];
