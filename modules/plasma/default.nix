@@ -242,14 +242,6 @@
           widgets = [
             "org.kde.plasma.marginsseparator"
             {
-              name = "org.kde.plasma.notes";
-              config = {
-                General = {
-                  color = "translucent";
-                };
-              };
-            }
-            {
               systemTray.items = {
                 showAll = false;
                 shown = [
@@ -281,6 +273,14 @@
                   "org.kde.plasma.clipboard"
                   "Syncthing Tray"
                 ];
+              };
+            }
+            {
+              name = "org.kde.plasma.notes";
+              config = {
+                General = {
+                  color = "translucent";
+                };
               };
             }
             {
@@ -341,6 +341,7 @@
 
       # Some config values and changed ones can be obtained by running rc2nix (altough a lot are missing):
       #  nix run github:nix-community/plasma-manager
+      # Another way to figure out config values is by running fswatch on ~/.config and changing a setting manually.
       configFile = {
         # https://www.reddit.com/r/kde/comments/r5xir0/config_file_location_for_hot_corners/
         # Disable corners and edges that do things.
