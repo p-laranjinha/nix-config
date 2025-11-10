@@ -406,7 +406,7 @@
         #  in kglobalshortcutssrc turns into
         #   <key>=<shortcut1>\t<shortcut2>\r<others>
         "kwin" = {
-          "Window Fullscreen" = "Alt+F11";
+          "Window Fullscreen" = "Meta+F11";
         };
       };
     };
