@@ -198,45 +198,6 @@
           location = "bottom";
           height = 44;
           screen = 0;
-          minLength = 800;
-          maxLength = 800;
-          alignment = "center";
-          widgets = [
-            {
-              kickoff = {
-                sortAlphabetically = true;
-                icon = "nix-snowflake-white";
-                sidebarPosition = "right";
-                showActionButtonCaptions = false;
-                showButtonsFor = "powerAndSession";
-                popupWidth = 791;
-              };
-            }
-            {
-              iconTasks = {
-                launchers = [
-                  # "applications:org.kde.dolphin.desktop"
-                  # "applications:org.kde.konsole.desktop"
-                ];
-                behavior = {
-                  grouping.method = "none";
-                  middleClickAction = "close";
-                };
-                appearance = {
-                  highlightWindows = true;
-                  rows = {
-                    multirowView = "lowSpace";
-                    maximum = 2;
-                  };
-                };
-              };
-            }
-          ];
-        }
-        {
-          location = "bottom";
-          height = 44;
-          screen = 0;
           lengthMode = "fit";
           alignment = "right";
           widgets = [
@@ -291,6 +252,47 @@
                   showSeconds = "always";
                 };
                 date.format.custom = "ddd dd/M";
+              };
+            }
+          ];
+        }
+        # Put the middle panel last so it is on top if I restart plasmashell
+        #  after I change values here, so it gets messed up.
+        {
+          location = "bottom";
+          height = 44;
+          screen = 0;
+          minLength = 800;
+          maxLength = 800;
+          alignment = "center";
+          widgets = [
+            {
+              kickoff = {
+                sortAlphabetically = true;
+                icon = "nix-snowflake-white";
+                sidebarPosition = "right";
+                showActionButtonCaptions = false;
+                showButtonsFor = "powerAndSession";
+                popupWidth = 791;
+              };
+            }
+            {
+              iconTasks = {
+                launchers = [
+                  # "applications:org.kde.dolphin.desktop"
+                  # "applications:org.kde.konsole.desktop"
+                ];
+                behavior = {
+                  grouping.method = "none";
+                  middleClickAction = "close";
+                };
+                appearance = {
+                  highlightWindows = true;
+                  rows = {
+                    multirowView = "lowSpace";
+                    maximum = 2;
+                  };
+                };
               };
             }
           ];
