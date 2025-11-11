@@ -12,7 +12,7 @@
       gitr = "git reset --soft HEAD~1";
 
       # Restart plasma shell.
-      kr = "kquitapp6 plasmashell; kstart plasmashell;";
+      psr = "kquitapp6 plasmashell; kstart plasmashell;";
 
       # nix-alien commands to run unpatched binaries and find their libraries.
       nixa = "nix-alien-ld --";

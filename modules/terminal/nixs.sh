@@ -1,6 +1,15 @@
 #! /usr/bin/env nix-shell 
 #! nix-shell -i bash -p bash gum kdePackages.kdbusaddons kdePackages.kde-cli-tools
 
+gum log --time timeonly --level info "Staging files..."
+git add .
+if [ $? -eq 0 ]; then
+	gum log --time timeonly --level info "Staged files."
+else
+	gum log --time timeonly --level error "Failed staging files."
+	exit 1
+fi
+
 gum log --time timeonly --level info "Rebuilding..."
 sudo nixos-rebuild switch --flake .
 if [ $? -eq 0 ]; then
@@ -10,11 +19,4 @@ else
 	exit 1
 fi
 
-gum confirm "Restart plasma shell?"
-if [ $? -eq 1 ]; then
-	exit 1 
-fi
-gum log --time timeonly --level info "Restarting plasma shell..."
-kquitapp6 plasmashell
-kstart plasmashell
-gum log --time timeonly --level info "Restarted plasma shell."
+echo "Run 'psr' to restart plasma shell."

@@ -118,11 +118,4 @@ else
 	exit 1
 fi
 
-gum confirm "Restart plasma shell?"
-if [ $? -eq 1 ]; then
-	exit 1 
-fi
-gum log --time timeonly --level info "Restarting plasma shell..."
-kquitapp6 plasmashell
-kstart plasmashell
-gum log --time timeonly --level info "Restarted plasma shell."
+echo "Run 'psr' to restart plasma shell."
