@@ -15,18 +15,21 @@
     imports = [inputs.quadlet-nix.homeManagerModules.quadlet];
     # https://seiarotg.github.io/quadlet-nix/home-manager-options.html
     virtualisation.quadlet = {
-      autoEscape = true;
+      autoEscape = true; # Will be default in the future.
       containers = {
-        echo-server = {
+        searxng = {
           autoStart = true;
           serviceConfig = {
             RestartSec = "10";
             Restart = "always";
           };
           containerConfig = {
-            image = "docker.io/mendhak/http-https-echo:31";
-            publishPorts = ["127.0.0.1:8080:8080"];
-            userns = "keep-id";
+            image = "docker.io/searxng/searxng:latest";
+            publishPorts = ["8080:8080"];
+            volumes = [
+              "${this.homeDirectory}/Desktop/searxng/config/:/etc/searcxng/"
+              "${this.homeDirectory}/Desktop/searxng/data/:/var/cache/searcxng/"
+            ];
           };
         };
       };
