@@ -34,6 +34,8 @@
     };
 
     nix-alien.url = "github:thiagokokada/nix-alien";
+
+    quadlet-nix.url = "github:SEIAROTg/quadlet-nix";
   };
 
   outputs = {
@@ -67,6 +69,7 @@
         ++ [
           {system.configurationRevision = self.rev or "dirty";}
           inputs.nur.modules.nixos.default
+          inputs.quadlet-nix.nixosModules.quadlet
         ];
       specialArgs = {
         inherit inputs;
