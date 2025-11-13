@@ -17,7 +17,7 @@ in {
   config = {
     networking.interfaces.enp14s0.wakeOnLan.enable = true;
 
-    # Accept all traffic from Tailscale unconditionally
+    # Accept all traffic from Tailscale unconditionally.
     networking.firewall.trustedInterfaces = ["tailscale0"];
 
     services.tailscale.enable = true;
@@ -30,14 +30,22 @@ in {
       enable = true;
       ports = [22];
       settings = {
-        PasswordAuthentication = true;
+        # Require public key authentication for better security;
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+        PermitRootLogin = "no"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
         AllowUsers = ["pebble"]; # Allows all users by default. Can be [ "user1" "user2" ]
-        UseDns = true;
         X11Forwarding = false;
-        PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
       };
     };
     services.fail2ban.enable = true;
+
+    # Remembers your ssh key passphrases so you don't have to write them everytime.
+    # Run 'ssh-add ~/.ssh/<key>' to add a key to the agent.
+    programs.ssh.startAgent = true;
+    # Allows KDE to remember SSH key passphrases across sessions.
+    programs.ssh.enableAskPassword = true;
+    environment.variables.SSH_ASKPASS_REQUIRE = "prefer";
 
     services.sunshine = {
       enable = cfg.sunshine;

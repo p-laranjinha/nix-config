@@ -1,0 +1,12 @@
+# Docs: https://docs.searxng.org/admin/settings/index.html
+
+# You can find the default settings.yml on:
+#  https://github.com/searxng/searxng/blob/master/searx/settings.yml
+use_default_settings: true
+server:
+  bind_address : "0.0.0.0"
+  secret_key: ""
+  limiter: true
+  image_proxy: true
+valkey:
+  url: valkey://valkey:6379/0

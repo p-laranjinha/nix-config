@@ -5,6 +5,17 @@
   this,
   ...
 }: {
+  imports = [
+    inputs.nur.modules.nixos.default
+  ];
+
+  nixpkgs.config = {
+    # Allow unfree packages
+    allowUnfree = true;
+    # Workaround for https://github.com/nix-community/home-manager/issues/2942
+    allowUnfreePredicate = _: true;
+  };
+
   # Required to install flatpak
   xdg.portal = {
     enable = true;
@@ -133,6 +144,8 @@
       # Browsers.
       ungoogled-chromium
       firefox
+
+      bitwarden-desktop
     ];
 
     # This will update flatpaks on rebuild, which will make rebuild not

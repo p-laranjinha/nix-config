@@ -36,6 +36,11 @@
     nix-alien.url = "github:thiagokokada/nix-alien";
 
     quadlet-nix.url = "github:SEIAROTg/quadlet-nix";
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -66,11 +71,7 @@
       inherit lib;
       modules =
         (lib.attrValues (lib.modulesIn ./modules))
-        ++ [
-          {system.configurationRevision = self.rev or "dirty";}
-          inputs.nur.modules.nixos.default
-          inputs.quadlet-nix.nixosModules.quadlet
-        ];
+        ++ [];
       specialArgs = {
         inherit inputs;
         inherit this;

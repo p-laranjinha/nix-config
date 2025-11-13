@@ -11,14 +11,11 @@
     extraGroups = ["networkmanager" "wheel" "wireshark" "dialout"];
   };
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  # Sets the configuration revision string to either the git commit reference or 'dirty'.
+  # Can be seen on entries shown by 'nixos-rebuild list-generations'.
+  system.configurationRevision = inputs.self.rev or "dirty";
 
-  nixpkgs.config = {
-    # Allow unfree packages
-    allowUnfree = true;
-    # Workaround for https://github.com/nix-community/home-manager/issues/2942
-    allowUnfreePredicate = _: true;
-  };
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   nix.optimise = {
     # Cleans the store
