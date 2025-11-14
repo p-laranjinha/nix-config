@@ -14,10 +14,11 @@ with lib; {
   lib.meta = {
     mkOutOfStoreSymlink = path: config.hm.lib.file.mkOutOfStoreSymlink path;
 
+    relativeToAbsoluteConfigPath = path: (this.configDirectory + removePrefix (toString ./..) (toString path));
+
     # Creates symlinks to these config files that can be changed without rebuilding.
     mkMutableConfigSymlink = path:
-      config.lib.meta.mkOutOfStoreSymlink
-      (this.configDirectory + removePrefix (toString ./..) (toString path));
+      config.lib.meta.mkOutOfStoreSymlink (config.lib.meta.relativeToAbsoluteConfigPath path);
 
     # Use like: hm.home.file = mkAutostartScript "name" ''script''
     mkAutostartScript = name: script: {

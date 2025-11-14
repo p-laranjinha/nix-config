@@ -26,6 +26,9 @@ in {
     services.xrdp.defaultWindowManager = "startplasma-x11";
     services.xrdp.openFirewall = ! cfg.sunshine;
 
+    # Key creation is done manually because it really only needs to be done once per system.
+    # To create a key run (and don't forget to use a phassphrase):
+    #  `ssh-keygen -f ~/.ssh/<filename>`
     services.openssh = {
       enable = true;
       ports = [22];
