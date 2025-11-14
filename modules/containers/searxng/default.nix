@@ -40,8 +40,8 @@ in {
               config.secrets.searxng.path
             ];
             volumes = [
-              "${searxng-config}:/etc/searxng:rw"
-              "${searxng-data}:/var/cache/searxng:rw"
+              "${searxng-config}:/etc/searxng"
+              "${searxng-data}:/var/cache/searxng"
             ];
             networks = [
               "searxng"

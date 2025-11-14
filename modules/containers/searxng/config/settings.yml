@@ -30,6 +30,17 @@ ui:
 plugins:
   searx.plugins.oa_doi_rewrite.SXNGPlugin:
     active: true
+categories_as_tabs:
+  general:
+  images:
+  videos:
+  # news:
+  map:
+  music:
+  it:
+  science:
+  files:
+  social media:
 engines:
   # General
   - name: "brave"
@@ -45,8 +56,20 @@ engines:
     disabled: true
   - name: "startpage images"
     disabled: true
-  - name: "pixabay images"
-    disabled: false
+  - name: "artic"
+    disabled: true
+  - name: "deviantart"
+    disabled: true
+  - name: "flickr"
+    disabled: true
+  - name: "openverse"
+    disabled: true
+  - name: "pinterest"
+    disabled: true
+  - name: "unsplash"
+    disabled: true
+  - name: "wikicommons.images"
+    disabled: true
   # Videos
   - name: "bing videos"
     disabled: true
@@ -56,18 +79,23 @@ engines:
     disabled: true
   - name: "qwant videos"
     disabled: true
-  - name: "bilibili"
-    disabled: false
-  - name: "pixabay videos"
-    disabled: false
+  - name: "dailymotion"
+    disabled: true
+  - name: "youtube"
+    weight: 10
+  # Map
+  - name: "photon"
+    disabled: true
   # Music
   - name: "deezer"
     disabled: false
   # IT
+  - name: "docker hub"
+    disabled: true
   - name: "hoogle"
     disabled: true
-  - name: "npm"
-    disabled: false
+  - name: "pypi"
+    disabled: true
   - name: "codeberg"
     disabled: false
   - name: "gitlab"
@@ -100,6 +128,7 @@ engines:
     disabled: true
   - name: "reddit"
     disabled: false
+    weight: 10
   - name: "tootfinder"
     disabled: true
 
