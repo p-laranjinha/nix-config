@@ -59,7 +59,7 @@
       # A home inside the home directory so I'm not bothered by folders and hidden folders added by programs.
       subHomeDirectory = "${this.homeDirectory}/home";
       configDirectory = "${this.subHomeDirectory}/nix-config";
-      secretsDirectory = "${inputs.self}/secrets";
+      # secretsDirectory = "${inputs.self}/secrets";
       hostPlatform = "x86_64-linux";
       # Research properly before changing this.
       stateVersion = "24.05";

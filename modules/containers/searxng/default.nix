@@ -14,7 +14,7 @@ in {
     "d ${valkey-data} 0770 ${this.username} users - -"
   ];
   secrets.searxng = {
-    sopsFile = "${this.secretsDirectory}/searxng.env";
+    sopsFile = ./secrets.env;
     format = "dotenv";
     # Entire file.
     key = "";
