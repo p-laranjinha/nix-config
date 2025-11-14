@@ -141,12 +141,19 @@
         ];
         search = {
           force = true;
-          default = "ddg";
+          default = "Searxng";
           order = [
+            "Searxng"
             "ddg"
             "google"
           ];
           engines = {
+            "Searxng" = {
+              urls = [{template = "http://localhost:8080/search?q={searchTerms}";}];
+              updateInterval = 24 * 60 * 60 * 1000; # every day
+              icon = "http://localhost:8080/static/themes/simple/img/favicon.png";
+              definedAliases = ["@s"];
+            };
             "Nix Packages" = {
               urls = [
                 {
@@ -167,16 +174,18 @@
                   ];
                 }
               ];
-              icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              updateInterval = 24 * 60 * 60 * 1000; # every day
+              icon = "https://search.nixos.org/favicon-96x96.png";
               definedAliases = ["@np"];
             };
             "NixOS Wiki" = {
-              urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
-              icon = "https://nixos.wiki/favicon.png";
+              urls = [{template = "https://wiki.nixos.org/w/index.php?search={searchTerms}";}];
+              icon = "https://wiki.nixos.org/favicon.ico";
               updateInterval = 24 * 60 * 60 * 1000; # every day
               definedAliases = ["@nw"];
             };
             "bing".metaData.hidden = true;
+            "perplexity".metaData.hidden = true;
             "google".metaData.alias = "@g"; # builtin engines only support specifying one additional alias.
           };
         };
