@@ -4,7 +4,7 @@
 #  https://github.com/searxng/searxng/blob/master/searx/settings.yml
 use_default_settings: true
 search:
-  autocomplete: "startpage"
+  autocomplete: "duckduckgo"
   # https://docs.searxng.org/admin/searx.favicons.html
   # Apparently favicons generate a significantly higher load so keep that in mind.
   favicon_resolver: "duckduckgo"
@@ -46,6 +46,10 @@ engines:
   - name: "brave"
     disabled: true
   - name: "google"
+    disabled: true
+  - name: "wikipedia"
+    disabled: true
+  - name: "wikidata"
     disabled: true
   # Images
   - name: "bing images"

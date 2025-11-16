@@ -8,7 +8,7 @@
   users.users.${this.username} = {
     isNormalUser = true;
     description = this.fullname;
-    extraGroups = ["networkmanager" "wheel" "wireshark" "dialout" "docker"];
+    extraGroups = ["networkmanager" "wheel" "wireshark" "dialout"];
   };
 
   # Sets the configuration revision string to either the git commit reference or 'dirty'.
