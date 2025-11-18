@@ -64,6 +64,7 @@ in {
           groups = [];
         };
       };
+      containerDataDir = "${this.homeDirectory}/container-data";
     };
     funcs = {
       containers = {
@@ -84,6 +85,10 @@ in {
     ++ lib.attrValues (lib.modulesIn ./.);
 
   config = {
+    systemd.tmpfiles.rules = [
+      "d ${config.vars.containerDataDir} 6770 ${this.username} users - -"
+    ];
+
     # Enable podman & podman systemd generator.
     virtualisation.quadlet.enable = true;
     users.users.${this.username} = {

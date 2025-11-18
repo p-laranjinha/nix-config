@@ -3,16 +3,19 @@
   config,
   ...
 }: let
-  searxng-config = config.lib.meta.relativeToAbsoluteConfigPath ./config;
-  searxng-data = "${this.homeDirectory}/Desktop/searxng/data";
-  valkey-data = "${this.homeDirectory}/Desktop/searxng/valkey-data";
-  vars = config.vars.containers;
+  vars =
+    config.vars.containers
+    // {dataDir = config.vars.containerDataDir;};
   funcs = config.funcs.containers;
+  searxng-config = config.lib.meta.relativeToAbsoluteConfigPath ./config;
+  searxng-data = "${vars.dataDir}/searxng/data";
+  valkey-data = "${vars.dataDir}/searxng/valkey-data";
 in {
   systemd.tmpfiles.rules = [
-    "d ${searxng-config} 2770 - ${vars.searxng.mainGroup} - -"
-    "d ${searxng-data} 2770 - ${vars.searxng.mainGroup} - -"
-    "d ${valkey-data} 2770 - ${vars.searxng-valkey.mainGroup} - -"
+    "d ${searxng-config} 2770 ${this.username} ${vars.searxng.mainGroup} - -"
+    "d ${vars.dataDir}/searxng - ${this.username} - - -"
+    "d ${searxng-data} 2770 ${this.username} ${vars.searxng.mainGroup} - -"
+    "d ${valkey-data} 2770 ${this.username} ${vars.searxng-valkey.mainGroup} - -"
   ];
   secrets.searxng = {
     sopsFile = ./secrets.env;

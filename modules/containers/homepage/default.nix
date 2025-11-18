@@ -3,14 +3,12 @@
   config,
   ...
 }: let
-  homepage-config = config.lib.meta.relativeToAbsoluteConfigPath ./config;
-  vars =
-    config.vars.containers.homepage
-    // {rootCapabilities = config.vars.containers.rootCapabilities;};
+  vars = config.vars.containers.homepage;
   funcs = config.funcs.containers;
+  homepage-config = config.lib.meta.relativeToAbsoluteConfigPath ./config;
 in {
   systemd.tmpfiles.rules = [
-    "d ${homepage-config} 2770 - ${vars.mainGroup} - -"
+    "d ${homepage-config} 2770 ${this.username} ${vars.mainGroup} - -"
   ];
   # Required to run homepage in rootless mode and it being able to read containers.
   users.users.${this.username}.extraGroups = ["podman"];
