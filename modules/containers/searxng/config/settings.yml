@@ -8,6 +8,11 @@ search:
   # https://docs.searxng.org/admin/searx.favicons.html
   # Apparently favicons generate a significantly higher load so keep that in mind.
   favicon_resolver: "duckduckgo"
+  default_lang: "all"
+  languages:
+    - all
+    - en
+    - pt-PT
 server:
   bind_address : "0.0.0.0"
   # secret_key: ""

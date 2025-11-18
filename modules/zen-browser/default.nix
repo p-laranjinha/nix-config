@@ -147,36 +147,32 @@
             "ddg"
             "google"
           ];
+          # https://searchfox.org/firefox-main/rev/b7497e2adf09e8b17bf161df07945f42c9f8cfe5/toolkit/components/search/SearchEngine.sys.mjs#890-923
           engines = {
             "Searxng" = {
-              urls = [{template = "http://localhost:8080/search?q={searchTerms}";}];
-              updateInterval = 24 * 60 * 60 * 1000; # every day
-              icon = "http://localhost:8080/static/themes/simple/img/favicon.png";
-              definedAliases = ["@s"];
-            };
-            "Nix Packages" = {
               urls = [
+                {template = "http://localhost:8080/search?q={searchTerms}";}
                 {
-                  template = "https://search.nixos.org/packages";
-                  params = [
-                    {
-                      name = "type";
-                      value = "packages";
-                    }
-                    {
-                      name = "channel";
-                      value = "unstable";
-                    }
-                    {
-                      name = "query";
-                      value = "{searchTerms}";
-                    }
-                  ];
+                  template = "http://localhost:8080/autocompleter?q={searchTerms}";
+                  # https://searchfox.org/firefox-main/rev/b7497e2adf09e8b17bf161df07945f42c9f8cfe5/toolkit/components/search/SearchUtils.sys.mjs#162-168
+                  type = "application/x-suggestions+json";
                 }
               ];
               updateInterval = 24 * 60 * 60 * 1000; # every day
+              icon = "https://docs.searxng.org/_static/searxng-wordmark.svg";
+              definedAliases = ["@s"];
+            };
+            "Nix Packages" = {
+              urls = [{template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";}];
+              updateInterval = 24 * 60 * 60 * 1000; # every day
               icon = "https://search.nixos.org/favicon-96x96.png";
               definedAliases = ["@np"];
+            };
+            "NixOS Options" = {
+              urls = [{template = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";}];
+              updateInterval = 24 * 60 * 60 * 1000; # every day
+              icon = "https://search.nixos.org/favicon-96x96.png";
+              definedAliases = ["@no"];
             };
             "NixOS Wiki" = {
               urls = [{template = "https://wiki.nixos.org/w/index.php?search={searchTerms}";}];
