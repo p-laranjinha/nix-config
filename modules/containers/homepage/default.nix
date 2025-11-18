@@ -4,9 +4,13 @@
   ...
 }: let
   homepage-config = config.lib.meta.relativeToAbsoluteConfigPath ./config;
+  vars =
+    config.vars.containers.homepage
+    // {rootCapabilities = config.vars.containers.rootCapabilities;};
+  funcs = config.funcs.containers;
 in {
   systemd.tmpfiles.rules = [
-    "d ${homepage-config} 2770 ${this.username} users - -"
+    "d ${homepage-config} 2770 - ${vars.mainGroup} - -"
   ];
   # Required to run homepage in rootless mode and it being able to read containers.
   users.users.${this.username}.extraGroups = ["podman"];
@@ -27,9 +31,15 @@ in {
               "${homepage-config}:/app/config"
               "/run/user/1000/podman/podman.sock:/var/run/podman.sock"
             ];
-            userns = "nomap";
-            user = "node";
-            annotations = {"run.oci.keep_original_groups" = "1";};
+            user = funcs.mkUser "node" vars.mainGroup;
+            uidMaps = funcs.mkUidMaps vars.n;
+            gidMaps =
+              funcs.mkGidMaps
+              vars.n
+              ([vars.mainGroup] ++ vars.groups);
+            addGroups =
+              funcs.mkAddGroups
+              vars.groups;
           };
         };
       };

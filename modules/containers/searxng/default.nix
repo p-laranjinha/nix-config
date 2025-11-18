@@ -6,11 +6,13 @@
   searxng-config = config.lib.meta.relativeToAbsoluteConfigPath ./config;
   searxng-data = "${this.homeDirectory}/Desktop/searxng/data";
   valkey-data = "${this.homeDirectory}/Desktop/searxng/valkey-data";
+  vars = config.vars.containers;
+  funcs = config.funcs.containers;
 in {
   systemd.tmpfiles.rules = [
-    "d ${searxng-config} 2770 ${this.username} share - -"
-    "d ${searxng-data} 2770 ${this.username} share - -"
-    "d ${valkey-data} 2770 ${this.username} users - -"
+    "d ${searxng-config} 2770 - ${vars.searxng.mainGroup} - -"
+    "d ${searxng-data} 2770 - ${vars.searxng.mainGroup} - -"
+    "d ${valkey-data} 2770 - ${vars.searxng-valkey.mainGroup} - -"
   ];
   secrets.searxng = {
     sopsFile = ./secrets.env;
@@ -44,29 +46,17 @@ in {
               "${searxng-data}:/var/cache/searxng"
             ];
             networks = ["searxng"];
-            # userns = "nomap";
-            dropCapabilities = [
-              "CHOWN"
-              "DAC_OVERRIDE"
-              "FOWNER"
-              "FSETID"
-              "KILL"
-              "NET_BIND_SERVICE"
-              "SETFCAP"
-              "SETGID"
-              "SETPCAP"
-              "SETUID"
-              "SYS_CHROOT"
-            ];
-            # annotations = {"run.oci.keep_original_groups" = "1";};
-            uidMaps = [
-              "0:1:1000"
-            ];
-            gidMaps = [
-              "0:2:1000"
-              "1001:1:1"
-            ];
-            addGroups = ["1001"];
+            user = funcs.mkUser "searxng" vars.searxng.mainGroup;
+            uidMaps =
+              funcs.mkUidMaps
+              vars.searxng.n;
+            gidMaps =
+              funcs.mkGidMaps
+              vars.searxng.n
+              ([vars.searxng.mainGroup] ++ vars.searxng.groups);
+            addGroups =
+              funcs.mkAddGroups
+              vars.searxng.groups;
           };
         };
         searxng-valkey = {
@@ -81,9 +71,17 @@ in {
             volumes = ["${valkey-data}:/data"];
             networkAliases = ["valkey"];
             networks = ["searxng"];
-            userns = "nomap";
-            user = "valkey";
-            annotations = {"run.oci.keep_original_groups" = "1";};
+            user = funcs.mkUser "valkey" vars.searxng-valkey.mainGroup;
+            uidMaps =
+              funcs.mkUidMaps
+              vars.searxng-valkey.n;
+            gidMaps =
+              funcs.mkGidMaps
+              vars.searxng-valkey.n
+              ([vars.searxng-valkey.mainGroup] ++ vars.searxng-valkey.groups);
+            addGroups =
+              funcs.mkAddGroups
+              vars.searxng-valkey.groups;
           };
         };
         # https://github.com/searx/searx/discussions/1723#discussioncomment-832494

@@ -4,42 +4,113 @@
   lib,
   config,
   ...
-}: {
+}: let
+  mkVars = lib.mapAttrs (_: v:
+    if (lib.typeOf v) == "set"
+    then mkVars v
+    else lib.mkOption {default = v;});
+  mkGroups = groups:
+    lib.listToAttrs (lib.genList (i: {
+      name = lib.elemAt groups i;
+      value = {
+        gid = startGid + i;
+        members = [this.username];
+      };
+    }) (lib.length groups));
+  mkSubGidRanges = groups:
+    lib.genList (i: {
+      count = 1;
+      startGid = startGid + i;
+    }) (lib.length groups);
+
+  # '+ 100000' so that these mapped gids don't conflict with the others.
+  getContainerGid = group: toString (config.users.groups.${group}.gid + 100000);
+
+  # How many uids and gids the containers will have allocated to them.
+  # Will map from 0-1999. More than enough for most containers.
+  uidGidCount = 2000;
+  # The groups defined in 'groups' start with this gid.
+  startGid = 1001;
+  groups = [
+    "searxng"
+    "searxng-valkey"
+    "homepage"
+    # "public" # For everything that may be exposed to the internet.
+  ];
+in {
+  options = mkVars {
+    vars = {
+      # Defining these here so there is less of a risk of overlapping.
+      # 'n' is used to define what subuid and subgids each container uses.
+      # 'mainGroup' is used to define the container's primary group, and what
+      #   owner group the volumes should have. Volumes may have a different group
+      #   owner if they're also going to be used by other containers, like 'public'.
+      # 'groups' are the additional groups the container's user belongs to, so
+      #   the container is able to access shared volumes.
+      containers = {
+        searxng = {
+          n = 0;
+          mainGroup = "searxng";
+          groups = [];
+        };
+        searxng-valkey = {
+          n = 1;
+          mainGroup = "searxng-valkey";
+          groups = [];
+        };
+        homepage = {
+          n = 2;
+          mainGroup = "homepage";
+          groups = [];
+        };
+      };
+    };
+    funcs = {
+      containers = {
+        mkUidMaps = n: ["0:${toString (1 + uidGidCount * n)}:${toString uidGidCount}"];
+        mkGidMaps = n: gs:
+          [
+            "0:${toString (1 + (lib.length groups) + uidGidCount * n)}:${toString uidGidCount}"
+          ]
+          ++ (map (g: "${getContainerGid g}:${toString (config.users.groups.${g}.gid - startGid + 1)}:1") gs);
+        mkAddGroups = map (g: "${getContainerGid g}");
+        mkUser = user: group: "${user}:${getContainerGid group}";
+      };
+    };
+  };
+
   imports =
     [inputs.quadlet-nix.nixosModules.quadlet]
     ++ lib.attrValues (lib.modulesIn ./.);
-  # Enable podman & podman systemd generator.
-  virtualisation.quadlet.enable = true;
-  users.users.${this.username} = {
-    # Required for auto start before user login.
-    linger = true;
-    # Required for rootless container with multiple users.
-    autoSubUidGidRange = true;
-    subGidRanges = [
-      {
-        count = 1;
-        startGid = 1001;
-      }
-    ];
-  };
-  # A 'share' group for container users so they don't have to be mapped to the host user.
-  users.groups.share = {
-    # TODO: will I use a subset of the existing subgids (>=100000) for custom
-    #  groups, or do I use smaller gids.
-    #  smaller gids >=1000 is probably the way to go as those don't seem to be
-    #  used, are recognizable, but distinguishable from default subgids
-    #  additionally i could give each container a number and decide their
-    #  subsets from something like 'i*100'
-    gid = 1001;
-    members = [this.username];
-  };
-  hm = {
-    imports = [inputs.quadlet-nix.homeManagerModules.quadlet];
-    virtualisation.quadlet = {
-      autoEscape = true; # Will be default in the future.
+
+  config = {
+    # Enable podman & podman systemd generator.
+    virtualisation.quadlet.enable = true;
+    users.users.${this.username} = {
+      # Required for auto start before user login.
+      linger = true;
+      # Required for rootless container with multiple users.
+      autoSubUidGidRange = true;
+      subGidRanges = mkSubGidRanges groups;
+    };
+    users.groups = mkGroups groups;
+    hm = {
+      imports = [inputs.quadlet-nix.homeManagerModules.quadlet];
+      virtualisation.quadlet = {
+        autoEscape = true; # Will be default in the future.
+      };
     };
   };
 }
+# Groups aren't deleted automatically because Nix doesn't know what files are
+#  owned by the groups.
+# So if you wan't to remove or change group order, you'll have to manually
+#  remove the group using 'sudo groupdel <group>' and change the owner group of
+#  the files/folders that need it.
+# An easy way to change owner groups to every file/folder that needs it is by
+#  running 'sudo find / -gid <OLD_GID> -exec chgrp <NEW_GID> {} +' before
+#  running 'nixos-rebuild switch'.
+#
 # Container options:
 #  https://seiarotg.github.io/quadlet-nix/home-manager-options.html
 #
@@ -91,3 +162,4 @@
 #  set their permissions. Using 2___ permissions, makes it so the files created
 #  in that directory inherit the group, so I can hopefully at least read the
 #  files outside the container.
+
