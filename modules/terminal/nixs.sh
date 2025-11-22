@@ -1,6 +1,11 @@
 #! /usr/bin/env nix-shell 
 #! nix-shell -i bash -p bash gum kdePackages.kdbusaddons kdePackages.kde-cli-tools
 
+NIX_CONFIG_DIR=/home/pebble/home/nix-config
+
+# cd to your config dir without affecting shell outside this script.
+pushd $NIX_CONFIG_DIR &>/dev/null
+
 # Update files gotten using fetchgit which have a comment on the rev or url attribute.
 gum log --time timeonly --level info "Updating fetchgit commit references..."
 fd .nix --exec update-nix-fetchgit --only-commented

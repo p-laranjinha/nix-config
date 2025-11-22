@@ -49,7 +49,12 @@ in {
               "${searxng-data}:/var/cache/searxng"
             ];
             networks = ["searxng"];
-            user = funcs.mkUser "searxng" vars.searxng.mainGroup;
+            # Searxng might need root user and so I'll remove root capabilities
+            #  for extra security. Hopefully being root and being able to
+            #  create the certificates file will prevent aardvark-dns from
+            #  failing every other time.
+            user = funcs.mkUser "root" vars.searxng.mainGroup;
+            dropCapabilities = ["CHOWN" "DAC_OVERRIDE" "FOWNER" "FSETID" "KILL" "NET_BIND_SERVICE" "SETFCAP" "SETGID" "SETPCAP" "SETUID" "SYS_CHROOT"];
             uidMaps =
               funcs.mkUidMaps
               vars.searxng.n;
