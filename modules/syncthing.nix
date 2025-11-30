@@ -14,6 +14,7 @@
         devices = {
           "phone".id = "R2RNYGN-BZPUWLZ-6OEOT77-ALGBSJP-MD2JPBY-AOY2T72-UX25SEB-H47LVAO";
           "tablet".id = "XR6AZSI-APGKKIB-LWMMCKW-6E63TBX-KFBSLVG-7JYURKQ-TZNGESZ-IVNNDQ5";
+          "server".id = "CYW4VXB-WPBFRY3-47JEZGH-Q77PLEA-QPK22HX-Q4ATSB6-26ZEDH5-EMYIDAH";
         };
         folders = {
           "default" = {
@@ -22,6 +23,7 @@
             devices = [
               "phone"
               "tablet"
+              "server"
             ];
             versioning = {
               type = "staggered";
@@ -37,6 +39,7 @@
             devices = [
               "phone"
               "tablet"
+              "server"
             ];
             versioning = {
               type = "staggered";
@@ -49,6 +52,7 @@
             path = "~/home/audio/music";
             devices = [
               "phone"
+              "server"
             ];
             versioning = {
               type = "staggered";
@@ -62,6 +66,7 @@
             devices = [
               "phone"
               "tablet"
+              "server"
             ];
           };
           "WIT" = {
@@ -69,6 +74,7 @@
             path = "~/home/sync/WIT";
             devices = [
               "phone"
+              "server"
             ];
           };
         };

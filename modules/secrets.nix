@@ -31,6 +31,9 @@
 #  `cat <filename>.pub | ssh-to-age'
 #  Or the following:
 #  `ssh-keyscan <target-hostname> | ssh-to-age'
+#
+# To update an encrypted file with new keys run:
+#  'sops updatekeys <file>'
 {
   inputs,
   pkgs,

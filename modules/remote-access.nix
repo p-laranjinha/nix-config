@@ -20,6 +20,7 @@ in {
     # Accept all traffic from Tailscale unconditionally.
     networking.firewall.trustedInterfaces = ["tailscale0"];
 
+    # You'll need to run `tailscale login` manually the first time you enable this.
     services.tailscale.enable = true;
 
     services.xrdp.enable = ! cfg.sunshine;
