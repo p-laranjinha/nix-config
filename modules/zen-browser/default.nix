@@ -57,8 +57,9 @@
 
           # Adds headers to my requests. It's up to the website whether they
           #  feel like following them.
-          "privacy.donottrackheader.enabled" = true;
           "privacy.globalprivacycontrol.enabled" = true;
+          # This one no longer works.
+          # "privacy.donottrackheader.enabled" = true;
 
           # Only HTTPS, show warning when using http.
           "dom.security.https_only_mode" = true;

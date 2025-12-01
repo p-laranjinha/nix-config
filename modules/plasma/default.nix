@@ -72,8 +72,8 @@
                   "cpu/all/usage" = blue;
                 };
                 Sensors = {
-                  highPrioritySensorIds = toEscapedList ["cpu/all/usage"];
-                  lowPrioritySensorIds = toEscapedList ["cpu/all/averageFrequency"];
+                  highPrioritySensorIds = ''["cpu/all/usage"]'';
+                  lowPrioritySensorIds = ''["cpu/all/averageFrequency"]'';
                 };
               };
             }
@@ -93,8 +93,8 @@
                   "cpu/all/maximumTemperature" = orange;
                 };
                 Sensors = {
-                  highPrioritySensorIds = toEscapedList ["cpu/all/maximumTemperature"];
-                  lowPrioritySensorIds = toEscapedList ["cpu/all/averageTemperature"];
+                  highPrioritySensorIds = ''["cpu/all/maximumTemperature"]'';
+                  lowPrioritySensorIds = ''["cpu/all/averageTemperature"]'';
                 };
                 "org.kde.ksysguard.linechart/General" = {
                   rangeAutoY = false;
@@ -119,8 +119,8 @@
                   "gpu/gpu1/usage" = blue;
                 };
                 Sensors = {
-                  highPrioritySensorIds = toEscapedList ["gpu/gpu1/usage"];
-                  lowPrioritySensorIds = toEscapedList ["gpu/gpu1/coreFrequency"];
+                  highPrioritySensorIds = ''["gpu/gpu1/usage"]'';
+                  lowPrioritySensorIds = ''["gpu/gpu1/coreFrequency"]'';
                 };
               };
             }
@@ -140,8 +140,8 @@
                   "gpu/gpu1/temp2" = orange;
                 };
                 Sensors = {
-                  highPrioritySensorIds = toEscapedList ["gpu/gpu1/temp2"];
-                  lowPrioritySensorIds = toEscapedList ["gpu/gpu1/temperature"];
+                  highPrioritySensorIds = ''["gpu/gpu1/temp2"]'';
+                  lowPrioritySensorIds = ''["gpu/gpu1/temperature"]'';
                 };
                 "org.kde.ksysguard.linechart/General" = {
                   rangeAutoY = false;
@@ -167,7 +167,7 @@
                   "memory/swap/used" = orange;
                 };
                 Sensors = {
-                  highPrioritySensorIds = toEscapedList ["memory/physical/used" "memory/swap/used"];
+                  highPrioritySensorIds = ''["memory/physical/used", "memory/swap/used"]'';
                 };
               };
             }
@@ -188,7 +188,7 @@
                   "network/all/upload" = orange;
                 };
                 Sensors = {
-                  highPrioritySensorIds = toEscapedList ["network/all/download" "network/all/upload"];
+                  highPrioritySensorIds = ''["network/all/download", "network/all/upload"]'';
                 };
               };
             }

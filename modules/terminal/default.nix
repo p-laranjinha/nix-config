@@ -18,10 +18,10 @@
       nixa = "nix-alien-ld --";
       nixafl = "nix-alien-find-libs";
 
-      # "nix rebuild"
-      # Runs a script that rebuilds this flake.
-      nixr = toString (config.lib.meta.mkMutableConfigSymlink ./nixr.sh);
+      # Runs a script that rebuild switches this config.
       nixs = toString (config.lib.meta.mkMutableConfigSymlink ./nixs.sh);
+      # Runs a script that rebuild switches and commits this config.
+      nixsf = toString (config.lib.meta.mkMutableConfigSymlink ./nixsf.sh);
       nixb = "sudo nixos-rebuild build --flake ${this.configDirectory}";
       nixl = "nixos-rebuild list-generations";
       nixu = "nix flake update --flake ${this.configDirectory}";
