@@ -34,13 +34,6 @@
     };
 
     nix-alien.url = "github:thiagokokada/nix-alien";
-
-    quadlet-nix.url = "github:SEIAROTg/quadlet-nix";
-
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
