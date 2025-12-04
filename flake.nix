@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-24-11.url = "github:nixos/nixpkgs/nixos-24.11";
 
     # Nix User Repository
     nur.url = "github:nix-community/NUR";
@@ -64,16 +65,24 @@
     };
 
     lib = (nixpkgs.lib.extend (_: _: home-manager.lib)).extend (import ./lib);
+
+    pkgs-24-11 = import inputs.nixpkgs-24-11 {
+      system = this.hostPlatform;
+      config.allowUnfree = true;
+      allowUnfreePredicate = _: true;
+    };
   in {
     inherit lib;
     nixosConfigurations.${this.hostname} = nixpkgs.lib.nixosSystem {
       inherit lib;
+      system = this.hostPlatform;
       modules =
         (lib.attrValues (lib.modulesIn ./modules))
         ++ [];
       specialArgs = {
         inherit inputs;
         inherit this;
+        inherit pkgs-24-11;
       };
     };
   };

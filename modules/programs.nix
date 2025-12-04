@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-24-11,
   config,
   inputs,
   this,
@@ -114,7 +115,7 @@
       inkscape-with-extensions
       gimp-with-plugins
       freecad
-      orca-slicer
+      pkgs-24-11.orca-slicer
       blender
       # Turn images into ASCII.
       letterpress

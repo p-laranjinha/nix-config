@@ -34,6 +34,7 @@
           in rec {
             inherit self;
             inherit (self) inputs lib;
+            inherit (self.nixosConfigurations) ${this.hostname};
             inherit (self.nixosConfigurations.${this.hostname}._module.specialArgs) this;
           }
         ''}'';
