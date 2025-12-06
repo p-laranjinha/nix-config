@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  this,
+  pkgs,
   ...
 }: let
   # It may take a restart for the icons to apply.
@@ -23,7 +23,10 @@ in {
     };
 
     home.file =
-      config.lib.meta.mkAutostartSymlink "betterbird" "${this.homeDirectory}/.local/share/flatpak/exports/share/applications/eu.betterbird.Betterbird.desktop"
+      config.lib.meta.mkAutostartScript "betterbird" ''
+        sleep 10
+        ${lib.getExe pkgs.flatpak} run eu.betterbird.Betterbird
+      ''
       // {
         "${userjs}".text = ''
           user_pref("mail.startupMinimized", true);

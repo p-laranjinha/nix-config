@@ -15,8 +15,11 @@
     programs.zen-browser = {
       enable = true;
 
-      # Check about:policies#documentation for options.
+      # Check the following for options:
+      #  about:policies#documentation
+      #  https://mozilla.github.io/policy-templates
       policies = {
+        DisableAppUpdate = true;
         DisableTelemetry = true;
         DisableFirefoxStudies = true;
         # https://mozilla.github.io/policy-templates/#enabletrackingprotection
@@ -39,8 +42,12 @@
         DisplayMenuBar = "default-off"; # "default-off" "always" "never" "default-on"
         SearchBar = "unified"; # "unified" "separate"
         NoDefaultBookmarks = true;
-        OfferToSaveLoginsDefault = false;
+        OfferToSaveLogins = false;
         PasswordManagerEnabled = false;
+        AutofillAddressEnabled = false;
+        AutofillCreditCardEnabled = false;
+        HttpsOnlyMode = true;
+
         # Disable welcome and update pages.
         OverrideFirstRunPage = "";
         OverridePostUpdatePage = "";
@@ -61,12 +68,6 @@
           # This one no longer works.
           # "privacy.donottrackheader.enabled" = true;
 
-          # Only HTTPS, show warning when using http.
-          "dom.security.https_only_mode" = true;
-          "dom.security.https_only_mode_ever_enabled" = true;
-          # Don't autofill addresses nor credit cards.
-          "extensions.formautofill.addresses.enabled" = false;
-          "extensions.formautofill.creditCards.enabled" = false;
           # Don't close the full browser when closing the last tab.
           "browser.tabs.closeWindowWithLastTab" = false;
 
@@ -173,6 +174,8 @@
             "newElementCount" = 0;
           };
         };
+        # Tne flake has more info on how to install extensions.
+        # https://github.com/0xc000022070/zen-browser-flake
         extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
           bitwarden
           ublock-origin

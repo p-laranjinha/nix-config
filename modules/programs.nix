@@ -1,9 +1,10 @@
 {
   pkgs,
-  pkgs-24-11,
+  pkgs-stable,
   config,
   inputs,
   this,
+  lib,
   ...
 }: {
   imports = [
@@ -55,6 +56,26 @@
       ];
   };
 
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+  };
+
+  hardware.logitech.wireless = {
+    enable = true;
+    enableGraphical = true;
+  };
+
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscodium;
+    # extensions = with pkgs.vscode-extensions;
+    #   []
+    #   ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace
+    #   [];
+  };
+
   environment.systemPackages = with pkgs; [
     # Disk and partition managers.
     gparted
@@ -67,86 +88,65 @@
     # Run unpatched binaries. Good for running "short-term" binaries where you
     #  don't want to add the required libraries to nix-ld.
     inputs.nix-alien.packages.${this.hostPlatform}.nix-alien
+
+    # Archive tools.
+    unrar
+    p7zip
+    # peazip
+
+    # Document editors.
+    kdePackages.kate
+    libreoffice-qt6-fresh
+    obsidian
+
+    # Find LaTeX symbols by sketching them.
+    hieroglyphic
+
+    # Calculator.
+    speedcrunch
+
+    # Graphic editors.
+    inkscape-with-extensions
+    gimp-with-plugins
+    freecad
+    pkgs-stable.orca-slicer
+    blender
+    # Turn images into ASCII.
+    letterpress
+
+    # Downloading apps.
+    qbittorrent
+
+    # Media players.
+    haruna
+    mpv
+    showtime
+
+    # Video recording/streaming.
+    obs-studio
+
+    # Messaging.
+    discord
+    # App that aggregates websites and runs them in the background. Good for messaging websites.
+    ferdium
+
+    # App to play background noise like rain and wind.
+    blanket
+
+    # GUI for dealing with git repos integrated with GitHub.
+    github-desktop
+
+    # Browsers.
+    ungoogled-chromium
+    firefox
+
+    # Password manager.
+    bitwarden-desktop
   ];
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-  };
-
-  hardware.logitech.wireless = {
-    enable = true;
-    enableGraphical = true;
-  };
 
   hm = {
     imports = [
       inputs.nix-flatpak.homeManagerModules.nix-flatpak
-    ];
-
-    programs.vscode = {
-      enable = true;
-      package = pkgs.vscodium;
-      # extensions = with pkgs.vscode-extensions;
-      #   []
-      #   ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace
-      #   [];
-    };
-
-    home.packages = with pkgs; [
-      # Archive tools.
-      unrar
-      p7zip
-      # peazip
-
-      # Document editors.
-      kdePackages.kate
-      libreoffice-qt6-fresh
-      obsidian
-
-      # Find LaTeX symbols by sketching them.
-      hieroglyphic
-
-      # Calculator.
-      speedcrunch
-
-      # Graphic editors.
-      inkscape-with-extensions
-      gimp-with-plugins
-      freecad
-      pkgs-24-11.orca-slicer
-      blender
-      # Turn images into ASCII.
-      letterpress
-
-      # Downloading apps.
-      qbittorrent
-
-      # Media players.
-      haruna
-      mpv
-      showtime
-
-      # Video recording/streaming.
-      obs-studio
-
-      # Messaging.
-      discord
-      # App that aggregates websites and runs them in the background. Good for messaging websites.
-      ferdium
-
-      # App to play background noise like rain and wind.
-      blanket
-
-      # GUI for dealing with git repos integrated with GitHub.
-      github-desktop
-
-      # Browsers.
-      ungoogled-chromium
-      firefox
-
-      bitwarden-desktop
     ];
 
     # This will update flatpaks on rebuild, which will make rebuild not
@@ -203,7 +203,9 @@
     ];
 
     home.file =
-      config.lib.meta.mkAutostartScript "discord" ''discord --start-minimized''
+      config.lib.meta.mkAutostartScript "discord" ''
+        ${lib.getExe pkgs.discord} --start-minimized
+      ''
       # // config.lib.meta.mkAutostartSymlink "discord" "${pkgs.discord}/share/applications/discord.desktop"
       ;
   };

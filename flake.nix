@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs-24-11.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
     # Nix User Repository
     nur.url = "github:nix-community/NUR";
@@ -66,7 +66,7 @@
 
     lib = (nixpkgs.lib.extend (_: _: home-manager.lib)).extend (import ./lib);
 
-    pkgs-24-11 = import inputs.nixpkgs-24-11 {
+    pkgs-stable = import inputs.nixpkgs-stable {
       system = this.hostPlatform;
       config.allowUnfree = true;
       allowUnfreePredicate = _: true;
@@ -82,7 +82,7 @@
       specialArgs = {
         inherit inputs;
         inherit this;
-        inherit pkgs-24-11;
+        inherit pkgs-stable;
       };
     };
   };
