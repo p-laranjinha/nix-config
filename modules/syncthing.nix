@@ -1,10 +1,16 @@
 {
   pkgs,
-  config,
   this,
   lib,
   ...
 }: {
+  opts.autostartScripts.syncthingtray = ''
+    ${lib.getExe pkgs.syncthingtray} --wait
+  '';
+  environment.systemPackages = with pkgs; [
+    syncthingtray
+  ];
+
   # Non-"home manager" syncthing fails to create this directory.
   systemd.tmpfiles.rules = [
     "d /var/lib/syncthing - ${this.username} users - -"
@@ -87,15 +93,5 @@
         };
       };
     };
-  };
-
-  environment.systemPackages = with pkgs; [
-    syncthingtray
-  ];
-
-  hm = {
-    home.file = config.lib.meta.mkAutostartScript "syncthingtray" ''
-      ${lib.getExe pkgs.syncthingtray} --wait
-    '';
   };
 }

@@ -11,28 +11,48 @@
   ...
 }:
 with lib; {
-  lib.meta = {
-    mkOutOfStoreSymlink = path: config.hm.lib.file.mkOutOfStoreSymlink path;
-
-    relativeToAbsoluteConfigPath = path: (this.configDirectory + removePrefix (toString ./..) (toString path));
-
-    # Creates symlinks to these config files that can be changed without rebuilding.
-    mkMutableConfigSymlink = path:
-      config.lib.meta.mkOutOfStoreSymlink (config.lib.meta.relativeToAbsoluteConfigPath path);
-
-    # Use like: hm.home.file = mkAutostartScript "name" ''script''
-    mkAutostartScript = name: script: {
-      ".config/autostart/${name}.desktop".text = ''
-        [Desktop Entry]
-        Exec=${pkgs.writeShellScript name script}
-        Name=${name}
-        Type=Application
-        X-KDE-AutostartScript=true
-      '';
+  # Check the NixOS GitHub manual for info on option types.
+  # https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/development/option-types.section.md
+  options.opts = {
+    autostartScripts = mkOption {
+      default = {};
+      type = with types; attrsOf str;
     };
-    # Use like: hm.home.file = mkAutostartSymlink "name" path
-    mkAutostartSymlink = name: path: {
-      ".config/autostart/${name}.desktop".source = config.lib.meta.mkOutOfStoreSymlink path;
+    autostartSymlinks = mkOption {
+      default = {};
+      type = with types; attrsOf path;
+    };
+  };
+
+  config = {
+    hm.home.file =
+      (listToAttrs (mapAttrsToList (name: script: {
+          name = ".config/autostart/${name}.script.desktop";
+          value.text = ''
+            [Desktop Entry]
+            Exec=${pkgs.writeShellScript name script}
+            Name=${name}
+            Type=Application
+            X-KDE-AutostartScript=true
+          '';
+        })
+        config.opts.autostartScripts))
+      // (
+        listToAttrs (mapAttrsToList (name: path: {
+            name = ".config/autostart/${name}.symlink.desktop";
+            value.source = config.lib.meta.mkOutOfStoreSymlink path;
+          })
+          config.opts.autostartSymlinks)
+      );
+
+    lib.meta = {
+      mkOutOfStoreSymlink = path: config.hm.lib.file.mkOutOfStoreSymlink path;
+
+      relativeToAbsoluteConfigPath = path: (this.configDirectory + removePrefix (toString ./..) (toString path));
+
+      # Creates symlinks to these config files that can be changed without rebuilding.
+      mkMutableConfigSymlink = path:
+        config.lib.meta.mkOutOfStoreSymlink (config.lib.meta.relativeToAbsoluteConfigPath path);
     };
   };
 }

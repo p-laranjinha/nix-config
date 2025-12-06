@@ -201,12 +201,10 @@
 
       "org.raspberrypi.rpi-imager"
     ];
-
-    home.file =
-      config.lib.meta.mkAutostartScript "discord" ''
-        ${lib.getExe pkgs.discord} --start-minimized
-      ''
-      # // config.lib.meta.mkAutostartSymlink "discord" "${pkgs.discord}/share/applications/discord.desktop"
-      ;
   };
+
+  opts.autostartScripts.discord = ''
+    ${lib.getExe pkgs.discord} --start-minimized
+  '';
+  # opts.autostartSymlinks.discord = "${pkgs.discord}/share/applications/discord.desktop";
 }

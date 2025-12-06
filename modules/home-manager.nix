@@ -55,16 +55,6 @@
       // {
         # Allows for unfree packages to be used by nix-shell
         ".config/nixpkgs/config.nix".text = ''{ allowUnfree = true; }'';
-      }
-      //
-      # Automatically locks the system on startup if the system was started with autologin.
-      # Made for use with Sunshine where I can access the system remotely but
-      #  still have a password.
-      config.lib.meta.mkAutostartScript "lock-if-autologin" ''
-        #! /usr/bin/env nix-shell
-        #! nix-shell -i bash -p procps
-        SDDM_TEST=`pgrep -xa sddm-helper`
-        [[ $SDDM_TEST == *"--autologin"* ]] && loginctl lock-session
-      '';
+      };
   };
 }
