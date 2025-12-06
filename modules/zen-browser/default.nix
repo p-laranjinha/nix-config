@@ -1,7 +1,7 @@
 {
   pkgs,
-  config,
   inputs,
+  funcs,
   ...
 }: {
   hm = {
@@ -10,7 +10,7 @@
     ];
 
     # Makes bookmarks look like essentials.
-    home.file.".zen/default/chrome/userChrome.css".source = config.lib.meta.mkMutableConfigSymlink ./zen-browser-clean-bookmarks.css;
+    home.file.".zen/default/chrome/userChrome.css".source = funcs.mkMutableConfigSymlink ./zen-browser-clean-bookmarks.css;
 
     programs.zen-browser = {
       enable = true;

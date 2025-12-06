@@ -1,13 +1,13 @@
-# For lib functions that depend on modules like nixos and home-manager.
-# There might be a way to create these functions with mkOption instead of
-#  abusing config.lib.meta, but I don't think it's worth the trouble.
-# These functions are accessed by config.lib.meta.XXX
+# For functions that depend on modules like nixos and home-manager, and options
+#  and variables to be reused in multiple places.
+# The functions and variables set here cannot be used inside the imports option.
 # For more "pure" functions check ../lib
 {
   this,
   config,
   lib,
   pkgs,
+  funcs,
   ...
 }:
 with lib; {
@@ -40,19 +40,24 @@ with lib; {
       // (
         listToAttrs (mapAttrsToList (name: path: {
             name = ".config/autostart/${name}.symlink.desktop";
-            value.source = config.lib.meta.mkOutOfStoreSymlink path;
+            value.source = funcs.mkOutOfStoreSymlink path;
           })
           config.opts.autostartSymlinks)
       );
 
-    lib.meta = {
-      mkOutOfStoreSymlink = path: config.hm.lib.file.mkOutOfStoreSymlink path;
+    # https://mynixos.com/nixpkgs/option/_module.args
+    # Additional arguments passed to each module.
+    # The default arguments like 'lib' and 'config' cannot be modified.
+    _module.args = {
+      funcs = {
+        mkOutOfStoreSymlink = path: config.hm.lib.file.mkOutOfStoreSymlink path;
 
-      relativeToAbsoluteConfigPath = path: (this.configDirectory + removePrefix (toString ./..) (toString path));
+        relativeToAbsoluteConfigPath = path: (this.configDirectory + removePrefix (toString ./..) (toString path));
 
-      # Creates symlinks to these config files that can be changed without rebuilding.
-      mkMutableConfigSymlink = path:
-        config.lib.meta.mkOutOfStoreSymlink (config.lib.meta.relativeToAbsoluteConfigPath path);
+        # Creates symlinks to these config files that can be changed without rebuilding.
+        mkMutableConfigSymlink = path:
+          funcs.mkOutOfStoreSymlink (funcs.relativeToAbsoluteConfigPath path);
+      };
     };
   };
 }

@@ -3,6 +3,7 @@
   lib,
   this,
   config,
+  funcs,
   ...
 }: {
   imports = [
@@ -50,7 +51,7 @@
     in
       builtins.listToAttrs (builtins.map (target: {
         name = "${lib.removePrefix ((this.homeDirectory) + "/") (this.subHomeDirectory)}/${target}";
-        value = {source = config.lib.meta.mkOutOfStoreSymlink "${this.homeDirectory}/${folders.${target}}";};
+        value = {source = funcs.mkOutOfStoreSymlink "${this.homeDirectory}/${folders.${target}}";};
       }) (builtins.attrNames folders))
       // {
         # Allows for unfree packages to be used by nix-shell

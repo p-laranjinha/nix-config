@@ -1,7 +1,7 @@
 {
   pkgs,
-  config,
   this,
+  funcs,
   ...
 }: {
   environment.shellAliases = {
@@ -18,9 +18,9 @@
     nixafl = "nix-alien-find-libs";
 
     # Runs a script that rebuild switches this config.
-    nixs = toString (config.lib.meta.mkMutableConfigSymlink ./nixs.sh);
+    nixs = toString (funcs.mkMutableConfigSymlink ./nixs.sh);
     # Runs a script that rebuild switches and commits this config.
-    nixsf = toString (config.lib.meta.mkMutableConfigSymlink ./nixsf.sh);
+    nixsf = toString (funcs.mkMutableConfigSymlink ./nixsf.sh);
     nixb = "sudo nixos-rebuild build --flake ${this.configDirectory}";
     nixl = "nixos-rebuild list-generations";
     nixu = "nix flake update --flake ${this.configDirectory}";
@@ -80,7 +80,7 @@
     # Required for zoxide to set the 'z' and 'zi' commands when set with home manager.
     programs.bash.enable = true;
 
-    home.file.".config/ghostty/config".source = config.lib.meta.mkMutableConfigSymlink ./ghostty/config;
+    home.file.".config/ghostty/config".source = funcs.mkMutableConfigSymlink ./ghostty/config;
   };
 
   environment.systemPackages = with pkgs; [

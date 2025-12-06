@@ -1,6 +1,6 @@
 {
   pkgs,
-  config,
+  funcs,
   ...
 }: {
   environment.systemPackages = with pkgs; [
@@ -21,6 +21,6 @@
     viAlias = true;
   };
   hm = {
-    home.file.".config/nvim".source = config.lib.meta.mkMutableConfigSymlink ./config;
+    home.file.".config/nvim".source = funcs.mkMutableConfigSymlink ./config;
   };
 }
