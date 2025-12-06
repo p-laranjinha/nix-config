@@ -1,7 +1,7 @@
 {
   pkgs,
-  this,
   lib,
+  vars,
   ...
 }: {
   opts.autostartScripts.syncthingtray = ''
@@ -13,7 +13,7 @@
 
   # Non-"home manager" syncthing fails to create this directory.
   systemd.tmpfiles.rules = [
-    "d /var/lib/syncthing - ${this.username} users - -"
+    "d /var/lib/syncthing - ${vars.username} users - -"
   ];
   services.syncthing = {
     # WARNING: If something is wrong, syncthing will just not have any

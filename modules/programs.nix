@@ -1,10 +1,9 @@
 {
   pkgs,
   pkgs-stable,
-  config,
   inputs,
-  this,
   lib,
+  vars,
   ...
 }: {
   imports = [
@@ -87,7 +86,7 @@
 
     # Run unpatched binaries. Good for running "short-term" binaries where you
     #  don't want to add the required libraries to nix-ld.
-    inputs.nix-alien.packages.${this.hostPlatform}.nix-alien
+    inputs.nix-alien.packages.${vars.hostPlatform}.nix-alien
 
     # Archive tools.
     unrar

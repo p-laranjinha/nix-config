@@ -1,4 +1,4 @@
-# For functions that depend on modules like nixos and home-manager check ../modules/lib.nix
+# For functions that depend on modules like nixos and home-manager check ../funcs
 lib: prev:
 with lib; {
   # Collects the top-level modules in a directory into an attribute set of paths.

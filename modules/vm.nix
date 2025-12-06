@@ -1,12 +1,12 @@
 {
   pkgs,
   inputs,
-  this,
+  vars,
   ...
 }: {
   # https://nixos.wiki/wiki/Virt-manager
   programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = [this.username];
+  users.groups.libvirtd.members = [vars.username];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
   # Some virt-manager configuration is in ./default-home.nix
@@ -15,8 +15,8 @@
   users.users.pebble.extraGroups = ["kvm" "libvirtd"];
   environment.systemPackages = [
     pkgs.freerdp
-    inputs.winapps.packages.${this.hostPlatform}.winapps
-    inputs.winapps.packages.${this.hostPlatform}.winapps-launcher # optional
+    inputs.winapps.packages.${vars.hostPlatform}.winapps
+    inputs.winapps.packages.${vars.hostPlatform}.winapps-launcher # optional
 
     pkgs.quickemu
   ];

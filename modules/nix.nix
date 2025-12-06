@@ -1,13 +1,13 @@
 {
-  this,
   inputs,
+  vars,
   ...
 }: {
-  networking.hostName = this.hostname;
+  networking.hostName = vars.hostname;
   # Don't forget to set a password with `passwd`.
-  users.users.${this.username} = {
+  users.users.${vars.username} = {
     isNormalUser = true;
-    description = this.fullname;
+    description = vars.fullname;
     extraGroups = ["networkmanager" "wheel" "wireshark" "dialout"];
   };
 
@@ -42,7 +42,7 @@
     #   exact = false;
     #   to = {
     #     type = "git";
-    #     url = "file:${this.configDirectory}";
+    #     url = "file:${vars.configDirectory}";
     #   };
     # };
     # config-github = {
@@ -55,5 +55,5 @@
     # };
   };
 
-  system.stateVersion = this.stateVersion;
+  system.stateVersion = vars.stateVersion;
 }

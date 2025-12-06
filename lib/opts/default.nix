@@ -1,9 +1,5 @@
-# For functions that depend on modules like nixos and home-manager, and options
-#  and variables to be reused in multiple places.
-# The functions and variables set here cannot be used inside the imports option.
-# For more "pure" functions check ../lib
+# For options that are reused in multiple places.
 {
-  this,
   config,
   lib,
   pkgs,
@@ -44,20 +40,5 @@ with lib; {
           })
           config.opts.autostartSymlinks)
       );
-
-    # https://mynixos.com/nixpkgs/option/_module.args
-    # Additional arguments passed to each module.
-    # The default arguments like 'lib' and 'config' cannot be modified.
-    _module.args = {
-      funcs = {
-        mkOutOfStoreSymlink = path: config.hm.lib.file.mkOutOfStoreSymlink path;
-
-        relativeToAbsoluteConfigPath = path: (this.configDirectory + removePrefix (toString ./..) (toString path));
-
-        # Creates symlinks to these config files that can be changed without rebuilding.
-        mkMutableConfigSymlink = path:
-          funcs.mkOutOfStoreSymlink (funcs.relativeToAbsoluteConfigPath path);
-      };
-    };
   };
 }

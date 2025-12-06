@@ -50,38 +50,28 @@
   } @ inputs: let
     # Common information about the system that may be used in multiple locations.
     # Using camelCase because that is the standard for options. kebab-case is for packages and files.
-    this = {
-      hostname = "orange";
-      username = "pebble";
-      fullname = "Orange Pebble";
-      homeDirectory = "/home/pebble";
-      # A home inside the home directory so I'm not bothered by folders and hidden folders added by programs.
-      subHomeDirectory = "${this.homeDirectory}/home";
-      configDirectory = "${this.subHomeDirectory}/nix-config";
-      # secretsDirectory = "${inputs.self}/secrets";
-      hostPlatform = "x86_64-linux";
-      # Research properly before changing this.
-      stateVersion = "24.05";
-    };
-
-    lib = (nixpkgs.lib.extend (_: _: home-manager.lib)).extend (import ./lib);
+    vars = import ./lib/vars;
+    lib = (nixpkgs.lib.extend (_: _: home-manager.lib)).extend (import ./lib/lib);
 
     pkgs-stable = import inputs.nixpkgs-stable {
-      system = this.hostPlatform;
+      system = vars.hostPlatform;
       config.allowUnfree = true;
       allowUnfreePredicate = _: true;
     };
   in {
     inherit lib;
-    nixosConfigurations.${this.hostname} = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.${vars.hostname} = nixpkgs.lib.nixosSystem {
       inherit lib;
-      system = this.hostPlatform;
+      system = vars.hostPlatform;
       modules =
         (lib.attrValues (lib.modulesIn ./modules))
-        ++ [];
+        ++ [
+          ./lib/funcs
+          ./lib/opts
+        ];
       specialArgs = {
         inherit inputs;
-        inherit this;
+        inherit vars;
         inherit pkgs-stable;
       };
     };

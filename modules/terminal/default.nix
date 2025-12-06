@@ -1,7 +1,7 @@
 {
   pkgs,
-  this,
   funcs,
+  vars,
   ...
 }: {
   environment.shellAliases = {
@@ -21,9 +21,9 @@
     nixs = toString (funcs.mkMutableConfigSymlink ./nixs.sh);
     # Runs a script that rebuild switches and commits this config.
     nixsf = toString (funcs.mkMutableConfigSymlink ./nixsf.sh);
-    nixb = "sudo nixos-rebuild build --flake ${this.configDirectory}";
+    nixb = "sudo nixos-rebuild build --flake ${vars.configDirectory}";
     nixl = "nixos-rebuild list-generations";
-    nixu = "nix flake update --flake ${this.configDirectory}";
+    nixu = "nix flake update --flake ${vars.configDirectory}";
 
     # "nix query"
     # Runs nix repl initialized with values from this flake for easier testing and debugging.
@@ -33,8 +33,8 @@
         in rec {
           inherit self;
           inherit (self) inputs lib;
-          inherit (self.nixosConfigurations) ${this.hostname};
-          inherit (self.nixosConfigurations.${this.hostname}._module.specialArgs) this;
+          inherit (self.nixosConfigurations) ${vars.hostname};
+          inherit (self.nixosConfigurations.${vars.hostname}._module.specialArgs) this;
         }
       ''}'';
   };

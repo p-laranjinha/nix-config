@@ -2,7 +2,7 @@
   pkgs,
   lib,
   config,
-  this,
+  vars,
   ...
 }: let
   cfg = config.personal.remote-access;
@@ -40,7 +40,7 @@ in {
         KbdInteractiveAuthentication = false;
         PermitRootLogin = "no"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
         TCPKeepAlive = "yes";
-        AllowUsers = [this.username]; # Allows all users by default. Can be [ "user1" "user2" ]
+        AllowUsers = [vars.username]; # Allows all users by default. Can be [ "user1" "user2" ]
         X11Forwarding = false;
       };
     };
