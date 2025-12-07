@@ -21,14 +21,14 @@
     # INFO: Versioning cleanup interval uses a different method which
     #  nixpkgs doesn't seem to support.
     enable = true;
-    user = "pebble";
+    user = vars.username;
     group = "users";
     openDefaultPorts = true;
     settings = {
       devices = {
         "phone".id = "R2RNYGN-BZPUWLZ-6OEOT77-ALGBSJP-MD2JPBY-AOY2T72-UX25SEB-H47LVAO";
         "tablet".id = "XR6AZSI-APGKKIB-LWMMCKW-6E63TBX-KFBSLVG-7JYURKQ-TZNGESZ-IVNNDQ5";
-        "server".id = "NKLO2LV-7AGOY3O-MVE5UM2-SGRCGZP-E6S2XKC-NQ346NE-VKLKIMA-B57TWQK";
+        "server".id = "7S2YS7O-KFKQOTG-JK2IDR4-C6YKLG6-4XNEFE2-RJWBQKU-LXVTJIC-VHNU5AU";
       };
       folders = {
         "default" = {
