@@ -66,13 +66,17 @@
     enableGraphical = true;
   };
 
+  # https://wiki.nixos.org/wiki/Visual_Studio_Code
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
-    # extensions = with pkgs.vscode-extensions;
-    #   []
-    #   ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace
-    #   [];
+    extensions = with pkgs.vscode-extensions;
+      [
+        jnoortheen.nix-ide
+      ]
+      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace
+      [
+      ];
   };
 
   environment.systemPackages = with pkgs; [
