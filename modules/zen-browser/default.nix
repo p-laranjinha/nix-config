@@ -184,19 +184,19 @@
         ];
         search = {
           force = true;
-          default = "Searxng";
+          default = "SearXNG";
           order = [
-            "Searxng"
+            "SearXNG"
             "ddg"
             "google"
           ];
           # https://searchfox.org/firefox-main/rev/b7497e2adf09e8b17bf161df07945f42c9f8cfe5/toolkit/components/search/SearchEngine.sys.mjs#890-923
           engines = {
-            "Searxng" = {
+            "SearXNG" = {
               urls = [
-                {template = "http://server:8080/search?q={searchTerms}";}
+                {template = "https://search.orangepebble.net/search?q={searchTerms}";}
                 {
-                  template = "http://server:8080/autocompleter?q={searchTerms}";
+                  template = "https://search.orangepebble.net/autocompleter?q={searchTerms}";
                   # https://searchfox.org/firefox-main/rev/b7497e2adf09e8b17bf161df07945f42c9f8cfe5/toolkit/components/search/SearchUtils.sys.mjs#162-168
                   type = "application/x-suggestions+json";
                 }
