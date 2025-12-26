@@ -196,7 +196,12 @@
               urls = [
                 {template = "https://search.orangepebble.net/search?q={searchTerms}";}
                 {
-                  template = "https://search.orangepebble.net/autocompleter?q={searchTerms}";
+                  # Not using the actual SearXNG autocompleter because it doesn't
+                  #  bypass auth (even though on mobile it does). SearXNG is
+                  #  using DDG anyways so nothing lost.
+                  # template = "https://search.orangepebble.net/autocompleter?q={searchTerms}";
+                  # 'count=3' because I don't want many search results.
+                  template = "https://ac.duckduckgo.com/ac/?type=list&count=3&q={searchTerms}";
                   # https://searchfox.org/firefox-main/rev/b7497e2adf09e8b17bf161df07945f42c9f8cfe5/toolkit/components/search/SearchUtils.sys.mjs#162-168
                   type = "application/x-suggestions+json";
                 }
