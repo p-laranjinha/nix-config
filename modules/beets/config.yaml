@@ -1,0 +1,71 @@
+directory: ~/home/audio/beetsmusic
+library: ~/home/audio/beets.db
+
+import:
+  copy: yes # Copy files to directory?
+  write: yes # Modify tags?
+  move: no # Move files to directory?
+
+paths:
+  default: $albumartist/$album%aunique{}/$title%sunique{} - $artist
+  singleton: $artist/$title%sunique{} - $artist
+  comp: Compilations/$album%aunique{}/$title%sunique{} - $artist
+
+plugins:
+  # Autotagger extensions
+  - chroma
+  - musicbrainz
+  - discogs
+  - deezer
+  - spotify
+  # Metadata
+  - autobpm
+  - edit
+  - fetchart
+  - keyfinder
+  # - lastgenre
+  - lyrics
+  - zero
+
+musicbrainz:
+  data_source_mismatch_penalty: 0.5
+  genres: yes
+  external_ids:
+      discogs: yes
+      spotify: yes
+      bandcamp: yes
+      beatport: yes
+      deezer: yes
+      tidal: yes
+discogs:
+  data_source_mismatch_penalty: 0.5
+deezer:
+  data_source_mismatch_penalty: 0.5
+spotify:
+  data_source_mismatch_penalty: 0.5
+
+# zero:
+#   fields:
+#     - album_artists
+
+# Couldn't make xtractor work in NixOS, maybe later.
+# xtractor:
+#   auto: yes
+#   threads: 8
+#   output_path: ~/home/audio/xtraction_data
+#   essentia_extractor: streaming_extractor_music
+#   extractor_profile:
+#     highlevel:
+#       svm_models:
+#         - ~/home/audio/essentia-extractor-svm_models-v2.1_beta5/danceability.history
+#         - ~/home/audio/essentia-extractor-svm_models-v2.1_beta5/gender.history
+#         - ~/home/audio/essentia-extractor-svm_models-v2.1_beta5/genre_rosamerica.history
+#         - ~/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_acoustic.history
+#         - ~/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_aggressive.history
+#         - ~/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_electronic.history
+#         - ~/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_happy.history
+#         - ~/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_sad.history
+#         - ~/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_party.history
+#         - ~/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_relaxed.history
+#         - ~/home/audio/essentia-extractor-svm_models-v2.1_beta5/voice_instrumental.history
+#         - ~/home/audio/essentia-extractor-svm_models-v2.1_beta5/moods_mirex.history
