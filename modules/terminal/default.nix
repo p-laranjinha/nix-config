@@ -41,6 +41,7 @@
   };
   programs.bash = {
     enable = true;
+    completion.enable = true;
     interactiveShellInit = ''
       # Breaks nix develop.
       # cd ~/home/

@@ -1,0 +1,40 @@
+directory: ~/home/audio/beetsmusic
+library: ~/home/audio/beets.db
+
+import:
+  copy: yes # Copy files to directory?
+  write: yes # Modify tags?
+  move: no # Move files to directory?
+
+paths:
+  default: $title%sunique{} - $artist
+
+plugins:
+  - xtractor
+  - edit
+  - info
+
+xtractor:
+  auto: no
+  write: yes
+  keep_output: yes
+  keep_profiles: yes
+  threads: 8
+  output_path: ~/home/audio/xtraction_data
+  essentia_extractor: ~/home/nix-config/modules/music/essentia/streaming_extractor_music
+  extractor_profile:
+    highlevel:
+      svm_models:
+        # These have to be absolute links.
+        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/danceability.history
+        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/gender.history
+        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/genre_rosamerica.history
+        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_acoustic.history
+        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_aggressive.history
+        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_electronic.history
+        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_happy.history
+        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_sad.history
+        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_party.history
+        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_relaxed.history
+        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/voice_instrumental.history
+        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/moods_mirex.history
