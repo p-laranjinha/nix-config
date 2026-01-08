@@ -2,7 +2,7 @@
   pkgs,
   funcs,
   vars,
-  lib,
+  config,
   ...
 }: {
   # https://nixcademy.com/posts/mastering-nixpkgs-overlays-techniques-and-best-practice/
@@ -44,12 +44,54 @@
                 passthru = {
                   updateScript = python-prev.nix-update-script {};
                 };
+              };
+              beets-yearfixer = python-prev.buildPythonPackage rec {
+                pname = "beets-yearfixer";
+                version = "v0.0.5";
+                pyproject = true;
 
-                meta = {
-                  description = "A beets plugin to add low and high level musical information to songs.";
-                  homepage = "https://github.com/adamjakab/BeetsPluginXtractor";
-                  license = python-prev.lib.licenses.mit;
-                  maintainers = [];
+                src = prev.fetchFromGitHub {
+                  owner = "adamjakab";
+                  repo = "BeetsPluginYearFixer";
+                  rev = version;
+                  hash = "sha256-TDRkCihp+hB33e9LCBpUye+KobpTPrDMutMa4zHJQ68=";
+                };
+
+                build-system = with python-prev; [
+                  setuptools
+                  poetry-core
+                ];
+
+                nativeBuildInputs = with python-prev; [
+                  beets
+                ];
+
+                passthru = {
+                  updateScript = python-prev.nix-update-script {};
+                };
+              };
+              beets-maptag = python-prev.buildPythonPackage {
+                pname = "beets-maptag";
+                version = "0.0.2";
+                pyproject = true;
+
+                src = prev.fetchFromGitHub {
+                  owner = "p-laranjinha";
+                  repo = "beets-maptag";
+                  rev = "master";
+                  hash = "sha256-9LTIDsgoP6Au8Es3XZt3uj2XTPUpfLueC2klMZ1mLmk=";
+                };
+
+                build-system = with python-prev; [
+                  setuptools
+                ];
+
+                nativeBuildInputs = with python-prev; [
+                  beets
+                ];
+
+                passthru = {
+                  updateScript = python-prev.nix-update-script {};
                 };
               };
             })
@@ -59,6 +101,14 @@
                   xtractor = {
                     enable = true;
                     propagatedBuildInputs = [python-prev.beets-xtractor];
+                  };
+                  yearfixer = {
+                    enable = true;
+                    propagatedBuildInputs = [python-prev.beets-yearfixer];
+                  };
+                  maptag = {
+                    enable = true;
+                    propagatedBuildInputs = [python-prev.beets-maptag];
                   };
                 };
               };
@@ -98,4 +148,46 @@
   # Docs: https://beets.readthedocs.io/en/stable/
   # Run `beet config -e` to edit this file.
   hm.home.file.".config/beets/config.yaml".source = funcs.mkMutableConfigSymlink ./beets.yaml;
+  hm.home.file.".config/beets/paths.yaml".text = let
+    essentia_models = fetchTarball {
+      url = "https://essentia.upf.edu/svm_models/essentia-extractor-svm_models-v2.1_beta5.tar.gz";
+      sha256 = "sha256:11ps1l4h8bl4l9rlvkhjs61908l18dh7mpq65brm8ki99hnp9g64";
+    };
+    streaming_extractor_music = "${funcs.mkMutableConfigSymlink ./essentia/streaming_extractor_music}";
+  in ''
+    xtractor:
+      essentia_extractor: ${streaming_extractor_music}
+      extractor_profile:
+        highlevel:
+          svm_models:
+            # https://acousticbrainz.org/datasets/accuracy
+            # These have to be absolute links.
+            - ${essentia_models}/danceability.history
+            - ${essentia_models}/gender.history
+            - ${essentia_models}/genre_rosamerica.history
+            - ${essentia_models}/mood_acoustic.history
+            - ${essentia_models}/mood_aggressive.history
+            - ${essentia_models}/mood_electronic.history
+            - ${essentia_models}/mood_happy.history
+            - ${essentia_models}/mood_party.history
+            - ${essentia_models}/mood_relaxed.history
+            - ${essentia_models}/mood_sad.history
+            - ${essentia_models}/moods_mirex.history
+            - ${essentia_models}/voice_instrumental.history
+            # The following aren't used by the plugin:
+            # - ${essentia_models}/genre_dortmund.history
+            # - ${essentia_models}/genre_electronic.history
+            # - ${essentia_models}/genre_tzanetakis.history
+            # - ${essentia_models}/ismir04_rhythm.history
+            # - ${essentia_models}/timbre.history
+            # - ${essentia_models}/tonal_atonal.history
+  '';
+  secrets.beets-secrets = {
+    sopsFile = ./secrets.yaml;
+    format = "yaml";
+    key = ""; # Entire file.
+    # Only the user and group can read and nothing else.
+    mode = "0440";
+    owner = vars.username;
+  };
 }

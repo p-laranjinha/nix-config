@@ -1,40 +1,128 @@
 directory: ~/home/audio/beetsmusic
-library: ~/home/audio/beets.db
+library: ~/home/audio/beetsmusic/beets.db
+
+# Including a yaml file defined in nix for some path options.
+include:
+  - paths.yaml
+  - /run/secrets/beets-secrets
+
+# What is shown with the list command (and others)
+format_item: $title - $artist - $album
+format_album: $album - $artist
 
 import:
-  copy: yes # Copy files to directory?
-  write: yes # Modify tags?
-  move: no # Move files to directory?
+  timid: yes # Asks for confirmation for every auto-tagging match.
+  languages: en # When auto-tagging, try to get the tag aliases of the following languages.
+  detail: yes # Show every tag match found, not just changes.
+  group_albums: yes # Track albums by metadata instead of directories.
+  bell: yes # Play a sound when input is needed.
+  set_fields:
+    # To apply these after an import just use the values with the modify command.
+    
+    # Setting some blank fields for custom values I may set.
+    # I need to use a function because '' becomes the format_item set above.
+    # pre_cover_artist: '%lower{}'
+    # audio_source: '%lower{}'
+    # video_url: '%lower{}'
+    # media_source: '%lower{}'
 
+advancedrewrite:
+  # Insturmental isn't very accurate because I think importing by album gets
+  #  the album language instead of the track language.
+  #  I guess I'll use the value obtained with the xtractor plugin.
+  # Get values: https://github.com/rdswift/picard-plugins/blob/2.0_RDS_Plugins/plugins/language_name/languages_en.py
+  - language ^$: Instrumental
+  - language eng: English
+  - language jpn: Japanese
+
+# This only removes embedded tags, so I can keep values in the database.
+zero:
+  fields: comments
+
+# https://beets.readthedocs.io/en/stable/reference/config.html#path-format-configuration
+# https://beets.readthedocs.io/en/stable/reference/pathformat.html
 paths:
-  default: $title%sunique{} - $artist
+  # The default for tracks that don't match any other path.
+  default: '%first{$albumartists,1,0,\␀}/$album%aunique{}/$title%sunique{} - $artist'
+  # For singles imported as an album, which I think is better than singleton
+  #  as it gets more info about the track from MusicBrainz.
+  albumtype:single: '%first{$albumartists,1,0,\␀}/$title%sunique{} - $artist'
+  # For tracks imported as a singleton.
+  singleton: '%first{$artists,1,0,\␀}/$title%sunique{} - $artist'
+  # For releases without a dominant artist.
+  comp: compilations/$album%aunique{}/$title%sunique{} - $artist
 
 plugins:
-  - xtractor
   - edit
   - info
+  - advancedrewrite
+  - zero
+  - chroma
+  - musicbrainz
+  - yearfixer
+  - lastgenre
+  - fetchart
+  - embedart
+  - lyrics
+  - xtractor
+  - maptag
+  - replaygain
+  - badfiles
+
+musicbrainz:
+  data_source_mismatch_penalty: 0.2
+  external_ids:
+    discogs: yes
+    bandcamp: yes
+    spotify: yes
+    deezer: yes
+    beatport: yes
+    tidal: yes
+# Leaving these here so I can easily add the plugins when needed.
+deezer:
+  data_source_mismatch_penalty: 0.8
+discogs:
+  data_source_mismatch_penalty: 0.8
+spotify:
+  data_source_mismatch_penalty: 0.8
+beatport:
+  data_source_mismatch_penalty: 0.8
+
+# I'm not sure how I want my genres as I don't use them much yet so I'll keep
+#  mostly to defaults.
+lastgenre:
+  # Large count so I get all/most of the popular enough tags, I feel like that
+  #  would be better for searching than the default 1.
+  count: 10
+
+fetchart:
+  minwidth: 500
+  maxwidth: 1200
+  store_source: yes
+
+embedart:
+  # I'm removing the art file because I think it would have problems with the
+  #  way I'm storing the single "albums".
+  # I can still add them back with the fetchart/extractart commands and some filtering.
+  remove_art_file: yes
+
+lyrics:
+  sources: [lrclib, google, genius, tekstowo]
+  # Only the lrclib source supports synced lyrics.
+  synced: yes
 
 xtractor:
-  auto: no
+  auto: yes
   write: yes
-  keep_output: yes
-  keep_profiles: yes
+  keep_output: no
+  keep_profiles: no
   threads: 8
-  output_path: ~/home/audio/xtraction_data
-  essentia_extractor: ~/home/nix-config/modules/music/essentia/streaming_extractor_music
-  extractor_profile:
-    highlevel:
-      svm_models:
-        # These have to be absolute links.
-        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/danceability.history
-        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/gender.history
-        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/genre_rosamerica.history
-        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_acoustic.history
-        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_aggressive.history
-        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_electronic.history
-        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_happy.history
-        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_sad.history
-        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_party.history
-        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/mood_relaxed.history
-        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/voice_instrumental.history
-        - /home/pebble/home/audio/essentia-extractor-svm_models-v2.1_beta5/moods_mirex.history
+
+replaygain:
+  backend: ffmpeg
+  # (default) This is what causes peak values to go over 1.0, and it's
+  #  supposedly more accurate but harder to run.
+  peak: 'true' 
+
+badfiles:
+  check_on_import: yes
