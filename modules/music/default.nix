@@ -1,8 +1,8 @@
 {
   pkgs,
+  pkgs-stable,
   funcs,
   vars,
-  config,
   ...
 }: {
   # https://nixcademy.com/posts/mastering-nixpkgs-overlays-techniques-and-best-practice/
@@ -132,7 +132,7 @@
     lrcget
 
     # A TUI music tagger.
-    beets
+    pkgs-stable.beets
 
     # A TUI music downloader from multiple sources.
     streamrip
