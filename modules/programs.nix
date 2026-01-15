@@ -133,9 +133,6 @@
     # App that aggregates websites and runs them in the background. Good for messaging websites.
     ferdium
 
-    # App to play background noise like rain and wind.
-    blanket
-
     # GUI for dealing with git repos integrated with GitHub.
     github-desktop
 
@@ -156,20 +153,6 @@
     #  idempotent, oh well.
     services.flatpak.update.onActivation = true;
     services.flatpak.packages = [
-      # App to play background music/noises from Animal Crossing.
-      "camp.nook.nookdesktop"
-
-      # Good looking widget that displays and controls the currently playing media.
-      # Could be cool to use with something like a terminal music player.
-      # But on KDE I could just use the included media player in the system tray.
-      "dev.geopjr.Turntable"
-
-      # App to draw things using characters to create ASCII art.
-      "io.github.nokse22.asciidraw"
-
-      # Cool internet radio app.
-      "de.haeckerfelix.Shortwave"
-
       # Dictionary.
       "com.github.johnfactotum.QuickLookup"
 

@@ -1,5 +1,5 @@
-directory: ~/home/audio/music-new
-library: ~/home/audio/music-new/beets.db
+directory: ~/home/audio/music
+library: ~/home/audio/music/beets.db
 
 # Including a yaml file defined in nix for some path options.
 include:
