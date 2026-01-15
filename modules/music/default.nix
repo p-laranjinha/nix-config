@@ -72,14 +72,14 @@
               };
               beets-maptag = python-prev.buildPythonPackage {
                 pname = "beets-maptag";
-                version = "0.0.2";
+                version = "master";
                 pyproject = true;
 
                 src = prev.fetchFromGitHub {
                   owner = "p-laranjinha";
                   repo = "beets-maptag";
                   rev = "master";
-                  hash = "sha256-9LTIDsgoP6Au8Es3XZt3uj2XTPUpfLueC2klMZ1mLmk=";
+                  hash = "sha256-5l4Cefm8LVlH4UmQ8hPWTTsudpaRzd27Q/CEELpVDus=";
                 };
 
                 build-system = with python-prev; [
@@ -119,6 +119,9 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    # The GOAT.
+    ffmpeg
+
     # A GUI music tagger.
     picard
 
@@ -130,12 +133,24 @@
 
     # A TUI music tagger.
     beets
+
+    # A TUI music downloader from multiple sources.
+    streamrip
+
+    # Youtube and many other sources TUI downloader.
+    yt-dlp
   ];
 
+  hm. services.flatpak.packages = [
+    # yt-dlp GUI frontend.
+    "org.nickvision.tubeconverter"
+  ];
+
+  # This is causing errors to show up :(
   # I need to use hm...initExtra so the command has autocompletion available.
-  hm.programs.bash.initExtra = ''
-    eval "$(beet completion)"
-  '';
+  # hm.programs.bash.initExtra = ''
+  #   eval "$(beet completion)"
+  # '';
 
   environment.shellAliases = {
     # I couldn't figure out how to actually install this binary, so I just
@@ -148,6 +163,7 @@
   # Docs: https://beets.readthedocs.io/en/stable/
   # Run `beet config -e` to edit this file.
   hm.home.file.".config/beets/config.yaml".source = funcs.mkMutableConfigSymlink ./beets.yaml;
+  hm.home.file.".config/beets/languagerewrite.yaml".source = funcs.mkMutableConfigSymlink ./languagerewrite.yaml;
   hm.home.file.".config/beets/paths.yaml".text = let
     essentia_models = fetchTarball {
       url = "https://essentia.upf.edu/svm_models/essentia-extractor-svm_models-v2.1_beta5.tar.gz";

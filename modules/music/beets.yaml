@@ -1,9 +1,10 @@
-directory: ~/home/audio/beetsmusic
-library: ~/home/audio/beetsmusic/beets.db
+directory: ~/home/audio/music-new
+library: ~/home/audio/music-new/beets.db
 
 # Including a yaml file defined in nix for some path options.
 include:
   - paths.yaml
+  - languagerewrite.yaml
   - /run/secrets/beets-secrets
 
 # What is shown with the list command (and others)
@@ -26,27 +27,14 @@ import:
     # video_url: '%lower{}'
     # media_source: '%lower{}'
 
-advancedrewrite:
-  # Insturmental isn't very accurate because I think importing by album gets
-  #  the album language instead of the track language.
-  #  I guess I'll use the value obtained with the xtractor plugin.
-  # Get values: https://github.com/rdswift/picard-plugins/blob/2.0_RDS_Plugins/plugins/language_name/languages_en.py
-  - language ^$: Instrumental
-  - language eng: English
-  - language jpn: Japanese
-
-# This only removes embedded tags, so I can keep values in the database.
-zero:
-  fields: comments
-
 # https://beets.readthedocs.io/en/stable/reference/config.html#path-format-configuration
 # https://beets.readthedocs.io/en/stable/reference/pathformat.html
 paths:
   # The default for tracks that don't match any other path.
+  # Mostly albums but also includes singles as they're imported as an album,
+  #  which I think is better than singleton as it gets more info about the track
+  #  from MusicBrainz.
   default: '%first{$albumartists,1,0,\␀}/$album%aunique{}/$title%sunique{} - $artist'
-  # For singles imported as an album, which I think is better than singleton
-  #  as it gets more info about the track from MusicBrainz.
-  albumtype:single: '%first{$albumartists,1,0,\␀}/$title%sunique{} - $artist'
   # For tracks imported as a singleton.
   singleton: '%first{$artists,1,0,\␀}/$title%sunique{} - $artist'
   # For releases without a dominant artist.
@@ -55,8 +43,9 @@ paths:
 plugins:
   - edit
   - info
+  - replace
   - advancedrewrite
-  - zero
+  - importadded
   - chroma
   - musicbrainz
   - yearfixer
@@ -68,6 +57,9 @@ plugins:
   - maptag
   - replaygain
   - badfiles
+
+chroma:
+  auto: yes
 
 musicbrainz:
   data_source_mismatch_penalty: 0.2
@@ -94,6 +86,8 @@ lastgenre:
   # Large count so I get all/most of the popular enough tags, I feel like that
   #  would be better for searching than the default 1.
   count: 10
+  force: yes
+  source: track
 
 fetchart:
   minwidth: 500
@@ -107,22 +101,29 @@ embedart:
   remove_art_file: yes
 
 lyrics:
-  sources: [lrclib, google, genius, tekstowo]
+  sources: [lrclib]
+  # sources: [lrclib, google, genius, tekstowo]
   # Only the lrclib source supports synced lyrics.
   synced: yes
 
 xtractor:
-  auto: yes
+  # auto: yes # Not working
   write: yes
-  keep_output: no
-  keep_profiles: no
+  # These files can be found on /tmp/xtractor
+  keep_output: yes
+  keep_profiles: yes
+  output_path: ~/home/documents/xtractor
   threads: 8
 
 replaygain:
+  # Calculate for every track imported, even ones with pre-existing values so
+  #  all the tracks are consistent and use true peaks.
+  overwrite: yes
   backend: ffmpeg
   # (default) This is what causes peak values to go over 1.0, and it's
   #  supposedly more accurate but harder to run.
   peak: 'true' 
 
 badfiles:
-  check_on_import: yes
+  # Tracks from Qobuz don't really work for some reason.
+  check_on_import: no
