@@ -56,6 +56,7 @@
       system = vars.hostPlatform;
       config.allowUnfree = true;
       allowUnfreePredicate = _: true;
+      overlays = [(import ./overlays/beets.nix)];
     };
   in {
     inherit lib;
