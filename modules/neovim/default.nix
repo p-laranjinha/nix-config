@@ -23,4 +23,9 @@
   hm = {
     home.file.".config/nvim".source = funcs.mkMutableConfigSymlink ./config;
   };
+  environment.shellAliases = {
+    vi2 = "vi -u '~/home/projects/neovim-config/init.lua'";
+    vim2 = "vim -u '~/home/projects/neovim-config/init.lua'";
+    nvim2 = "nvim -u '~/home/projects/neovim-config/init.lua'";
+  };
 }
