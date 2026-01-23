@@ -112,7 +112,6 @@
     inkscape-with-extensions
     gimp-with-plugins
     freecad
-    pkgs-stable.orca-slicer
     blender
     # Turn images into ASCII.
     letterpress
@@ -186,6 +185,16 @@
       "io.github.quodlibet.QuodLibet"
 
       "org.raspberrypi.rpi-imager"
+
+      # Slicer for 3D printing.
+      rec {
+        appId = "com.orcaslicer.OrcaSlicer";
+        sha256 = "sha256-z8d1B+lAwNC/bQO1ufcsWO4GAuCnWPG9RGR4oSh2EXM=";
+        bundle = "${pkgs.fetchurl {
+          url = "https://github.com/OrcaSlicer/OrcaSlicer/releases/download/nightly-builds/OrcaSlicer-Linux-flatpak_nightly_x86_64.flatpak";
+          inherit sha256;
+        }}";
+      }
     ];
   };
 
