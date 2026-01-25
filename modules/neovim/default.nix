@@ -1,18 +1,28 @@
 {
   pkgs,
   funcs,
+  vars,
   ...
-}: {
+}:
+{
   environment.systemPackages = with pkgs; [
-    # Dependencies
-    gcc
-    unzip # Used to install LSPs with Mason.
-    ripgrep
-    fzf
-    cargo # Used to install the nil nix LSP.
+    # Dependencies (the comments are what made me install them, not all they might be used for)
     wl-clipboard # Clipboard provider for Wayland.
-    xclip # Clipboard provider for X11/RDP
-    nodejs_24 # For the bash LSP.
+    xclip # Clipboard provider for X11/RDP.
+    ripgrep # Search tool.
+    fzf # Fuzzy finder.
+    luarocks # Lua package manager used by some plugins.
+    lua51Packages.lua # Version lazy.nvim (with :checkhealth) says it needs.
+    tree-sitter
+    gcc # Required to compile treesitter parsers.
+    gnumake # Required for LuaSnip.
+    unzip # Used to install packages with Mason.
+    cargo # Used to install the nil Nix LSP.
+    nodejs_25 # For the bash LSP.
+    python315 # For the python linter and formatter.
+
+    # LSPs, DAPs, Linters and Formatters not installed with Mason.
+    statix
   ];
   programs.neovim = {
     enable = true;
@@ -21,11 +31,13 @@
     viAlias = true;
   };
   hm = {
-    home.file.".config/nvim".source = funcs.mkMutableConfigSymlink ./config;
+    home.file.".config/nvim2".source = funcs.mkMutableConfigSymlink ./config;
+    home.file.".config/nvim".source =
+      funcs.mkOutOfStoreSymlink "${vars.subHomeDirectory}/projects/neovim-config";
   };
   environment.shellAliases = {
-    vi2 = "vi -u '~/home/projects/neovim-config/init.lua'";
-    vim2 = "vim -u '~/home/projects/neovim-config/init.lua'";
-    nvim2 = "nvim -u '~/home/projects/neovim-config/init.lua'";
+    vi2 = "NVIM_APPNAME=nvim2 vi";
+    vim2 = "NVIM_APPNAME=nvim2 vim";
+    nvim2 = "NVIM_APPNAME=nvim2 nvim";
   };
 }

@@ -27,17 +27,17 @@
 
     # "nix query"
     # Runs nix repl initialized with values from this flake for easier testing and debugging.
-    nixq = ''nix repl --file ${pkgs.writeText "replinit.nix" ''
-        let
-          self = builtins.getFlake "config";
-        in rec {
-          inherit self;
-          inherit (self) inputs lib;
-          inherit (self.nixosConfigurations) ${vars.hostname};
-          inherit (self.nixosConfigurations.${vars.hostname}._module.specialArgs) vars;
-          inherit (self.nixosConfigurations.${vars.hostname}._module.args) funcs;
-        }
-      ''}'';
+    nixq = "nix repl --file ${pkgs.writeText "replinit.nix" ''
+      let
+        self = builtins.getFlake "config";
+      in rec {
+        inherit self;
+        inherit (self) inputs lib;
+        inherit (self.nixosConfigurations) ${vars.hostname};
+        inherit (self.nixosConfigurations.${vars.hostname}._module.specialArgs) vars;
+        inherit (self.nixosConfigurations.${vars.hostname}._module.args) funcs;
+      }
+    ''}";
   };
   programs.bash = {
     enable = true;
@@ -104,8 +104,7 @@
 
     # Nix formatter.
     alejandra
-    # Nix language server.
-    nil
+    nixfmt
     # Nix package version diff tool.
     nvd
 
