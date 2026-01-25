@@ -41,39 +41,40 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  } @ inputs: let
-    # Common information about the system that may be used in multiple locations.
-    # Using camelCase because that is the standard for options. kebab-case is for packages and files.
-    vars = import ./lib/vars inputs;
-    lib = (nixpkgs.lib.extend (_: _: home-manager.lib)).extend (import ./lib/lib);
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
+    let
+      # Common information about the system that may be used in multiple locations.
+      # Using camelCase because that is the standard for options. kebab-case is for packages and files.
+      vars = import ./lib/vars inputs;
+      lib = (nixpkgs.lib.extend (_: _: home-manager.lib)).extend (import ./lib/lib);
 
-    pkgs-stable = import inputs.nixpkgs-stable {
-      system = vars.hostPlatform;
-      config.allowUnfree = true;
-      allowUnfreePredicate = _: true;
-      overlays = [(import ./overlays/beets.nix)];
-    };
-  in {
-    inherit lib;
-    nixosConfigurations.${vars.hostname} = nixpkgs.lib.nixosSystem {
+      pkgs-stable = import inputs.nixpkgs-stable {
+        system = vars.hostPlatform;
+        config.allowUnfree = true;
+        allowUnfreePredicate = _: true;
+        overlays = [ (import ./overlays/beets.nix) ];
+      };
+    in
+    {
       inherit lib;
-      system = vars.hostPlatform;
-      modules =
-        (lib.attrValues (lib.modulesIn ./modules))
-        ++ [
+      nixosConfigurations.${vars.hostname} = nixpkgs.lib.nixosSystem {
+        inherit lib;
+        system = vars.hostPlatform;
+        modules = (lib.attrValues (lib.modulesIn ./modules)) ++ [
           ./lib/funcs
           ./lib/opts
         ];
-      specialArgs = {
-        inherit inputs;
-        inherit vars;
-        inherit pkgs-stable;
+        specialArgs = {
+          inherit inputs;
+          inherit vars;
+          inherit pkgs-stable;
+        };
       };
     };
-  };
 }

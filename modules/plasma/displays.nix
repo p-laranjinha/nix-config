@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.personal.displays;
-in {
+in
+{
   options.personal.displays = {
     one-1920x1080-screen = lib.mkOption {
       type = lib.types.bool;
@@ -103,11 +105,7 @@ in {
                                 "priority": 0
                             },
                             {
-                                "enabled": ${
-          if (! cfg.one-1920x1080-screen)
-          then "true"
-          else "false"
-        },
+                                "enabled": ${if (!cfg.one-1920x1080-screen) then "true" else "false"},
                                 "outputIndex": 1,
                                 "position": {
                                     "x": 2560,

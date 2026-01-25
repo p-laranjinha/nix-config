@@ -1,4 +1,5 @@
-inputs: let
+inputs:
+let
   # Setting this in 'let in' so the values can be used easier in imports.
   default = rec {
     hostname = "orange";
@@ -14,4 +15,4 @@ inputs: let
     stateVersion = "24.05";
   };
 in
-  default
+default

@@ -4,9 +4,11 @@
   config,
   vars,
   ...
-}: let
+}:
+let
   cfg = config.personal.remote-access;
-in {
+in
+{
   options.personal.remote-access = {
     sunshine = lib.mkOption {
       type = lib.types.bool;
@@ -19,28 +21,28 @@ in {
     networking.interfaces.enp14s0.wakeOnLan.enable = true;
 
     # Accept all traffic from Tailscale unconditionally.
-    networking.firewall.trustedInterfaces = ["tailscale0"];
+    networking.firewall.trustedInterfaces = [ "tailscale0" ];
 
     # You'll need to run `tailscale login` manually the first time you enable this.
     services.tailscale.enable = true;
 
-    services.xrdp.enable = ! cfg.sunshine;
+    services.xrdp.enable = !cfg.sunshine;
     services.xrdp.defaultWindowManager = "startplasma-x11";
-    services.xrdp.openFirewall = ! cfg.sunshine;
+    services.xrdp.openFirewall = !cfg.sunshine;
 
     # Key creation is done manually because it really only needs to be done once per system.
     # To create a key run (and don't forget to use a phassphrase):
     #  `ssh-keygen -f ~/.ssh/<filename>`
     services.openssh = {
       enable = true;
-      ports = [22];
+      ports = [ 22 ];
       settings = {
         # Require public key authentication for better security;
         PasswordAuthentication = false;
         KbdInteractiveAuthentication = false;
         PermitRootLogin = "no"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
         TCPKeepAlive = "yes";
-        AllowUsers = [vars.username]; # Allows all users by default. Can be [ "user1" "user2" ]
+        AllowUsers = [ vars.username ]; # Allows all users by default. Can be [ "user1" "user2" ]
         X11Forwarding = false;
       };
     };

@@ -3,16 +3,20 @@
   inputs,
   vars,
   ...
-}: {
+}:
+{
   # https://nixos.wiki/wiki/Virt-manager
   programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = [vars.username];
+  users.groups.libvirtd.members = [ vars.username ];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
   # Some virt-manager configuration is in ./default-home.nix
 
   # https://github.com/winapps-org/winapps
-  users.users.pebble.extraGroups = ["kvm" "libvirtd"];
+  users.users.pebble.extraGroups = [
+    "kvm"
+    "libvirtd"
+  ];
   environment.systemPackages = [
     pkgs.freerdp
     inputs.winapps.packages.${vars.hostPlatform}.winapps
@@ -25,8 +29,8 @@
     # Some virt-manager configuration
     dconf.settings = {
       "org/virt-manager/virt-manager/connections" = {
-        autoconnect = ["qemu:///system"];
-        uris = ["qemu:///system"];
+        autoconnect = [ "qemu:///system" ];
+        uris = [ "qemu:///system" ];
       };
     };
     home.sessionVariables.LIBVIRT_DEFAULT_URI = "qemu:///system";

@@ -3,7 +3,8 @@
   funcs,
   vars,
   ...
-}: {
+}:
+{
   environment.shellAliases = {
     lg = "lazygit";
 
@@ -105,6 +106,8 @@
     # Nix formatter.
     alejandra
     nixfmt
+    # Formatter multiplexer
+    treefmt
     # Nix package version diff tool.
     nvd
 

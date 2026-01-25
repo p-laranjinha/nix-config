@@ -40,10 +40,11 @@
   lib,
   vars,
   ...
-}: {
+}:
+{
   imports = [
     inputs.sops-nix.nixosModules.sops
-    (lib.mkAliasOptionModule ["secrets"] ["sops" "secrets"])
+    (lib.mkAliasOptionModule [ "secrets" ] [ "sops" "secrets" ])
   ];
 
   environment.systemPackages = with pkgs; [

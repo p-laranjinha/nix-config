@@ -1,4 +1,4 @@
-#! /usr/bin/env nix-shell 
+#! /usr/bin/env nix-shell
 #! nix-shell -i bash -p bash gum kdePackages.kdbusaddons kdePackages.kde-cli-tools
 
 NIX_CONFIG_DIR=/home/pebble/home/nix-config
@@ -17,7 +17,7 @@ fi
 
 # Autoformat the nix files.
 gum log --time timeonly --level info "Formatting files..."
-alejandra -q .
+treefmt
 if [ $? -eq 0 ]; then
 	gum log --time timeonly --level info "Finished formatting files."
 else

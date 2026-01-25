@@ -7,16 +7,25 @@
   modulesPath,
   vars,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
   boot = {
-    initrd.availableKernelModules = ["nvme" "ahci" "xhci_pci" "usb_storage" "usbhid" "sd_mod" "sr_mod"];
-    initrd.kernelModules = [];
-    kernelModules = ["kvm-amd"];
-    extraModulePackages = [];
+    initrd.availableKernelModules = [
+      "nvme"
+      "ahci"
+      "xhci_pci"
+      "usb_storage"
+      "usbhid"
+      "sd_mod"
+      "sr_mod"
+    ];
+    initrd.kernelModules = [ ];
+    kernelModules = [ "kvm-amd" ];
+    extraModulePackages = [ ];
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -129,41 +138,54 @@
     "/" = {
       device = "/dev/disk/by-uuid/4ad2648f-df23-4750-b957-3436f592f847";
       fsType = "btrfs";
-      options = ["compress=zstd"];
+      options = [ "compress=zstd" ];
     };
     "/home" = {
       device = "/dev/disk/by-uuid/4ad2648f-df23-4750-b957-3436f592f847";
       fsType = "btrfs";
-      options = ["subvol=home" "compress=zstd"];
+      options = [
+        "subvol=home"
+        "compress=zstd"
+      ];
     };
     "/nix" = {
       device = "/dev/disk/by-uuid/4ad2648f-df23-4750-b957-3436f592f847";
       fsType = "btrfs";
-      options = ["subvol=nix" "compress=zstd" "noatime"];
+      options = [
+        "subvol=nix"
+        "compress=zstd"
+        "noatime"
+      ];
     };
     "/boot" = {
       device = "/dev/disk/by-uuid/12CE-A600";
       fsType = "vfat";
-      options = ["fmask=0022" "dmask=0022"];
+      options = [
+        "fmask=0022"
+        "dmask=0022"
+      ];
     };
     "/swap" = {
       device = "/dev/disk/by-uuid/4ad2648f-df23-4750-b957-3436f592f847";
       fsType = "btrfs";
-      options = ["subvol=swap" "noatime"];
+      options = [
+        "subvol=swap"
+        "noatime"
+      ];
     };
   };
-  swapDevices = [{device = "/swap/swapfile";}];
+  swapDevices = [ { device = "/swap/swapfile"; } ];
   services.btrfs.autoScrub = {
     enable = true;
     interval = "monthly";
-    fileSystems = ["/"];
+    fileSystems = [ "/" ];
   };
   services.snapper.configs = {
     # root is the default config name
     # This required "sudo btrfs subvolume create /home/.snapshots" to be run once
     root = {
       SUBVOLUME = "/home";
-      ALLOW_USERS = ["${vars.username}"];
+      ALLOW_USERS = [ "${vars.username}" ];
       TIMELINE_CREATE = true;
       TIMELINE_CLEANUP = true;
     };

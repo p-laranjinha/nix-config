@@ -3,14 +3,16 @@
   inputs,
   funcs,
   ...
-}: {
+}:
+{
   hm = {
     imports = [
       inputs.zen-browser.homeModules.beta
     ];
 
     # Makes bookmarks look like essentials.
-    home.file.".zen/default/chrome/userChrome.css".source = funcs.mkMutableConfigSymlink ./zen-browser-clean-bookmarks.css;
+    home.file.".zen/default/chrome/userChrome.css".source =
+      funcs.mkMutableConfigSymlink ./zen-browser-clean-bookmarks.css;
 
     programs.zen-browser = {
       enable = true;
@@ -82,7 +84,7 @@
           # Same default search engine for both general and private browsing.
           "browser.search.separatePrivateDefault" = false;
           # Removes "Search with Google" from search results.
-          "browser.newtabpage.pinned" = [];
+          "browser.newtabpage.pinned" = [ ];
           # Hide the bookmark toolbar.
           "browser.toolbars.bookmarks.visibility" = "never";
           # Load bookmarks in new tabs.
@@ -132,9 +134,9 @@
                 "personal-bookmarks"
                 "tabbrowser-tabs"
               ];
-              vertical-tabs = [];
-              PersonalToolbar = [];
-              zen-sidebar-top-buttons = [];
+              vertical-tabs = [ ];
+              PersonalToolbar = [ ];
+              zen-sidebar-top-buttons = [ ];
               zen-sidebar-foot-buttons = [
                 "preferences-button"
                 "zen-workspaces-button"
@@ -167,8 +169,8 @@
                 # "_5d554479-7cc4-487f-bd25-d8fc67a42602_-browser-action" # FMHY SafeGuard
               ];
             };
-            seen = [];
-            dirtyAreaCache = [];
+            seen = [ ];
+            dirtyAreaCache = [ ];
             # This has to be bigger than the "currentVersion" in about:config or prefs.js.
             "currentVersion" = 999;
             "newElementCount" = 0;
@@ -194,7 +196,7 @@
           engines = {
             "SearXNG" = {
               urls = [
-                {template = "https://search.orangepebble.net/search?q={searchTerms}";}
+                { template = "https://search.orangepebble.net/search?q={searchTerms}"; }
                 {
                   # Not using the actual SearXNG autocompleter because it doesn't
                   #  bypass auth (even though on mobile it does). SearXNG is
@@ -208,25 +210,25 @@
               ];
               updateInterval = 24 * 60 * 60 * 1000; # every day
               icon = "https://docs.searxng.org/_static/searxng-wordmark.svg";
-              definedAliases = ["@s"];
+              definedAliases = [ "@s" ];
             };
             "Nix Packages" = {
-              urls = [{template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";}];
+              urls = [ { template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}"; } ];
               updateInterval = 24 * 60 * 60 * 1000; # every day
               icon = "https://search.nixos.org/favicon-96x96.png";
-              definedAliases = ["@np"];
+              definedAliases = [ "@np" ];
             };
             "NixOS Options" = {
-              urls = [{template = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";}];
+              urls = [ { template = "https://search.nixos.org/options?channel=unstable&query={searchTerms}"; } ];
               updateInterval = 24 * 60 * 60 * 1000; # every day
               icon = "https://search.nixos.org/favicon-96x96.png";
-              definedAliases = ["@no"];
+              definedAliases = [ "@no" ];
             };
             "NixOS Wiki" = {
-              urls = [{template = "https://wiki.nixos.org/w/index.php?search={searchTerms}";}];
+              urls = [ { template = "https://wiki.nixos.org/w/index.php?search={searchTerms}"; } ];
               icon = "https://wiki.nixos.org/favicon.ico";
               updateInterval = 24 * 60 * 60 * 1000; # every day
-              definedAliases = ["@nw"];
+              definedAliases = [ "@nw" ];
             };
             "bing".metaData.hidden = true;
             "perplexity".metaData.hidden = true;

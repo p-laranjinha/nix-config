@@ -3,7 +3,8 @@
   lib,
   vars,
   ...
-}: {
+}:
+{
   opts.autostartScripts.syncthingtray = ''
     ${lib.getExe pkgs.syncthingtray} --wait
   '';

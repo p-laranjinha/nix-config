@@ -5,7 +5,8 @@
   lib,
   vars,
   ...
-}: {
+}:
+{
   imports = [
     inputs.nur.modules.nixos.default
   ];
@@ -43,11 +44,12 @@
   # Use "nix-alien" if you don't want to add libraries to this list and rebuild.
   programs.nix-ld = {
     enable = true;
-    libraries = with pkgs;
-    # https://nixos.wiki/wiki/Games
-    # https://discourse.nixos.org/t/programs-nix-ld-libraries-expects-set-instead-of-list/56009/4
-    # https://wiki.nixos.org/wiki/FAQ#I've_downloaded_a_binary%2C_but_I_can't_run_it%2C_what_can_I_do%3F
-    # Should make most binaries run.
+    libraries =
+      with pkgs;
+      # https://nixos.wiki/wiki/Games
+      # https://discourse.nixos.org/t/programs-nix-ld-libraries-expects-set-instead-of-list/56009/4
+      # https://wiki.nixos.org/wiki/FAQ#I've_downloaded_a_binary%2C_but_I_can't_run_it%2C_what_can_I_do%3F
+      # Should make most binaries run.
       pkgs.steam-run.args.multiPkgs pkgs
       ++ [
         # Add any missing dynamic libraries for unpackaged programs here, NOT in environment.systemPackages
@@ -70,12 +72,12 @@
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
-    extensions = with pkgs.vscode-extensions;
+    extensions =
+      with pkgs.vscode-extensions;
       [
         jnoortheen.nix-ide
       ]
-      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace
-      [
+      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       ];
   };
 

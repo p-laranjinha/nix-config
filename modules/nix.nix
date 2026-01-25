@@ -2,13 +2,19 @@
   inputs,
   vars,
   ...
-}: {
+}:
+{
   networking.hostName = vars.hostname;
   # Don't forget to set a password with `passwd`.
   users.users.${vars.username} = {
     isNormalUser = true;
     description = vars.fullname;
-    extraGroups = ["networkmanager" "wheel" "wireshark" "dialout"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "wireshark"
+      "dialout"
+    ];
   };
 
   security.sudo.extraConfig = ''
@@ -19,12 +25,15 @@
   # Can be seen on entries shown by 'nixos-rebuild list-generations'.
   system.configurationRevision = inputs.self.rev or "dirty";
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   nix.optimise = {
     # Cleans the store
     automatic = true;
-    dates = ["weekly"];
+    dates = [ "weekly" ];
   };
   nix.gc = {
     # Deletes old generations

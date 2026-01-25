@@ -4,10 +4,11 @@
   funcs,
   vars,
   ...
-}: {
+}:
+{
   imports = [
     inputs.home-manager.nixosModules.default
-    (lib.mkAliasOptionModule ["hm"] ["home-manager" "users" vars.username])
+    (lib.mkAliasOptionModule [ "hm" ] [ "home-manager" "users" vars.username ])
   ];
 
   home-manager = {
@@ -16,9 +17,9 @@
     verbose = true;
     backupFileExtension = "backup";
     overwriteBackup = false;
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = { inherit inputs; };
     # For modules shared by all users;
-    sharedModules = [];
+    sharedModules = [ ];
   };
 
   hm = {
@@ -35,26 +36,31 @@
     programs.home-manager.enable = true;
 
     # Symlinking folders I care about to a sub home folder to have a cleaner home.
-    home.file = let
-      folders = {
-        "desktop" = "Desktop";
-        "downloads" = "Downloads";
-        "audio" = "Music";
-        "images" = "Pictures";
-        "videos" = "Videos";
-        "documents" = "Documents";
-        ".config" = ".config";
-        ".local" = ".local";
-        ".zen" = ".zen";
-      };
-    in
-      builtins.listToAttrs (builtins.map (target: {
-        name = "${lib.removePrefix ((vars.homeDirectory) + "/") (vars.subHomeDirectory)}/${target}";
-        value = {source = funcs.mkOutOfStoreSymlink "${vars.homeDirectory}/${folders.${target}}";};
-      }) (builtins.attrNames folders))
+    home.file =
+      let
+        folders = {
+          "desktop" = "Desktop";
+          "downloads" = "Downloads";
+          "audio" = "Music";
+          "images" = "Pictures";
+          "videos" = "Videos";
+          "documents" = "Documents";
+          ".config" = ".config";
+          ".local" = ".local";
+          ".zen" = ".zen";
+        };
+      in
+      builtins.listToAttrs (
+        builtins.map (target: {
+          name = "${lib.removePrefix ((vars.homeDirectory) + "/") (vars.subHomeDirectory)}/${target}";
+          value = {
+            source = funcs.mkOutOfStoreSymlink "${vars.homeDirectory}/${folders.${target}}";
+          };
+        }) (builtins.attrNames folders)
+      )
       // {
         # Allows for unfree packages to be used by nix-shell
-        ".config/nixpkgs/config.nix".text = ''{ allowUnfree = true; }'';
+        ".config/nixpkgs/config.nix".text = "{ allowUnfree = true; }";
       };
   };
 }

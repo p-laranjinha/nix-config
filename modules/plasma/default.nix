@@ -3,7 +3,8 @@
   inputs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./displays.nix
   ];
@@ -46,153 +47,153 @@
           lengthMode = "fit";
           alignment = "left";
           # Not using the included systemMonitor option because it sucks.
-          widgets = let
-            blue = "61,174,233";
-            orange = "246,116,0";
-            black = "0,0,0";
-            # Taken from the systemMonitor option source code.
-            toEscapedList = ids:
-              if ids != null
-              then "[${lib.concatMapStringsSep ", " (x: ''\"${x}\"'') ids}]"
-              else null;
-          in [
-            {
-              name = "org.kde.plasma.systemmonitor";
-              config = {
-                Appearance = {
-                  title = "CPU Usage";
-                  chartFace = "org.kde.ksysguard.linechart";
-                  updateRateLimit = "1000";
+          widgets =
+            let
+              blue = "61,174,233";
+              orange = "246,116,0";
+              black = "0,0,0";
+              # Taken from the systemMonitor option source code.
+              toEscapedList =
+                ids: if ids != null then "[${lib.concatMapStringsSep ", " (x: ''\"${x}\"'') ids}]" else null;
+            in
+            [
+              {
+                name = "org.kde.plasma.systemmonitor";
+                config = {
+                  Appearance = {
+                    title = "CPU Usage";
+                    chartFace = "org.kde.ksysguard.linechart";
+                    updateRateLimit = "1000";
+                  };
+                  SensorLabels = {
+                    "cpu/all/usage" = "Usage";
+                    "cpu/all/averageFrequency" = "Average Frequency";
+                  };
+                  SensorColors = {
+                    "cpu/all/usage" = blue;
+                  };
+                  Sensors = {
+                    highPrioritySensorIds = ''["cpu/all/usage"]'';
+                    lowPrioritySensorIds = ''["cpu/all/averageFrequency"]'';
+                  };
                 };
-                SensorLabels = {
-                  "cpu/all/usage" = "Usage";
-                  "cpu/all/averageFrequency" = "Average Frequency";
+              }
+              {
+                name = "org.kde.plasma.systemmonitor";
+                config = {
+                  Appearance = {
+                    title = "CPU Temperature";
+                    chartFace = "org.kde.ksysguard.linechart";
+                    updateRateLimit = "1000";
+                  };
+                  SensorLabels = {
+                    "cpu/all/maximumTemperature" = "Maximum Temperature";
+                    "cpu/all/averageTemperature" = "Average Temperature";
+                  };
+                  SensorColors = {
+                    "cpu/all/maximumTemperature" = orange;
+                  };
+                  Sensors = {
+                    highPrioritySensorIds = ''["cpu/all/maximumTemperature"]'';
+                    lowPrioritySensorIds = ''["cpu/all/averageTemperature"]'';
+                  };
+                  "org.kde.ksysguard.linechart/General" = {
+                    rangeAutoY = false;
+                    rangeFromY = 40;
+                    rangeToY = 95;
+                  };
                 };
-                SensorColors = {
-                  "cpu/all/usage" = blue;
+              }
+              {
+                name = "org.kde.plasma.systemmonitor";
+                config = {
+                  Appearance = {
+                    title = "GPU Usage";
+                    chartFace = "org.kde.ksysguard.linechart";
+                    updateRateLimit = "1000";
+                  };
+                  SensorLabels = {
+                    "gpu/gpu1/usage" = "Usage";
+                    "gpu/gpu1/coreFrequency" = "Frequency";
+                  };
+                  SensorColors = {
+                    "gpu/gpu1/usage" = blue;
+                  };
+                  Sensors = {
+                    highPrioritySensorIds = ''["gpu/gpu1/usage"]'';
+                    lowPrioritySensorIds = ''["gpu/gpu1/coreFrequency"]'';
+                  };
                 };
-                Sensors = {
-                  highPrioritySensorIds = ''["cpu/all/usage"]'';
-                  lowPrioritySensorIds = ''["cpu/all/averageFrequency"]'';
+              }
+              {
+                name = "org.kde.plasma.systemmonitor";
+                config = {
+                  Appearance = {
+                    title = "GPU Temperature";
+                    chartFace = "org.kde.ksysguard.linechart";
+                    updateRateLimit = "1000";
+                  };
+                  SensorLabels = {
+                    "gpu/gpu1/temp2" = "Junction Temperature"; # Hotspot
+                    "gpu/gpu1/temperature" = "Temperature";
+                  };
+                  SensorColors = {
+                    "gpu/gpu1/temp2" = orange;
+                  };
+                  Sensors = {
+                    highPrioritySensorIds = ''["gpu/gpu1/temp2"]'';
+                    lowPrioritySensorIds = ''["gpu/gpu1/temperature"]'';
+                  };
+                  "org.kde.ksysguard.linechart/General" = {
+                    rangeAutoY = false;
+                    rangeFromY = 40;
+                    rangeToY = 110;
+                  };
                 };
-              };
-            }
-            {
-              name = "org.kde.plasma.systemmonitor";
-              config = {
-                Appearance = {
-                  title = "CPU Temperature";
-                  chartFace = "org.kde.ksysguard.linechart";
-                  updateRateLimit = "1000";
+              }
+              {
+                name = "org.kde.plasma.systemmonitor";
+                config = {
+                  Appearance = {
+                    title = "Memory Usage";
+                    chartFace = "org.kde.ksysguard.linechart";
+                    updateRateLimit = "1000";
+                  };
+                  SensorLabels = {
+                    "memory/physical/used" = "Used Physical";
+                    "memory/swap/used" = "Used Swap";
+                  };
+                  SensorColors = {
+                    "memory/physical/used" = blue;
+                    "memory/swap/used" = orange;
+                  };
+                  Sensors = {
+                    highPrioritySensorIds = ''["memory/physical/used", "memory/swap/used"]'';
+                  };
                 };
-                SensorLabels = {
-                  "cpu/all/maximumTemperature" = "Maximum Temperature";
-                  "cpu/all/averageTemperature" = "Average Temperature";
+              }
+              {
+                name = "org.kde.plasma.systemmonitor";
+                config = {
+                  Appearance = {
+                    title = "Network Speed";
+                    chartFace = "org.kde.ksysguard.linechart";
+                    updateRateLimit = "1000";
+                  };
+                  SensorLabels = {
+                    "network/all/download" = "Download Rate";
+                    "network/all/upload" = "Upload Rate";
+                  };
+                  SensorColors = {
+                    "network/all/download" = blue;
+                    "network/all/upload" = orange;
+                  };
+                  Sensors = {
+                    highPrioritySensorIds = ''["network/all/download", "network/all/upload"]'';
+                  };
                 };
-                SensorColors = {
-                  "cpu/all/maximumTemperature" = orange;
-                };
-                Sensors = {
-                  highPrioritySensorIds = ''["cpu/all/maximumTemperature"]'';
-                  lowPrioritySensorIds = ''["cpu/all/averageTemperature"]'';
-                };
-                "org.kde.ksysguard.linechart/General" = {
-                  rangeAutoY = false;
-                  rangeFromY = 40;
-                  rangeToY = 95;
-                };
-              };
-            }
-            {
-              name = "org.kde.plasma.systemmonitor";
-              config = {
-                Appearance = {
-                  title = "GPU Usage";
-                  chartFace = "org.kde.ksysguard.linechart";
-                  updateRateLimit = "1000";
-                };
-                SensorLabels = {
-                  "gpu/gpu1/usage" = "Usage";
-                  "gpu/gpu1/coreFrequency" = "Frequency";
-                };
-                SensorColors = {
-                  "gpu/gpu1/usage" = blue;
-                };
-                Sensors = {
-                  highPrioritySensorIds = ''["gpu/gpu1/usage"]'';
-                  lowPrioritySensorIds = ''["gpu/gpu1/coreFrequency"]'';
-                };
-              };
-            }
-            {
-              name = "org.kde.plasma.systemmonitor";
-              config = {
-                Appearance = {
-                  title = "GPU Temperature";
-                  chartFace = "org.kde.ksysguard.linechart";
-                  updateRateLimit = "1000";
-                };
-                SensorLabels = {
-                  "gpu/gpu1/temp2" = "Junction Temperature"; # Hotspot
-                  "gpu/gpu1/temperature" = "Temperature";
-                };
-                SensorColors = {
-                  "gpu/gpu1/temp2" = orange;
-                };
-                Sensors = {
-                  highPrioritySensorIds = ''["gpu/gpu1/temp2"]'';
-                  lowPrioritySensorIds = ''["gpu/gpu1/temperature"]'';
-                };
-                "org.kde.ksysguard.linechart/General" = {
-                  rangeAutoY = false;
-                  rangeFromY = 40;
-                  rangeToY = 110;
-                };
-              };
-            }
-            {
-              name = "org.kde.plasma.systemmonitor";
-              config = {
-                Appearance = {
-                  title = "Memory Usage";
-                  chartFace = "org.kde.ksysguard.linechart";
-                  updateRateLimit = "1000";
-                };
-                SensorLabels = {
-                  "memory/physical/used" = "Used Physical";
-                  "memory/swap/used" = "Used Swap";
-                };
-                SensorColors = {
-                  "memory/physical/used" = blue;
-                  "memory/swap/used" = orange;
-                };
-                Sensors = {
-                  highPrioritySensorIds = ''["memory/physical/used", "memory/swap/used"]'';
-                };
-              };
-            }
-            {
-              name = "org.kde.plasma.systemmonitor";
-              config = {
-                Appearance = {
-                  title = "Network Speed";
-                  chartFace = "org.kde.ksysguard.linechart";
-                  updateRateLimit = "1000";
-                };
-                SensorLabels = {
-                  "network/all/download" = "Download Rate";
-                  "network/all/upload" = "Upload Rate";
-                };
-                SensorColors = {
-                  "network/all/download" = blue;
-                  "network/all/upload" = orange;
-                };
-                Sensors = {
-                  highPrioritySensorIds = ''["network/all/download", "network/all/upload"]'';
-                };
-              };
-            }
-          ];
+              }
+            ];
         }
         {
           location = "bottom";
