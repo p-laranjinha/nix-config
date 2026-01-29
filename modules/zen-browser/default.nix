@@ -186,32 +186,13 @@
         ];
         search = {
           force = true;
-          default = "SearXNG";
+          default = "ddg";
           order = [
-            "SearXNG"
             "ddg"
             "google"
           ];
           # https://searchfox.org/firefox-main/rev/b7497e2adf09e8b17bf161df07945f42c9f8cfe5/toolkit/components/search/SearchEngine.sys.mjs#890-923
           engines = {
-            "SearXNG" = {
-              urls = [
-                { template = "https://search.orangepebble.net/search?q={searchTerms}"; }
-                {
-                  # Not using the actual SearXNG autocompleter because it doesn't
-                  #  bypass auth (even though on mobile it does). SearXNG is
-                  #  using DDG anyways so nothing lost.
-                  # template = "https://search.orangepebble.net/autocompleter?q={searchTerms}";
-                  # 'count=3' because I don't want many search results.
-                  template = "https://ac.duckduckgo.com/ac/?type=list&count=3&q={searchTerms}";
-                  # https://searchfox.org/firefox-main/rev/b7497e2adf09e8b17bf161df07945f42c9f8cfe5/toolkit/components/search/SearchUtils.sys.mjs#162-168
-                  type = "application/x-suggestions+json";
-                }
-              ];
-              updateInterval = 24 * 60 * 60 * 1000; # every day
-              icon = "https://docs.searxng.org/_static/searxng-wordmark.svg";
-              definedAliases = [ "@s" ];
-            };
             "Nix Packages" = {
               urls = [ { template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}"; } ];
               updateInterval = 24 * 60 * 60 * 1000; # every day
@@ -230,9 +211,11 @@
               updateInterval = 24 * 60 * 60 * 1000; # every day
               definedAliases = [ "@nw" ];
             };
+            # Builtin engines only support specifying one additional alias.
+            "google".metaData.alias = "@g";
+            "perplexity".metaData.alias = "@p";
+            # DDG uses bing so no point in having it as well.
             "bing".metaData.hidden = true;
-            "perplexity".metaData.hidden = true;
-            "google".metaData.alias = "@g"; # builtin engines only support specifying one additional alias.
           };
         };
       };
