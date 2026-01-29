@@ -1,10 +1,53 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i bash -p bash gum kdePackages.kdbusaddons kdePackages.kde-cli-tools
+#! nix-shell -i bash -p bash
+# shellcheck shell=bash
 
 NIX_CONFIG_DIR=/home/pebble/home/nix-config
 
 # cd to your config dir without affecting shell outside this script.
 pushd $NIX_CONFIG_DIR &>/dev/null
+
+# Check if submodules are up to date and warn the user.
+gum log --time timeonly --level info "Checking submodules..."
+check_submodule() {
+	git diff HEAD --quiet
+	if [ $? -eq 0 ]; then
+		gum log --time timeonly --level info "Submodule '$name' has no uncommitted files."
+	else
+		gum log --time timeonly --level warn "Submodule '$name' has uncommitted files."
+		gum confirm "Continue?"
+		if [ $? -eq 1 ]; then
+			exit 1
+		fi
+	fi
+
+	# https://stackoverflow.com/a/3278427
+	UPSTREAM=${1:-'@{u}'}
+	LOCAL=$(git rev-parse @)
+	REMOTE=$(git rev-parse "$UPSTREAM")
+	BASE=$(git merge-base @ "$UPSTREAM")
+
+	if [ $LOCAL = $REMOTE ]; then
+		gum log --time timeonly --level info "Submodule '$name' is up to date."
+	else
+		if [ $LOCAL = $BASE ]; then
+			gum log --time timeonly --level warn "Submodule '$name' is outdated."
+		elif [ $REMOTE = $BASE ]; then
+			gum log --time timeonly --level warn "Submodule '$name' has not pushed its changes."
+		else
+			gum log --time timeonly --level warn "Submodule '$name' has diverged from origin."
+		fi
+		gum confirm "Continue?"
+		if [ $? -eq 1 ]; then
+			exit 1
+		fi
+	fi
+}
+export -f check_submodule
+git submodule --quiet foreach check_submodule
+if [ $? -ne 0 ]; then
+	exit 1
+fi
 
 # Update files gotten using fetchgit which have a comment on the rev or url attribute.
 gum log --time timeonly --level info "Updating fetchgit commit references..."

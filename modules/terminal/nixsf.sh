@@ -1,5 +1,6 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i bash -p bash gum fd update-nix-fetchgit alejandra delta
+#! nix-shell -i bash -p bash
+# shellcheck shell=bash
 
 NIX_CONFIG_DIR=/home/pebble/home/nix-config
 
