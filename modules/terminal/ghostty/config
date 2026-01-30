@@ -1,9 +1,12 @@
-theme = Ayu
-# The background color in nvim is darker, so I chose that.
-# background = #0A0E14
+theme = Carbonfox
+# I like the black background color
 background = #000000
+# I changed yellow in Neovim, so I'll also change it here
+palette = 3=#ebcb8b
+palette = 11=#ebcb8b
 
 font-size = 11
 font-family = "FiraCode Nerd Font"
 
+# I use this keybind in Neovim for resizing splits
 keybind = shift+ctrl+j=unbind
