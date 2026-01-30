@@ -21,6 +21,8 @@ check_submodule() {
 		fi
 	fi
 
+	git fetch --quiet
+
 	# https://stackoverflow.com/a/3278427
 	UPSTREAM=${1:-'@{u}'}
 	LOCAL=$(git rev-parse @)
