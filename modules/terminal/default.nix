@@ -47,43 +47,61 @@
       # Breaks nix develop.
       # cd ~/home/
     '';
-    # Send me a notification and sound when long running commands finish.
-    undistractMe = {
+  };
+  programs = {
+    git = {
       enable = true;
-      playSound = true;
-    };
-  };
-  programs.git = {
-    enable = true;
-    config = {
-      init.defaultBranch = "master";
-      user.name = "p-laranjinha";
-      user.email = "plcasimiro2000@gmail.com";
+      config = {
+        init.defaultBranch = "master";
+        user.name = "p-laranjinha";
+        user.email = "plcasimiro2000@gmail.com";
 
-      core.pager = "delta";
-      interactive.diffFilter = "delta --color-only";
-      delta.navigate = "true"; # use n and N to move between diff sections
-      delta.dark = "true";
-      delta.line-numbers = "true";
-      delta.hyperlinks = "true";
-      merge.conflictStyle = "zdiff3";
+        core.pager = "delta";
+        interactive.diffFilter = "delta --color-only";
+        delta = {
+          navigate = "true"; # use n and N to move between diff sections
+          dark = "true";
+          line-numbers = "true";
+          hyperlinks = "true";
+        };
+        merge.conflictStyle = "zdiff3";
+      };
+      # Git extension for versioning large files (Git Large File Storage).
+      lfs.enable = true;
     };
-    # Git extension for versioning large files (Git Large File Storage).
-    lfs.enable = true;
-  };
 
-  # Tool to locate the nixpkgs package providing a certain file. Used by comma.
-  programs.nix-index.enable = true;
+    tmux.enable = true;
+
+    # Tool to locate the nixpkgs package providing a certain file. Used by comma.
+    nix-index.enable = true;
+  };
 
   hm = {
-    programs.gh.enable = true;
+    programs = {
+      gh.enable = true;
 
-    # Throws an error when not set with home manager.
-    programs.zoxide.enable = true;
-    # Required for zoxide to set the 'z' and 'zi' commands when set with home manager.
-    programs.bash.enable = true;
+      # Throws an error when not set with home manager.
+      zoxide.enable = true;
+      # Required for zoxide to set the 'z' and 'zi' commands when set with home manager.
+      bash.enable = true;
+    };
 
-    home.file.".config/ghostty/config".source = funcs.mkMutableConfigSymlink ./ghostty/config;
+    home.file = {
+      ".config/ghostty/config".source = funcs.mkMutableConfigSymlink ./ghostty/config;
+      ".config/tmux/tmux.conf".source = funcs.mkMutableConfigSymlink ./tmux/tmux.conf;
+      ".config/tmux/plugins/tpm".source = funcs.mkOutOfStoreSymlink (
+        pkgs.fetchFromGitHub {
+          owner = "tmux-plugins";
+          repo = "tpm";
+          rev = "master";
+          hash = "sha256-hW8mfwB8F9ZkTQ72WQp/1fy8KL1IIYMZBtZYIwZdMQc=";
+        }
+      );
+      ".config/tmux/plugins/tmux-which-key/config.yaml".source =
+        funcs.mkMutableConfigSymlink ./tmux/which-key.yaml;
+      ".config/tmux/scripts".source = funcs.mkMutableConfigSymlink ./tmux/scripts;
+    };
+
   };
 
   environment.systemPackages = with pkgs; [

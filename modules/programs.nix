@@ -186,7 +186,8 @@
       # Music player with plugins.
       "io.github.quodlibet.QuodLibet"
 
-      "org.raspberrypi.rpi-imager"
+      # Color picker with many other color-related functionality
+      "com.ktechpit.colorsmith"
 
       # Slicer for 3D printing.
       rec {
