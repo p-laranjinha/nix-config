@@ -2,53 +2,67 @@
   pkgs,
   funcs,
   vars,
+  lib,
   ...
 }:
 {
-  environment.shellAliases = {
-    lg = "lazygit";
-
-    # Undoes a commit but keeps the changes.
-    gitr = "git reset --soft HEAD~1";
-
-    # Restart plasma shell.
-    psr = "kquitapp6 plasmashell; kstart plasmashell;";
-
-    # nix-alien commands to run unpatched binaries and find their libraries.
-    nixa = "nix-alien-ld --";
-    nixafl = "nix-alien-find-libs";
-
-    # Runs a script that rebuild switches this config.
-    nixs = toString (funcs.mkMutableConfigSymlink ./nixs.sh);
-    # Runs a script that rebuild switches and commits this config.
-    nixsf = toString (funcs.mkMutableConfigSymlink ./nixsf.sh);
-    nixb = "sudo nixos-rebuild build --flake ${vars.configDirectory}";
-    nixl = "nixos-rebuild list-generations";
-    nixu = "nix flake update --flake ${vars.configDirectory}";
-
-    # "nix query"
-    # Runs nix repl initialized with values from this flake for easier testing and debugging.
-    nixq = "nix repl --file ${pkgs.writeText "replinit.nix" ''
-      let
-        self = builtins.getFlake "config";
-      in rec {
-        inherit self;
-        inherit (self) inputs lib;
-        inherit (self.nixosConfigurations) ${vars.hostname};
-        inherit (self.nixosConfigurations.${vars.hostname}._module.specialArgs) vars;
-        inherit (self.nixosConfigurations.${vars.hostname}._module.args) funcs;
-      }
-    ''}";
-  };
-  programs.bash = {
-    enable = true;
-    completion.enable = true;
-    interactiveShellInit = ''
-      # Breaks nix develop.
-      # cd ~/home/
-    '';
-  };
+  users.defaultUserShell = pkgs.zsh;
+  environment.shells = with pkgs; [
+    zsh
+    bash
+  ];
+  # Prevent the new user dialog in zsh
+  system.userActivationScripts.zshrc = "touch .zshrc";
   programs = {
+    zsh = {
+      shellAliases = {
+        lg = "lazygit";
+
+        # Undoes a commit but keeps the changes.
+        gitr = "git reset --soft HEAD~1";
+
+        # Restart plasma shell.
+        psr = "kquitapp6 plasmashell; kstart plasmashell;";
+
+        # nix-alien commands to run unpatched binaries and find their libraries.
+        nixa = "nix-alien-ld --";
+        nixafl = "nix-alien-find-libs";
+
+        # Runs a script that rebuild switches this config.
+        nixs = toString (funcs.mkMutableConfigSymlink ./nixs.sh);
+        # Runs a script that rebuild switches and commits this config.
+        nixsf = toString (funcs.mkMutableConfigSymlink ./nixsf.sh);
+        nixb = "sudo nixos-rebuild build --flake ${vars.configDirectory}";
+        nixl = "nixos-rebuild list-generations";
+        nixu = "nix flake update --flake ${vars.configDirectory}";
+
+        # "nix query"
+        # Runs nix repl initialized with values from this flake for easier testing and debugging.
+        nixq = "nix repl --file ${pkgs.writeText "replinit.nix" ''
+          let
+            self = builtins.getFlake "config";
+          in rec {
+            inherit self;
+            inherit (self) inputs lib;
+            inherit (self.nixosConfigurations) ${vars.hostname};
+            inherit (self.nixosConfigurations.${vars.hostname}._module.specialArgs) vars;
+            inherit (self.nixosConfigurations.${vars.hostname}._module.args) funcs;
+          }
+        ''}";
+      };
+      enable = true;
+      enableCompletion = true;
+      autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
+      ohMyZsh = {
+        enable = true;
+      };
+      promptInit = ''
+        source "${funcs.mkMutableConfigSymlink ./prompt.zsh}"
+        source <(fzf --zsh)
+      '';
+    };
+    bash.enable = true;
     git = {
       enable = true;
       config = {
@@ -83,7 +97,7 @@
       # Throws an error when not set with home manager.
       zoxide.enable = true;
       # Required for zoxide to set the 'z' and 'zi' commands when set with home manager.
-      bash.enable = true;
+      zsh.enable = true;
     };
 
     home.file = {
@@ -147,6 +161,9 @@
 
     # 'cat' replacement with syntax highlighting.
     bat
+
+    # Calculator used by my zsh theme to calculate run times.
+    bc
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your

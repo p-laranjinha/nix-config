@@ -58,7 +58,7 @@ items:
         key: n
         command: next-window
       - name: New
-        key: W
+        key: C-w
         command: "neww -c #{pane_current_path}"
       - separator: true
       - name: Select 1
