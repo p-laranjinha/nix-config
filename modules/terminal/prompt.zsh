@@ -50,6 +50,7 @@ _simplerich_update_git_info() {
 # REF: http://zsh.sourceforge.net/Doc/Release/Functions.html
 preexec() { # cspell:disable-line
     _SIMPLERICH_COMMAND_TIME_BEGIN="$(_simplerich_current_time_millis)"
+    echo "[$(date +%H:%M:%S)]"
 }
 
 # command execute after
@@ -266,10 +267,10 @@ _simplerich_prompt() {
     }
 
     if [ -v CONDA_DEFAULT_ENV ] || [ -v VIRTUAL_ENV ]; then
-        echo "$(real_time) $(python_info) $(directory_info) $(git_info)
+        echo "$(directory_info) $(python_info) $(git_info)
 $(command_status) "
     else
-        echo "$(real_time) $(directory_info) $(git_info)
+        echo "$(directory_info) $(git_info)
 $(command_status) "
     fi
 }
