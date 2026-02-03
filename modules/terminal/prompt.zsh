@@ -266,13 +266,34 @@ _simplerich_prompt() {
         echo "${_SIMPLERICH_COMMAND_STATUS}"
     }
 
+    zvm_mode() {
+      case $ZVM_MODE in
+        $ZVM_MODE_NORMAL)
+          echo N
+        ;;
+        $ZVM_MODE_INSERT)
+          echo I
+        ;;
+        $ZVM_MODE_VISUAL)
+          echo V
+        ;;
+        $ZVM_MODE_VISUAL_LINE)
+          echo L
+        ;;
+        $ZVM_MODE_REPLACE)
+          echo R
+        ;;
+      esac
+    }
+
     if [ -v CONDA_DEFAULT_ENV ] || [ -v VIRTUAL_ENV ]; then
-        echo "$(directory_info) $(python_info) $(git_info)
+        echo "$(zvm_mode) $(directory_info) $(python_info) $(git_info)
 $(command_status) "
     else
-        echo "$(directory_info) $(git_info)
+      echo "$(zvm_mode) $(directory_info) $(git_info)
 $(command_status) "
     fi
 }
 
 PROMPT='$(_simplerich_prompt)'
+PROMPT2='> '
