@@ -278,8 +278,11 @@ items:
         command: customize-mode -Z
   - separator: true
   - name: Open blank popup terminal
-    key: C-t
+    key: C-b
     command: display-popup -E -w 75% -h 75% -d "#{pane_current_path}"
+  - name: Toggle monitoring pane [-p]
+    key: M-m
+    command: send-keys 'M-m'
   - name: Time
     key: t
     command: clock-mode

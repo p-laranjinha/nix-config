@@ -96,31 +96,12 @@ precmd() { # cspell:disable-line
         _SIMPLERICH_COMMAND_TIME_BEGIN="-20200325"
         local length_cost=${#cost}
 
-        local send_notif=false
-        if [[ $cost -gt 20 ]]; then
-          send_notif=true
-        fi
-
         if [ "$length_cost" = "4" ]; then
             cost="0${cost}"
         fi
 
-        local non_timed_commands=(
-          "vi"
-          "nvim"
-          "lg"
-          "ssh"
-        )
-        local dont_skip_notification=true
-        for i in "${non_timed_commands[@]}"; do
-          if [[ $cmd == "$i"* ]]; then
-            dont_skip_notification=false
-            break
-          fi
-        done
-
-        # Send notification if more than X seconds have passed and cmd doesn't have those prefixes.
-        if $send_notif && $dont_skip_notification; then
+        # Send notification if the monitor notification is set to true.
+        if [[ "$ZSH_MONITOR_TO_NOTIFY" = true ]]; then
           local message=$(sed 's/\\n/\'$'\n''/g' <<< "Command has finished.\nTook ${cost}s.")
           notify-send --app-name "zsh" $message
         fi
