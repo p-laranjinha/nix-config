@@ -111,7 +111,7 @@ precmd() { # cspell:disable-line
 
         cost="[${cost}s]"
 
-        echo "${time} $fg[blue]${cost}${color_reset} ${formatted_cmd}"
+        echo "${time} $fg[blue]${cost}${color_reset} ${formatted_cmd}\n"
     }
 
     # last_cmd
@@ -250,34 +250,35 @@ _simplerich_prompt() {
         echo "${_SIMPLERICH_COMMAND_STATUS}"
     }
 
-    zvm_mode() {
-      case $ZVM_MODE in
-        $ZVM_MODE_NORMAL)
-          echo "%{$fg[blue]%}N%{$reset_color%}"
-        ;;
-        $ZVM_MODE_INSERT)
-          echo "%{$fg[green]%}I%{$reset_color%}"
-        ;;
-        $ZVM_MODE_VISUAL)
-          echo "%{$fg[magenta]%}V%{$reset_color%}"
-        ;;
-        $ZVM_MODE_VISUAL_LINE)
-          echo "%{$fg[magenta]%}L%{$reset_color%}"
-        ;;
-        $ZVM_MODE_REPLACE)
-          echo "%{$fg[red]%}R%{$reset_color%}"
-        ;;
-      esac
-    }
 
     if [ -v CONDA_DEFAULT_ENV ] || [ -v VIRTUAL_ENV ]; then
-        echo "$(zvm_mode) $(directory_info) $(python_info) $(git_info)
-$(command_status) "
+        echo "$(directory_info) $(python_info) $(git_info)
+$(_zvm_mode)$(command_status) "
     else
-      echo "$(zvm_mode) $(directory_info) $(git_info)
-$(command_status) "
+      echo "$(directory_info) $(git_info)
+$(_zvm_mode)$(command_status) "
     fi
 }
 
+_zvm_mode() {
+  case $ZVM_MODE in
+    $ZVM_MODE_NORMAL)
+      echo "%{$fg[blue]%}N%{$reset_color%}"
+    ;;
+    $ZVM_MODE_INSERT)
+      echo "%{$fg[green]%}I%{$reset_color%}"
+    ;;
+    $ZVM_MODE_VISUAL)
+      echo "%{$fg[magenta]%}V%{$reset_color%}"
+    ;;
+    $ZVM_MODE_VISUAL_LINE)
+      echo "%{$fg[magenta]%}L%{$reset_color%}"
+    ;;
+    $ZVM_MODE_REPLACE)
+      echo "%{$fg[red]%}R%{$reset_color%}"
+    ;;
+  esac
+}
+
 PROMPT='$(_simplerich_prompt)'
-PROMPT2='> '
+PROMPT2='$(_zvm_mode)> '

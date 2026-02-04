@@ -61,8 +61,8 @@
         source "${funcs.mkMutableConfigSymlink ./prompt.zsh}"
       '';
       interactiveShellInit = ''
+        ZSH_VI_MODE_PLUGIN_FILE="${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
         source "${funcs.mkMutableConfigSymlink ./.zshrc}"
-        source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
       '';
     };
     bash.enable = true;

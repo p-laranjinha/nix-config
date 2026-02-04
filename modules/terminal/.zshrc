@@ -14,3 +14,5 @@ zvm_before_init() {
     ZVM_VI_HIGHLIGHT_FOREGROUND=#f2f4f8
     ZVM_VI_HIGHLIGHT_BACKGROUND=#2a2a2a
 }
+
+source "$ZSH_VI_MODE_PLUGIN_FILE"
