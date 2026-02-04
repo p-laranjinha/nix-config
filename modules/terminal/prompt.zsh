@@ -59,15 +59,16 @@ precmd() { # cspell:disable-line
     local last_cmd_return_code=$?
 
     update_command_status() {
-        local color=""
-        local command_result=$1
-        if $command_result; then
-            color=""
-        else
-            color="%{$fg[red]%}"
-        fi
+        # local color=""
+        # local command_result=$1
+        # if $command_result; then
+        #     color=""
+        # else
+        #     color="%{$fg[red]%}"
+        # fi
 
-        _SIMPLERICH_COMMAND_STATUS="${color}%(!.#.$)%{$reset_color%}"
+        # _SIMPLERICH_COMMAND_STATUS="${color}%(!.#.$)%{$reset_color%}"
+        _SIMPLERICH_COMMAND_STATUS="%(!.#.$)%{$reset_color%}"
     }
 
     output_command_execute_after() {
@@ -85,7 +86,7 @@ precmd() { # cspell:disable-line
             color_cmd="$fg[red]"
         fi
         local color_reset="$reset_color"
-        local formatted_cmd="${color_cmd}${cmd}${color_reset}"
+        local formatted_cmd="${color_cmd}(${last_cmd_return_code}) ${cmd}${color_reset}"
 
         # time
         local time="[$(date +%H:%M:%S)]"
@@ -253,32 +254,32 @@ _simplerich_prompt() {
 
     if [ -v CONDA_DEFAULT_ENV ] || [ -v VIRTUAL_ENV ]; then
         echo "$(directory_info) $(python_info) $(git_info)
-$(_zvm_mode)$(command_status) "
+$(_zvm_mode_color)$(command_status) "
     else
       echo "$(directory_info) $(git_info)
-$(_zvm_mode)$(command_status) "
+$(_zvm_mode_color)$(command_status) "
     fi
 }
 
-_zvm_mode() {
+_zvm_mode_color() {
   case $ZVM_MODE in
     $ZVM_MODE_NORMAL)
-      echo "%{$fg[blue]%}N%{$reset_color%}"
+      echo "%{$fg[blue]%}"
     ;;
     $ZVM_MODE_INSERT)
-      echo "%{$fg[green]%}I%{$reset_color%}"
+      echo "%{$fg[green]%}"
     ;;
     $ZVM_MODE_VISUAL)
-      echo "%{$fg[magenta]%}V%{$reset_color%}"
+      echo "%{$fg[magenta]%}"
     ;;
     $ZVM_MODE_VISUAL_LINE)
-      echo "%{$fg[magenta]%}L%{$reset_color%}"
+      echo "%{$fg[magenta]%}"
     ;;
     $ZVM_MODE_REPLACE)
-      echo "%{$fg[red]%}R%{$reset_color%}"
+      echo "%{$fg[red]%}"
     ;;
   esac
 }
 
 PROMPT='$(_simplerich_prompt)'
-PROMPT2='$(_zvm_mode)> '
+PROMPT2='$(_zvm_mode_color)>%{$reset_color%} '

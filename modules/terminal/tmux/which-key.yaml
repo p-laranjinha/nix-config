@@ -211,8 +211,8 @@ items:
       - name: Choose
         key: s
         command: choose-tree -Zs
-      - name: "[New]"
-        key: N
+      - name: "New"
+        key: +
         command: new
       - name: Rename
         key: "$"
