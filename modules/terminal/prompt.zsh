@@ -273,7 +273,7 @@ _zvm_mode_color() {
       echo "%{$fg[magenta]%}"
     ;;
     $ZVM_MODE_VISUAL_LINE)
-      echo "%{$fg[magenta]%}"
+      echo "%{$fg[magenta]%}\033[9m"
     ;;
     $ZVM_MODE_REPLACE)
       echo "%{$fg[red]%}"
