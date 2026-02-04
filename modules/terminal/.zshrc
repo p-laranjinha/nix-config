@@ -14,18 +14,3 @@ zvm_before_init() {
     ZVM_VI_HIGHLIGHT_FOREGROUND=#f2f4f8
     ZVM_VI_HIGHLIGHT_BACKGROUND=#2a2a2a
 }
-
-function monitor-to-notify {
-    if [[ "$ZSH_MONITOR_TO_NOTIFY" = true ]]; then
-        ZSH_MONITOR_TO_NOTIFY=false
-        tmux display-message "Not monitoring pane."
-    else
-        ZSH_MONITOR_TO_NOTIFY=true
-        tmux display-message "Monitoring pane."
-    fi
-}
-zle -N monitor-to-notify
-bindkey '^[m' monitor-to-notify
-# Regular bindkey maps to the insert mode of ZVM, so these are for the normal and visual modes.
-bindkey -M vicmd '^[m' monitor-to-notify
-bindkey -M visual '^[m' monitor-to-notify

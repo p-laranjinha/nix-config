@@ -277,11 +277,11 @@ items:
         key: C
         command: customize-mode -Z
   - separator: true
-  - name: Open blank popup terminal
+  - name: Open blank popup terminal (b)
     key: C-b
     command: display-popup -E -w 75% -h 75% -d "#{pane_current_path}"
-  - name: Toggle monitoring pane [-p]
-    key: M-m
+  - name: Toggle monitoring pane
+    key: k
     command: send-keys 'M-m'
   - name: Time
     key: t

@@ -100,8 +100,11 @@ precmd() { # cspell:disable-line
             cost="0${cost}"
         fi
 
-        # Send notification if the monitor notification is set to true.
-        if [[ "$ZSH_MONITOR_TO_NOTIFY" = true ]]; then
+        # Send notification if the pane file created by tmux exists.
+        local dir="$XDG_CACHE_HOME/tmux/notify"
+        local pane_id=$(tmux display-message -p '#{pane_id}' | tr -d %)
+        local pane_file="$dir/$pane_id"
+        if [ -f "$pane_file" ]; then
           local message=$(sed 's/\\n/\'$'\n''/g' <<< "Command has finished.\nTook ${cost}s.")
           notify-send --app-name "zsh" $message
         fi
@@ -250,19 +253,19 @@ _simplerich_prompt() {
     zvm_mode() {
       case $ZVM_MODE in
         $ZVM_MODE_NORMAL)
-          echo N
+          echo "%{$fg[blue]%}N%{$reset_color%}"
         ;;
         $ZVM_MODE_INSERT)
-          echo I
+          echo "%{$fg[green]%}I%{$reset_color%}"
         ;;
         $ZVM_MODE_VISUAL)
-          echo V
+          echo "%{$fg[magenta]%}V%{$reset_color%}"
         ;;
         $ZVM_MODE_VISUAL_LINE)
-          echo L
+          echo "%{$fg[magenta]%}L%{$reset_color%}"
         ;;
         $ZVM_MODE_REPLACE)
-          echo R
+          echo "%{$fg[red]%}R%{$reset_color%}"
         ;;
       esac
     }
