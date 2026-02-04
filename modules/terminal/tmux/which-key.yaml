@@ -36,7 +36,7 @@ items:
     key: c
     menu:
       - name: Copy
-        key: c
+        key: C-c
         command: copy-mode
       - name: List buffers
         key: "#"
@@ -57,8 +57,8 @@ items:
       - name: Next
         key: n
         command: next-window
-      - name: New
-        key: C-w
+      - name: Create new
+        key: c
         command: "neww -c #{pane_current_path}"
       - separator: true
       - name: Select 1
