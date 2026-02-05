@@ -62,6 +62,14 @@
       interactiveShellInit = ''
         ZSH_GHOSTTY_ICON=${pkgs.ghostty}/share/icons/hicolor/128x128/apps/com.mitchellh.ghostty.png
         ZSH_VI_MODE_PLUGIN_FILE="${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+        ZSH_NIX_SHELL_PLUGIN_FILE="${
+          pkgs.fetchFromGitHub {
+            owner = "chisui";
+            repo = "zsh-nix-shell";
+            rev = "v0.8.0";
+            sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
+          }
+        }/nix-shell.plugin.zsh"
         source "${funcs.mkMutableConfigSymlink ./.zshrc}"
       '';
     };

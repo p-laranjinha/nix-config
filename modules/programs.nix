@@ -143,6 +143,9 @@
 
     # Password manager.
     bitwarden-desktop
+
+    # Audio equalizer and other effects.
+    easyeffects
   ];
 
   hm = {

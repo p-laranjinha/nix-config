@@ -156,8 +156,8 @@ TRAPALRM() { # cspell:disable-line
     export _SIMPLERICH_PROMPT_CALLED_COUNT=$count
 }
 
-# git
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}["
+# git
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[green]%}]%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="  %{$fg[yellow]%}*"
 
@@ -251,12 +251,18 @@ _simplerich_prompt() {
         echo "${_SIMPLERICH_COMMAND_STATUS}"
     }
 
+    in_nix_shell() {
+        if [[ -v IN_NIX_SHELL ]]; then
+            echo " %{$fg[yellow]%}[nix-shell]%{$reset_color%}"
+        fi
+    }
+
 
     if [ -v CONDA_DEFAULT_ENV ] || [ -v VIRTUAL_ENV ]; then
-        echo "$(directory_info) $(python_info) $(git_info)
+      echo "$(directory_info)$(in_nix_shell) $(python_info) $(git_info)
 $(_zvm_mode_color)$(command_status) "
     else
-      echo "$(directory_info) $(git_info)
+      echo "$(directory_info)$(in_nix_shell) $(git_info)
 $(_zvm_mode_color)$(command_status) "
     fi
 }

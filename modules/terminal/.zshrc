@@ -16,3 +16,7 @@ zvm_before_init() {
 }
 
 source "$ZSH_VI_MODE_PLUGIN_FILE"
+source "$ZSH_NIX_SHELL_PLUGIN_FILE"
+
+# Makes it so nix-shell uses zsh.
+export NIX_BUILD_SHELL=zsh
