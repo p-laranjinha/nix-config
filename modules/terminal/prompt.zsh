@@ -50,7 +50,7 @@ _simplerich_update_git_info() {
 # REF: http://zsh.sourceforge.net/Doc/Release/Functions.html
 preexec() { # cspell:disable-line
     _SIMPLERICH_COMMAND_TIME_BEGIN="$(_simplerich_current_time_millis)"
-    echo "[$(date +%H:%M:%S)]"
+    # echo "[$(date +%H:%M:%S)]"
 }
 
 # command execute after
@@ -86,7 +86,7 @@ precmd() { # cspell:disable-line
             color_cmd="$fg[red]"
         fi
         local color_reset="$reset_color"
-        local formatted_cmd="${color_cmd}(${last_cmd_return_code}) ${cmd}${color_reset}"
+        local formatted_cmd="${color_cmd}[${last_cmd_return_code}]${color_reset} ${cmd}"
 
         # time
         local time="[$(date +%H:%M:%S)]"
@@ -106,13 +106,13 @@ precmd() { # cspell:disable-line
         local pane_id=$(tmux display-message -p '#{pane_id}' | tr -d %)
         local pane_file="$dir/$pane_id"
         if [ -f "$pane_file" ]; then
-          local message=$(sed 's/\\n/\'$'\n''/g' <<< "Command has finished.\nTook ${cost}s.")
-          notify-send --app-name "zsh" $message
+          local message=$(sed 's/\\n/\'$'\n''/g' <<< "The command has ended:\n${cmd}")
+          notify-send --app-name "zsh" -i $ZSH_GHOSTTY_ICON $message
         fi
 
-        cost="[${cost}s]"
+        cost="${cost}s"
 
-        echo "${time} $fg[blue]${cost}${color_reset} ${formatted_cmd}\n"
+        echo "\n$fg[blue]${cost}${color_reset} ${formatted_cmd}"
     }
 
     # last_cmd

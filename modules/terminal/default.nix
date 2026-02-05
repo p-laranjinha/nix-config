@@ -36,9 +36,8 @@
         nixl = "nixos-rebuild list-generations";
         nixu = "nix flake update --flake ${vars.configDirectory}";
 
-        # "nix query"
         # Runs nix repl initialized with values from this flake for easier testing and debugging.
-        nixq = "nix repl --file ${pkgs.writeText "replinit.nix" ''
+        nixr = "nix repl --file ${pkgs.writeText "replinit.nix" ''
           let
             self = builtins.getFlake "config";
           in rec {
@@ -61,6 +60,7 @@
         source "${funcs.mkMutableConfigSymlink ./prompt.zsh}"
       '';
       interactiveShellInit = ''
+        ZSH_GHOSTTY_ICON=${pkgs.ghostty}/share/icons/hicolor/128x128/apps/com.mitchellh.ghostty.png
         ZSH_VI_MODE_PLUGIN_FILE="${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
         source "${funcs.mkMutableConfigSymlink ./.zshrc}"
       '';
