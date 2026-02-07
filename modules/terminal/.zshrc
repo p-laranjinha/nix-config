@@ -16,7 +16,15 @@ zvm_before_init() {
 }
 
 source "$ZSH_VI_MODE_PLUGIN_FILE"
-source "$ZSH_NIX_SHELL_PLUGIN_FILE"
 
-# Makes it so nix-shell uses zsh.
-export NIX_BUILD_SHELL=zsh
+# https://discourse.nixos.org/t/nix-shell-does-not-use-my-users-shell-zsh/5588/13
+# Makes nix-shell and nix develop use ZSH.
+alias nix-shell='nix-shell --run $SHELL'
+nix() {
+    if [[ $1 == "develop" ]]; then
+        shift
+        command nix develop -c $SHELL "$@"
+    else
+        command nix "$@"
+    fi
+}

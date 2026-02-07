@@ -37,49 +37,64 @@
   # Install flatpak binary.
   services.flatpak.enable = true;
 
-  # So that regular binaries can be run.
-  # This doesn't export to LD_LIBRARY_PATH in order to not affect packages that
-  #  are correctly defined.
-  # Run "export LD_LIBRARY_PATH=$NIX_LD_LIBRARY_PATH" if required.
-  # Use "nix-alien" if you don't want to add libraries to this list and rebuild.
-  programs.nix-ld = {
-    enable = true;
-    libraries =
-      with pkgs;
-      # https://nixos.wiki/wiki/Games
-      # https://discourse.nixos.org/t/programs-nix-ld-libraries-expects-set-instead-of-list/56009/4
-      # https://wiki.nixos.org/wiki/FAQ#I've_downloaded_a_binary%2C_but_I_can't_run_it%2C_what_can_I_do%3F
-      # Should make most binaries run.
-      pkgs.steam-run.args.multiPkgs pkgs
-      ++ [
-        # Add any missing dynamic libraries for unpackaged programs here, NOT in environment.systemPackages
-        libusb1 # Wraith Master
-      ];
-  };
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-  };
-
   hardware.logitech.wireless = {
     enable = true;
     enableGraphical = true;
   };
 
-  # https://wiki.nixos.org/wiki/Visual_Studio_Code
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscodium;
-    extensions =
-      with pkgs.vscode-extensions;
-      [
-        jnoortheen.nix-ide
-      ]
-      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      ];
-  };
+  programs =
+    let
+      # https://nixos.wiki/wiki/Games
+      # https://discourse.nixos.org/t/programs-nix-ld-libraries-expects-set-instead-of-list/56009/4
+      # https://wiki.nixos.org/wiki/FAQ#I've_downloaded_a_binary%2C_but_I_can't_run_it%2C_what_can_I_do%3F
+      # Should make most binaries and appimages run.
+      additional_libraries =
+        pkgs.steam-run.args.multiPkgs pkgs
+        ++ (with pkgs; [
+          # Add any missing dynamic libraries for unpackaged binaries/appimages here, NOT in environment.systemPackages
+          libusb1 # Wraith Master
+          webkitgtk_4_1 # OrcaSlicer
+        ]);
+    in
+    {
+      # So that appimages can be run.
+      appimage = {
+        enable = true;
+        binfmt = true;
+        package = pkgs.appimage-run.override {
+          extraPkgs = pkgs: additional_libraries;
+        };
+      };
+
+      # So that regular binaries can be run.
+      # This doesn't export to LD_LIBRARY_PATH in order to not affect packages that
+      #  are correctly defined.
+      # Run "export LD_LIBRARY_PATH=$NIX_LD_LIBRARY_PATH" if required.
+      # Use "nix-alien" if you don't want to add libraries to this list and rebuild.
+      nix-ld = {
+        enable = true;
+        libraries = additional_libraries;
+      };
+
+      steam = {
+        enable = true;
+        remotePlay.openFirewall = true;
+        localNetworkGameTransfers.openFirewall = true;
+      };
+
+      # https://wiki.nixos.org/wiki/Visual_Studio_Code
+      vscode = {
+        enable = true;
+        package = pkgs.vscodium;
+        extensions =
+          with pkgs.vscode-extensions;
+          [
+            jnoortheen.nix-ide
+          ]
+          ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          ];
+      };
+    };
 
   environment.systemPackages = with pkgs; [
     # Disk and partition managers.

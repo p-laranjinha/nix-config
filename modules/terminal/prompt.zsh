@@ -156,8 +156,8 @@ TRAPALRM() { # cspell:disable-line
     export _SIMPLERICH_PROMPT_CALLED_COUNT=$count
 }
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}["
 # git
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}["
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[green]%}]%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="  %{$fg[yellow]%}*"
 
