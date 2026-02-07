@@ -291,4 +291,4 @@ items:
     command: show-messages
   - name: +Keys
     key: "?"
-    command: display-popup -E -w 75% -h 75% ~/.config/tmux/scripts/tmux-fzf-keys.sh
+    command: display-popup -E -w 75% -h 75% ~/.config/tmux/scripts/fzf-keys.sh
