@@ -108,6 +108,10 @@ precmd() { # cspell:disable-line
         if [ -f "$pane_file" ]; then
           local message=$(sed 's/\\n/\'$'\n''/g' <<< "The command has ended:\n${cmd}")
           notify-send --app-name "zsh" -i $ZSH_GHOSTTY_ICON $message
+          # https://github.com/jml/undistract-me
+          # Inspired by the undistract-me used by NixOS with bash.
+          # https://stackoverflow.com/a/51061398
+          (&>/dev/null pw-play "$FREEDESKTOP_SOUNDS_DIR/stereo/complete.oga" &)
         fi
 
         cost="${cost}s"

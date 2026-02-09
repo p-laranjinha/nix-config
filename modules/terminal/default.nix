@@ -53,14 +53,14 @@
       enableCompletion = true;
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
-      ohMyZsh = {
-        enable = true;
-      };
+      # Used by my prompt.
+      ohMyZsh.enable = true;
       promptInit = ''
+        ZSH_GHOSTTY_ICON=${pkgs.ghostty}/share/icons/hicolor/128x128/apps/com.mitchellh.ghostty.png
+        FREEDESKTOP_SOUNDS_DIR=${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop
         source "${funcs.mkMutableConfigSymlink ./prompt.zsh}"
       '';
       interactiveShellInit = ''
-        ZSH_GHOSTTY_ICON=${pkgs.ghostty}/share/icons/hicolor/128x128/apps/com.mitchellh.ghostty.png
         ZSH_VI_MODE_PLUGIN_FILE="${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
         source "${funcs.mkMutableConfigSymlink ./.zshrc}"
       '';
@@ -165,7 +165,7 @@
     # 'cat' replacement with syntax highlighting.
     bat
 
-    # Calculator used by my zsh theme to calculate run times.
+    # Calculator used by my zsh prompt to calculate run times.
     bc
 
     # # You can also create simple shell scripts directly inside your
