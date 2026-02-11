@@ -2,10 +2,13 @@
   pkgs,
   funcs,
   vars,
-  lib,
   ...
 }:
 {
+  imports = [
+    ./neovim
+  ];
+
   users.defaultUserShell = pkgs.zsh;
   environment.shells = with pkgs; [
     zsh

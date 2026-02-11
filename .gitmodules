@@ -1,6 +1,6 @@
-[submodule "modules/neovim/config"]
-	path = modules/neovim/config
+[submodule "neovim-config"]
+	path = modules/terminal/neovim/config
 	url = https://github.com/p-laranjinha/neovim-config
-[submodule "modules/music/essentia"]
+[submodule "essentia"]
 	path = modules/music/essentia
 	url = https://github.com/p-laranjinha/essentia-nix
