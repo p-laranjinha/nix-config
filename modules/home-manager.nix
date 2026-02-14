@@ -45,9 +45,15 @@
           "images" = "Pictures";
           "videos" = "Videos";
           "documents" = "Documents";
-          ".config" = ".config";
-          ".local" = ".local";
-          ".zen" = ".zen";
+          ".dotfiles/config" = ".config";
+          ".dotfiles/local" = ".local";
+          ".dotfiles/zen" = ".zen";
+          ".dotfiles/var" = ".var";
+          ".dotfiles/cache" = ".cache";
+          ".dotfiles/steam" = ".steam";
+          ".dotfiles/thunderbird" = ".thunderbird";
+          ".dotfiles/ssh" = ".ssh";
+          ".dotfiles/zsh_history" = ".zsh_history";
         };
       in
       builtins.listToAttrs (

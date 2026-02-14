@@ -210,9 +210,9 @@
       # Slicer for 3D printing.
       rec {
         appId = "com.orcaslicer.OrcaSlicer";
-        sha256 = "sha256-z8d1B+lAwNC/bQO1ufcsWO4GAuCnWPG9RGR4oSh2EXM=";
+        sha256 = "sha256-3ATEWjsgtHWgkKS9WBIGfpuV5bd6sciuPWojrrH2CDo=";
         bundle = "${pkgs.fetchurl {
-          url = "https://github.com/OrcaSlicer/OrcaSlicer/releases/download/nightly-builds/OrcaSlicer-Linux-flatpak_nightly_x86_64.flatpak";
+          url = "https://github.com/OrcaSlicer/OrcaSlicer/releases/download/v2.3.2-beta/OrcaSlicer-Linux-flatpak_V2.3.2-beta_x86_64.flatpak";
           inherit sha256;
         }}";
       }
