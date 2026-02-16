@@ -12,7 +12,7 @@
 
     # Makes bookmarks look like essentials.
     home.file.".zen/default/chrome/userChrome.css".source =
-      funcs.mkMutableConfigSymlink ./zen-browser-clean-bookmarks.css;
+      funcs.mkMutableConfigSymlink ./userChrome.css;
 
     programs.zen-browser = {
       enable = true;
@@ -114,6 +114,8 @@
           "zen.urlbar.show-protections-icon" = true;
           # Hide the copy url button in the url bar.
           "zen.urlbar.single-toolbar-show-copy-url" = false;
+          # Bring back the Firefox extensions button.
+          "zen.theme.hide-unified-extensions-button" = false;
 
           "browser.uiCustomization.state" = builtins.toJSON {
             placements = {
