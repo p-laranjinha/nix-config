@@ -39,6 +39,8 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    direnv-instant.url = "github:Mic92/direnv-instant";
   };
 
   outputs =

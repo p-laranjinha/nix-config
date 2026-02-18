@@ -27,8 +27,6 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    vimAlias = true;
-    viAlias = true;
   };
   hm = {
     home.file.".config/nvim".source = funcs.mkMutableConfigSymlink ./config;
@@ -36,8 +34,10 @@
       funcs.mkOutOfStoreSymlink "${vars.subHomeDirectory}/projects/neovim-config";
   };
   environment.shellAliases = {
-    vi2 = "NVIM_APPNAME=nvim2 vi";
-    vim2 = "NVIM_APPNAME=nvim2 vim";
+    vi = "nvim";
+    vim = "nvim";
+    vi2 = "NVIM_APPNAME=nvim2 nvvi";
+    vim2 = "NVIM_APPNAME=nvim2 nvim";
     nvim2 = "NVIM_APPNAME=nvim2 nvim";
   };
 }

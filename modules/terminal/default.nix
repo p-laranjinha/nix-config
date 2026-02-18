@@ -2,6 +2,7 @@
   pkgs,
   funcs,
   vars,
+  inputs,
   ...
 }:
 {
@@ -10,48 +11,52 @@
   ];
 
   users.defaultUserShell = pkgs.zsh;
-  environment.shells = with pkgs; [
-    zsh
-    bash
-  ];
   # Prevent the new user dialog in zsh
   system.userActivationScripts.zshrc = "touch .zshrc";
+  environment = {
+    shells = with pkgs; [
+      zsh
+      bash
+    ];
+    shellAliases = {
+      lg = "lazygit";
+
+      # Undoes a commit but keeps the changes.
+      gitr = "git reset --soft HEAD~1";
+
+      # Restart plasma shell.
+      psr = "kquitapp6 plasmashell; kstart plasmashell;";
+
+      # nix-alien commands to run unpatched binaries and find their libraries.
+      nixa = "nix-alien-ld --";
+      nixafl = "nix-alien-find-libs";
+
+      # Runs a script that rebuild switches this config.
+      nixs = toString (funcs.mkMutableConfigSymlink ./nixs.sh);
+      # Runs a script that rebuild switches and commits this config.
+      nixsf = toString (funcs.mkMutableConfigSymlink ./nixsf.sh);
+      nixb = "sudo nixos-rebuild build --flake ${vars.configDirectory}";
+      nixl = "nixos-rebuild list-generations";
+      nixu = "nix flake update --flake ${vars.configDirectory}";
+      nixd = "nix develop -c $SHELL";
+      nixp = "nix-shell --run $SHELL -p";
+
+      # Runs nix repl initialized with values from this flake for easier testing and debugging.
+      nixr = "nix repl --file ${pkgs.writeText "replinit.nix" ''
+        let
+          self = builtins.getFlake "config";
+        in rec {
+          inherit self;
+          inherit (self) inputs lib;
+          inherit (self.nixosConfigurations) ${vars.hostname};
+          inherit (self.nixosConfigurations.${vars.hostname}._module.specialArgs) vars;
+          inherit (self.nixosConfigurations.${vars.hostname}._module.args) funcs;
+        }
+      ''}";
+    };
+  };
   programs = {
     zsh = {
-      shellAliases = {
-        lg = "lazygit";
-
-        # Undoes a commit but keeps the changes.
-        gitr = "git reset --soft HEAD~1";
-
-        # Restart plasma shell.
-        psr = "kquitapp6 plasmashell; kstart plasmashell;";
-
-        # nix-alien commands to run unpatched binaries and find their libraries.
-        nixa = "nix-alien-ld --";
-        nixafl = "nix-alien-find-libs";
-
-        # Runs a script that rebuild switches this config.
-        nixs = toString (funcs.mkMutableConfigSymlink ./nixs.sh);
-        # Runs a script that rebuild switches and commits this config.
-        nixsf = toString (funcs.mkMutableConfigSymlink ./nixsf.sh);
-        nixb = "sudo nixos-rebuild build --flake ${vars.configDirectory}";
-        nixl = "nixos-rebuild list-generations";
-        nixu = "nix flake update --flake ${vars.configDirectory}";
-
-        # Runs nix repl initialized with values from this flake for easier testing and debugging.
-        nixr = "nix repl --file ${pkgs.writeText "replinit.nix" ''
-          let
-            self = builtins.getFlake "config";
-          in rec {
-            inherit self;
-            inherit (self) inputs lib;
-            inherit (self.nixosConfigurations) ${vars.hostname};
-            inherit (self.nixosConfigurations.${vars.hostname}._module.specialArgs) vars;
-            inherit (self.nixosConfigurations.${vars.hostname}._module.args) funcs;
-          }
-        ''}";
-      };
       enable = true;
       enableCompletion = true;
       autosuggestions.enable = true;
@@ -94,9 +99,14 @@
 
     # Tool to locate the nixpkgs package providing a certain file. Used by comma.
     nix-index.enable = true;
+
   };
 
   hm = {
+    imports = [
+      inputs.direnv-instant.homeModules.direnv-instant
+    ];
+
     programs = {
       gh.enable = true;
 
@@ -104,6 +114,13 @@
       zoxide.enable = true;
       # Required for zoxide to set the 'z' and 'zi' commands when set with home manager.
       zsh.enable = true;
+
+      # In home-manager so silent=true actually works.
+      direnv = {
+        enable = true;
+        silent = true;
+      };
+      direnv-instant.enable = true;
     };
 
     home.file = {

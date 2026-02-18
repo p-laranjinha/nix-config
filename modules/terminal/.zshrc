@@ -19,12 +19,12 @@ source "$ZSH_VI_MODE_PLUGIN_FILE"
 
 # https://discourse.nixos.org/t/nix-shell-does-not-use-my-users-shell-zsh/5588/13
 # Makes nix-shell and nix develop use ZSH.
-alias nix-shell='nix-shell --run $SHELL'
-nix() {
-    if [[ $1 == "develop" ]]; then
-        shift
-        command nix develop -c $SHELL "$@"
-    else
-        command nix "$@"
-    fi
-}
+# alias nix-shell='nix-shell --run $SHELL'
+# nix() {
+#     if [[ $1 == "develop" ]]; then
+#         shift
+#         command nix develop -c $SHELL "$@"
+#     else
+#         command nix "$@"
+#     fi
+# }

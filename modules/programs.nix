@@ -146,6 +146,7 @@
 
     # Messaging.
     discord
+    element-desktop
     # App that aggregates websites and runs them in the background. Good for messaging websites.
     ferdium
 
