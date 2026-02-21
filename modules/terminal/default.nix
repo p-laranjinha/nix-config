@@ -49,6 +49,7 @@
           inherit self;
           inherit (self) inputs lib;
           inherit (self.nixosConfigurations) ${vars.hostname};
+          inherit (self.nixosConfigurations.${vars.hostname}) pkgs;
           inherit (self.nixosConfigurations.${vars.hostname}._module.specialArgs) vars;
           inherit (self.nixosConfigurations.${vars.hostname}._module.args) funcs;
         }

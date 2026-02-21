@@ -10,16 +10,46 @@
   ];
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services = {
+    displayManager.sddm.enable = true;
+    displayManager.sddm.wayland.enable = true;
+    desktopManager.plasma6.enable = true;
+  };
 
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    plasma-browser-integration
-  ];
-  environment.systemPackages = with pkgs; [
-    kdePackages.kdbusaddons # kquitapp6
-  ];
+  environment = {
+    plasma6.excludePackages = with pkgs.kdePackages; [
+      plasma-browser-integration
+    ];
+    systemPackages = with pkgs; [
+      # kquitapp6
+      kdePackages.kdbusaddons
+
+      # MouseTiler KWin Plugin
+      # Based on https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/by-name/po/polonium/package.nix
+      (stdenv.mkDerivation {
+        pname = "mousetiler";
+        version = "v5.2.0";
+
+        src = fetchurl {
+          url = "https://github.com/rxappdev/MouseTiler/releases/download/v5.2.0/mousetiler.kwinscript";
+          hash = "sha256-WF/7z8AXg/nR/Sh+0DWbWVi+emPihQMOdqNi6Y36Ep0=";
+        };
+
+        nativeBuildInputs = with libsForQt5; [ plasma-framework ];
+
+        dontUnpack = true;
+        dontWrapQtApps = true;
+
+        installPhase = ''
+          runHook preInstall
+
+          plasmapkg2 --install $src --packageroot $out/share/kwin/scripts
+
+          runHook postInstall
+        '';
+      })
+    ];
+  };
 
   hm = {
     imports = [
@@ -32,6 +62,54 @@
       workspace = {
         lookAndFeel = "org.kde.breezedark.desktop";
         enableMiddleClickPaste = false;
+      };
+
+      # Set dynamic Mountain workspace (changes depending on if it is day or night). Based on
+      #  https://github.com/nix-community/plasma-manager/blob/44b928068359b7d2310a34de39555c63c93a2c90/modules/workspace.nix#L532-L588
+      # This edits '~/.config/plasma-org.kde.plasma.desktop-appletsrc'.
+      workspace.wallpaper = "${pkgs.kdePackages.plasma-workspace-wallpapers}/share/wallpapers/Mountain/#day-night";
+      startup.desktopScript."dynamic_wallpaper" = {
+        text = ''
+          let allDesktops = desktops();
+          for (const desktop of allDesktops) {
+            desktop.wallpaperPlugin = "org.kde.image";
+            desktop.currentConfigGroup = ["Wallpaper", "org.kde.image", "General"];
+            desktop.writeConfig("DynamicMode", 1)
+          }
+        '';
+        priority = 3;
+      };
+
+      # Enable and configure MouseTiler
+      configFile."kwinrc" = {
+        Plugins.mousetilerEnabled = true;
+        Script-mousetiler = {
+          hintCenterInTile = false;
+          hintChangeMode = false;
+          hintInputType = false;
+          hintMoveOnDrop = false;
+          autoTileRestoreSize = true;
+          autoTilerMode1 = 9;
+          autoTilerMode2 = 1;
+          autoTilerMode3 = 7;
+          popupLayout = ''
+            SPECIAL_AUTO_TILER_1
+            SPECIAL_AUTO_TILER_2
+            SPECIAL_AUTO_TILER_3
+            2x2
+            SPECIAL_MAXIMIZE
+            0,0,75,100+25,0,75,100+25,0,50,100
+            2x1
+            0,0,25,100+75,0,25,100+25,20,50,60
+            0,0,1/3,100+1/3,0,2/3,100
+            SPECIAL_SPLIT_HORIZONTAL
+            SPECIAL_FILL
+            SPECIAL_SPLIT_VERTICAL
+            SPECIAL_KEEP_ABOVE
+            SPECIAL_KEEP_BELOW
+            SPECIAL_FULLSCREEN
+          '';
+        };
       };
 
       # Use the command "plasma-interactiveconsole" and the following website
