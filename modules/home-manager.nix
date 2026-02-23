@@ -47,7 +47,6 @@
           "documents" = "Documents";
           ".dotfiles/config" = ".config";
           ".dotfiles/local" = ".local";
-          ".dotfiles/zen" = ".zen";
           ".dotfiles/var" = ".var";
           ".dotfiles/cache" = ".cache";
           ".dotfiles/steam" = ".steam";

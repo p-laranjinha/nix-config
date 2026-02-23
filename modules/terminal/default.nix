@@ -113,8 +113,13 @@
 
       # Throws an error when not set with home manager.
       zoxide.enable = true;
-      # Required for zoxide to set the 'z' and 'zi' commands when set with home manager.
-      zsh.enable = true;
+
+      zsh = {
+        # Required for zoxide to set the 'z' and 'zi' commands when set with home manager.
+        enable = true;
+        # Removes rebuild warning.
+        dotDir = "${vars.homeDirectory}/.config/zsh";
+      };
 
       # In home-manager so silent=true actually works.
       direnv = {

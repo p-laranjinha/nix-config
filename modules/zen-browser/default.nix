@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   funcs,
+  vars,
   ...
 }:
 {
@@ -11,11 +12,13 @@
     ];
 
     # Makes bookmarks look like essentials.
-    home.file.".zen/default/chrome/userChrome.css".source =
+    home.file.".config/zen/default/chrome/userChrome.css".source =
       funcs.mkMutableConfigSymlink ./userChrome.css;
 
     programs.zen-browser = {
       enable = true;
+      # Hide rebuild warning about migration from .zen to .config/zen.
+      suppressXdgMigrationWarning = true;
 
       # Check the following for options:
       #  about:policies#documentation
