@@ -134,7 +134,8 @@
     };
 
     home.file = {
-      ".config/ghostty/config".source = funcs.mkMutableConfigSymlink ./ghostty/config;
+      ".config/ghostty/config".source = funcs.mkMutableConfigSymlink ./ghostty.config;
+      ".config/foot/foot.ini".source = funcs.mkMutableConfigSymlink ./foot.ini;
       ".config/tmux/tmux.conf".source = funcs.mkMutableConfigSymlink ./tmux/tmux.conf;
       ".config/tmux/plugins/tpm".source = funcs.mkOutOfStoreSymlink (
         pkgs.fetchFromGitHub {
@@ -155,6 +156,7 @@
     # Terminals.
     ghostty
     wezterm
+    foot
 
     # Tool to remove large files from git history. Call with "bfg".
     bfg-repo-cleaner
