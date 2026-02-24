@@ -148,6 +148,21 @@
       ".config/tmux/plugins/tmux-which-key/config.yaml".source =
         funcs.mkMutableConfigSymlink ./tmux/which-key.yaml;
       ".config/tmux/scripts".source = funcs.mkMutableConfigSymlink ./tmux/scripts;
+
+      # Taken from the "foot" desktop file.
+      # Maybe use pkgs.makeDesktopItem next time.
+      ".local/share/applications/tmux.desktop".text = ''
+        [Desktop Entry]
+        Type=Application
+        Exec=foot tmux new -A
+        Icon=foot
+        Terminal=false
+        Categories=System;TerminalEmulator;
+        Keywords=shell;prompt;command;commandline;
+
+        Name=tmux
+        Comment=A terminal multiplexer (launched with foot)
+      '';
     };
 
   };
