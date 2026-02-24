@@ -88,7 +88,6 @@
           hintChangeMode = false;
           hintInputType = false;
           hintMoveOnDrop = false;
-          autoTileRestoreSize = true;
           autoTilerMode1 = 9;
           autoTilerMode2 = 1;
           autoTilerMode3 = 7;
