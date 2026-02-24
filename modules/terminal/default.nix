@@ -27,6 +27,10 @@
       # Restart plasma shell.
       psr = "kquitapp6 plasmashell; kstart plasmashell;";
 
+      # "reboot" wrapper that allows me to choose a GRUB option before restart.
+      # Run "sudo reboot" to not use this.
+      reboot = toString (funcs.mkMutableConfigSymlink ./reboot.sh);
+
       # nix-alien commands to run unpatched binaries and find their libraries.
       nixa = "nix-alien-ld --";
       nixafl = "nix-alien-find-libs";
