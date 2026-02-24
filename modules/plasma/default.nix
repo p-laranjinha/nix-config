@@ -473,6 +473,12 @@
           KeepClipboardContents = false;
           IgnoreImages = false;
         };
+
+        # Make "foot" my default terminal.
+        kdeglobals.General = {
+          TerminalApplication = "foot";
+          TerminalService = "foot.desktop";
+        };
       };
       shortcuts = {
         # Some shortcuts and changed ones can be obtained by running rc2nix (altough a lot are missing):

@@ -169,9 +169,9 @@
 
   environment.systemPackages = with pkgs; [
     # Terminals.
-    ghostty
-    wezterm
     foot
+    # ghostty
+    # wezterm
 
     # Tool to remove large files from git history. Call with "bfg".
     bfg-repo-cleaner
