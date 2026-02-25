@@ -96,14 +96,18 @@
       };
     };
 
+  fonts.packages = with pkgs; [
+    # My default monofont/programming font.
+    nerd-fonts.fira-code
+    # A good font for CAD/3D printing.
+    # A nerd-fonts variant also exists.
+    overpass
+  ];
+
   environment.systemPackages = with pkgs; [
     # Disk and partition managers.
     gparted
     kdePackages.partitionmanager
-
-    # Fonts.
-    nerd-fonts.fira-code
-    overpass # A nerd-fonts variant also exists.
 
     # Run unpatched binaries. Good for running "short-term" binaries where you
     #  don't want to add the required libraries to nix-ld.

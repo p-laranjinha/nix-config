@@ -80,12 +80,22 @@ else
 fi
 
 gum log --time timeonly --level info "Rebuilding..."
-sudo nixos-rebuild switch --flake .
+# When rebuilding, keep current specialisation.
+CURRENT_SYSTEM=$(readlink -f /run/current-system)
+DEFAULT_SYSTEM=$(readlink -f /nix/var/nix/profiles/system)
+if [[ "$CURRENT_SYSTEM" == "$DEFAULT_SYSTEM" ]]; then
+    sudo nixos-rebuild switch --flake .
+else
+    for SPECIALISATION in /nix/var/nix/profiles/system/specialisation/*; do
+        if [[ "$(readlink -f "$SPECIALISATION")" == "$CURRENT_SYSTEM" ]]; then
+            sudo nixos-rebuild switch --flake . --specialisation "$(basename "$SPECIALISATION")"
+            break
+        fi
+    done
+fi
 if [ $? -eq 0 ]; then
     gum log --time timeonly --level info "Finished rebuilding."
 else
     gum log --time timeonly --level error "Failed rebuild."
     exit 1
 fi
-
-echo "Run 'psr' to restart plasma shell."

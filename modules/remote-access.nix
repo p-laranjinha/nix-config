@@ -43,7 +43,8 @@
   programs.ssh = {
     # Remembers your ssh key passphrases so you don't have to write them everytime.
     # Run 'ssh-add ~/.ssh/<key>' to add a key to the agent.
-    startAgent = true;
+    # Has to be disabled when niri is enabled because it includes the Gnome ssh-agent.
+    startAgent = !config.opts.niri;
     # Allows KDE to remember SSH key passphrases across sessions.
     enableAskPassword = true;
   };

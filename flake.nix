@@ -6,7 +6,10 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
     # Nix User Repository
-    nur.url = "github:nix-community/NUR";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -33,14 +36,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-alien.url = "github:thiagokokada/nix-alien";
+    nix-alien = {
+      url = "github:thiagokokada/nix-alien";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    direnv-instant.url = "github:Mic92/direnv-instant";
+    direnv-instant = {
+      url = "github:Mic92/direnv-instant";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    dms-plugin-registry = {
+      url = "github:AvengeMedia/dms-plugin-registry";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

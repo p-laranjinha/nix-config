@@ -9,6 +9,7 @@
     };
     niri.configuration = {
       opts.plasma = false;
+      opts.niri = true;
     };
   };
 }

@@ -40,6 +40,11 @@ with lib;
       type = with types; bool;
       description = "Use the KDE Plasma desktop environment.";
     };
+    niri = mkOption {
+      default = false;
+      type = with types; bool;
+      description = "Use the niri window manager.";
+    };
   };
 
   config = {
