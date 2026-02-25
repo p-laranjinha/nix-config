@@ -1,4 +1,7 @@
-# For options that are reused in multiple places.
+# opts are custom options that:
+#  - can be called anywhere multiple times to achieve something;
+#  - can be called once (for example, in a specialization) to affect options elsewhere.
+# To get the value from opts you need to use 'config.opts.option'.
 {
   config,
   lib,
@@ -14,10 +17,28 @@ with lib;
     autostartScripts = mkOption {
       default = { };
       type = with types; attrsOf str;
+      description = "Make scripts autostart using .desktop files.";
     };
     autostartSymlinks = mkOption {
       default = { };
       type = with types; attrsOf path;
+      description = "Make .desktop files autostart.";
+    };
+
+    sunshine = mkOption {
+      default = false;
+      type = with types; bool;
+      description = "Enable Sunshine and disable xRDP.";
+    };
+    one-1920x1080-screen = mkOption {
+      default = false;
+      type = with types; bool;
+      description = "Make the system use 1 screen at 1920x1080p. Useful for Sunshine.";
+    };
+    plasma = mkOption {
+      default = true;
+      type = with types; bool;
+      description = "Use the KDE Plasma desktop environment.";
     };
   };
 
