@@ -74,6 +74,20 @@ layout {
         color "#9dcbfb80"
     }
 }
+// Add lines like this to spawn processes at startup.
+// Note that running niri as a session supports xdg-desktop-autostart, which may be more convenient to use.
+spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
+// Disable the "Important Hotkeys" pop-up at startup.
+hotkey-overlay {
+    skip-at-startup
+}
+// Ask the clients to omit their client-side decorations if possible.
+// If the client will specifically ask for CSD, the request will be honored.
+// Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
+// This option will also fix border/focus ring drawing behind some semitransparent windows.
+// After enabling or disabling this, you need to restart the apps for this to take effect.
+prefer-no-csd
+//
 config-notification {
     disable-failed
 }
@@ -87,29 +101,6 @@ overview {
         off
     }
 }
-// Add lines like this to spawn processes at startup.
-// Note that running niri as a session supports xdg-desktop-autostart,
-// which may be more convenient to use.
-// See the binds section below for more spawn examples.
-// This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
-environment {
-    XDG_CURRENT_DESKTOP "niri"
-    QT_QPA_PLATFORM "wayland"
-    ELECTRON_OZONE_PLATFORM_HINT "auto"
-    QT_QPA_PLATFORMTHEME "gtk3"
-    QT_QPA_PLATFORMTHEME_QT6 "gtk3"
-}
-hotkey-overlay {
-    // Disable the "Important Hotkeys" pop-up at startup.
-    skip-at-startup
-}
-// Ask the clients to omit their client-side decorations if possible.
-// If the client will specifically ask for CSD, the request will be honored.
-// Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
-// This option will also fix border/focus ring drawing behind some semitransparent windows.
-// After enabling or disabling this, you need to restart the apps for this to take effect.
-prefer-no-csd
 screenshot-path "~/Pictures/screenshots/%Y-%m-%d_%H-%M-%S.png"
 animations {
     horizontal-view-movement {
