@@ -88,7 +88,12 @@ if [[ "$CURRENT_SYSTEM" == "$DEFAULT_SYSTEM" ]]; then
 else
     for SPECIALISATION in /nix/var/nix/profiles/system/specialisation/*; do
         if [[ "$(readlink -f "$SPECIALISATION")" == "$CURRENT_SYSTEM" ]]; then
-            sudo nixos-rebuild switch --flake . --specialisation "$(basename "$SPECIALISATION")"
+            gum log --time timeonly --level warn "Specialisation being used, config will be built twice."
+            # Because switching with '--specialisation' will apply the wrong boot options, I have
+            # to build twice. Once to activate the specialisation, the other to apply the boot
+            # options.
+            sudo nixos-rebuild test --flake . --specialisation "$(basename "$SPECIALISATION")"
+            sudo nixos-rebuild boot --flake .
             break
         fi
     done

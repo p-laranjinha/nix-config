@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  funcs,
   ...
 }:
 {
@@ -24,5 +25,6 @@
       enable = true;
       compositor.name = "niri";
     };
+    hm.home.file.".config/niri".source = funcs.mkMutableConfigSymlink ./config;
   };
 }
