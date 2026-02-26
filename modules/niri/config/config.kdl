@@ -116,7 +116,7 @@ hotkey-overlay {
 // After enabling or disabling this, you need to restart the apps for this to take effect.
 prefer-no-csd
 
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+screenshot-path "~/Pictures/screenshots/%Y-%m-%d_%H-%M-%S.png"
 
 animations {
     horizontal-view-movement {
@@ -142,20 +142,24 @@ animations {
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
+
+// Additional default rules.
 window-rule {
     clip-to-geometry true
     geometry-corner-radius 12
     draw-border-with-background false
 }
+// Informs non-floating windows that they're tiled.
 window-rule {
     match is-floating=false
     tiled-state true
 }
+// Work around WezTerm's initial configure bug by setting an empty default-column-width.
 window-rule {
-    // Work around WezTerm's initial configure bug by setting an empty default-column-width.
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     default-column-width {}
 }
+// Open floating by default.
 window-rule {
     match app-id=r#"^gnome-calculator$"#
     match app-id=r#"^galculator$"#
@@ -163,16 +167,31 @@ window-rule {
     match app-id=r#"^org\.gnome\.Nautilus$"#
     match app-id=r#"^steam$"#
     match app-id=r#"^xdg-desktop-portal$"#
+    match app-id=r#"^discord$"#
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     match app-id=r#"zen-beta$"# title="^Picture-in-Picture$"
     match app-id="zoom"
     match app-id=r#"org.quickshell$"# // dms windows.
     open-floating true
 }
+// Open floating on the bottom-right by default.
 window-rule {
+    match app-id=r#"^org\.kde\.dolphin$"# title="^Copying"
+    match app-id=r#"^org\.kde\.dolphin$"# title="^Moving"
     match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
-    default-floating-position x=10 y=10 relative-to="bottom-right"
+    open-floating true
+    default-floating-position x=16 y=16 relative-to="bottom-right"
 }
+// Block from screen capture. Doesn't block screenshots where you manually select the area.
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    match app-id=r#"Bitwarden$"#
+    block-out-from "screen-capture"
+    // Use this instead if you want them visible on third-party screenshot tools.
+    // block-out-from "screencast"
+}
+
 
 layer-rule {
     match namespace="^quickshell$"
@@ -207,4 +226,4 @@ recent-windows {
 }
 
 // Include dms files
-include "dms/binds.kdl"
+include "binds.kdl"

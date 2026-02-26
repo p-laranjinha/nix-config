@@ -43,7 +43,7 @@ binds {
     XF86AudioMute allow-when-locked=true {
         spawn "dms" "ipc" "call" "audio" "mute";
     }
-    XF86AudioMicMute allow-when-locked=true {
+    Shift+XF86AudioMute allow-when-locked=true {
         spawn "dms" "ipc" "call" "audio" "micmute";
     }
 
