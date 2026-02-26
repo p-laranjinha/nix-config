@@ -187,6 +187,10 @@ debug {
     honor-xdg-activation-with-invalid-serial
 }
 
+cursor {
+    xcursor-size 32
+}
+
 recent-windows {
     highlight {
         corner-radius 12
