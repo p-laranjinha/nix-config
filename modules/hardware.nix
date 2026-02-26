@@ -93,6 +93,7 @@
     xkb = {
       layout = "us,us";
       variant = ",intl";
+      options = "fkeys:basic_13-24";
     };
   };
 
