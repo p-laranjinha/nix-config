@@ -211,6 +211,13 @@ recent-windows {
         }
     }
 }
-// Include dms files
-include "binds.kdl"
+// Include dms files. These can be changed through the settings GUI.
+include "dms/alttab.kdl"
+include "dms/binds.kdl"
+include "dms/colors.kdl"
+include "dms/cursor.kdl"
+include "dms/layout.kdl"
+include "dms/outputs.kdl"
+include "dms/windowrules.kdl"
+include "dms/wpblur.kdl"
 

@@ -29,9 +29,9 @@
       };
     };
     extraPortals = with pkgs; [
-      # xdg-desktop-portal-wlr
+      # I could use a mix of other portals with niri, but KDE's seems the most feature complete and
+      #  seems to work fine.
       kdePackages.xdg-desktop-portal-kde
-      # xdg-desktop-portal-gtk
     ];
   };
   # Install flatpak binary.
@@ -102,6 +102,11 @@
     # A good font for CAD/3D printing.
     # A nerd-fonts variant also exists.
     overpass
+    # Used by flatpaks.
+    noto-fonts
+    noto-fonts-color-emoji
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
   ];
 
   environment.systemPackages = with pkgs; [

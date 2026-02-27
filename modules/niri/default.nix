@@ -31,8 +31,10 @@
     };
     hm = {
       home = {
-        file.".config/niri".source = funcs.mkMutableConfigSymlink ./config;
-        file.".config/mimeapps.list".source = funcs.mkMutableConfigSymlink ./mimeapps.list;
+        file = {
+          ".config/niri".source = funcs.mkMutableConfigSymlink ./config;
+          ".config/mimeapps.list".source = funcs.mkMutableConfigSymlink ./mimeapps.list;
+        };
         pointerCursor = {
           enable = true;
           name = "phinger-cursors-dark";
@@ -44,12 +46,17 @@
       xdg.configFile."menus/applications.menu".text =
         builtins.readFile "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
       # https://danklinux.com/docs/dankmaterialshell/application-themes#gtk-applications
+      # Run 'nwg-look' to check the available GTK themes.
       gtk = {
         enable = true;
         colorScheme = "dark";
         theme = {
           name = "Breeze-Dark";
           package = pkgs.kdePackages.breeze-gtk;
+        };
+        iconTheme = {
+          name = "breeze-dark";
+          package = pkgs.kdePackages.breeze-icons;
         };
       };
       # https://discourse.nixos.org/t/guide-to-installing-qt-theme/35523
@@ -80,7 +87,6 @@
     # TODO: remove backup file
     # TODO: dim right screen
     # TODO: see if I can right click app widget for settings like fullscreen?
-    # TODO: fix fonts in apps like Mission Center
     # TODO: setup calendar
   };
 }
