@@ -10,10 +10,10 @@
 {
   config = lib.mkIf config.opts.niri {
     environment.systemPackages = with pkgs; [
+      inputs.dms.packages.${vars.hostPlatform}.default
       xwayland-satellite
       kdePackages.dolphin
       nomacs # Image viewer
-      inputs.dms.packages.${vars.hostPlatform}.default
     ];
     fonts.packages = with pkgs; [
       # Used by flatpaks.
@@ -104,6 +104,62 @@
           };
         };
       };
+      programs.khal = {
+        enable = true;
+        locale = {
+          timeformat = "%H:%M";
+          dateformat = "%Y-%m-%d";
+          longdateformat = "%Y-%m-%d";
+          datetimeformat = "%Y-%m-%d %H:%M";
+          longdatetimeformat = "%Y-%m-%d %H:%M";
+          firstweekday = 6;
+          unicode_symbols = true;
+        };
+      };
+      programs.vdirsyncer = {
+        enable = true;
+        statusPath = "~/.calendars/status";
+      };
+      services.vdirsyncer.enable = true;
+      # 'vdirsyncer discover calendar_personal' has to be run to login into my account.
+      accounts.calendar.accounts."personal" = {
+        primary = true;
+        primaryCollection = "plcasimiro2000@gmail.com";
+        remote = {
+          type = "google_calendar";
+        };
+        local = {
+          type = "filesystem";
+          path = "~/.calendars/Personal";
+        };
+        khal = {
+          enable = true;
+          type = "discover";
+        };
+        vdirsyncer = {
+          enable = true;
+          collections = [
+            "from a"
+            "from b"
+          ];
+          conflictResolution = "remote wins";
+          metadata = [
+            "color"
+            "displayname"
+          ];
+          tokenFile = "~/.vdirsyncer/google_calendar_token";
+          clientIdCommand = [
+            "sops"
+            "-d"
+            (funcs.relativeToAbsoluteConfigPath ./google-calendar-client-id)
+          ];
+          clientSecretCommand = [
+            "sops"
+            "-d"
+            (funcs.relativeToAbsoluteConfigPath ./google-calendar-client-secret)
+          ];
+        };
+      };
       gtk = {
         enable = true;
         colorScheme = "dark";
@@ -125,6 +181,7 @@
         };
         platformTheme.name = "kde";
       };
+      # Use 'dconf-editor' to find options you can change with this.
       dconf.settings = {
         "org/gnome/desktop/interface" = {
           # Fonts used by flakpak (and other things).
@@ -143,13 +200,11 @@
       QT_QPA_PLATFORMTHEME = "kde";
       QT_QPA_PLATFORMTHEME_QT6 = "kde";
     };
-
-    # TODO: keymaps
-    # TODO: background apps
-    # TODO: bar layout and plugins
-    # TODO: remove backup file
-    # TODO: dim right screen
-    # TODO: see if I can right click app widget for settings like fullscreen?
-    # TODO: setup calendar
   };
+  # TODO: keymaps
+  # TODO: background apps
+  # TODO: bar layout and plugins
+  # TODO: remove backup file
+  # TODO: dim right screen
+  # TODO: see if I can right click app widget for settings like fullscreen?
 }
