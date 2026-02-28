@@ -146,6 +146,5 @@
     # TODO: dim right screen
     # TODO: see if I can right click app widget for settings like fullscreen?
     # TODO: setup calendar
-    # TODO: setup foot transparency
   };
 }
