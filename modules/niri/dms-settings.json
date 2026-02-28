@@ -465,6 +465,11 @@
       ],
       "rightWidgets": [
         {
+          "id": "cpuUsage",
+          "enabled": true,
+          "minimumWidth": true
+        },
+        {
           "id": "systemTray",
           "enabled": true
         },

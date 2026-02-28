@@ -71,7 +71,6 @@
     };
   };
   # TODO: keymaps
-  # TODO: background apps
   # TODO: bar layout and plugins
   # TODO: remove backup file
   # TODO: dim right screen

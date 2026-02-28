@@ -1,9 +1,9 @@
 {
   pkgs,
-  pkgs-stable,
   inputs,
   lib,
   vars,
+  config,
   ...
 }:
 {
@@ -225,7 +225,12 @@
   };
 
   opts.autostartScripts.discord = ''
+    ${if config.opts.niri then "sleep 10" else ""}
     ${lib.getExe pkgs.discord} --start-minimized
+  '';
+  opts.autostartScripts.easyeffects = ''
+    ${if config.opts.niri then "sleep 10" else ""}
+    ${lib.getExe pkgs.easyeffects} --hide-window
   '';
   # opts.autostartSymlinks.discord = "${pkgs.discord}/share/applications/discord.desktop";
 }

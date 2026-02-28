@@ -18,7 +18,7 @@ let
 in
 {
   opts.autostartScripts.betterbird = ''
-    sleep 10
+    ${if config.opts.plasma then "sleep 10" else ""}
     ${lib.getExe pkgs.flatpak} run eu.betterbird.Betterbird
   '';
   hm = {
@@ -36,6 +36,7 @@ in
       "${userjs}".text = ''
         user_pref("mail.startupMinimized", true);
         user_pref("mail.minimizeToTray", true);
+        user_pref("mail.minimizeToTray.supportedDesktops", "kde,gnome,pop:gnome,xfce,mate,niri");
       '';
 
       # System tray icon.
