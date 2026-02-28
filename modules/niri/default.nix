@@ -25,9 +25,13 @@
       };
       dsearch.enable = true;
     };
-    services.displayManager.dms-greeter = {
-      enable = true;
-      compositor.name = "niri";
+    services = {
+      displayManager.dms-greeter = {
+        enable = true;
+        compositor.name = "niri";
+      };
+      # Backend of udiskie to manager removable media.
+      udisks2.enable = true;
     };
     hm = {
       home = {
@@ -47,6 +51,15 @@
         builtins.readFile "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
       # https://danklinux.com/docs/dankmaterialshell/application-themes#gtk-applications
       # Run 'nwg-look' to check the available GTK themes.
+      services.udiskie = {
+        enable = true;
+        settings = {
+          program_options = {
+            file_manager = "${lib.getExe pkgs.kdePackages.dolphin}";
+          };
+          automount = false;
+        };
+      };
       gtk = {
         enable = true;
         colorScheme = "dark";
@@ -81,12 +94,12 @@
 
     # TODO: keymaps
     # TODO: background apps
-    # TODO: wallpapers (sync with greeter)
     # TODO: dms json in this repo
     # TODO: bar layout and plugins
     # TODO: remove backup file
     # TODO: dim right screen
     # TODO: see if I can right click app widget for settings like fullscreen?
     # TODO: setup calendar
+    # TODO: sync greeter
   };
 }

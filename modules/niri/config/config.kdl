@@ -26,52 +26,39 @@ input {
 
     }
 }
-// You can configure outputs by their name, which you can find
-// by running `niri msg outputs` while inside a niri instance.
-// Find more information on the wiki:
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
-// Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-output "DP-2" {
-    mode "2560x1440"
-    position x=0 y=0
-    focus-at-startup
-    variable-refresh-rate on-demand=true
-}
-output "HDMI-A-1" {
-    mode "1920x1080"
-    position x=2560 y=180
-    variable-refresh-rate on-demand=true
-}
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
+// I've added transparency to these colors because I want a slight hint while keeping the theme.
 layout {
-    gaps 4
     background-color "transparent"
     focus-ring {
-        width 1
-        active-color "#8c9199"
-        // active-color   "#9dcbfb"
-        inactive-color "#505050"
-        urgent-color "#ffb4ab"
+        active-color "#dfdfe0b0"
+        inactive-color "#484848b0"
+        urgent-color "#ee5396b0"
     }
     border {
         off
     }
     shadow {
-        // draw-behind-window true
-        softness 30
-        spread 5
-        offset x=0 y=5
         color "#00000070"
     }
     tab-indicator {
-        active-color "#9dcbfb"
-        inactive-color "#8c9199"
-        urgent-color "#ffb4ab"
+        active-color "#dfdfe0b0"
+        inactive-color "#484848b0"
+        urgent-color "#ee5396b0"
     }
+    // The hint for where a window I'm moving will be placed.
     insert-hint {
-        color "#9dcbfb80"
+        color "#78a9ff80"
+    }
+}
+// Super+Tab (usually known as Alt+Tab)
+// Also has Super+` for to only display windows of the current app.
+recent-windows {
+    highlight {
+        active-color "#2c3b55"
+        urgent-color "#ee5396"
     }
 }
 // Add lines like this to spawn processes at startup.
@@ -125,24 +112,10 @@ animations {
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
-// Additional default rules.
-window-rule {
-    clip-to-geometry true
-    geometry-corner-radius 12
-    draw-border-with-background false
-}
-// Informs non-floating windows that they're tiled.
-window-rule {
-    match is-floating=false
-    tiled-state true
-}
-// Work around WezTerm's initial configure bug by setting an empty default-column-width.
-window-rule {
-    match app-id="^org\\.wezfurlong\\.wezterm$"
-    default-column-width {
-
-    }
-}
+//
+// DMS's settings only support setting window rules for 1 match, so either use it for simple or
+//  unique rules, or just use it to find app-ids, titles, and config options.
+//
 // Open floating by default.
 window-rule {
     match app-id="^gnome-calculator$"
@@ -155,8 +128,11 @@ window-rule {
     match app-id="firefox$" title="^Picture-in-Picture$"
     match app-id="zen-beta$" title="^Picture-in-Picture$"
     match app-id="zoom"
+    match app-id="udiskie"
+    // dms windows.
     match app-id="org.quickshell$"
- // dms windows.    open-floating true
+    open-floating true
+    tiled-state false
 }
 // Open floating on the bottom-right by default.
 window-rule {
@@ -164,9 +140,11 @@ window-rule {
     match app-id="^org\\.kde\\.dolphin$" title="^Moving"
     match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
     open-floating true
+    tiled-state false
     default-floating-position x=16 y=16 relative-to="bottom-right"
 }
 // Block from screen capture. Doesn't block screenshots where you manually select the area.
+// You can test this in the 'debug' section below.
 window-rule {
     match app-id="^org\\.keepassxc\\.KeePassXC$"
     match app-id="^org\\.gnome\\.World\\.Secrets$"
@@ -177,44 +155,21 @@ window-rule {
 }
 layer-rule {
     match namespace="^quickshell$"
+    // Place inside the overview backdrop, like wallpapers.
     place-within-backdrop true
 }
-layer-rule {
-    match namespace="dms:blurwallpaper"
-    place-within-backdrop true
-}
+// Debugging or experimental options.
 debug {
+    // Render monitors like it was a screencast or screen capture.
+    // preview-render "screencast"
+    // preview-render "screen-capture"
+    // Required by apps like Discord so clicking on their tray icon works.
     honor-xdg-activation-with-invalid-serial
-}
-cursor {
-    xcursor-size 32
-}
-recent-windows {
-    highlight {
-        corner-radius 12
-        active-color "#124a73"
-        urgent-color "#ffb4ab"
-    }
-    // Override to disable super+tab
-    binds {
-        Alt+Tab {
-            next-window scope="output"
-        }
-        Alt+Shift+Tab {
-            previous-window scope="output"
-        }
-        Alt+grave {
-            next-window filter="app-id"
-        }
-        Alt+Shift+grave {
-            previous-window filter="app-id"
-        }
-    }
 }
 // Include dms files. These can be changed through the settings GUI.
 include "dms/alttab.kdl"
 include "dms/binds.kdl"
-include "dms/colors.kdl"
+// include "dms/colors.kdl" // Only way to change these is to remove this include.
 include "dms/cursor.kdl"
 include "dms/layout.kdl"
 include "dms/outputs.kdl"
