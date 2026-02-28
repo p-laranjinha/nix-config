@@ -36,12 +36,12 @@ with lib;
       description = "Make the system use 1 screen at 1920x1080p. Useful for Sunshine.";
     };
     plasma = mkOption {
-      default = true;
+      default = false;
       type = with types; bool;
       description = "Use the KDE Plasma desktop environment.";
     };
     niri = mkOption {
-      default = false;
+      default = true;
       type = with types; bool;
       description = "Use the niri window manager.";
     };

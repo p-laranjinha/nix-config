@@ -15,6 +15,13 @@
       nomacs # Image viewer
       inputs.dms.packages.${vars.hostPlatform}.default
     ];
+    fonts.packages = with pkgs; [
+      # Used by flatpaks.
+      noto-fonts
+      noto-fonts-color-emoji
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+    ];
     programs = {
       niri.enable = true;
       dms-shell = {
@@ -29,16 +36,32 @@
       displayManager.dms-greeter = {
         enable = true;
         compositor.name = "niri";
+        configHome = vars.homeDirectory;
       };
       # Backend of udiskie to manager removable media.
       udisks2.enable = true;
     };
+    # Sync greeter with DMS.
+    users.users.${vars.username} = {
+      extraGroups = [
+        "greeter"
+      ];
+    };
+    systemd.tmpfiles.rules = [
+      "L+ /var/cache/dms-greeter/settings.json - - - - ${vars.homeDirectory}/.config/DankMaterialShell/settings.json"
+      "Z /var/cache/dms-greeter/settings.json 777 ${vars.username} greeter - -"
+      "L+ /var/cache/dms-greeter/session.json - - - - ${vars.homeDirectory}/.local/state/DankMaterialShell/session.json"
+      "Z /var/cache/dms-greeter/session.json 777 ${vars.username} greeter - -"
+      "L+ /var/cache/dms-greeter/colors.json - - - - ${vars.homeDirectory}/.cache/DankMaterialShell/dms-colors.json"
+      "Z /var/cache/dms-greeter/colors.json 777 ${vars.username} greeter - -"
+
+      "r ${vars.homeDirectory}/.config/gtk-3.0/settings.ini.backup - - - - -"
+      "r ${vars.homeDirectory}/.config/gtk-4.0/gtk.css.backup - - - - -"
+      "r ${vars.homeDirectory}/.config/gtk-4.0/settings.ini.backup - - - - -"
+      "r ${vars.homeDirectory}/.gtkrc-2.0.backup - - - - -"
+    ];
     hm = {
       home = {
-        file = {
-          ".config/niri".source = funcs.mkMutableConfigSymlink ./config;
-          ".config/mimeapps.list".source = funcs.mkMutableConfigSymlink ./mimeapps.list;
-        };
         pointerCursor = {
           enable = true;
           name = "phinger-cursors-dark";
@@ -47,17 +70,33 @@
           # size = 32;
         };
       };
-      xdg.configFile."menus/applications.menu".text =
-        builtins.readFile "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
+      xdg.configFile = {
+        "niri" = {
+          source = funcs.mkMutableConfigSymlink ./config;
+          force = true;
+        };
+        "mimeapps.list" = {
+          source = funcs.mkMutableConfigSymlink ./mimeapps.list;
+          force = true;
+        };
+        "DankMaterialShell/settings.json" = {
+          source = funcs.mkMutableConfigSymlink ./dms-settings.json;
+          force = true;
+        };
+        "menus/applications.menu" = {
+          text = builtins.readFile "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
+          force = true;
+        };
+      };
       # https://danklinux.com/docs/dankmaterialshell/application-themes#gtk-applications
       # Run 'nwg-look' to check the available GTK themes.
       services.udiskie = {
         enable = true;
         settings = {
           program_options = {
-            file_manager = "${lib.getExe pkgs.kdePackages.dolphin}";
+            file_manager = "${pkgs.kdePackages.dolphin}/bin/dolphin";
+            automount = "false";
           };
-          automount = false;
         };
       };
       gtk = {
@@ -81,6 +120,14 @@
         };
         platformTheme.name = "kde";
       };
+      dconf.settings = {
+        "org/gnome/desktop/interface" = {
+          # Fonts used by flakpak (and other things).
+          document-font-name = "Noto Sans 10";
+          font-name = "Noto Sans 10";
+          monospace-font-name = "FiraCode Nerd Font";
+        };
+      };
     };
     environment.sessionVariables = {
       XDG_CURRENT_DESKTOP = "niri";
@@ -94,12 +141,11 @@
 
     # TODO: keymaps
     # TODO: background apps
-    # TODO: dms json in this repo
     # TODO: bar layout and plugins
     # TODO: remove backup file
     # TODO: dim right screen
     # TODO: see if I can right click app widget for settings like fullscreen?
     # TODO: setup calendar
-    # TODO: sync greeter
+    # TODO: setup foot transparency
   };
 }

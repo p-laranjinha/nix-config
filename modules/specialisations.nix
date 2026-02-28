@@ -4,12 +4,18 @@
 {
   specialisation = {
     sunshine.configuration = {
-      opts.sunshine = true;
-      opts.one-1920x1080-screen = true;
+      opts = {
+        sunshine = true;
+        one-1920x1080-screen = true;
+        plasma = true;
+        niri = false;
+      };
     };
-    niri.configuration = {
-      opts.plasma = false;
-      opts.niri = true;
+    plasma.configuration = {
+      opts = {
+        plasma = true;
+        niri = false;
+      };
     };
   };
 }

@@ -92,9 +92,9 @@ else
             # Because switching with '--specialisation' will apply the wrong boot options, I have
             # to build twice. Once to activate the specialisation, the other to apply the boot
             # options.
-            sudo nixos-rebuild test --flake . --specialisation "$(basename "$SPECIALISATION")"
+            sudo nixos-rebuild boot --flake .
             if [ $? -eq 0 ]; then
-                sudo nixos-rebuild boot --flake .
+                sudo nixos-rebuild test --flake . --specialisation "$(basename "$SPECIALISATION")"
             fi
             break
         fi

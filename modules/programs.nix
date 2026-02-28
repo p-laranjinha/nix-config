@@ -102,11 +102,6 @@
     # A good font for CAD/3D printing.
     # A nerd-fonts variant also exists.
     overpass
-    # Used by flatpaks.
-    noto-fonts
-    noto-fonts-color-emoji
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
   ];
 
   environment.systemPackages = with pkgs; [
