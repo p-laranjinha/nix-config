@@ -48,12 +48,17 @@
       ];
     };
     systemd.tmpfiles.rules = [
-      "L+ /var/cache/dms-greeter/settings.json - - - - ${vars.homeDirectory}/.config/DankMaterialShell/settings.json"
+      "L+ /var/cache/dms-greeter/settings.json - - - - ${funcs.relativeToAbsoluteConfigPath ./dms-settings.json}"
       "Z /var/cache/dms-greeter/settings.json 777 ${vars.username} greeter - -"
+      "Z ${funcs.relativeToAbsoluteConfigPath ./dms-settings.json} 777 ${vars.username} greeter - -"
+
       "L+ /var/cache/dms-greeter/session.json - - - - ${vars.homeDirectory}/.local/state/DankMaterialShell/session.json"
       "Z /var/cache/dms-greeter/session.json 777 ${vars.username} greeter - -"
+      "Z ${vars.homeDirectory}/.local/state/DankMaterialShell/session.json 777 ${vars.username} greeter - -"
+
       "L+ /var/cache/dms-greeter/colors.json - - - - ${vars.homeDirectory}/.cache/DankMaterialShell/dms-colors.json"
       "Z /var/cache/dms-greeter/colors.json 777 ${vars.username} greeter - -"
+      "Z ${vars.homeDirectory}/.cache/DankMaterialShell/dms-colors.json 777 ${vars.username} greeter - -"
 
       "r ${vars.homeDirectory}/.config/gtk-3.0/settings.ini.backup - - - - -"
       "r ${vars.homeDirectory}/.config/gtk-4.0/gtk.css.backup - - - - -"
