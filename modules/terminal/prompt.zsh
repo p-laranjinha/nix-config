@@ -6,7 +6,7 @@
 if [[ "$OSTYPE" == "darwin"* ]]; then
     {
         gdate
-    } || {
+        } || {
         echo "\n$fg_bold[yellow]simplerich.zsh-theme depends on cmd [gdate] to get current time in milliseconds$reset_color"
         echo "$fg_bold[yellow][gdate] is not installed by default in macOS$reset_color"
         echo "$fg_bold[yellow]to get [gdate] by running:$reset_color"
@@ -106,12 +106,18 @@ precmd() { # cspell:disable-line
         local pane_id=$(tmux display-message -p '#{pane_id}' | tr -d %)
         local pane_file="$dir/$pane_id"
         if [ -f "$pane_file" ]; then
-          local message=$(sed 's/\\n/\'$'\n''/g' <<< "The command has ended:\n${cmd}")
-          notify-send --app-name "zsh" -i $ZSH_GHOSTTY_ICON $message
-          # https://github.com/jml/undistract-me
-          # Inspired by the undistract-me used by NixOS with bash.
-          # https://stackoverflow.com/a/51061398
-          (&>/dev/null pw-play "$FREEDESKTOP_SOUNDS_DIR/stereo/complete.oga" &)
+            result_word=""
+            if $command_result; then
+                result_word="Finished"
+            else
+                result_word="Failed"
+            fi
+            local message=$(sed 's/\\n/\'$'\n''/g' <<< "${cmd}\n${result_word} after ${cost}s.")
+            notify-send --app-name "Terminal monitoring" -i $ZSH_NOTIFY_ICON "Command ended" $message
+            # https://github.com/jml/undistract-me
+            # Inspired by the undistract-me used by NixOS with bash.
+            # https://stackoverflow.com/a/51061398
+            (&>/dev/null pw-play "$FREEDESKTOP_SOUNDS_DIR/stereo/complete.oga" &)
         fi
 
         cost="${cost}s"
@@ -263,32 +269,32 @@ _simplerich_prompt() {
 
 
     if [ -v CONDA_DEFAULT_ENV ] || [ -v VIRTUAL_ENV ]; then
-      echo "$(directory_info)$(in_nix_shell) $(python_info) $(git_info)
+        echo "$(directory_info)$(in_nix_shell) $(python_info) $(git_info)
 $(_zvm_mode_color)$(command_status) "
     else
-      echo "$(directory_info)$(in_nix_shell) $(git_info)
+        echo "$(directory_info)$(in_nix_shell) $(git_info)
 $(_zvm_mode_color)$(command_status) "
     fi
 }
 
 _zvm_mode_color() {
-  case $ZVM_MODE in
-    $ZVM_MODE_NORMAL)
-      echo "%{$fg[blue]%}"
-    ;;
-    $ZVM_MODE_INSERT)
-      echo "%{$fg[green]%}"
-    ;;
-    $ZVM_MODE_VISUAL)
-      echo "%{$fg[magenta]%}"
-    ;;
-    $ZVM_MODE_VISUAL_LINE)
-      echo "%{$fg[magenta]%}\033[9m"
-    ;;
-    $ZVM_MODE_REPLACE)
-      echo "%{$fg[red]%}"
-    ;;
-  esac
+    case $ZVM_MODE in
+        $ZVM_MODE_NORMAL)
+            echo "%{$fg[blue]%}"
+            ;;
+        $ZVM_MODE_INSERT)
+            echo "%{$fg[green]%}"
+            ;;
+        $ZVM_MODE_VISUAL)
+            echo "%{$fg[magenta]%}"
+            ;;
+        $ZVM_MODE_VISUAL_LINE)
+            echo "%{$fg[magenta]%}\033[9m"
+            ;;
+        $ZVM_MODE_REPLACE)
+            echo "%{$fg[red]%}"
+            ;;
+    esac
 }
 
 PROMPT='$(_simplerich_prompt)'

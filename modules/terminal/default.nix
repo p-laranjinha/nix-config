@@ -69,7 +69,7 @@
       # Used by my prompt.
       ohMyZsh.enable = true;
       promptInit = ''
-        ZSH_GHOSTTY_ICON=${pkgs.ghostty}/share/icons/hicolor/128x128/apps/com.mitchellh.ghostty.png
+        ZSH_NOTIFY_ICON=${pkgs.foot}/share/icons/hicolor/scalable/apps/foot.svg
         FREEDESKTOP_SOUNDS_DIR=${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop
         source "${funcs.mkMutableConfigSymlink ./prompt.zsh}"
       '';
