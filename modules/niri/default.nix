@@ -53,6 +53,10 @@
           source = funcs.mkMutableConfigSymlink ./dms-settings.json;
           force = true;
         };
+        "DankMaterialShell/clsettings.json" = {
+          source = funcs.mkMutableConfigSymlink ./dms-clipboard-settings.json;
+          force = true;
+        };
         "menus/applications.menu" = {
           text = builtins.readFile "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
           force = true;
@@ -74,5 +78,4 @@
   # TODO: keymaps
   # TODO: remove backup file
   # TODO: dim right screen
-  # TODO: figure out why the clipboard widget isn't showing history
 }

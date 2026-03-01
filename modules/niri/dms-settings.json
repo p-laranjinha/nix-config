@@ -200,7 +200,7 @@
   "appPickerViewMode": "grid",
   "filePickerUsageHistory": {},
   "sortAppsAlphabetically": false,
-  "appLauncherGridColumns": 4,
+  "appLauncherGridColumns": 6,
   "spotlightCloseNiriOverview": true,
   "spotlightSectionViewModes": {
     "apps": "list"
@@ -214,7 +214,7 @@
   "dankLauncherV2BorderThickness": 2,
   "dankLauncherV2BorderColor": "primary",
   "dankLauncherV2ShowFooter": true,
-  "dankLauncherV2UnloadOnClose": false,
+  "dankLauncherV2UnloadOnClose": true,
   "useAutoLocation": true,
   "weatherEnabled": false,
   "networkPreference": "ethernet",
@@ -407,10 +407,17 @@
     ],
     "osd": [
       "all"
+    ],
+    "notepad": [
+      {
+        "name": "DP-2",
+        "model": "BenQ EX2710Q"
+      }
     ]
   },
   "showOnLastDisplay": {
-    "osd": true
+    "osd": true,
+    "notepad": true
   },
   "niriOutputSettings": {
     "HDMI-A-1": {
@@ -448,24 +455,6 @@
         {
           "id": "workspaceSwitcher",
           "enabled": true
-        },
-        {
-          "id": "focusedWindow",
-          "enabled": false,
-          "focusedWindowCompactMode": true
-        },
-        {
-          "id": "appsDock",
-          "enabled": false,
-          "barShowOverflowBadge": true
-        },
-        {
-          "id": "runningApps",
-          "enabled": false,
-          "runningAppsCompactMode": true,
-          "runningAppsGroupByApp": false,
-          "runningAppsCurrentWorkspace": true,
-          "runningAppsCurrentMonitor": false
         }
       ],
       "centerWidgets": [
@@ -502,14 +491,14 @@
           "minimumWidth": true
         },
         {
-          "id": "amdGpuMonitor",
-          "enabled": true
-        },
-        {
           "id": "memUsage",
           "enabled": true,
           "minimumWidth": true,
           "showSwap": false
+        },
+        {
+          "id": "amdGpuMonitor",
+          "enabled": true
         }
       ],
       "rightWidgets": [
@@ -668,6 +657,9 @@
   "builtInPluginSettings": {
     "dms_settings_search": {
       "trigger": "?"
+    },
+    "dms_settings": {
+      "enabled": true
     }
   },
   "clipboardEnterToPaste": false,
