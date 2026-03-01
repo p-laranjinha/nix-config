@@ -12,6 +12,7 @@
     ./calendar.nix
     ./greeter.nix
     ./theme.nix # includes fonts
+    ./plugins.nix
   ];
 
   config = lib.mkIf config.opts.niri {
@@ -71,8 +72,7 @@
     };
   };
   # TODO: keymaps
-  # TODO: bar layout and plugins
   # TODO: remove backup file
   # TODO: dim right screen
-  # TODO: see if I can right click app widget for settings like fullscreen?
+  # TODO: figure out why the clipboard widget isn't showing history
 }

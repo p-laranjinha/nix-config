@@ -1,0 +1,34 @@
+{
+  "calculator": {
+    "enabled": true,
+    "trigger": "=",
+    "calcEngine": "qalc",
+    "persistHistoryOnFile": false
+  },
+  "dankGifSearch": {
+    "enabled": true
+  },
+  "emojiLauncher": {
+    "enabled": true,
+    "trigger": "emoji"
+  },
+  "dankObsidian": {
+    "enabled": true,
+    "trigger": "ob",
+    "noTrigger": false,
+    "isFlatpak": false
+  },
+  "dankStickerSearch": {
+    "enabled": true,
+    "trigger": "sticker"
+  },
+  "dankBitwarden": {
+    "enabled": true,
+    "trigger": "pass"
+  },
+  "amdGpuMonitor": {
+    "enabled": true,
+    "minimumWidth": true,
+    "popoutStyle": "alt"
+  }
+}
