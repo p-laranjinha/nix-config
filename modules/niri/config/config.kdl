@@ -134,6 +134,11 @@ window-rule {
     open-floating true
     tiled-state false
 }
+// Open maximized by default.
+window-rule {
+    match app-id="zen-beta$"
+    open-maximized true
+}
 // Open floating on the bottom-right by default.
 window-rule {
     match app-id="^org\\.kde\\.dolphin$" title="^Copying"
