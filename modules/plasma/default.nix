@@ -3,6 +3,7 @@
   inputs,
   lib,
   config,
+  vars,
   ...
 }:
 {
@@ -82,6 +83,13 @@
           '';
           priority = 3;
         };
+        # https://github.com/nix-community/plasma-manager/issues/577#issuecomment-3971533980
+        # TODO: remove this after the bug (plasma 6.6 crashes when multiple panels are set which
+        #  makes panels overlap and look wrong) is fixed
+        startup.desktopScript."panels".preCommands = lib.mkForce ''
+          sleep 3
+          [ -f ${vars.homeDirectory}/.config/plasma-org.kde.plasma.desktop-appletsrc ] && rm ${vars.homeDirectory}/.config/plasma-org.kde.plasma.desktop-appletsrc
+        '';
 
         # Enable and configure MouseTiler
         configFile."kwinrc" = {
