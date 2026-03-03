@@ -14,7 +14,7 @@
   },
   "dankObsidian": {
     "enabled": true,
-    "trigger": "ob",
+    "trigger": ".",
     "noTrigger": false,
     "isFlatpak": false
   },
@@ -33,6 +33,6 @@
   },
   "dankLauncherKeys": {
     "enabled": true,
-    "trigger": "key"
+    "trigger": "?"
   }
 }

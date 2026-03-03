@@ -680,7 +680,7 @@
   "desktopWidgetGroups": [],
   "builtInPluginSettings": {
     "dms_settings_search": {
-      "trigger": "?"
+      "trigger": ","
     },
     "dms_settings": {
       "enabled": true
