@@ -21,6 +21,7 @@
       dankObsidian.enable = true;
       dankStickerSearch.enable = true;
       dankBitwarden.enable = true;
+      dankLauncherKeys.enable = true;
 
       # Bar plugins
       # dankActions.enable = true;

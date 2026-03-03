@@ -134,8 +134,6 @@
     gimp-with-plugins
     freecad
     blender
-    # Turn images into ASCII.
-    letterpress
 
     # Downloading apps.
     qbittorrent
@@ -143,7 +141,6 @@
     # Media players.
     haruna
     mpv
-    showtime
 
     # Video recording/streaming.
     obs-studio
@@ -166,6 +163,15 @@
 
     # Audio equalizer and other effects.
     easyeffects
+
+    # App to see system logs.
+    gnome-logs
+
+    # Task manager like the one on windows. Looks nice.
+    mission-center
+
+    # PDF editor.
+    pdf4qt
   ];
 
   hm = {
@@ -177,40 +183,14 @@
     #  idempotent, oh well.
     services.flatpak.update.onActivation = true;
     services.flatpak.packages = [
-      # Dictionary.
-      "com.github.johnfactotum.QuickLookup"
-
-      # Task manager like the one on windows. Looks nice.
-      "io.missioncenter.MissionCenter"
-
       # App to make SVGs smaller.
       "re.sonny.OhMySVG"
-
-      # App to see system logs.
-      "org.gnome.Logs"
 
       # App to read files and add highlight lines based on tags.
       "io.github.phastmike.tags"
 
-      # Tool to modify PDFs.
-      "com.github.jeromerobert.pdfarranger"
-
-      # App that adds website to the system menu.
-      # TODO: See what this app does and figure out how to do it via nix. If I even want that.
-      "io.github.zaedus.spider"
-
-      # Downloading app.
-      "io.github.giantpinkrobots.varia"
-
       # App with lots of utilities for developers, like a chmod calculator, diff, QR code generator, and regex tester.
       "me.iepure.devtoolbox"
-      "io.gitlab.liferooter.TextPieces"
-
-      # Music player with plugins.
-      "io.github.quodlibet.QuodLibet"
-
-      # Color picker with many other color-related functionality
-      "com.ktechpit.colorsmith"
 
       # Slicer for 3D printing.
       rec {

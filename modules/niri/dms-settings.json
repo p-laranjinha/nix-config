@@ -97,7 +97,8 @@
     {
       "id": "brightnessSlider",
       "enabled": true,
-      "width": 50
+      "width": 50,
+      "deviceName": "ddc:i2c-8"
     },
     {
       "id": "audioOutput",
@@ -366,7 +367,24 @@
   "notificationHistorySaveLow": true,
   "notificationHistorySaveNormal": true,
   "notificationHistorySaveCritical": true,
-  "notificationRules": [],
+  "notificationRules": [
+    {
+      "enabled": true,
+      "field": "appName",
+      "pattern": "flameshot",
+      "matchType": "exact",
+      "action": "popup_only",
+      "urgency": "default"
+    },
+    {
+      "enabled": true,
+      "field": "appName",
+      "pattern": "Terminal monitoring",
+      "matchType": "exact",
+      "action": "popup_only",
+      "urgency": "default"
+    }
+  ],
   "osdAlwaysShowValue": false,
   "osdPosition": 5,
   "osdVolumeEnabled": true,
@@ -388,7 +406,7 @@
     "suspend",
     "restart"
   ],
-  "powerMenuDefaultAction": "logout",
+  "powerMenuDefaultAction": "poweroff",
   "powerMenuGridLayout": false,
   "customPowerActionLock": "",
   "customPowerActionLogout": "",
@@ -421,7 +439,8 @@
   },
   "niriOutputSettings": {
     "HDMI-A-1": {
-      "vrrOnDemand": true
+      "vrrOnDemand": true,
+      "disabled": true
     },
     "DP-2": {
       "vrrOnDemand": true,
@@ -454,6 +473,10 @@
         },
         {
           "id": "workspaceSwitcher",
+          "enabled": true
+        },
+        {
+          "id": "focusedWindow",
           "enabled": true
         }
       ],
@@ -663,7 +686,32 @@
     }
   },
   "clipboardEnterToPaste": false,
-  "launcherPluginVisibility": {},
+  "launcherPluginVisibility": {
+    "dms_settings_search": {
+      "allowWithoutTrigger": false
+    },
+    "dankStickerSearch": {
+      "allowWithoutTrigger": false
+    },
+    "dankObsidian": {
+      "allowWithoutTrigger": false
+    },
+    "emojiLauncher": {
+      "allowWithoutTrigger": false
+    },
+    "dankLauncherKeys": {
+      "allowWithoutTrigger": false
+    },
+    "calculator": {
+      "allowWithoutTrigger": false
+    },
+    "dankGifSearch": {
+      "allowWithoutTrigger": false
+    },
+    "dankBitwarden": {
+      "allowWithoutTrigger": false
+    }
+  },
   "launcherPluginOrder": [],
   "configVersion": 5
 }

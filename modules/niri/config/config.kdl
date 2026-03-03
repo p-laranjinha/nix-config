@@ -129,6 +129,12 @@ window-rule {
     match app-id="zen-beta$" title="^Picture-in-Picture$"
     match app-id="zoom"
     match app-id="udiskie"
+    match app-id="^eu.betterbird.Betterbird$"
+    match app-id="^com.github.wwmm.easyeffects$"
+    match title="^Save screenshot$"
+    // Syncthing popup
+    match app-id="^chrome-127.0.0.1__-Default$"
+    match title="^Settings - Syncthing Tray$"
     // dms windows.
     match app-id="org.quickshell$"
     open-floating true
@@ -148,12 +154,20 @@ window-rule {
     tiled-state false
     default-floating-position x=16 y=16 relative-to="bottom-right"
 }
+// Open floating on the top-right by default.
+window-rule {
+    match title="^Syncthing Tray$"
+    open-floating true
+    tiled-state false
+    default-floating-position x=16 y=16 relative-to="top-right"
+}
 // Block from screen capture. Doesn't block screenshots where you manually select the area.
 // You can test this in the 'debug' section below.
 window-rule {
     match app-id="^org\\.keepassxc\\.KeePassXC$"
     match app-id="^org\\.gnome\\.World\\.Secrets$"
     match app-id="Bitwarden$"
+    match app-id="^org.gnupg.pinentry-qt$"
     block-out-from "screen-capture"
  // Use this instead if you want them visible on third-party screenshot tools.
     // block-out-from "screencast"

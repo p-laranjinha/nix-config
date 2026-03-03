@@ -8,13 +8,6 @@
 }:
 {
   config = lib.mkIf config.opts.niri {
-    fonts.packages = with pkgs; [
-      # Used by flatpaks.
-      noto-fonts
-      noto-fonts-color-emoji
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-    ];
     systemd.tmpfiles.rules = [
       # Remove these backups that break things when I switch from plasma to niri.
       "r ${vars.homeDirectory}/.config/gtk-3.0/settings.ini.backup - - - - -"
@@ -60,12 +53,12 @@
         };
         platformTheme.name = "kde";
       };
-      # Use 'dconf-editor' to find options you can change with this.
+      # Use 'dconf-editor' or 'gnome-tweaks' to find options you can change with this.
       dconf.settings = {
         "org/gnome/desktop/interface" = {
           # Fonts used by flakpak (and other things).
-          document-font-name = "Noto Sans 10";
-          font-name = "Noto Sans 10";
+          document-font-name = "DejaVu Sans";
+          font-name = "DejaVu Sans";
           monospace-font-name = "FiraCode Nerd Font";
         };
       };

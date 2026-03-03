@@ -21,6 +21,8 @@
       xwayland-satellite
       kdePackages.dolphin
       nomacs # Image viewer
+      flameshot
+      grim # Dependency for Flameshot in wayland
     ];
     programs = {
       niri.enable = true;
@@ -39,6 +41,11 @@
     environment.sessionVariables = {
       XDG_CURRENT_DESKTOP = "niri";
     };
+    users.users.${vars.username} = {
+      extraGroups = [
+        "i2c" # Required to change monitor brightness
+      ];
+    };
     hm = {
       xdg.configFile = {
         "niri" = {
@@ -55,6 +62,10 @@
         };
         "DankMaterialShell/clsettings.json" = {
           source = funcs.mkMutableConfigSymlink ./dms-clipboard-settings.json;
+          force = true;
+        };
+        "flameshot/flameshot.ini" = {
+          source = funcs.mkMutableConfigSymlink ./flameshot.ini;
           force = true;
         };
         "menus/applications.menu" = {
@@ -75,7 +86,7 @@
       };
     };
   };
-  # TODO: keymaps
-  # TODO: remove backup file
-  # TODO: dim right screen
+  # TODO: change profile picture
+  # TODO: fix the error message that shows up when I run a command when tmux isn't running
+  # TODO: fix tmux swap pane shortcut
 }
