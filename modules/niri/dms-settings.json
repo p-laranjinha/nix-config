@@ -218,7 +218,7 @@
   "dankLauncherV2UnloadOnClose": true,
   "useAutoLocation": true,
   "weatherEnabled": false,
-  "networkPreference": "ethernet",
+  "networkPreference": "wifi",
   "iconTheme": "System Default",
   "cursorSettings": {
     "theme": "phinger-cursors-dark",
@@ -477,7 +477,8 @@
         },
         {
           "id": "focusedWindow",
-          "enabled": true
+          "enabled": true,
+          "focusedWindowCompactMode": false
         }
       ],
       "centerWidgets": [

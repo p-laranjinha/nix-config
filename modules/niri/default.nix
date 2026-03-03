@@ -86,7 +86,4 @@
       };
     };
   };
-  # TODO: change profile picture
-  # TODO: fix the error message that shows up when I run a command when tmux isn't running
-  # TODO: fix tmux swap pane shortcut
 }

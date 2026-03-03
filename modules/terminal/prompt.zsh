@@ -101,23 +101,26 @@ precmd() { # cspell:disable-line
             cost="0${cost}"
         fi
 
-        # Send notification if the pane file created by tmux exists.
-        local dir="$XDG_CACHE_HOME/tmux/notify"
-        local pane_id=$(tmux display-message -p '#{pane_id}' | tr -d %)
-        local pane_file="$dir/$pane_id"
-        if [ -f "$pane_file" ]; then
-            result_word=""
-            if $command_result; then
-                result_word="Finished"
-            else
-                result_word="Failed"
+        # If tmux is running.
+        if tmux ls &>/dev/null ; then
+            # Send notification if the pane file created by tmux exists.
+            local dir="$XDG_CACHE_HOME/tmux/notify"
+            local pane_id=$(tmux display-message -p '#{pane_id}' | tr -d %)
+            local pane_file="$dir/$pane_id"
+            if [ -f "$pane_file" ]; then
+                result_word=""
+                if $command_result; then
+                    result_word="Finished"
+                else
+                    result_word="Failed"
+                fi
+                local message=$(sed 's/\\n/\'$'\n''/g' <<< "${cmd}\n${result_word} after ${cost}s.")
+                notify-send --app-name "Terminal monitoring" -i $ZSH_NOTIFY_ICON "Command ended" $message
+                # https://github.com/jml/undistract-me
+                # Inspired by the undistract-me used by NixOS with bash.
+                # https://stackoverflow.com/a/51061398
+                (&>/dev/null pw-play "$FREEDESKTOP_SOUNDS_DIR/stereo/complete.oga" &)
             fi
-            local message=$(sed 's/\\n/\'$'\n''/g' <<< "${cmd}\n${result_word} after ${cost}s.")
-            notify-send --app-name "Terminal monitoring" -i $ZSH_NOTIFY_ICON "Command ended" $message
-            # https://github.com/jml/undistract-me
-            # Inspired by the undistract-me used by NixOS with bash.
-            # https://stackoverflow.com/a/51061398
-            (&>/dev/null pw-play "$FREEDESKTOP_SOUNDS_DIR/stereo/complete.oga" &)
         fi
 
         cost="${cost}s"
