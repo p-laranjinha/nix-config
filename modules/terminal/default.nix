@@ -37,8 +37,6 @@
 
       # Runs a script that rebuild switches this config.
       nixs = toString (funcs.mkMutableConfigSymlink ./nixs.sh);
-      # Runs a script that rebuild switches and commits this config.
-      nixsf = toString (funcs.mkMutableConfigSymlink ./nixsf.sh);
       nixb = "sudo nixos-rebuild build --flake ${vars.configDirectory}";
       nixl = "nixos-rebuild list-generations";
       nixu = "nix flake update --flake ${vars.configDirectory}";
