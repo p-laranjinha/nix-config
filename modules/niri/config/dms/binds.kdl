@@ -67,7 +67,7 @@ binds {
     Mod+C hotkey-overlay-title="Center column" { center-column; }
     Mod+Ctrl+C hotkey-overlay-title="Center visible columns" { center-visible-columns; }
     Mod+Shift+End hotkey-overlay-title="Move column to the end" { move-column-to-last; }
-    Mod+Ctrl+F hotkey-overlay-title="Maximize column" { expand-column-to-available-width; }
+    Mod+Ctrl+M hotkey-overlay-title="Maximize column" { expand-column-to-available-width; }
     Mod+Ctrl+H hotkey-overlay-title="Focus left monitor" { focus-monitor-left; }
     Mod+Shift+Home hotkey-overlay-title="Move column to the start" { move-column-to-first; }
     Mod+Ctrl+J hotkey-overlay-title="Focus monitor below" { focus-monitor-down; }
@@ -122,7 +122,7 @@ binds {
     Mod+WheelScrollLeft hotkey-overlay-title="Focus left column" { focus-column-left; }
     Mod+WheelScrollRight hotkey-overlay-title="Focus right column" { focus-column-right; }
     Shift+Print hotkey-overlay-title="Screenshot (current window)" { screenshot-window; }
-    Mod+Ctrl+M hotkey-overlay-title="Toggle tab column" { toggle-column-tabbed-display; }
+    Mod+Alt+M hotkey-overlay-title="Toggle tab column" { toggle-column-tabbed-display; }
     Mod+Shift+F hotkey-overlay-title="Switch focus between floating and tiling windows" { switch-focus-between-floating-and-tiling; }
     Alt+Print hotkey-overlay-title="Screenshot (all screens)" { spawn "flameshot" "full" "-p" "/home/pebble/Pictures/screenshots"; }
     Ctrl+Print hotkey-overlay-title="Screenshot (current screen)" { screenshot-screen; }
