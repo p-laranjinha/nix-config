@@ -23,6 +23,9 @@
 
     # LSPs, DAPs, Linters and Formatters not installed with Mason.
     statix
+    # quickshell (.qml)
+    # qmllint requires more configuration that I don't know how to do.
+    kdePackages.qtdeclarative
   ];
   programs.neovim = {
     enable = true;

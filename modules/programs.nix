@@ -81,19 +81,6 @@
         remotePlay.openFirewall = true;
         localNetworkGameTransfers.openFirewall = true;
       };
-
-      # https://wiki.nixos.org/wiki/Visual_Studio_Code
-      vscode = {
-        enable = true;
-        package = pkgs.vscodium;
-        extensions =
-          with pkgs.vscode-extensions;
-          [
-            jnoortheen.nix-ide
-          ]
-          ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          ];
-      };
     };
 
   fonts.packages = with pkgs; [
@@ -191,6 +178,11 @@
 
       # App with lots of utilities for developers, like a chmod calculator, diff, QR code generator, and regex tester.
       "me.iepure.devtoolbox"
+
+      # VSCode without the telemetry.
+      # Installing this as a flatpak so I can just use it casually without going through Nix.
+      # To go through Nix see: https://wiki.nixos.org/wiki/Visual_Studio_Code
+      "com.vscodium.codium"
 
       # Slicer for 3D printing.
       rec {
