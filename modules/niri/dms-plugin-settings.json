@@ -34,5 +34,8 @@
   "dankLauncherKeys": {
     "enabled": true,
     "trigger": "?"
+  },
+  "FocusedApp-remake": {
+    "enabled": true
   }
 }

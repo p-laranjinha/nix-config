@@ -25,17 +25,27 @@
 
       # Bar plugins
       # dankActions.enable = true;
-      amdGpuMonitorFork = {
-        enable = true;
-        src = pkgs.fetchFromGitHub {
-          owner = "skrimix";
-          repo = "dms-amd-gpu-monitor";
-          rev = "963a9296c80e7381023d682edd13cb157b5c55cd"; # 'alt-syles' branch
-          hash = "sha256-VfW95Kvtm/bGtHDEC+EW1bssNQRrVv4BHaNm5YFffss=";
-        };
-      };
       # easyEffects.enable = true;
       # musicLyrics.enable = true;
+      # The following 2 aren't updating properly, so I'll just symlink to a repo "for now".
+      # amdGpuMonitorFork = {
+      #   enable = true;
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "p-laranjinha";
+      #     repo = "dms-amd-gpu-monitor";
+      #     rev = "18e0610ebfc5cfe3a0c1d94374c935997efac0f6"; # 'alt-syles' branch
+      #     hash = "sha256-i27ApSb1kCbkiW2Avv16OAPY5zLQg/9qHAxdY38SJLs=";
+      #   };
+      # };
+      # focusedAppRemake = {
+      #   enable = true;
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "p-laranjinha";
+      #     repo = "dms-focusedapp-widget-remake";
+      #     rev = "master";
+      #     hash = "sha256-Sjh3EacrJC9rusjAeigXtcycdVvyOaNqKHAoNv7Wtko=";
+      #   };
+      # };
     };
 
     # Dependencies

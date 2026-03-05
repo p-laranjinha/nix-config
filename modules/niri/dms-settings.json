@@ -458,7 +458,7 @@
       "id": "default",
       "name": "Main Bar",
       "enabled": true,
-      "position": 0,
+      "position": 1,
       "screenPreferences": [
         {
           "name": "DP-2",
@@ -476,9 +476,8 @@
           "enabled": true
         },
         {
-          "id": "focusedWindow",
-          "enabled": true,
-          "focusedWindowCompactMode": false
+          "id": "FocusedApp-remake",
+          "enabled": true
         }
       ],
       "centerWidgets": [
