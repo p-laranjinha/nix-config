@@ -101,6 +101,10 @@
           "devtools.chrome.enabled" = true;
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
+          # Use the system file picker.
+          "widget.use-xdg-desktop-portal.file-picker" = 1;
+          "widget.use-xdg-desktop-portal.mime-handler" = 1;
+
           # Hides the new tab button.
           "zen.tabs.show-newtab-vertical" = false;
           # Always floats the url bar when focused.

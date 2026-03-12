@@ -23,7 +23,7 @@
     "trigger": "sticker"
   },
   "dankBitwarden": {
-    "enabled": true,
+    "enabled": false,
     "trigger": "pass"
   },
   "amdGpuMonitor": {

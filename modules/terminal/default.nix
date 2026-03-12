@@ -8,6 +8,11 @@
 {
   imports = [
     ./neovim
+
+    # Tool to locate the nixpkgs package providing a certain file. Used by comma.
+    # Unlike regular nix-index, this one includes an automatically updated database, and so I don't
+    #  need to manually update it every once in a while.
+    inputs.nix-index-database.darwinModules.nix-index
   ];
 
   users.defaultUserShell = pkgs.zsh;
@@ -100,9 +105,10 @@
 
     tmux.enable = true;
 
-    # Tool to locate the nixpkgs package providing a certain file. Used by comma.
     nix-index.enable = true;
 
+    # CLI tool to run programs without installing them on Nix. Functionally an easier to use nix-shell. Requires nix-index.
+    nix-index-database.comma.enable = true;
   };
 
   hm = {
@@ -179,9 +185,6 @@
 
     # App to give quick examples of how to use most commands.
     tldr
-
-    # CLI tool to run programs without installing them on Nix. Functionally an easier to use nix-shell. Requires nix-index.
-    comma
 
     # Nix formatter.
     alejandra

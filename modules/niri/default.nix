@@ -20,12 +20,16 @@
       inputs.dms.packages.${vars.hostPlatform}.default
       xwayland-satellite
       kdePackages.dolphin
+      kdePackages.ark
       nomacs # Image viewer
       flameshot
       grim # Dependency for Flameshot in wayland
     ];
     programs = {
-      niri.enable = true;
+      niri = {
+        enable = true;
+        useNautilus = false;
+      };
       dms-shell = {
         enable = true;
         # Use latest dms and quickshell.
@@ -39,7 +43,16 @@
       udisks2.enable = true;
     };
     environment.sessionVariables = {
-      XDG_CURRENT_DESKTOP = "niri";
+      GTK_USE_PORTAL = "1";
+    };
+    xdg.portal = {
+      xdgOpenUsePortal = true;
+      # Set values in '/etc/xdg/xdg-desktop-portal/niri-portals.conf'
+      config.niri = {
+        # Make Dolphin the file picker.
+        # Overwritting https://github.com/NixOS/nixpkgs/blob/62dc67aa6a52b4364dd75994ec00b51fbf474e50/nixos/modules/programs/wayland/niri.nix#L53
+        "org.freedesktop.impl.portal.FileChooser" = lib.mkForce "kde";
+      };
     };
     users.users.${vars.username} = {
       extraGroups = [
@@ -82,6 +95,20 @@
             file_manager = "${pkgs.kdePackages.dolphin}/bin/dolphin";
             automount = "false";
           };
+        };
+      };
+      # https://github.com/niri-wm/niri/discussions/1599
+      # Runs a script that floats windows not just on launch.
+      systemd.user.services.niri-dynamic-float = {
+        Unit = {
+          After = [ "niri.service" ];
+        };
+        Service = {
+          Type = "simple";
+          ExecStart = "${pkgs.python3}/bin/python ${funcs.mkMutableConfigSymlink ./dynamic-float.py}";
+        };
+        Install = {
+          WantedBy = [ "niri.service" ];
         };
       };
     };

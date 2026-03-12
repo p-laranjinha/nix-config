@@ -262,7 +262,7 @@
   "acLockTimeout": 0,
   "acSuspendTimeout": 0,
   "acSuspendBehavior": 0,
-  "acProfileName": "",
+  "acProfileName": "2",
   "batteryMonitorTimeout": 0,
   "batteryLockTimeout": 0,
   "batterySuspendTimeout": 0,
@@ -358,7 +358,7 @@
   "notificationTimeoutNormal": 5000,
   "notificationTimeoutCritical": 0,
   "notificationCompactMode": false,
-  "notificationPopupPosition": 0,
+  "notificationPopupPosition": 3,
   "notificationAnimationSpeed": 1,
   "notificationCustomAnimationDuration": 400,
   "notificationHistoryEnabled": true,
@@ -381,6 +381,22 @@
       "field": "appName",
       "pattern": "Terminal monitoring",
       "matchType": "exact",
+      "action": "no_history",
+      "urgency": "default"
+    },
+    {
+      "enabled": true,
+      "field": "desktopEntry",
+      "pattern": "eu.betterbird.Betterbird",
+      "matchType": "exact",
+      "action": "popup_only",
+      "urgency": "default"
+    },
+    {
+      "enabled": true,
+      "field": "appName",
+      "pattern": "discord",
+      "matchType": "contains",
       "action": "popup_only",
       "urgency": "default"
     }
@@ -593,7 +609,7 @@
       "popupGapsAuto": true,
       "popupGapsManual": 4,
       "maximizeDetection": true,
-      "scrollYBehavior": "none",
+      "scrollYBehavior": "column",
       "clickThrough": false,
       "widgetPadding": 12,
       "iconScale": 1.15,
@@ -603,7 +619,7 @@
       "shadowIntensity": 0,
       "shadowColorMode": "text",
       "shadowOpacity": 50,
-      "scrollXBehavior": "none"
+      "scrollXBehavior": "workspace"
     }
   ],
   "desktopClockEnabled": false,

@@ -125,12 +125,13 @@ window-rule {
     match app-id="^steam$"
     match app-id="^xdg-desktop-portal$"
     match app-id="^discord$"
-    match app-id="firefox$" title="^Picture-in-Picture$"
-    match app-id="zen-beta$" title="^Picture-in-Picture$"
+    match app-id="^firefox$" title="^Picture-in-Picture$"
+    match app-id="^zen-beta$" title="^Picture-in-Picture$"
+    match app-id="^zen-beta$" title="^Library$"
     match app-id="zoom"
     match app-id="udiskie"
-    match app-id="^eu.betterbird.Betterbird$"
     match app-id="^com.github.wwmm.easyeffects$"
+    match app-id="^org.freecad.FreeCAD$" title="^Addon Manager$"
     match title="^Save screenshot$"
     // Syncthing popup
     match app-id="^chrome-127.0.0.1__-Default$"
@@ -140,9 +141,21 @@ window-rule {
     open-floating true
     tiled-state false
 }
+// Open floating without a focus ring by default.
+// For those popup-like windows that only have a logo before the app open.
+window-rule {
+    match app-id="^org.freecad.FreeCAD$" title="^FreeCAD$"
+    open-floating true
+    tiled-state false
+    focus-ring {
+        off
+    }
+}
 // Open maximized by default.
 window-rule {
-    match app-id="zen-beta$"
+    match app-id="^eu.betterbird.Betterbird$"
+    match app-id="^zen-beta$"
+    match app-id="^org.freecad.FreeCAD$"
     open-maximized true
 }
 // Open floating on the bottom-right by default.
@@ -150,16 +163,10 @@ window-rule {
     match app-id="^org\\.kde\\.dolphin$" title="^Copying"
     match app-id="^org\\.kde\\.dolphin$" title="^Moving"
     match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
-    open-floating true
-    tiled-state false
-    default-floating-position x=16 y=16 relative-to="bottom-right"
-}
-// Open floating on the top-right by default.
-window-rule {
     match title="^Syncthing Tray$"
     open-floating true
     tiled-state false
-    default-floating-position x=16 y=16 relative-to="top-right"
+    default-floating-position x=16 y=16 relative-to="bottom-right"
 }
 // Block from screen capture. Doesn't block screenshots where you manually select the area.
 // You can test this in the 'debug' section below.

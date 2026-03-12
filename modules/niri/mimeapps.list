@@ -1,4 +1,5 @@
 [Added Associations]
+application/pdf=io.github.JakubMelka.Pdf4qt.Pdf4QtViewer.desktop;
 application/x-desktop=org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;writer.desktop;io.github.phastmike.tags.desktop;io.gitlab.liferooter.TextPieces.desktop;nvim.desktop;
 application/x-extension-htm=zen.desktop;
 application/x-extension-html=zen.desktop;
@@ -7,10 +8,12 @@ application/x-extension-xht=zen.desktop;
 application/x-extension-xhtml=zen.desktop;
 application/x-shellscript=org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;writer.desktop;io.github.phastmike.tags.desktop;io.gitlab.liferooter.TextPieces.desktop;nvim.desktop;
 application/xhtml+xml=zen.desktop;
+application/xml=org.kde.kate.desktop;
+application/zip=org.kde.ark.desktop;
 image/png=org.nomacs.ImageLounge.desktop;
 image/svg+xml=org.nomacs.ImageLounge.desktop;
 inode/directory=org.kde.dolphin.desktop;codium.desktop;org.kde.kate.desktop;org.kde.gwenview.desktop;
-model/stl=OrcaSlicer.desktop;org.freecad.FreeCAD.desktop;
+model/stl=io.github.orcaslicer.OrcaSlicer.desktop;OrcaSlicer.desktop;org.freecad.FreeCAD.desktop;
 text/css=org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;writer.desktop;io.github.phastmike.tags.desktop;io.gitlab.liferooter.TextPieces.desktop;nvim.desktop;
 text/html=zen.desktop;
 text/plain=org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;writer.desktop;io.github.phastmike.tags.desktop;io.gitlab.liferooter.TextPieces.desktop;nvim.desktop;
@@ -22,6 +25,7 @@ x-scheme-handler/https=zen-beta.desktop;zen.desktop;
 x-scheme-handler/mailto=eu.betterbird.Betterbird.desktop;
 
 [Default Applications]
+application/pdf=io.github.JakubMelka.Pdf4qt.Pdf4QtViewer.desktop;
 application/x-desktop=org.kde.kate.desktop;
 application/x-extension-htm=zen-beta.desktop
 application/x-extension-html=zen-beta.desktop
@@ -30,9 +34,11 @@ application/x-extension-xht=zen-beta.desktop
 application/x-extension-xhtml=zen-beta.desktop
 application/x-shellscript=org.kde.kate.desktop;
 application/xhtml+xml=zen-beta.desktop
+application/xml=org.kde.kate.desktop;
+application/zip=org.kde.ark.desktop;
 image/svg+xml=org.nomacs.ImageLounge.desktop;
 inode/directory=org.kde.dolphin.desktop;
-model/stl=OrcaSlicer.desktop;
+model/stl=io.github.orcaslicer.OrcaSlicer.desktop;
 text/css=org.kde.kate.desktop;
 text/html=zen-beta.desktop
 text/plain=org.kde.kate.desktop;
