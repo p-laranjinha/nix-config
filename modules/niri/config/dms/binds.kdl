@@ -128,8 +128,8 @@ binds {
     Ctrl+Print hotkey-overlay-title="Screenshot (current screen)" { screenshot-screen; }
     Mod+B hotkey-overlay-title="Open browser" { spawn "zen-beta"; }
     Mod+E hotkey-overlay-title="Open file explorer" { spawn "dolphin"; }
-    Mod+Shift+T hotkey-overlay-title="Open terminal" { spawn "foot" "tmux" "new" "-A"; }
-    Mod+T hotkey-overlay-title="Open terminal" { spawn "foot"; }
+    Mod+T hotkey-overlay-title="Open terminal" { spawn "foot" "tmux" "new" "-A"; }
+    Mod+Shift+T hotkey-overlay-title="Open terminal" { spawn "foot"; }
     Print hotkey-overlay-title="Screenshot (selected area)" { spawn "flameshot" "gui"; }
     Mod+Alt+K hotkey-overlay-title="Switch keyboard layout" { switch-layout "next"; }
     Mod+Escape allow-inhibiting=false hotkey-overlay-title="Toggle inhibit shortcuts" { toggle-keyboard-shortcuts-inhibit; }

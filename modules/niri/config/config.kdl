@@ -138,15 +138,14 @@ window-rule {
     match title="^Settings - Syncthing Tray$"
     // dms windows.
     match app-id="org.quickshell$"
-    open-floating true
-    tiled-state false
-}
-// Open floating without a focus ring by default.
-// For those popup-like windows that only have a logo before the app open.
-window-rule {
     match app-id="^org.freecad.FreeCAD$" title="^FreeCAD$"
     open-floating true
     tiled-state false
+}
+// Remove focus ring.
+window-rule {
+    match app-id="^org.freecad.FreeCAD$" title="^FreeCAD$"
+    match app-id="^zen-beta$"
     focus-ring {
         off
     }
@@ -162,6 +161,7 @@ window-rule {
 window-rule {
     match app-id="^org\\.kde\\.dolphin$" title="^Copying"
     match app-id="^org\\.kde\\.dolphin$" title="^Moving"
+    match app-id="^org\\.kde\\.dolphin$" title="^Progress Dialog"
     match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
     match title="^Syncthing Tray$"
     open-floating true
