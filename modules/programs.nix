@@ -84,8 +84,10 @@
     };
 
   fonts.packages = with pkgs; [
-    # My default monofont/programming font.
+    # My old monofont/programming font.
     nerd-fonts.fira-code
+    # My default monofont/programming font.
+    nerd-fonts.sauce-code-pro
     # A good font for CAD/3D printing.
     # A nerd-fonts variant also exists.
     overpass

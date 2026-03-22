@@ -244,7 +244,7 @@
   "launcherLogoContrast": 1,
   "launcherLogoSizeOffset": 0,
   "fontFamily": "Inter Variable",
-  "monoFontFamily": "FiraCode Nerd Font",
+  "monoFontFamily": "SauceCodePro Nerd Font",
   "fontWeight": 400,
   "fontScale": 1,
   "notepadUseMonospace": true,
@@ -731,3 +731,4 @@
   "launcherPluginOrder": [],
   "configVersion": 5
 }
+

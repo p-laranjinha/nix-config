@@ -59,7 +59,7 @@
           # Fonts used by flakpak (and other things).
           document-font-name = "DejaVu Sans";
           font-name = "DejaVu Sans";
-          monospace-font-name = "FiraCode Nerd Font";
+          monospace-font-name = "SauceCodePro Nerd Font";
         };
       };
     };
