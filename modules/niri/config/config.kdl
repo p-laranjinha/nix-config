@@ -155,6 +155,7 @@ window-rule {
     match app-id="^eu.betterbird.Betterbird$"
     match app-id="^zen-beta$"
     match app-id="^org.freecad.FreeCAD$"
+    match app-id="^OrcaSlicer$"
     open-maximized true
 }
 // Open floating on the bottom-right by default.
