@@ -39,6 +39,11 @@
           name = "Breeze-Dark";
           package = pkgs.kdePackages.breeze-gtk;
         };
+        gtk4.theme = {
+          name = "Breeze-Dark";
+          package = pkgs.kdePackages.breeze-gtk;
+        };
+
         iconTheme = {
           name = "breeze-dark";
           package = pkgs.kdePackages.breeze-icons;

@@ -17,8 +17,6 @@
 
     programs.zen-browser = {
       enable = true;
-      # Hide rebuild warning about migration from .zen to .config/zen.
-      suppressXdgMigrationWarning = true;
 
       # Check the following for options:
       #  about:policies#documentation
