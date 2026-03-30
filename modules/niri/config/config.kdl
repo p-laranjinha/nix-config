@@ -149,6 +149,15 @@ window-rule {
         off
     }
 }
+// Don't automatically focus.
+window-rule {
+    match app-id="^org.freecad.FreeCAD$" title="^FreeCAD$"
+    match app-id="^org\\.kde\\.dolphin$" title="^Copying"
+    match app-id="^org\\.kde\\.dolphin$" title="^Moving"
+    match app-id="^org\\.kde\\.dolphin$" title="^Progress Dialog"
+    match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
+    open-focused false
+}
 // Open maximized by default.
 window-rule {
     match app-id="^eu.betterbird.Betterbird$"
@@ -166,7 +175,7 @@ window-rule {
     match title="^Syncthing Tray$"
     open-floating true
     tiled-state false
-    default-floating-position x=16 y=16 relative-to="bottom-right"
+    default-floating-position x=4 y=4 relative-to="bottom-right"
 }
 // Block from screen capture. Doesn't block screenshots where you manually select the area.
 // You can test this in the 'debug' section below.

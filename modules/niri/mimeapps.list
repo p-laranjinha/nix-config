@@ -16,7 +16,7 @@ inode/directory=org.kde.dolphin.desktop;codium.desktop;org.kde.kate.desktop;org.
 model/stl=io.github.orcaslicer.OrcaSlicer.desktop;OrcaSlicer.desktop;org.freecad.FreeCAD.desktop;
 text/css=org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;writer.desktop;io.github.phastmike.tags.desktop;io.gitlab.liferooter.TextPieces.desktop;nvim.desktop;
 text/html=zen.desktop;
-text/plain=org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;writer.desktop;io.github.phastmike.tags.desktop;io.gitlab.liferooter.TextPieces.desktop;nvim.desktop;
+text/plain=org.kde.kate.desktop;org.kde.kwrite.desktop;writer.desktop;io.github.phastmike.tags.desktop;nvim.desktop;com.vscodium.codium.desktop;
 text/x-python=org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;writer.desktop;io.github.phastmike.tags.desktop;io.gitlab.liferooter.TextPieces.desktop;nvim.desktop;peazip-add-to-bzip2.desktop;peazip-add-to-xz.desktop;peazip-add-to-brotli.desktop;peazip-add-to-wim.desktop;peazip-add-to-archive.desktop;peazip-convert.desktop;peazip-add-to-tar.desktop;peazip-add-to-pea.desktop;peazip-open.desktop;peazip-add-to-7z.desktop;peazip-add-to-zip.desktop;peazip-add-to-zpaq.desktop;peazip-add-to-gzip.desktop;peazip-add-to-zstd.desktop;
 x-scheme-handler/chrome=zen-beta.desktop;zen.desktop;
 x-scheme-handler/geo=google-maps-geo-handler.desktop;
@@ -53,10 +53,3 @@ x-scheme-handler/https=zen-beta.desktop
 x-scheme-handler/mailto=eu.betterbird.Betterbird.desktop;
 x-scheme-handler/x-github-client=github-desktop.desktop
 x-scheme-handler/x-github-desktop-auth=github-desktop.desktop
-
-[Removed Associations]
-application/x-desktop=OrcaSlicer.desktop;
-application/x-shellscript=OrcaSlicer.desktop;
-text/css=OrcaSlicer.desktop;
-text/plain=org.freecad.FreeCAD.desktop;OrcaSlicer.desktop;
-text/x-python=OrcaSlicer.desktop;org.freecad.FreeCAD.desktop;

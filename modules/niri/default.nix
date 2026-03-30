@@ -20,6 +20,7 @@
       inputs.dms.packages.${vars.hostPlatform}.default
       xwayland-satellite
       kdePackages.dolphin
+      kdePackages.kde-cli-tools # Contains tool used by dolphin to edit default file apps
       kdePackages.ark
       nomacs # Image viewer
       flameshot
