@@ -14,6 +14,7 @@
       "wheel"
       "wireshark"
       "dialout"
+      "podman"
     ];
   };
 
@@ -43,6 +44,16 @@
   };
 
   services.printing.enable = true;
+
+  virtualisation = {
+    containers.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
 
   # Adds current flake to the registry so it can be accessed in things like the repl.
   nix.registry = {
