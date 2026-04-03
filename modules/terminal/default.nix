@@ -105,10 +105,9 @@
 
     tmux.enable = true;
 
-    nix-index.enable = true;
-
     # CLI tool to run programs without installing them on Nix. Functionally an easier to use nix-shell. Requires nix-index.
     nix-index-database.comma.enable = true;
+    nix-index.enable = true;
   };
 
   hm = {
@@ -187,7 +186,6 @@
     tldr
 
     # Nix formatter.
-    alejandra
     nixfmt
     # Formatter multiplexer
     treefmt
