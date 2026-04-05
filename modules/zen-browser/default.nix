@@ -143,9 +143,12 @@
               ];
               vertical-tabs = [ ];
               PersonalToolbar = [ ];
-              zen-sidebar-top-buttons = [ ];
+              zen-sidebar-top-buttons = [
+                "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action" # Bitwarden
+              ];
               zen-sidebar-foot-buttons = [
-                "preferences-button"
+                "zen-toggle-compact-mode"
+                # "preferences-button"
                 "zen-workspaces-button"
                 "downloads-button"
                 "sidebar-button"
@@ -153,14 +156,14 @@
               # Some extensions may appear in the nav-bar if they're not here.
               # The extensions appear in this order.
               unified-extensions-area = [
-                "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action" # Bitwarden
                 "addon_darkreader_org-browser-action" # Dark Reader
+                "addon_karakeep_app-browser-action" # Karakeep
                 "_531906d3-e22f-4a6c-a102-8057b88a1a63_-browser-action" # SingleFile
-                "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action" # Violentmonkey
-                "_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action" # Stylus
                 "_d07ccf11-c0cd-4938-a265-2a4d6ad01189_-browser-action" # Web Archives
+                "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action" # Violentmonkey
+                # "_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action" # Stylus
                 "ublock0_raymondhill_net-browser-action" # uBlock Origin
-                "adnauseam_rednoise_org-browser-action" # AdNauseam
+                # "adnauseam_rednoise_org-browser-action" # AdNauseam
                 "gdpr_cavi_au_dk-browser-action" # Consent-O-Matic
                 "dearrow_ajay_app-browser-action" # DeArrow
                 "sponsorblocker_ajay_app-browser-action" # SponsorBlock
@@ -170,9 +173,8 @@
                 "_a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad_-browser-action" # Refined GitHub
                 "_036a55b4-5e72-4d05-a06c-cba2dfcc134a_-browser-action" # TWP - Translate Web Pages
                 "default-bookmark-folder_gustiaux_com-browser-action" # Default Bookmark Folder
-                "amptra_keepa_com-browser-action" # Keepa
-                "addon_karakeep_app-browser-action" # Karakeep
-                "_12cf650b-1822-40aa-bff0-996df6948878_-browser-action" # cookies.txt
+                # "amptra_keepa_com-browser-action" # Keepa
+                # "_12cf650b-1822-40aa-bff0-996df6948878_-browser-action" # cookies.txt
 
                 # Not sure it works with SearxNG, but I even forgot about it
                 #  when using DuckDuckGo.
@@ -192,7 +194,7 @@
           bitwarden
           ublock-origin
           darkreader
-          # The rest can just be installed by logging in to the Firefox account.
+          # The rest can just be installed by logging into the Firefox account.
         ];
         search = {
           force = true;

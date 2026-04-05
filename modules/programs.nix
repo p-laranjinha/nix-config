@@ -144,7 +144,7 @@
     github-desktop
 
     # Browsers.
-    ungoogled-chromium
+    chromium
     firefox
 
     # Password manager.
