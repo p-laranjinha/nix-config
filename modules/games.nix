@@ -4,8 +4,8 @@
     prismlauncher
     heroic
     cartridges
+    itch
 
-    mindustry
     osu-lazer-bin
   ];
 
