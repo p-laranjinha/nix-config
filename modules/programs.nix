@@ -120,6 +120,7 @@
 
     # Graphic editors.
     inkscape-with-extensions
+    graphite # inkscape alternative
     gimp-with-plugins
     freecad
     blender

@@ -188,6 +188,16 @@ window-rule {
  // Use this instead if you want them visible on third-party screenshot tools.
     // block-out-from "screencast"
 }
+// Hide windows that show up at startup.
+window-rule {
+    match at-startup=true app-id="^thunderbird$"
+    open-floating true
+    open-focused false
+    focus-ring {
+        off
+    }
+    opacity 0.0
+}
 layer-rule {
     match namespace="^quickshell$"
     // Place inside the overview backdrop, like wallpapers.
