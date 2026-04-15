@@ -126,6 +126,9 @@ items:
       - name: Choose
         key: p
         command: displayp -d 0
+      - name: Join <window.pane>
+        key: "j"
+        command: command-prompt "join-pane -s %%"
       - separator: true
       - name: Left [-p]
         key: M-h
