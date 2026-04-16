@@ -91,10 +91,10 @@
       # Run 'nwg-look' to check the available GTK themes.
       services.udiskie = {
         enable = true;
+        automount = false;
         settings = {
           program_options = {
             file_manager = "${pkgs.kdePackages.dolphin}/bin/dolphin";
-            automount = "false";
           };
         };
       };
