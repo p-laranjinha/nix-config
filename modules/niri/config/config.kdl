@@ -60,6 +60,14 @@ recent-windows {
         active-color "#2c3b55"
         urgent-color "#ee5396"
     }
+    binds {
+        Mod+Semicolon {
+            next-window
+        }
+        Mod+Shift+Semicolon {
+            previous-window
+        }
+    }
 }
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart, which may be more convenient to use.
