@@ -66,7 +66,6 @@
           id = "music";
           path = "~/home/audio/music";
           devices = [
-            "phone"
             "server"
           ];
           versioning = {
