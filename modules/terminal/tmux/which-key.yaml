@@ -214,12 +214,15 @@ items:
       - name: Choose
         key: s
         command: choose-tree -Zs
-      - name: "New"
+      - name: New
         key: +
         command: new
       - name: Rename
         key: "$"
         command: rename
+      - name: Kill
+        key: C-x
+        command: kill-session
   - name: +Environment
     key: e
     menu:
@@ -263,19 +266,17 @@ items:
         menu:
           - name: Install
             key: I
-            command:
-              run-shell $TMUX_PLUGIN_MANAGER_PATH/tpm/bindings/install_plugins
+            command: run-shell $TMUX_PLUGIN_MANAGER_PATH/tpm/bindings/install_plugins
           - name: Update
             key: u
-            command:
-              run-shell $TMUX_PLUGIN_MANAGER_PATH/tpm/bindings/update_plugins
+            command: run-shell $TMUX_PLUGIN_MANAGER_PATH/tpm/bindings/update_plugins
           - name: Clean
             key: M-u
-            command:
-              run-shell $TMUX_PLUGIN_MANAGER_PATH/tpm/bindings/clean_plugins
+            command: run-shell $TMUX_PLUGIN_MANAGER_PATH/tpm/bindings/clean_plugins
       - name: Reload config
         key: r
-        command: source-file ~/.config/tmux/tmux.conf \; display-message "󰑓 Config reloaded"
+        command: source-file ~/.config/tmux/tmux.conf \; display-message "󰑓 Config
+          reloaded"
       - name: Customize
         key: C
         command: customize-mode -Z
