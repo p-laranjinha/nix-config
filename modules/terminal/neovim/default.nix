@@ -27,6 +27,9 @@
     # qmllint requires more configuration that I don't know how to do.
     kdePackages.qtdeclarative
     clang-tools # C/C++ LSP/linter/formatter.
+    cmake-language-server
+    gersemi # cmake formatter.
+    cmake-lint
   ];
   programs.neovim = {
     enable = true;
