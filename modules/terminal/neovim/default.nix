@@ -26,6 +26,7 @@
     # quickshell (.qml)
     # qmllint requires more configuration that I don't know how to do.
     kdePackages.qtdeclarative
+    clang-tools # C/C++ LSP/linter/formatter.
   ];
   programs.neovim = {
     enable = true;

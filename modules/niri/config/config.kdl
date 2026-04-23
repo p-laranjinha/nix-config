@@ -126,11 +126,6 @@ animations {
 //
 // Open floating by default.
 window-rule {
-    match app-id="^gnome-calculator$"
-    match app-id="^galculator$"
-    match app-id="^blueman-manager$"
-    match app-id="^org\\.gnome\\.Nautilus$"
-    match app-id="^steam$"
     match app-id="^xdg-desktop-portal$"
     match app-id="^discord$"
     match app-id="^firefox$" title="^Picture-in-Picture$"
