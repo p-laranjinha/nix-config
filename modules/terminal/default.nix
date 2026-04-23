@@ -132,6 +132,8 @@
       direnv = {
         enable = true;
         silent = true;
+        # Makes direnv better but I use it to remove some more of the output.
+        nix-direnv.enable = true;
       };
       direnv-instant.enable = true;
     };
